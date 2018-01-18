@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 2be1f30218a9c1342a3d4a2bfe9ff287
+timeCreated: 1516229435
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: HoverTank_TANK_GRP6
+    100002: nurbsCircle1
+    100004: nurbsCircle2
+    100006: nurbsCircle3
+    100008: nurbsCircle4
+    100010: polySurface4
+    100012: rotAixsXY17
+    100014: rotAxisZ
+    100016: //RootNode
+    100018: TankPlaceHolder3_Leg_BCK_L
+    100020: TankPlaceHolder3_Leg_BCK_R
+    100022: TankPlaceHolder3_Leg_FRT_L
+    100024: TankPlaceHolder3_Leg_FRT_R
+    100026: TankPlaceHolder3_Wheel_BCK_L
+    100028: TankPlaceHolder3_Wheel_BCK_R
+    100030: TankPlaceHolder3_Wheel_FRT_L
+    100032: TankPlaceHolder3_Wheel_FRT_R
+    100034: TankPlaceHolder3_Wheel_L_GRP1
+    100036: TankPlaceHolder3_Wheel_R_GRP1
+    400000: HoverTank_TANK_GRP6
+    400002: nurbsCircle1
+    400004: nurbsCircle2
+    400006: nurbsCircle3
+    400008: nurbsCircle4
+    400010: polySurface4
+    400012: rotAixsXY17
+    400014: rotAxisZ
+    400016: //RootNode
+    400018: TankPlaceHolder3_Leg_BCK_L
+    400020: TankPlaceHolder3_Leg_BCK_R
+    400022: TankPlaceHolder3_Leg_FRT_L
+    400024: TankPlaceHolder3_Leg_FRT_R
+    400026: TankPlaceHolder3_Wheel_BCK_L
+    400028: TankPlaceHolder3_Wheel_BCK_R
+    400030: TankPlaceHolder3_Wheel_FRT_L
+    400032: TankPlaceHolder3_Wheel_FRT_R
+    400034: TankPlaceHolder3_Wheel_L_GRP1
+    400036: TankPlaceHolder3_Wheel_R_GRP1
+    2100000: blinn11
+    2100002: blinn3
+    2100004: lambert6
+    2100006: blinn1
+    2300000: polySurface4
+    2300002: TankPlaceHolder3_Leg_BCK_L
+    2300004: TankPlaceHolder3_Leg_BCK_R
+    2300006: TankPlaceHolder3_Leg_FRT_L
+    2300008: TankPlaceHolder3_Leg_FRT_R
+    2300010: TankPlaceHolder3_Wheel_BCK_L
+    2300012: TankPlaceHolder3_Wheel_BCK_R
+    2300014: TankPlaceHolder3_Wheel_FRT_L
+    2300016: TankPlaceHolder3_Wheel_FRT_R
+    3300000: polySurface4
+    3300002: TankPlaceHolder3_Leg_BCK_L
+    3300004: TankPlaceHolder3_Leg_BCK_R
+    3300006: TankPlaceHolder3_Leg_FRT_L
+    3300008: TankPlaceHolder3_Leg_FRT_R
+    3300010: TankPlaceHolder3_Wheel_BCK_L
+    3300012: TankPlaceHolder3_Wheel_BCK_R
+    3300014: TankPlaceHolder3_Wheel_FRT_L
+    3300016: TankPlaceHolder3_Wheel_FRT_R
+    4300000: polySurface4
+    4300002: TankPlaceHolder3_Leg_FRT_L
+    4300004: TankPlaceHolder3_Leg_BCK_L
+    4300006: TankPlaceHolder3_Wheel_BCK_L
+    4300008: TankPlaceHolder3_Wheel_FRT_L
+    4300010: TankPlaceHolder3_Leg_FRT_R
+    4300012: TankPlaceHolder3_Leg_BCK_R
+    4300014: TankPlaceHolder3_Wheel_FRT_R
+    4300016: TankPlaceHolder3_Wheel_BCK_R
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
