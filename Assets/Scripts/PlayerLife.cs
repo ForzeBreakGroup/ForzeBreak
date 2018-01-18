@@ -50,10 +50,7 @@ public class PlayerLife : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            NetworkConnection conn = connectionToClient;
-            GameObject newPlayer = Instantiate<GameObject>(this.gameObject, NetworkHandler.instance.startPositions[0].position, Quaternion.identity);
-            NetworkServer.ReplacePlayerForConnection(conn, newPlayer, 0);
-            Destroy(this.gameObject);
+            this.gameObject.transform.position = NetworkHandler.singleton.startPositions[0].position;
         }
     }
 }

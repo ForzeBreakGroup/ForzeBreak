@@ -39,17 +39,20 @@ public class MatchMakerHandler : MonoBehaviour
     public void HostGame()
     {
         Debug.Log(networkHandler.matchMaker);
-        networkHandler.matchMaker.CreateMatch(RoomName, 4, true, "", "", "", 0, 0, networkHandler.OnMatchCreate);
+        networkHandler.matchMaker.CreateMatch(RoomName, 4, true, "", "", "", 0, 0, this.OnMatchCreated);
     }
 
     public void ListGames()
     {
-
+        networkHandler.matchMaker.ListMatches(0, 20, "", true, 0, 0, this.OnMatchList);
     }
 
     public void JoinGame()
     {
-
+        if (matchList.Count > 0)
+        {
+            networkHandler.matchMaker.JoinMatch(matchList[0].networkId, "", "", "", 0, 0, this.OnMatchJoined);
+        }
     }
     #endregion
 
@@ -61,6 +64,51 @@ public class MatchMakerHandler : MonoBehaviour
             networkHandler = FindObjectOfType(typeof(NetworkHandler)) as NetworkHandler;
         }
         networkHandler.StartMatchMaker();
+    }
+
+    private void OnMatchCreated(bool success, string extendedInfo, MatchInfo matchInfo)
+    {
+        Debug.Log("MatchMakerHandler OnMatchCreated " + matchInfo);
+
+        // Calls the NetworkHandler for starting the host service on successful connection
+        if (success)
+        {
+            Utility.SetAccessTokenForNetwork(matchInfo.networkId, matchInfo.accessToken);
+            networkHandler.StartHost(matchInfo);
+        }
+        else
+        {
+            Debug.LogError("MatchMakerHandler OnMatchCreated Failed: " + extendedInfo);
+        }
+    }
+
+    private void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matches)
+    {
+        Debug.Log("MatchMakerHandler OnMatchList");
+        if (success)
+        {
+            this.matchList = matches;
+            foreach(MatchInfoSnapshot match in this.matchList)
+            {
+                Debug.Log(match.name);
+            }
+        }
+    }
+
+    private void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)
+    {
+        Debug.Log("MatchMakerHandler OnMatchJoined " + matchInfo);
+
+        // Calls the NetworkHandler for joining an existing match on successful connection
+        if (success)
+        {
+            Utility.SetAccessTokenForNetwork(matchInfo.networkId, matchInfo.accessToken);
+            networkHandler.StartClient(matchInfo);
+        }
+        else
+        {
+            Debug.LogError("MatchMakerHandler OnMatchJoined Faield: " + extendedInfo);
+        }
     }
 
     private void OnDestroy()

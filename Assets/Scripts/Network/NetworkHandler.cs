@@ -117,6 +117,12 @@ public class NetworkHandler : NetworkManager
         Debug.Log("OnMatchCreate");
     }
 
+    public override void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
+    {
+        base.OnMatchList(success, extendedInfo, matchList);
+        Debug.Log("OnMatchList");
+    }
+
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
