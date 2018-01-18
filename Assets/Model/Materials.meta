@@ -1,9 +1,18 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 97cc3aeed62fc9742a94cbd28c8aa740
 folderAsset: yes
 timeCreated: 1516250185
 licenseType: Free
 DefaultImporter:
+=======
+guid: 0c65f46ac8e6f7c4cb9842719061e63c
+folderAsset: yes
+timeCreated: 1516317092
+licenseType: Free
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> test-carcontroller
   userData: 
   assetBundleName: 
   assetBundleVariant: 
