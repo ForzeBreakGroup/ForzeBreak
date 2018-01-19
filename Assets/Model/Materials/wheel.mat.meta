@@ -1,16 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 2a772fd82ba5faf428b622da6bb60648
-timeCreated: 1516250185
-licenseType: Free
-NativeFormatImporter:
-=======
 guid: bb2940b7c2e37a444b6ee2d38b585932
 timeCreated: 1516317093
 licenseType: Free
 NativeFormatImporter:
   externalObjects: {}
->>>>>>> test-carcontroller
   mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
