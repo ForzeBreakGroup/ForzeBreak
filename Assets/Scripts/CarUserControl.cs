@@ -13,7 +13,6 @@ public class CarUserControl : NetworkBehaviour
         m_Car = GetComponent<CarControlWheels>();
     }
 
-
     private void FixedUpdate()
     {
         if (!isLocalPlayer)
@@ -31,6 +30,13 @@ public class CarUserControl : NetworkBehaviour
         v = (v == 0) ? -controllerTrigger : v;
         m_Car.Move(h, v, v, handbrake);
 
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        Debug.Log("OnStartLocalPlayer");
+        base.OnStartLocalPlayer();
+        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 }
 
