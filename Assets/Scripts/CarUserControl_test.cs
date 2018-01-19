@@ -11,12 +11,6 @@ public class CarUserControl_test : MonoBehaviour
     {
         // get the car controller
         m_Car = GetComponent<CarControlWheels>();
-        if (!cameraControl)
-        {
-            GameObject obj = Instantiate(camera);
-            cameraControl = obj.GetComponent<CameraControl>();
-        }
-        cameraControl.AssignTarget(this.gameObject);
     }
 
 

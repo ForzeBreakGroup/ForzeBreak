@@ -2,16 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+
 
 internal enum FollowType
 {
     FollowVelocity,
     FollowTilt,
 }
-public class CameraControl : NetworkBehaviour {
+public class CameraControl : MonoBehaviour {
 
-    [SerializeField] private GameObject target;
+    
     [SerializeField] private FollowType followType = FollowType.FollowTilt;
     [SerializeField] private float targetVelocityLowerLimit = 0f;
     [SerializeField] private float moveSpeed = 15f;
@@ -21,21 +21,20 @@ public class CameraControl : NetworkBehaviour {
     [SerializeField] private float smoothTurnTime = 0.2f;
     [SerializeField] private float spinTurnLimit = 90;
 
+    private GameObject target;
     private float lastFlatAngle;
     private Rigidbody targetRigidbody;
     private float currentTurnAmount;
     private float turnSpeedVelocityChange;
     private Vector3 rollUp = Vector3.up;
     
-    public void AssignTarget(GameObject obj)
+    void Awake()
     {
-        if (!isLocalPlayer)
-            return;
-        target = obj;
+        target = transform.parent.gameObject;
         targetRigidbody = target.GetComponent<Rigidbody>();
     }
 	
-
+    
 	void FixedUpdate () {
         FollowTarget(Time.deltaTime);
 	}
