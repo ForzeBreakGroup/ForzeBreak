@@ -140,6 +140,11 @@ public class CarControlWheels : MonoBehaviour
         BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
         handbrake = Mathf.Clamp(handbrake, 0, 1);
 
+        if (handbrake <= 0f)
+        {
+            m_WheelColliders[2].brakeTorque = 0;
+            m_WheelColliders[3].brakeTorque = 0;
+        }
         //Set the steer on the front wheels.
         //Assuming that wheels 0 and 1 are the front wheels.
         m_SteerAngle = steering*m_MaximumSteerAngle;
