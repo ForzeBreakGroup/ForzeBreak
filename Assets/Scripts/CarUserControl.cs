@@ -13,7 +13,6 @@ public class CarUserControl : NetworkBehaviour
         m_Car = GetComponent<CarControlWheels>();
     }
 
-
     private void FixedUpdate()
     {
         if (!isLocalPlayer)
@@ -24,6 +23,13 @@ public class CarUserControl : NetworkBehaviour
         float v = Input.GetAxis("Vertical");
         float handbrake = Input.GetAxis("Jump");
         m_Car.Move(h, v, v, handbrake);
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        Debug.Log("OnStartLocalPlayer");
+        base.OnStartLocalPlayer();
+        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 }
 
