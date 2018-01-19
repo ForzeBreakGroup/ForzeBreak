@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 internal enum FollowType
 {
     FollowVelocity,
     FollowTilt,
 }
-public class CameraControl : MonoBehaviour {
+public class CameraControl : NetworkBehaviour {
 
     [SerializeField] private GameObject target;
     [SerializeField] private FollowType followType = FollowType.FollowTilt;
@@ -28,6 +29,8 @@ public class CameraControl : MonoBehaviour {
     
     public void AssignTarget(GameObject obj)
     {
+        if (!isLocalPlayer)
+            return;
         target = obj;
         targetRigidbody = target.GetComponent<Rigidbody>();
     }
