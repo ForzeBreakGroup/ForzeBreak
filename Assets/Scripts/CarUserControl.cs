@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CarUserControl : MonoBehaviour
+public class CarUserControl : NetworkBehaviour
 {
     private CarControlWheels m_Car; // the car controller we want to use
 
@@ -15,6 +16,9 @@ public class CarUserControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer)
+            return;
+
         // pass the input to the car!
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
