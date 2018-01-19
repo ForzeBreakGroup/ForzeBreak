@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class CarUserControl_test : MonoBehaviour
 {
+    public GameObject camera;
     private CarControlWheels m_Car; // the car controller we want to use
-
+    private CameraControl cameraControl; // Camera for the player
 
     private void Awake()
     {
         // get the car controller
         m_Car = GetComponent<CarControlWheels>();
+        if (!cameraControl)
+        {
+            GameObject obj = Instantiate(camera);
+            cameraControl = obj.GetComponent<CameraControl>();
+        }
+        cameraControl.AssignTarget(this.gameObject);
     }
 
 

@@ -25,13 +25,12 @@ public class CameraControl : MonoBehaviour {
     private float currentTurnAmount;
     private float turnSpeedVelocityChange;
     private Vector3 rollUp = Vector3.up;
-
-	// Use this for initialization
-	void Start () {
-        if (target == null) return;
+    
+    public void AssignTarget(GameObject obj)
+    {
+        target = obj;
         targetRigidbody = target.GetComponent<Rigidbody>();
-
-	}
+    }
 	
 
 	void FixedUpdate () {
