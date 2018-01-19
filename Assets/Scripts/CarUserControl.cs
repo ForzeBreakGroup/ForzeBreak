@@ -4,16 +4,15 @@ using UnityEngine.Networking;
 
 public class CarUserControl : NetworkBehaviour
 {
-    public GameObject camera;
+    public GameObject cam;
+
     private CarControlWheels m_Car; // the car controller we want to use
     private CameraControl cameraControl; // Camera for the player
-
 
     private void Awake()
     {
         // get the car controller
         m_Car = GetComponent<CarControlWheels>();
-       
     }
 
     private void FixedUpdate()
@@ -40,6 +39,7 @@ public class CarUserControl : NetworkBehaviour
         Debug.Log("OnStartLocalPlayer");
         base.OnStartLocalPlayer();
         transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = Color.blue;
+        GameObject obj = Instantiate<GameObject>(cam, this.transform);
     }
 }
 
