@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4448894020775584}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,9 +197,12 @@ GameObject:
   - component: {fileID: 54603720000154380}
   - component: {fileID: 114963482455167210}
   - component: {fileID: 114326394104619156}
+  - component: {fileID: 114186110486111824}
+  - component: {fileID: 114661372419888626}
+  - component: {fileID: 114450795078955172}
   m_Layer: 0
   m_Name: Tank_Wheels
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +219,7 @@ GameObject:
   - component: {fileID: 65522490432707692}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1132,6 +1135,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114186110486111824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416838636922178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 114
+    i1: 27
+    i2: 74
+    i3: 1
+    i4: 61
+    i5: 69
+    i6: 213
+    i7: 20
+    i8: 107
+    i9: 182
+    i10: 68
+    i11: 139
+    i12: 207
+    i13: 215
+    i14: 4
+    i15: 108
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114326394104619156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1143,6 +1178,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538af9328de7a4b478666523ed7a1a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114450795078955172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416838636922178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763b06745445aa94d9217d97916c3046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114661372419888626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416838636922178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114963482455167210
 MonoBehaviour:
   m_ObjectHideFlags: 1
