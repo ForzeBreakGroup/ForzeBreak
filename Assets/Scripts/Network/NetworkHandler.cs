@@ -43,6 +43,8 @@ public class NetworkHandler : NetworkManager
             return networkHandler;
         }
     }
+
+    public bool isTesting = false;
     #endregion
 
     #region Private Members
@@ -83,6 +85,11 @@ public class NetworkHandler : NetworkManager
     {
         // Preserve the gameobject through the scene loadings
         DontDestroyOnLoad(this);
+
+        if (isTesting)
+        {
+            NetworkHandler.instance.StartHost();
+        }
     }
     #endregion
 

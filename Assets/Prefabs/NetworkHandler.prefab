@@ -61,7 +61,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1178416150509612, guid: 5ed031e8e34ce854e90aeb40918153b6,
+  m_PlayerPrefab: {fileID: 1676727889975342, guid: 1dfe2cd04da1d514f99495ebd841cb1d,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  isTesting: 0
 --- !u!114 &114602067445705480
 MonoBehaviour:
   m_ObjectHideFlags: 1
