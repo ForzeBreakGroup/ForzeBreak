@@ -4,10 +4,19 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description：
+ * Class to handle matchmaker calls and callback functions
+ */
 public class MatchMakerHandler : MonoBehaviour
 {
     #region Public Members
+    // MatchMaking room name
     public static string RoomName = "Default";
+
+    // Singleton instance of MatchmakerHandler
     public static MatchMakerHandler instance
     {
         get
@@ -28,25 +37,40 @@ public class MatchMakerHandler : MonoBehaviour
     #endregion
 
     #region Private Members
+    // Private instance reference
     private static MatchMakerHandler matchHandler;
 
+    // List of matches available through Unity Multiplayer service
     private List<MatchInfoSnapshot> matchList = new List<MatchInfoSnapshot>();
+
+    // Reference to NetworkHandler in scene
     private NetworkHandler networkHandler;
+
+    // Internally stored MatchInfo from creating/joining match
     private MatchInfo matchInfo;
     #endregion
 
     #region Public Methods
+    /// <summary>
+    /// Public method to create a match using RoomName provided
+    /// </summary>
     public void HostGame()
     {
         Debug.Log(networkHandler.matchMaker);
         networkHandler.matchMaker.CreateMatch(RoomName, 4, true, "", "", "", 0, 0, this.OnMatchCreated);
     }
 
+    /// <summary>
+    /// Public method to obtain a list of available matches
+    /// </summary>
     public void ListGames()
     {
         networkHandler.matchMaker.ListMatches(0, 20, "", true, 0, 0, this.OnMatchList);
     }
 
+    /// <summary>
+    /// Joining a match from the list
+    /// </summary>
     public void JoinGame()
     {
         if (matchList.Count > 0)
@@ -57,6 +81,9 @@ public class MatchMakerHandler : MonoBehaviour
     #endregion
 
     #region Private Methods
+    /// <summary>
+    /// Auto start a matchmaker
+    /// </summary>
     private void Awake()
     {
         if (!networkHandler)
@@ -66,6 +93,12 @@ public class MatchMakerHandler : MonoBehaviour
         networkHandler.StartMatchMaker();
     }
 
+    /// <summary>
+    /// MatchMaker OnCreate callback function
+    /// </summary>
+    /// <param name="success"> Boolean for if MatchCreated </param>
+    /// <param name="extendedInfo"> String detailing explicit error message if any </param>
+    /// <param name="matchInfo"> MatchInfo from the match created </param>
     private void OnMatchCreated(bool success, string extendedInfo, MatchInfo matchInfo)
     {
         Debug.Log("MatchMakerHandler OnMatchCreated " + matchInfo);

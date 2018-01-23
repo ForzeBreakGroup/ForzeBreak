@@ -7,22 +7,46 @@ using UnityEngine.Networking;
  * Author: Jason Lin
  * 
  * Description:
- * Record of player's current life point with public method for other player scripts to access to decrement it.
- * Once the life point reached zero (0), it calls to the server to notify player state change via Command.
+ * Network synchronized script to manage client player's life during match.
+ * Calls to host to change scene once a player's life has been depleted.
  */
 public class PlayerLife : NetworkBehaviour
 {
-    [SyncVar]
-    private int playerLife = 3;
- 
+    #region Private Members
+    /// <summary>
+    ///  Player's remaining life synchronized and managed by server/host
+    /// </summary>
+    [SyncVar] private int playerLife = 3;
+
+    /// <summary>
+    /// Networked Command method to request the host to change the scene.
+    /// </summary>
     [Command]
     private void CmdPlayerLifeDepleted()
     {
         // Change scene
         NetworkHandler.singleton.ServerChangeScene("End");
     }
+    #endregion
 
-    // Public method for local player to decrease number of life
+    #region Private Methods
+    /// <summary>
+    /// Invoked by server to ask specific client to respawn the player object
+    /// </summary>
+    /// <param name="target"> NetworkConnection ID used to identify client </param>
+    [TargetRpc]
+    private void TargetRespawn(NetworkConnection target)
+    {
+        if (isLocalPlayer)
+        {
+            this.gameObject.transform.position = NetworkHandler.singleton.startPositions[0].position;
+        }
+    }
+    #endregion
+
+    /// <summary>
+    /// Used by local player object to decrease the current player's life and reflect to server
+    /// </summary>
     public void DecrementPlayerLife()
     {
         if (!isServer)
@@ -43,14 +67,5 @@ public class PlayerLife : NetworkBehaviour
         }
 
         Debug.Log(playerLife);
-    }
-
-    [TargetRpc]
-    void TargetRespawn(NetworkConnection target)
-    {
-        if (isLocalPlayer)
-        {
-            this.gameObject.transform.position = NetworkHandler.singleton.startPositions[0].position;
-        }
     }
 }
