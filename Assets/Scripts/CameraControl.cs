@@ -25,6 +25,8 @@ public class CameraControl : MonoBehaviour {
     [SerializeField] private float targetVelocityLowerLimit = 0f;
     [SerializeField] private float smoothTurnTime = 0.2f;
     [SerializeField] private float spinTurnLimit = 180;
+    [SerializeField] private bool followRoll = false;
+    [SerializeField] private bool followTilt = false;
 
     private GameObject target;
     private float lastFlatAngle;
@@ -32,10 +34,11 @@ public class CameraControl : MonoBehaviour {
     private float currentTurnAmount;
     private float turnSpeedVelocityChange;
     private Vector3 rollUp = Vector3.up;
-    
+
+    private Vector3 oldPosition;
     void Awake()
     {
-        target = transform.parent.gameObject;
+        target = transform.root.gameObject;
         targetRigidbody = target.GetComponent<Rigidbody>();
     }
 	
@@ -71,7 +74,6 @@ public class CameraControl : MonoBehaviour {
                     currentTurnAmount = 1;
                 }
                 lastFlatAngle = currentFlatAngle;
-
                 break;
             case FollowType.FollowVelocity:
                 if (targetRigidbody.velocity.magnitude > targetVelocityLowerLimit)
@@ -87,19 +89,22 @@ public class CameraControl : MonoBehaviour {
                 currentTurnAmount = Mathf.SmoothDamp(currentTurnAmount, 1, ref turnSpeedVelocityChange, smoothTurnTime);
 
                 targetForward.y = 0;
-                if(targetForward.sqrMagnitude < float.Epsilon)
-                {
-                    targetForward = transform.forward;
-                }
                 break;
         }
 
+        transform.position = Vector3.Lerp(oldPosition, target.transform.position, deltaTime * moveSpeed);
+        oldPosition = transform.position;
+        if (!followTilt)
+            if (targetForward.sqrMagnitude < float.Epsilon)
+                targetForward = transform.forward;
 
-
-        transform.position = Vector3.Lerp(transform.position, target.transform.position, deltaTime * moveSpeed);
         Quaternion rollRotation = Quaternion.LookRotation(targetForward, rollUp);
 
-        rollUp = rollSpeed > 0 ? Vector3.Slerp(rollUp, targetUp, rollSpeed * deltaTime) : Vector3.up;
+        if (followRoll)
+            rollUp = rollSpeed > 0 ? Vector3.Slerp(rollUp, targetUp, rollSpeed * deltaTime) : Vector3.up;
+        else
+            rollUp = Vector3.up;
+
         transform.rotation = Quaternion.Lerp(transform.rotation, rollRotation, turnSpeed * currentTurnAmount * deltaTime);
 
     }

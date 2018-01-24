@@ -23,7 +23,7 @@ public class CarUserControl : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-
+        Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
         // keyboard Input
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");

@@ -143,12 +143,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followType: 1
-  moveSpeed: 10
-  turnSpeed: 10
+  moveSpeed: 8
+  turnSpeed: 15
   rollSpeed: 3
   targetVelocityLowerLimit: 0
   smoothTurnTime: 0.2
   spinTurnLimit: 0
+  followRoll: 0
+  followTilt: 0
 --- !u!124 &124431141644714686
 Behaviour:
   m_ObjectHideFlags: 1

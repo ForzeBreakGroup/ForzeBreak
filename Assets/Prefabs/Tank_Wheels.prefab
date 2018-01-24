@@ -1066,7 +1066,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676727889975342}
   serializedVersion: 2
-  m_Mass: 2500
+  m_Mass: 1000
   m_Drag: 0.1
   m_AngularDrag: 1
   m_UseGravity: 1
@@ -1126,30 +1126,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e7da0a228014f95a6d6763c0a135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CarDriveType: 2
-  m_WheelColliders:
+  carDriveType: 2
+  wheelColliders:
   - {fileID: 146261834323506252}
   - {fileID: 146918822901116010}
   - {fileID: 146815347846981636}
   - {fileID: 146622885819790572}
-  m_WheelMeshes:
+  wheelMeshes:
   - {fileID: 1044961388253858}
   - {fileID: 1671419883353716}
   - {fileID: 1544975948668020}
   - {fileID: 1267641856983676}
-  m_CentreOfMassOffset: {x: 0, y: 0, z: 0}
-  m_MaximumSteerAngle: 30
-  m_SteerHelper: 0.3
-  m_TractionControl: 1
-  m_FullTorqueOverAllWheels: 3000
-  m_ReverseTorque: 800
-  m_MaxHandbrakeTorque: 100000000
-  m_Downforce: 2000
-  m_SpeedType: 0
-  m_Topspeed: 200
-  m_RevRangeBoundary: 1
-  m_SlipLimit: 0.3
-  m_BrakeTorque: 20000
+  centreOfMassOffset: {x: 0, y: 0, z: 0}
+  maximumSteerAngle: 30
+  steerHelper: 0.3
+  tractionControl: 1
+  fullTorqueOverAllWheels: 25000
+  reverseTorque: 800
+  maxHandbrakeTorque: 100000000
+  downforce: 100
+  speedType: 0
+  topspeed: 200
+  revRangeBoundary: 1
+  slipLimit: 0.3
+  brakeTorque: 10000
 --- !u!114 &114592363567638722
 MonoBehaviour:
   m_ObjectHideFlags: 1
