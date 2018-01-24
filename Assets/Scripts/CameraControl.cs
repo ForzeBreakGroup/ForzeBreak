@@ -3,7 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+ * Author: Robin
+ * 
+ * Description:
+ * Camera Control, handle the location and rotation of camera.
+ * 
+ */
 internal enum FollowType
 {
     FollowVelocity,
@@ -13,13 +19,12 @@ public class CameraControl : MonoBehaviour {
 
     
     [SerializeField] private FollowType followType = FollowType.FollowTilt;
-    [SerializeField] private float targetVelocityLowerLimit = 0f;
     [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private float turnSpeed = 15f;
     [SerializeField] private float rollSpeed = 3f;
-    [SerializeField] private Vector3 offset =  new Vector3(0,0.5f,-3f);
+    [SerializeField] private float targetVelocityLowerLimit = 0f;
     [SerializeField] private float smoothTurnTime = 0.2f;
-    [SerializeField] private float spinTurnLimit = 90;
+    [SerializeField] private float spinTurnLimit = 180;
 
     private GameObject target;
     private float lastFlatAngle;

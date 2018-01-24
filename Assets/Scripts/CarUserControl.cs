@@ -2,17 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/*
+ * Author: Robin
+ * 
+ * Description:
+ * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
+ */
 public class CarUserControl : NetworkBehaviour
 {
     public GameObject cam;
-
-    private CarControlWheels m_Car; // the car controller we want to use
-    private CameraControl cameraControl; // Camera for the player
+    private CarControlWheels carControlWheels; // the car controller we want to use
 
     private void Awake()
     {
         // get the car controller
-        m_Car = GetComponent<CarControlWheels>();
+        carControlWheels = GetComponent<CarControlWheels>();
     }
 
     private void FixedUpdate()
@@ -20,17 +24,18 @@ public class CarUserControl : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        // pass the input to the car!
+        // keyboard Input
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         float handbrake = Input.GetAxis("Handbrake");
-
+        // controller Input
         float controllerX = Input.GetAxis("Controller_X_Axis");
         float controllerTrigger = Input.GetAxis("Controller_Trigger_Axis");
 
+        //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
         v = (v == 0) ? -controllerTrigger : v;
-        m_Car.Move(h, v, v, handbrake);
+        carControlWheels.Move(h, v, v, handbrake);
 
     }
 
