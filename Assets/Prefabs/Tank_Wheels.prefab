@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 65077654828817232}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1109,7 +1109,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   damagePercentage: 0
+=======
+  collisionType: 1
+  damagePercentage: 0
+  enableLog: 0
+  internalAmplify: 1
+  explosionRadius: 3
+  upwardEffect: 2
+>>>>>>> ca5e48ea4bfe877f3b74e5bf8e34c9b6a4e52e87
 --- !u!114 &114311918752152702
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -238,23 +238,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.17000008
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 5.03
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
       propertyPath: m_LocalRotation.w
@@ -271,7 +271,15 @@ Prefab:
     - target: {fileID: 54060104964955468, guid: 708e344f657ecbc4ca9ddbbff8792eb4,
         type: 2}
       propertyPath: m_Mass
-      value: 1000
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458163659038528, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586673310914274, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 708e344f657ecbc4ca9ddbbff8792eb4, type: 2}
@@ -329,6 +337,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844d661a22e458544b69bbe4c049678b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1350493626
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.3845918
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -8.03919
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476416712520232, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f3278b6206cf58948a910b7f3802a612, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1439337112 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1458163659038528, guid: 708e344f657ecbc4ca9ddbbff8792eb4,
@@ -345,7 +395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionType: 1
   damagePercentage: 0
+  enableLog: 1
+  internalAmplify: 1
+  explosionRadius: 3
+  upwardEffect: 2
 --- !u!1001 &1834748214
 Prefab:
   m_ObjectHideFlags: 0
