@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 1103797975907846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1184573, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4993755906200114}
   m_RootOrder: 0
@@ -445,8 +445,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1571782453958706}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09650004, z: 0.011000156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4987277369328098}
@@ -463,7 +463,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676727889975342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5241811, y: 2.39, z: -2.230854}
+  m_LocalPosition: {x: 6.3, y: 2.197, z: 5.533}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4606380917276834}
@@ -556,8 +556,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333884955931806}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09650004, z: 0.011000156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4760397191842124}
@@ -671,8 +671,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1289201642119670}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09650004, z: 0.011000156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4141662135797616}
@@ -1068,7 +1068,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2500
   m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1109,12 +1109,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  damagePercentage: 0
+=======
   collisionType: 1
   damagePercentage: 0
   enableLog: 0
   internalAmplify: 1
   explosionRadius: 3
   upwardEffect: 2
+>>>>>>> ca5e48ea4bfe877f3b74e5bf8e34c9b6a4e52e87
 --- !u!114 &114311918752152702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1139,12 +1143,12 @@ MonoBehaviour:
   - {fileID: 1267641856983676}
   m_CentreOfMassOffset: {x: 0, y: 0, z: 0}
   m_MaximumSteerAngle: 30
-  m_SteerHelper: 0.8
-  m_TractionControl: 0.5
-  m_FullTorqueOverAllWheels: 2500
+  m_SteerHelper: 0.3
+  m_TractionControl: 1
+  m_FullTorqueOverAllWheels: 3000
   m_ReverseTorque: 800
   m_MaxHandbrakeTorque: 100000000
-  m_Downforce: 100
+  m_Downforce: 2000
   m_SpeedType: 0
   m_Topspeed: 200
   m_RevRangeBoundary: 1
