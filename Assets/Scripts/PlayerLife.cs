@@ -39,7 +39,13 @@ public class PlayerLife : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            this.gameObject.transform.position = NetworkHandler.singleton.startPositions[0].position;
+            // Reset physic rigidbody
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+            // Reset transform
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+            transform.position = NetworkHandler.singleton.startPositions[0].position;
         }
     }
     #endregion
