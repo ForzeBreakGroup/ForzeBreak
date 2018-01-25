@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: dea75f30a36a39f42aaf03c6ebe65f66
-timeCreated: 1516819084
+guid: 8d202add188d13e499b083dacfa29720
+timeCreated: 1516850956
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: curve1
-    100002: NURBS_Arena
-    100004: nurbsToPoly2
-    100006: //RootNode
-    400000: curve1
-    400002: NURBS_Arena
-    400004: nurbsToPoly2
-    400006: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: lambert1
-    2300000: nurbsToPoly2
-    3300000: nurbsToPoly2
-    4300000: nurbsToPoly2
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Main_Arena_V08
     9500000: //RootNode
   externalObjects: {}
   materials:
