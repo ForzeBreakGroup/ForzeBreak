@@ -17,23 +17,26 @@ internal enum SpeedType
 public class CarControlWheels : MonoBehaviour
 {
     [SerializeField] private CarDriveType carDriveType = CarDriveType.FourWheelDrive;
-    [SerializeField] private WheelCollider[] wheelColliders = new WheelCollider[4];
     [SerializeField] private GameObject[] wheelMeshes = new GameObject[4];
+    [SerializeField] private GameObject[] wheelCollidersObjects = new GameObject[4];
     [SerializeField] private Vector3 centreOfMassOffset;
-    [SerializeField] private float maximumSteerAngle;
+    [SerializeField] private float maximumSteerAngle =30.0f;
     [Range(0, 1)] [SerializeField] private float steerHelper; // 0 is raw physics , 1 the car will grip in the direction it is facing
     [Range(0, 1)] [SerializeField] private float tractionControl; // 0 is no traction control, 1 is full interference
-    [SerializeField] private float fullTorqueOverAllWheels;
-    [SerializeField] private float reverseTorque;
-    [SerializeField] private float maxHandbrakeTorque;
+    [SerializeField] private float fullTorqueOverAllWheels =2500f;
+    [SerializeField] private float reverseTorque=1500f;
+    [SerializeField] private float maxHandbrakeTorque=1e+8f;
     [SerializeField] private float downforce = 100f;
     [SerializeField] private SpeedType speedType;
-    [SerializeField] private float topspeed = 200;
+    [SerializeField] private float topspeed = 50;
     [SerializeField] private static int numOfGears = 5;
     [SerializeField] private float revRangeBoundary = 1f;
-    [SerializeField] private float slipLimit;
-    [SerializeField] private float brakeTorque;
+    [SerializeField] private float slipLimit = 0.2f;
+    [SerializeField] private float brakeTorque = 1e+8f;
 
+
+    private WheelCollider[] wheelColliders = new WheelCollider[4];
+    private WheelEffects[] wheelEffects = new WheelEffects[4];
     private Quaternion[] wheelMeshLocalRotations;
     private Vector3 prevpos, pos;
     private float steerAngle;
@@ -45,17 +48,24 @@ public class CarControlWheels : MonoBehaviour
     private const float reversingThreshold = 0.01f;
     
     public bool IsBoosting { get; set; }
+    public bool IsWheelsGround { get; set; }
     public bool Skidding { get; private set; }
     public float BrakeInput { get; private set; }
     public float CurrentSteerAngle{ get { return steerAngle; }}
     public float CurrentSpeed{ get { return carRigidbody.velocity.magnitude*2.23693629f; }}
-    public float MaxSpeed{get { return topspeed; }}
+    public float MaxSpeed { get; set; }
     public float Revs { get; private set; }
     public float AccelInput { get; private set; }
 
     // Use this for initialization
     private void Start()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            wheelColliders[i] = wheelCollidersObjects[i].GetComponent<WheelCollider>();
+            wheelEffects[i] = wheelCollidersObjects[i].GetComponent<WheelEffects>();
+        }
+
         wheelMeshLocalRotations = new Quaternion[4];
         for (int i = 0; i < 4; i++)
         {
@@ -66,7 +76,9 @@ public class CarControlWheels : MonoBehaviour
         maxHandbrakeTorque = float.MaxValue;
 
         carRigidbody = GetComponent<Rigidbody>();
-        currentTorque = fullTorqueOverAllWheels - (tractionControl*fullTorqueOverAllWheels);
+        currentTorque = fullTorqueOverAllWheels - (tractionControl * fullTorqueOverAllWheels);
+
+        MaxSpeed = topspeed;
     }
 
 
@@ -126,13 +138,20 @@ public class CarControlWheels : MonoBehaviour
 
     public void Move(float steering, float accel, float footbrake, float handbrake)
     {
+        IsWheelsGround = true;
         for (int i = 0; i < 4; i++)
         {
+
             Quaternion quat;
             Vector3 position;
             wheelColliders[i].GetWorldPose(out position, out quat);
             wheelMeshes[i].transform.position = position;
             wheelMeshes[i].transform.rotation = quat;
+
+            WheelHit wheelhit;
+            wheelColliders[i].GetGroundHit(out wheelhit);
+            if (wheelhit.normal == Vector3.zero)
+                IsWheelsGround = false;
         }
 
         //clamp input values
@@ -154,8 +173,7 @@ public class CarControlWheels : MonoBehaviour
 
         SteerHelper();
         ApplyDrive(accel, footbrake);
-        if(!IsBoosting)
-            CapSpeed();
+        CapSpeed();
 
         //Set the handbrake.
         //Assuming that wheels 2 and 3 are the rear wheels.
@@ -171,26 +189,32 @@ public class CarControlWheels : MonoBehaviour
         GearChanging();
 
         AddDownForce();
+        //CheckForWheelSpin();
         TractionControl();
     }
 
 
     private void CapSpeed()
     {
+        if (!IsBoosting && MaxSpeed > topspeed + 0.1f)
+            MaxSpeed = Mathf.Lerp(MaxSpeed, topspeed, 0.5f);
+
+
+
         float speed = carRigidbody.velocity.magnitude;
         switch (speedType)
         {
             case SpeedType.MPH:
 
                 speed *= 2.23693629f;
-                if (speed > topspeed)
-                    carRigidbody.velocity = (topspeed/2.23693629f) * carRigidbody.velocity.normalized;
+                if (speed > MaxSpeed)
+                    carRigidbody.velocity = (MaxSpeed / 2.23693629f) * carRigidbody.velocity.normalized;
                 break;
 
             case SpeedType.KPH:
                 speed *= 3.6f;
-                if (speed > topspeed)
-                    carRigidbody.velocity = (topspeed/3.6f) * carRigidbody.velocity.normalized;
+                if (speed > MaxSpeed)
+                    carRigidbody.velocity = (MaxSpeed / 3.6f) * carRigidbody.velocity.normalized;
                 break;
         }
     }
@@ -198,55 +222,52 @@ public class CarControlWheels : MonoBehaviour
 
     private void ApplyDrive(float accel, float footbrake)
     {
-
-        float thrustTorque;
-        switch (carDriveType)
+        if (CurrentSpeed > 0.1 && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
+            wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = brakeTorque* accel;
+        else
         {
-            case CarDriveType.FourWheelDrive:
-                thrustTorque = accel * (currentTorque / 4f);
-                for (int i = 0; i < 4; i++)
-                {
-                    wheelColliders[i].motorTorque = thrustTorque;
-                }
-                break;
-
-            case CarDriveType.FrontWheelDrive:
-                thrustTorque = accel * (currentTorque / 2f);
-                wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = thrustTorque;
-                break;
-
-            case CarDriveType.RearWheelDrive:
-                thrustTorque = accel * (currentTorque / 2f);
-                wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = thrustTorque;
-                break;
-
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (CurrentSpeed > 5 && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
+            float thrustTorque;
+            switch (carDriveType)
             {
-                wheelColliders[i].brakeTorque = brakeTorque*footbrake;
-            }
-            else if (footbrake > 0)
-            {
-                wheelColliders[i].brakeTorque = 0f;
-                wheelColliders[i].motorTorque = -reverseTorque*footbrake;
+                case CarDriveType.FourWheelDrive:
+                    thrustTorque = accel * (currentTorque / 4f);
+
+                    wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
+                    wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = thrustTorque;
+                    break;
+
+                case CarDriveType.FrontWheelDrive:
+                    thrustTorque = accel * (currentTorque / 2f);
+                    wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
+                    wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = thrustTorque;
+                    break;
+
+                case CarDriveType.RearWheelDrive:
+                    thrustTorque = accel * (currentTorque / 2f);
+                    wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
+                    wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = thrustTorque;
+                    break;
             }
         }
+
+        
+        if (CurrentSpeed > 0.1 && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
+        {
+            wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = brakeTorque * footbrake;
+        }
+        else if (footbrake > 0)
+        {
+            wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
+            wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = -reverseTorque/4f * footbrake;
+        }
+        
     }
 
 
     private void SteerHelper()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            WheelHit wheelhit;
-            wheelColliders[i].GetGroundHit(out wheelhit);
-            if (wheelhit.normal == Vector3.zero)
-                return; // wheels arent on the ground so dont realign the rigidbody velocity
-        }
-
+        if (!IsWheelsGround)
+            return;
         // this if is needed to avoid gimbal lock problems that will make the car suddenly shift direction
         if (Mathf.Abs(oldRotation - transform.eulerAngles.y) < 10f)
         {
@@ -255,6 +276,7 @@ public class CarControlWheels : MonoBehaviour
             carRigidbody.velocity = velRotation * carRigidbody.velocity;
         }
         oldRotation = transform.eulerAngles.y;
+
     }
 
 
@@ -317,7 +339,31 @@ public class CarControlWheels : MonoBehaviour
             }
         }
     }
+    // checks if the wheels are spinning and is so does three things
+    // 1) emits particles
+    // 2) plays tiure skidding sounds
+    // 3) leaves skidmarks on the ground
+    // these effects are controlled through the WheelEffects class
+    private void CheckForWheelSpin()
+    {
+        // loop through all wheels
+        for (int i = 0; i < 4; i++)
+        {
+            WheelHit wheelHit;
+            wheelColliders[i].GetGroundHit(out wheelHit);
 
-        
+            // is the tire slipping above the given threshhold
+            if (Mathf.Abs(wheelHit.forwardSlip) >= slipLimit || Mathf.Abs(wheelHit.sidewaysSlip) >= slipLimit)
+            {
+                wheelEffects[i].EmitTyreSmoke();
+                
+                continue;
+            }
+            
+            // end the trail generation
+            wheelEffects[i].EndSkidTrail();
+        }
+    }
+
 }
 
