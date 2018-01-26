@@ -43,6 +43,8 @@ public class NetworkHandler : NetworkManager
             return networkHandler;
         }
     }
+
+    public bool isTesting = false;
     #endregion
 
     #region Private Members
@@ -50,11 +52,7 @@ public class NetworkHandler : NetworkManager
     /// Singleton instance of this script
     /// </summary>
     private static NetworkHandler networkHandler;
-
-    /// <summary>
-    /// Singleton instance of MatchMakerHandler
-    /// </summary>
-    private static MatchMakerHandler matchMakerHandler;
+    private Dictionary<NetworkConnection, GameObject> playerInConnection;
     #endregion
 
     #region Public Methods
@@ -72,7 +70,7 @@ public class NetworkHandler : NetworkManager
     /// </summary>
     private void Init()
     {
-        matchMakerHandler = GetComponent<MatchMakerHandler>();
+        playerInConnection = new Dictionary<NetworkConnection, GameObject>();
     }
 
     /// <summary>
@@ -83,6 +81,44 @@ public class NetworkHandler : NetworkManager
     {
         // Preserve the gameobject through the scene loadings
         DontDestroyOnLoad(this);
+        Debug.Log(NetworkHandler.instance.isNetworkActive);
+        if (isTesting && !NetworkHandler.instance.isNetworkActive)
+        {
+            NetworkHandler.instance.StartHost();
+        }
+    }
+
+    private GameObject AddPlayerToScene(NetworkConnection conn, short playerControllerId)
+    {
+        GameObject player = null;
+
+        if ((UnityEngine.Object) NetworkHandler.instance.playerPrefab == (UnityEngine.Object)null)
+        {
+            Debug.LogError((object)"The PlayerPrefab is empty on the NetworkManager. Please setup a PlayerPrefab object.");
+        }
+        else if ((UnityEngine.Object)NetworkHandler.instance.playerPrefab.GetComponent<NetworkIdentity>() == (UnityEngine.Object)null)
+        {
+            Debug.LogError((object)"The PlayerPrefab does not have a NetworkIdentity. Please add a NetworkIdentity to the player prefab.");
+        }
+        else if ((int)playerControllerId < conn.playerControllers.Count && conn.playerControllers[(int)playerControllerId].IsValid && (UnityEngine.Object)conn.playerControllers[(int)playerControllerId].gameObject != (UnityEngine.Object)null)
+        {
+            Debug.LogError((object)"There is already a player at that playerControllerId for this connections.");
+        }
+        else
+        {
+            // Obtain StartPosition from the NetworkManager
+            Transform startPosition = this.GetStartPosition();
+
+            // Spawns player at startposition location if exist otherwise 0,0,0
+            player = !((UnityEngine.Object)startPosition != (UnityEngine.Object)null) ?
+                    (GameObject)UnityEngine.Object.Instantiate((UnityEngine.Object)NetworkHandler.instance.playerPrefab, Vector3.zero, Quaternion.identity) :
+                    (GameObject)UnityEngine.Object.Instantiate((UnityEngine.Object)NetworkHandler.instance.playerPrefab, startPosition.position, startPosition.rotation);
+
+            // Calls the server to add the player
+            NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+        }
+
+        return player;
     }
     #endregion
 
@@ -131,7 +167,35 @@ public class NetworkHandler : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        base.OnServerAddPlayer(conn, playerControllerId);
+        GameObject player = AddPlayerToScene(conn, playerControllerId);
+        Debug.Log("OnServerAddPlayer");
+
+        // Register the player in the network list
+        foreach(KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
+        {
+            player.GetComponent<ArrowIndicators>().RpcAddPlayer(entry.Key.connectionId, entry.Value);
+            entry.Value.GetComponent<ArrowIndicators>().RpcAddPlayer(conn.connectionId, player);
+        }
+
+        // Update the internal record
+        NetworkHandler.instance.playerInConnection.Add(conn, player);
+
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+        Debug.Log("OnServerDisconnect");
+
+        // Remove the player connection from the record
+        NetworkHandler.instance.playerInConnection.Remove(conn);
+
+        // Calls to all players still in network to update the arrow indicator to lose track of left player
+        foreach(KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
+        {
+            entry.Value.GetComponent<ArrowIndicators>().RpcRemovePlayer(conn.connectionId);
+        }
+
     }
     #endregion
 }
