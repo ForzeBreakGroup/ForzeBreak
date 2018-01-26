@@ -1106,7 +1106,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1000
   m_Drag: 0.1
-  m_AngularDrag: 0.025
+  m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1203,14 +1203,14 @@ MonoBehaviour:
   - {fileID: 1491205311695650}
   centreOfMassOffset: {x: 0, y: 0, z: 0}
   maximumSteerAngle: 30
-  steerHelper: 0.8
+  steerHelper: 0.6
   tractionControl: 1
-  fullTorqueOverAllWheels: 2500
+  fullTorqueOverAllWheels: 3500
   reverseTorque: 500
   maxHandbrakeTorque: 100000000
   downforce: 100
   speedType: 0
-  topspeed: 40
+  topspeed: 30
   revRangeBoundary: 1
   slipLimit: 0.2
   brakeTorque: 100000000
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostPower: 30
   energy: 100
-  boostMaxSpeed: 60
+  boostMaxSpeed: 50
   energyDecay: 0.5
   energyRecover: 1
   maxEnergy: 100

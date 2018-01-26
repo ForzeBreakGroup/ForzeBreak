@@ -16,17 +16,16 @@ public class FlipControl : MonoBehaviour {
 
     public void Flip()
     {
-        if (!carController.IsWheelsGround && transform.up.y<0&& canFlip)
-        {
+        //if (!carController.IsWheelsGround && transform.up.y<0&& canFlip)
+        //{
             canFlip = false;
             carRigidbody.AddForce(Vector3.up * 2500, ForceMode.Impulse);
             carRigidbody.AddRelativeTorque(Vector3.forward * 1000, ForceMode.Acceleration);
-        }
+        //}
 
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("enter");
         canFlip = true;
     }
     //private bool IsGrounded()

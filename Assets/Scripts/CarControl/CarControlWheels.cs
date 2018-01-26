@@ -283,7 +283,8 @@ public class CarControlWheels : MonoBehaviour
     // this is used to add more grip in relation to speed
     private void AddDownForce()
     {
-        wheelColliders[0].attachedRigidbody.AddForce(-transform.up*downforce*
+        if(IsWheelsGround)
+            wheelColliders[0].attachedRigidbody.AddForce(-transform.up*downforce*
                                                         wheelColliders[0].attachedRigidbody.velocity.magnitude);
     }
 
