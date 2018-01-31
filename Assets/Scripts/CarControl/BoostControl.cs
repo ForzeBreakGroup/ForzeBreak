@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BoostControl : MonoBehaviour {
 
-    [SerializeField] private float boostPower = 30.0f;
-    [SerializeField] private float energy = 100.0f;
-    [SerializeField] private float boostMaxSpeed = 80.0f;
-    [SerializeField] private float energyDecay = 0.5f;
-    [SerializeField] private float energyRecover = 1.0f;
-    [SerializeField] private float maxEnergy = 100.0f;
+    public float boostPower = 30.0f;
+    public float energy = 100.0f;
+    public float boostMaxSpeed = 50.0f;
+    public float energyDecay = 0.5f;
+    public float energyRecover = 1.0f;
+    public float maxEnergy = 100.0f;
 
 
 
