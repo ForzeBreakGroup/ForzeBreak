@@ -58,8 +58,6 @@ public class DamageSystem : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float receiverUpwardEffect = 2.0f;
 
-    private float [] adjustedAngle;
-
     /// <summary>
     /// Enables logging information on Console
     /// </summary>
@@ -88,10 +86,6 @@ public class DamageSystem : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        // Adjust the angle for calculation
-        adjustedAngle = new float[2];
-        adjustedAngle[0] = 180.0f - colliderAngle;
-        adjustedAngle[1] = 180.0f + colliderAngle;
     }
 
     /// <summary>
@@ -135,19 +129,14 @@ public class DamageSystem : MonoBehaviour
     /// <returns>Result of collision analysis, receiver or collider</returns>
     private CollisionResult AnalyzeCollision(Collision collision)
     {
-        // Find the angle between contact point and vehicle direction
-        float angleBetween = Vector3.Angle(collision.contacts[0].normal, transform.rotation.eulerAngles.normalized);
+        float collisionAngle = Vector3.Angle(GetComponent<Rigidbody>().velocity, -collision.contacts[0].normal);
 
-        // Logging information on console
         if (enableLog)
         {
-            Debug.Log("Contact Point: " + collision.contacts[0].normal + ", Vehicle Direction: " + transform.rotation.eulerAngles + ", Angle Between: " +angleBetween);
-            Debug.Log("Vehicle Location: " + transform.position + ", Other Vehicle Location: " + collision.transform.position);
-            Debug.Log("Analysis Result: " + ((angleBetween > adjustedAngle[0] && angleBetween < adjustedAngle[1]) ? "Collider" : "Receiver"));
+            Debug.Log("Vehicle Velocity: " + GetComponent<Rigidbody>().velocity + ", Contact Point: " + collision.contacts[0].normal + ", Angle: " + collisionAngle);
         }
 
-        // If the angle is within the collider angle, then return the entity as collider
-        if (angleBetween > adjustedAngle[0] && angleBetween < adjustedAngle[1])
+        if (collisionAngle < colliderAngle)
         {
             return CollisionResult.Collider;
         }
