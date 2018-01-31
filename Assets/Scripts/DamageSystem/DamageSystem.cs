@@ -186,7 +186,12 @@ public class DamageSystem : MonoBehaviour
         }
 
         // Apply explosion force at specified location with upward effect
-        GetComponent<Rigidbody>().AddExplosionForce(explosionForce, collisionPoint, receiverExplosionRadius, receiverUpwardEffect, ForceMode.Impulse);
+        float adjustedUpwardEffect = receiverUpwardEffect;
+        if (collisionPoint.y > transform.position.y)
+        {
+            adjustedUpwardEffect = -adjustedUpwardEffect;
+        }
+        GetComponent<Rigidbody>().AddExplosionForce(explosionForce, collisionPoint, receiverExplosionRadius, adjustedUpwardEffect, ForceMode.Impulse);
     }
     #endregion
 
