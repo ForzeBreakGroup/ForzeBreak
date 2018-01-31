@@ -47,9 +47,8 @@ public class CarUserControl : NetworkBehaviour
             boostControl.Boost();
         else
             boostControl.Recover();
-
-        if(flip)
-            flipControl.Flip();
+        
+        flipControl.Flip(flip,h);
 
     }
 
@@ -57,6 +56,7 @@ public class CarUserControl : NetworkBehaviour
     {
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
         flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");
+        
     }
 
     public override void OnStartLocalPlayer()

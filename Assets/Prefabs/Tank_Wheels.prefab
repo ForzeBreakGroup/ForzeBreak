@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 114754004366044882}
   - component: {fileID: 114717635520710594}
   - component: {fileID: 114897829746237984}
+  - component: {fileID: 114216797478839944}
   m_Layer: 0
   m_Name: Tank_Wheels
   m_TagString: Player
@@ -1160,12 +1161,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionType: 1
-  damagePercentage: 0
+  damageAmplifyPercentage: 100
+  colliderAngle: 45
+  colliderUpwardEffect: 0
+  receiverAdditionalAmplification: 1
+  receiverExplosionRadius: 3
+  receiverUpwardEffect: 2
   enableLog: 0
-  internalAmplify: 1
-  explosionRadius: 3
-  upwardEffect: 2
+--- !u!114 &114216797478839944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676727889975342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc4206caf0c304fa70b66dbafbe838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114228642779406330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1313,6 +1326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89c08a7e3aac6a409fce90c0f2bf8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipCD: 0.2
+  upForce_wheelsGrounded: 7500
+  upForce_overturned: 3000
+  sideForce: 1000
 --- !u!114 &114997115521309918
 MonoBehaviour:
   m_ObjectHideFlags: 1
