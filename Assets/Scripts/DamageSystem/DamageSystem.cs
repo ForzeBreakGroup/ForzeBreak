@@ -136,12 +136,13 @@ public class DamageSystem : MonoBehaviour
     private CollisionResult AnalyzeCollision(Collision collision)
     {
         // Find the angle between contact point and vehicle direction
-        float angleBetween = Vector3.Angle(collision.contacts[0].point.normalized, transform.rotation.eulerAngles.normalized);
+        float angleBetween = Vector3.Angle(collision.contacts[0].normal, transform.rotation.eulerAngles.normalized);
 
         // Logging information on console
         if (enableLog)
         {
-            Debug.Log("Contact Point: " + collision.contacts[0].point.normalized + ", Vehicle Direction: " + transform.rotation.eulerAngles.normalized + ", Angle Between: " +angleBetween);
+            Debug.Log("Contact Point: " + collision.contacts[0].normal + ", Vehicle Direction: " + transform.rotation.eulerAngles + ", Angle Between: " +angleBetween);
+            Debug.Log("Vehicle Location: " + transform.position + ", Other Vehicle Location: " + collision.transform.position);
             Debug.Log("Analysis Result: " + ((angleBetween > adjustedAngle[0] && angleBetween < adjustedAngle[1]) ? "Collider" : "Receiver"));
         }
 
