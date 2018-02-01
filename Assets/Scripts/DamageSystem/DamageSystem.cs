@@ -103,18 +103,29 @@ public class DamageSystem : MonoBehaviour
                 Debug.Log("OnCollisionEnter triggered by " + gameObject.name);
             }
 
+            // Calculate average contact point norm
+            Vector3 avgContact = Vector3.zero;
+            Vector3 avgNorm = Vector3.zero;
+            foreach (ContactPoint contactPoint in collision.contacts)
+            {
+                avgContact += contactPoint.point;
+                avgNorm += contactPoint.normal;
+            }
+            avgContact /= collision.contacts.Length;
+            avgNorm /= collision.contacts.Length;
+
             // Different collision results different force applied
-            switch (AnalyzeCollision(collision))
+            switch (AnalyzeCollision(avgNorm))
             {
                 // Collider - the vehicle causing the collision, mitigates forces received
                 case CollisionResult.Collider:
-                    ColliderReciprocalForce(collision.impulse, collision.contacts[0].point);
+                    ColliderReciprocalForce(collision.impulse, avgContact);
                     break;
 
                 // Receiver - the vehicle receiving the collision force, full force applied
                 case CollisionResult.Receiver:
                 default:
-                    ReceiverAmplifiedForce(collision.impulse, collision.contacts[0].point);
+                    ReceiverAmplifiedForce(collision.impulse, avgContact);
                     break;
             }
 
@@ -125,15 +136,15 @@ public class DamageSystem : MonoBehaviour
     /// Use the angle between normalized contact point and normalized vehicle rotation to determine if the
     /// vehicle is receiving the collision or the cause of collision
     /// </summary>
-    /// <param name="collision">Collision result received from OnCollisionEnter</param>
+    /// <param name="contactNorm">Average of collision contact points norm</param>
     /// <returns>Result of collision analysis, receiver or collider</returns>
-    private CollisionResult AnalyzeCollision(Collision collision)
+    private CollisionResult AnalyzeCollision(Vector3 contactNorm)
     {
-        float collisionAngle = Vector3.Angle(GetComponent<Rigidbody>().velocity, -collision.contacts[0].normal);
+        float collisionAngle = Vector3.Angle(GetComponent<Rigidbody>().velocity, -contactNorm);
 
         if (enableLog)
         {
-            Debug.Log("Vehicle Velocity: " + GetComponent<Rigidbody>().velocity + ", Contact Point: " + collision.contacts[0].normal + ", Angle: " + collisionAngle);
+            Debug.Log("Vehicle Velocity: " + GetComponent<Rigidbody>().velocity + ", Contact Point: " + contactNorm + ", Angle: " + collisionAngle);
         }
 
         if (collisionAngle < colliderAngle)
@@ -159,7 +170,7 @@ public class DamageSystem : MonoBehaviour
         if (enableLog)
         {
             Debug.Log("Collider Reciprocal Force: ");
-            Debug.Log("Applying " + amplifiedReciprocalForce + " At Location: " + collisionPoint + new Vector3(0, -colliderUpwardEffect, 0));
+            Debug.Log("Applying " + amplifiedReciprocalForce + " At Location: " + (collisionPoint + new Vector3(0, -colliderUpwardEffect, 0)));
             Debug.Log("Amplified from: " + impulse + " to: " + amplifiedReciprocalForce);
         }
 

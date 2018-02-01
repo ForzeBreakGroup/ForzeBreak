@@ -8,6 +8,7 @@ using UnityEngine.Networking;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
+[NetworkSettings(channel = 1)]
 public class CarUserControl : NetworkBehaviour
 {
     public GameObject cam;
