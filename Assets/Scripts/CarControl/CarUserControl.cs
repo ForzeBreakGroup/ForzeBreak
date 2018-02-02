@@ -11,6 +11,8 @@ using UnityEngine.Networking;
 [NetworkSettings(channel = 1)]
 public class CarUserControl : NetworkBehaviour
 {
+    [SyncVar]
+    public Color color;
     public GameObject cam;
     private CarControlWheels carControlWheels; // the car controller we want to use
     private BoostControl boostControl;
@@ -64,8 +66,13 @@ public class CarUserControl : NetworkBehaviour
     {
         Debug.Log("OnStartLocalPlayer");
         base.OnStartLocalPlayer();
-        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = Color.blue;
         GameObject obj = Instantiate<GameObject>(cam, this.transform);
+    }
+
+    public void ChangeColor(Color c)
+    {
+        color = c;
+        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = color;
     }
 }
 

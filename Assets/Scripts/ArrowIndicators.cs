@@ -23,11 +23,6 @@ public class ArrowIndicators : NetworkBehaviour
     /// </summary>
     private Dictionary<int, GameObject> arrowList;
 
-    /// <summary>
-    /// Array of tracker scheme to be placed based on number of player
-    /// </summary>
-    private TrackerScheme[] trackerScheme = { TrackerScheme.Blue, TrackerScheme.Red, TrackerScheme.Green };
-
     private void Awake()
     {
         if (!arrowIndicator)
@@ -42,10 +37,12 @@ public class ArrowIndicators : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-
+        
         GameObject trackPlayer = Instantiate(arrowIndicator, this.transform);
+        CarUserControl carControl = playerObject.GetComponent<CarUserControl>();
         trackPlayer.GetComponent<TrackPlayer>().objectToTrack = playerObject;
-        trackPlayer.GetComponent<TrackPlayer>().ChangeScheme(trackerScheme[arrowList.Count + 1]);
+        trackPlayer.GetComponent<TrackPlayer>().ChangeScheme(carControl.color);
+        carControl.ChangeColor(carControl.color);
         arrowList.Add(uniqueId, trackPlayer);
     }
 

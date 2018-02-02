@@ -8,17 +8,6 @@ using UnityEngine;
  * Description:
  * Tracking GameObject provided by the caller, points towards the object
  */
-
-/// <summary>
-/// Enum defines different tracker scheme options available
-/// </summary>
-public enum TrackerScheme
-{
-    Red,
-    Blue,
-    Green
-};
-
 public class TrackPlayer : MonoBehaviour
 {
     /// <summary>
@@ -30,27 +19,13 @@ public class TrackPlayer : MonoBehaviour
     /// Changes the arrow to predetermined scheme option
     /// </summary>
     /// <param name="scheme"></param>
-    public void ChangeScheme(TrackerScheme scheme)
+    public void ChangeScheme(Color c)
     {
         Material mat = transform.Find("Arrow_Test").GetComponent<MeshRenderer>().material;
 
         if (mat)
         {
-            // Changes the arrow texture
-            switch (scheme)
-            {
-                case TrackerScheme.Blue:
-                    mat.color = Color.blue;
-                    break;
-                case TrackerScheme.Red:
-                    mat.color = Color.red;
-                    break;
-                case TrackerScheme.Green:
-                    mat.color = Color.green;
-                    break;
-                default:
-                    break;
-            }
+            mat.color = c;
         }
     }
 

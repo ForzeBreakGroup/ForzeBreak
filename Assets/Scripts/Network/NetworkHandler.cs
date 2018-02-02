@@ -53,6 +53,7 @@ public class NetworkHandler : NetworkManager
     /// </summary>
     private static NetworkHandler networkHandler;
     private Dictionary<NetworkConnection, GameObject> playerInConnection;
+    private Color[] playerColor = { Color.red, Color.blue, Color.green, Color.magenta };
     #endregion
 
     #region Public Methods
@@ -167,6 +168,8 @@ public class NetworkHandler : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player = AddPlayerToScene(conn, playerControllerId);
+        player.GetComponent<CarUserControl>().ChangeColor(playerColor[playerInConnection.Count]);
+
         Debug.Log("OnServerAddPlayer");
 
         // Register the player in the network list
