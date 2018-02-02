@@ -11,6 +11,7 @@ using UnityEngine.Networking;
  * Analyze the collision and applies different force based on collision analysis
  */
 [RequireComponent(typeof(Collision))]
+[NetworkSettings(channel = 1)]
 public class DamageSystem : NetworkBehaviour
 {
     /// <summary>
@@ -104,29 +105,18 @@ public class DamageSystem : NetworkBehaviour
                 Debug.Log("OnCollisionEnter triggered by " + gameObject.name);
             }
 
-            // Calculate average contact point norm
-            Vector3 avgContact = Vector3.zero;
-            Vector3 avgNorm = Vector3.zero;
-            foreach (ContactPoint contactPoint in collision.contacts)
-            {
-                avgContact += contactPoint.point;
-                avgNorm += contactPoint.normal;
-            }
-            avgContact /= collision.contacts.Length;
-            avgNorm /= collision.contacts.Length;
-
             // Different collision results different force applied
-            switch (AnalyzeCollision(avgNorm))
+            switch (AnalyzeCollision(collision.contacts[0].normal))
             {
                 // Collider - the vehicle causing the collision, mitigates forces received
                 case CollisionResult.Collider:
-                    ColliderReciprocalForce(collision.impulse, avgContact);
+                    ColliderReciprocalForce(collision.impulse, collision.contacts[0].point);
                     break;
 
                 // Receiver - the vehicle receiving the collision force, full force applied
                 case CollisionResult.Receiver:
                 default:
-                    ReceiverAmplifiedForce(collision.impulse, avgContact);
+                    ReceiverAmplifiedForce(collision.impulse, collision.contacts[0].point);
                     break;
             }
 
