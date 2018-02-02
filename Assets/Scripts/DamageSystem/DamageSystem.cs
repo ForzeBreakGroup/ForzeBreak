@@ -97,7 +97,7 @@ public class DamageSystem : NetworkBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Only deals with player collision, other collision objects are handled by their own script
-        if (collision.transform.tag == "Player" && isLocalPlayer)
+        if (collision.transform.tag == "Player")
         {
             // Logging information to console
             if (enableLog)

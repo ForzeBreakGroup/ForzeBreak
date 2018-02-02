@@ -168,12 +168,12 @@ public class NetworkHandler : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player = AddPlayerToScene(conn, playerControllerId);
-        player.GetComponent<CarUserControl>().ChangeColor(playerColor[playerInConnection.Count]);
-
         Debug.Log("OnServerAddPlayer");
 
+        player.GetComponent<CarUserControl>().ChangeColor(playerColor[playerInConnection.Count]);
+
         // Register the player in the network list
-        foreach(KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
+        foreach (KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
         {
             player.GetComponent<ArrowIndicators>().RpcAddPlayer(entry.Key.connectionId, entry.Value);
             entry.Value.GetComponent<ArrowIndicators>().RpcAddPlayer(conn.connectionId, player);

@@ -71,8 +71,10 @@ public class CarUserControl : NetworkBehaviour
 
     public void ChangeColor(Color c)
     {
+        Debug.Log("Aaa");
         color = c;
-        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = color;
+        Debug.Log(transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material);
+        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = c;
     }
 }
 
