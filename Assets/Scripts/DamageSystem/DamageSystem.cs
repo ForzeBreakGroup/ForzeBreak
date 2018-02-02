@@ -116,7 +116,7 @@ public class DamageSystem : NetworkBehaviour
                 // Receiver - the vehicle receiving the collision force, full force applied
                 case CollisionResult.Receiver:
                 default:
-                    ReceiverAmplifiedForce(collision.impulse, collision.contacts[0].point);
+                    ReceiverAmplifiedForce(collision.gameObject.GetComponent<Rigidbody>().velocity, collision.contacts[0].point);
                     break;
             }
 
@@ -177,14 +177,14 @@ public class DamageSystem : NetworkBehaviour
     private void ReceiverAmplifiedForce(Vector3 impulse, Vector3 collisionPoint)
     {
         // Force = |impact force| * additional amplification * % dmg
-        float explosionForce = impulse.magnitude * receiverAdditionalAmplification * damageAmplifyPercentage / 100.0f;
-        
+        //float explosionForce = impulse.magnitude * receiverAdditionalAmplification * damageAmplifyPercentage / 100.0f;
+
         // Logging information on console
         if (enableLog)
         {
             Debug.Log("Receiver Amplified Force: ");
-            Debug.Log("Applying " + explosionForce + " at: " + collisionPoint + new Vector3(0, -receiverUpwardEffect, 0));
-            Debug.Log("Amplified from: " + impulse.magnitude + " to: " + explosionForce);
+           // Debug.Log("Applying " + explosionForce + " at: " + collisionPoint + new Vector3(0, -receiverUpwardEffect, 0));
+           // Debug.Log("Amplified from: " + impulse.magnitude + " to: " + explosionForce);
         }
 
         // Apply explosion force at specified location with upward effect
@@ -193,7 +193,7 @@ public class DamageSystem : NetworkBehaviour
         {
             adjustedUpwardEffect = -adjustedUpwardEffect;
         }
-        GetComponent<Rigidbody>().AddExplosionForce(explosionForce, collisionPoint, receiverExplosionRadius, adjustedUpwardEffect, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce((impulse + Vector3.up * adjustedUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification / 100.0f, ForceMode.Impulse);
     }
     #endregion
 
