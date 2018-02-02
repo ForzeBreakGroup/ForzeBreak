@@ -188,12 +188,9 @@ public class DamageSystem : NetworkBehaviour
         }
 
         // Apply explosion force at specified location with upward effect
-        float adjustedUpwardEffect = receiverUpwardEffect;
-        if (collisionPoint.y > transform.position.y)
-        {
-            adjustedUpwardEffect = -adjustedUpwardEffect;
-        }
-        GetComponent<Rigidbody>().AddForce((impulse + Vector3.up * adjustedUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification / 100.0f, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce((impulse + Vector3.up * receiverUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification * 10, ForceMode.Impulse);
+
+        Debug.Log((impulse + Vector3.up * receiverUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification * 10);
     }
     #endregion
 
