@@ -21,12 +21,19 @@ public class CarUserControl : NetworkBehaviour
     private bool boost = false;
     private bool flip = false;
 
-    private void Awake()
+    private void Start()
     {
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
+
+        // Change the color of player vehicle to assigned color
+        Material mat = transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material;
+        if (mat.color != color)
+        {
+            mat.color = color;
+        }
     }
 
     private void FixedUpdate()
@@ -58,8 +65,7 @@ public class CarUserControl : NetworkBehaviour
     private void Update()
     {
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");
-        
+        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");        
     }
 
     public override void OnStartLocalPlayer()
@@ -71,10 +77,7 @@ public class CarUserControl : NetworkBehaviour
 
     public void ChangeColor(Color c)
     {
-        Debug.Log("Aaa");
         color = c;
-        Debug.Log(transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material);
-        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = c;
     }
 }
 

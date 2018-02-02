@@ -181,7 +181,6 @@ public class NetworkHandler : NetworkManager
 
         // Update the internal record
         NetworkHandler.instance.playerInConnection.Add(conn, player);
-
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
