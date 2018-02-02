@@ -105,7 +105,7 @@ public class DamageSystem : NetworkBehaviour
             }
             else
             {
-                rg.AddForce(-rg.velocity * damageAmplifyPercentage * 10);
+                rg.AddExplosionForce(collision.impulse.magnitude, collision.contacts[0].point, 30, collision.impulse.magnitude, ForceMode.Impulse);
             }
         }
     }
