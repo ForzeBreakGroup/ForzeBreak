@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 /*
  * Author: Jason Lin
@@ -10,7 +11,7 @@ using UnityEngine;
  * Analyze the collision and applies different force based on collision analysis
  */
 [RequireComponent(typeof(Collision))]
-public class DamageSystem : MonoBehaviour
+public class DamageSystem : NetworkBehaviour
 {
     /// <summary>
     /// Sealed class to define constants for damage system
@@ -95,7 +96,7 @@ public class DamageSystem : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Only deals with player collision, other collision objects are handled by their own script
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player" && isLocalPlayer)
         {
             // Logging information to console
             if (enableLog)

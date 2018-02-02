@@ -81,7 +81,6 @@ public class NetworkHandler : NetworkManager
     {
         // Preserve the gameobject through the scene loadings
         DontDestroyOnLoad(this);
-        Debug.Log(NetworkHandler.instance.isNetworkActive);
         if (isTesting && !NetworkHandler.instance.isNetworkActive)
         {
             NetworkHandler.instance.StartHost();
