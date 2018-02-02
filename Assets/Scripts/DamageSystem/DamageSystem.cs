@@ -96,6 +96,21 @@ public class DamageSystem : NetworkBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            Rigidbody rg = GetComponent<Rigidbody>();
+            if (rg.velocity.magnitude > collision.rigidbody.velocity.magnitude)
+            {
+                rg.velocity = Vector3.zero;
+            }
+            else
+            {
+                rg.AddForce(-rg.velocity * damageAmplifyPercentage * 10);
+            }
+        }
+    }
+    /*
+    {
         // Only deals with player collision, other collision objects are handled by their own script
         if (collision.transform.tag == "Player")
         {
@@ -122,6 +137,7 @@ public class DamageSystem : NetworkBehaviour
 
         }
     }
+    */
 
     /// <summary>
     /// Use the angle between normalized contact point and normalized vehicle rotation to determine if the
