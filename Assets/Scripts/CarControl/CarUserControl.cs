@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * Author: Robin
@@ -8,10 +7,8 @@ using UnityEngine.Networking;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-[NetworkSettings(channel = 1)]
-public class CarUserControl : NetworkBehaviour
+public class CarUserControl : MonoBehaviour
 {
-    [SyncVar]
     public Color color;
     public GameObject cam;
     private CarControlWheels carControlWheels; // the car controller we want to use
@@ -23,6 +20,7 @@ public class CarUserControl : NetworkBehaviour
 
     private void Start()
     {
+        GameObject obj = Instantiate<GameObject>(cam, this.transform);
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
@@ -38,8 +36,6 @@ public class CarUserControl : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-            return;
         // keyboard Input
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -66,13 +62,6 @@ public class CarUserControl : NetworkBehaviour
     {
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
         flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");        
-    }
-
-    public override void OnStartLocalPlayer()
-    {
-        Debug.Log("OnStartLocalPlayer");
-        base.OnStartLocalPlayer();
-        GameObject obj = Instantiate<GameObject>(cam, this.transform);
     }
 
     public void ChangeColor(Color c)

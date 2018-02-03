@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * Author: Jason Lin
@@ -10,9 +9,7 @@ using UnityEngine.Networking;
  * Only for hanlding collision between players, and keeping record of damages of the player vehicle.
  * Analyze the collision and applies different force based on collision analysis
  */
-[RequireComponent(typeof(Collision))]
-[NetworkSettings(channel = 1)]
-public class DamageSystem : NetworkBehaviour
+public class DamageSystem : MonoBehaviour
 {
     /// <summary>
     /// Sealed class to define constants for damage system

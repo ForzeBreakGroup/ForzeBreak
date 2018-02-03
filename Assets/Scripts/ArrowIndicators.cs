@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * Author: Jason Lin
@@ -11,7 +10,7 @@ using UnityEngine.Networking;
  * Methods to add/remove arrow
  */
 
-public class ArrowIndicators : NetworkBehaviour
+public class ArrowIndicators : MonoBehaviour
 {
     /// <summary>
     /// Arrow Indicator GameObject
@@ -31,13 +30,9 @@ public class ArrowIndicators : NetworkBehaviour
         }
         arrowList = new Dictionary<int, GameObject>();
     }
-
-    [ClientRpc]
+    
     public void RpcAddPlayer(int uniqueId, GameObject playerObject)
     {
-        if (!isLocalPlayer)
-            return;
-        
         GameObject trackPlayer = Instantiate(arrowIndicator, this.transform);
         CarUserControl carControl = playerObject.GetComponent<CarUserControl>();
         trackPlayer.GetComponent<TrackPlayer>().objectToTrack = playerObject;
@@ -46,12 +41,8 @@ public class ArrowIndicators : NetworkBehaviour
         arrowList.Add(uniqueId, trackPlayer);
     }
 
-    [ClientRpc]
     public void RpcRemovePlayer(int uniqueId)
     {
-        if (!isLocalPlayer)
-            return;
-
         GameObject arrow = null;
         if (arrowList.TryGetValue(uniqueId, out arrow))
         {
