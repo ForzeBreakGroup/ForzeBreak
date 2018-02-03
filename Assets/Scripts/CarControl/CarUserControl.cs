@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Photon;
 
 /*
  * Author: Robin
@@ -7,7 +8,7 @@ using UnityEngine;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : MonoBehaviour
+public class CarUserControl : PunBehaviour
 {
     public Color color;
     public GameObject cam;
@@ -20,6 +21,8 @@ public class CarUserControl : MonoBehaviour
 
     private void Start()
     {
+        enabled = photonView.isMine;
+
         GameObject obj = Instantiate<GameObject>(cam, this.transform);
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();

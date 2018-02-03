@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon;
 
 /*
@@ -15,6 +16,7 @@ public class NetworkManager : PunBehaviour
     #region Public Members
     public bool isLocalTesting = false;
     public string gameVersion = "0.1.0";
+    public static GameObject localPlayer;
     public static NetworkManager instance
     {
         get
@@ -40,6 +42,7 @@ public class NetworkManager : PunBehaviour
 
     #region Private Members
     private static NetworkManager networkManager;
+    private Vector3[] spawnPosition;
     #endregion
 
     #region Public Methods
@@ -63,6 +66,11 @@ public class NetworkManager : PunBehaviour
     #endregion
 
     #region Private Methods
+    private void Start()
+    {
+        SceneManager.sceneLoaded += this.OnLevelLoad;
+    }
+
     private void Awake()
     {
         if (networkManager)
@@ -86,6 +94,13 @@ public class NetworkManager : PunBehaviour
         {
             PhotonNetwork.automaticallySyncScene = true;
         }
+    }
+
+    private void OnLevelLoad(Scene scene, LoadSceneMode sceneMode)
+    {
+        if (!PhotonNetwork.inRoom) return;
+
+        localPlayer = PhotonNetwork.Instantiate("Tank_Wheel", Vector3.zero, Quaternion.identity, 0);
     }
     #endregion
 
