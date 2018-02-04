@@ -8,7 +8,7 @@ using Photon;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : PunBehaviour
+public class CarUserControl : Photon.MonoBehaviour
 {
     public Color color;
     public GameObject cam;
@@ -21,8 +21,6 @@ public class CarUserControl : PunBehaviour
 
     private void Start()
     {
-        enabled = photonView.isMine;
-
         GameObject obj = Instantiate<GameObject>(cam, this.transform);
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
@@ -35,6 +33,11 @@ public class CarUserControl : PunBehaviour
         {
             mat.color = color;
         }
+    }
+
+    private void Awake()
+    {
+        enabled = photonView.isMine;
     }
 
     private void FixedUpdate()

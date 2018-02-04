@@ -674,6 +674,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1676727889975342, guid: 1dfe2cd04da1d514f99495ebd841cb1d,
         type: 2}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerPrefabName
+      value: PlayerObj
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f06ce1498daa68f4bac88c448296c823, type: 2}
   m_IsPrefabParent: 0

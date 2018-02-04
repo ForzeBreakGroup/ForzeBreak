@@ -43,6 +43,8 @@ public class NetworkManager : PunBehaviour
     #region Private Members
     private static NetworkManager networkManager;
     private Vector3[] spawnPosition;
+    [SerializeField] private string playerPrefabName = "Player";
+    [SerializeField] private string onlineSceneName = "Arena1";
     #endregion
 
     #region Public Methods
@@ -100,7 +102,7 @@ public class NetworkManager : PunBehaviour
     {
         if (!PhotonNetwork.inRoom) return;
 
-        localPlayer = PhotonNetwork.Instantiate("Tank_Wheel", Vector3.zero, Quaternion.identity, 0);
+        localPlayer = PhotonNetwork.Instantiate(playerPrefabName, Vector3.zero, Quaternion.identity, 0);
     }
     #endregion
 
@@ -112,7 +114,7 @@ public class NetworkManager : PunBehaviour
 
         if (PhotonNetwork.isMasterClient)
         {
-            PhotonNetwork.LoadLevel("Arena1");
+            PhotonNetwork.LoadLevel(onlineSceneName);
         }
     }
 
@@ -137,6 +139,17 @@ public class NetworkManager : PunBehaviour
     {
         Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonCreateRoomFailed(codeAndMsg);
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("JoinedLobby");
+        base.OnJoinedLobby();
+
+        if (isLocalTesting)
+        {
+            PhotonNetwork.JoinOrCreateRoom("Testing", new RoomOptions(), null);
+        }
     }
     #endregion
 }
