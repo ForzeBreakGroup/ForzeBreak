@@ -1,13 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class ArrowIndicators : NetworkBehaviour
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * 3D arrow indicator manager to handle multiple arrow pointing at the given player's position
+ * Methods to add/remove arrow
+ */
+
+public class ArrowIndicators : MonoBehaviour
 {
+    /// <summary>
+    /// Arrow Indicator GameObject
+    /// </summary>
     public GameObject arrowIndicator;
-    // Dictionary of <player unique Network ID, Arrow Object>
-    Dictionary<int, GameObject> arrowList;
+
+    /// <summary>
+    /// Dictioanry to keep track of which connection id is connecting with which player object
+    /// </summary>
+    private Dictionary<int, GameObject> arrowList;
 
     private void Awake()
     {
@@ -17,24 +30,19 @@ public class ArrowIndicators : NetworkBehaviour
         }
         arrowList = new Dictionary<int, GameObject>();
     }
-
-    [ClientRpc]
+    
     public void RpcAddPlayer(int uniqueId, GameObject playerObject)
     {
-        if (!isLocalPlayer)
-            return;
-
         GameObject trackPlayer = Instantiate(arrowIndicator, this.transform);
+        CarUserControl carControl = playerObject.GetComponent<CarUserControl>();
         trackPlayer.GetComponent<TrackPlayer>().objectToTrack = playerObject;
+        trackPlayer.GetComponent<TrackPlayer>().ChangeScheme(carControl.color);
+        carControl.ChangeColor(carControl.color);
         arrowList.Add(uniqueId, trackPlayer);
     }
 
-    [ClientRpc]
     public void RpcRemovePlayer(int uniqueId)
     {
-        if (!isLocalPlayer)
-            return;
-
         GameObject arrow = null;
         if (arrowList.TryGetValue(uniqueId, out arrow))
         {

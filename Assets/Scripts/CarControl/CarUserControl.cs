@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * Author: Robin
@@ -8,8 +7,9 @@ using UnityEngine.Networking;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : NetworkBehaviour
+public class CarUserControl : MonoBehaviour
 {
+    public Color color;
     public GameObject cam;
     private CarControlWheels carControlWheels; // the car controller we want to use
     private BoostControl boostControl;
@@ -18,18 +18,24 @@ public class CarUserControl : NetworkBehaviour
     private bool boost = false;
     private bool flip = false;
 
-    private void Awake()
+    private void Start()
     {
+        GameObject obj = Instantiate<GameObject>(cam, this.transform);
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
+
+        // Change the color of player vehicle to assigned color
+        Material mat = transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material;
+        if (mat.color != color)
+        {
+            mat.color = color;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-            return;
         // keyboard Input
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -47,24 +53,20 @@ public class CarUserControl : NetworkBehaviour
             boostControl.Boost();
         else
             boostControl.Recover();
-
-        if(flip)
-            flipControl.Flip();
+        
+        flipControl.Flip(flip,h);
 
     }
 
     private void Update()
     {
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");
+        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");        
     }
 
-    public override void OnStartLocalPlayer()
+    public void ChangeColor(Color c)
     {
-        Debug.Log("OnStartLocalPlayer");
-        base.OnStartLocalPlayer();
-        transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material.color = Color.blue;
-        GameObject obj = Instantiate<GameObject>(cam, this.transform);
+        color = c;
     }
 }
 

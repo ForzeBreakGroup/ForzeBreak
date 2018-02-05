@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fa1407fe3a94f4f4db69c391b88e41c9
-timeCreated: 1517004986
+guid: 3fcd9ba1b45c589479bdef3aad668dd3
+timeCreated: 1517011977
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -77,7 +77,6 @@ ModelImporter:
     400066: Object_7
     400068: Object_8
     400070: Object_9
-    2100000: Material_2
     2300000: Object_1
     2300002: Object_10
     2300004: Object_11
@@ -183,12 +182,17 @@ ModelImporter:
     4300064: Object_34
     4300066: Object_35
     4300068: Object_36
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_2
+    second: {fileID: 2100000, guid: 9a1cbe3a00772ff4087d2013706df652, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -226,8 +230,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

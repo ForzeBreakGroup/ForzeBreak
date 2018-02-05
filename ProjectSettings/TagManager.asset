@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - DeathBound
+  - UI_SpeedBar
+  - UI_BoostBar
   layers:
   - Default
   - TransparentFX

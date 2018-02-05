@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4600898447616078}
   - component: {fileID: 114602067445705480}
   - component: {fileID: 114386551105349994}
+  - component: {fileID: 114850017184805470}
   m_Layer: 0
   m_Name: NetworkHandler
   m_TagString: Untagged
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_OfflineScene: Menu
   m_OnlineScene: Arena1
   m_SpawnPrefabs: []
-  m_CustomConfig: 0
+  m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
@@ -110,7 +111,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 
+  m_Channels: 0500000006000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -121,8 +122,8 @@ MonoBehaviour:
   m_MatchPort: 443
   matchName: default
   matchSize: 4
-  isNetworkActive: 0
-  matchMaker: {fileID: 0}
+  isNetworkActive: 1
+  matchMaker: {fileID: 114850017184805470}
   isTesting: 0
 --- !u!114 &114602067445705480
 MonoBehaviour:
@@ -133,5 +134,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07ed5ed0ac150f24ba4eeb7213ba98e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114850017184805470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825513656032288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 

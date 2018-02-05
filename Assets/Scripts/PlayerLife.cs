@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 /*
  * Author: Jason Lin
@@ -10,22 +10,21 @@ using UnityEngine.Networking;
  * Network synchronized script to manage client player's life during match.
  * Calls to host to change scene once a player's life has been depleted.
  */
-public class PlayerLife : NetworkBehaviour
+public class PlayerLife : MonoBehaviour
 {
     #region Private Members
     /// <summary>
     ///  Player's remaining life synchronized and managed by server/host
     /// </summary>
-    [SyncVar] private int playerLife = 3;
+    private int playerLife = 3;
 
     /// <summary>
     /// Networked Command method to request the host to change the scene.
     /// </summary>
-    [Command]
     private void CmdPlayerLifeDepleted()
     {
         // Change scene
-        NetworkHandler.singleton.ServerChangeScene("End");
+        SceneManager.LoadScene("End");
     }
     #endregion
 
@@ -34,19 +33,15 @@ public class PlayerLife : NetworkBehaviour
     /// Invoked by server to ask specific client to respawn the player object
     /// </summary>
     /// <param name="target"> NetworkConnection ID used to identify client </param>
-    [TargetRpc]
-    private void TargetRespawn(NetworkConnection target)
-    {
-        if (isLocalPlayer)
-        {
-            // Reset physic rigidbody
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    private void TargetRespawn()
+{
+        // Reset physic rigidbody
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
-            // Reset transform
-            transform.rotation = Quaternion.Euler(Vector3.zero);
-            transform.position = NetworkHandler.singleton.startPositions[0].position;
-        }
+        // Reset transform
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.position = Vector3.zero;
     }
     #endregion
 
@@ -55,9 +50,6 @@ public class PlayerLife : NetworkBehaviour
     /// </summary>
     public void DecrementPlayerLife()
     {
-        if (!isServer)
-            return;
-
         // Decrements the current player life
         --playerLife;
 
@@ -69,9 +61,7 @@ public class PlayerLife : NetworkBehaviour
         else
         {
             // Calls respawn the player
-            TargetRespawn(connectionToClient);
+            TargetRespawn();
         }
-
-        Debug.Log(playerLife);
     }
 }

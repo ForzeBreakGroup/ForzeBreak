@@ -53,6 +53,7 @@ public class NetworkHandler : NetworkManager
     /// </summary>
     private static NetworkHandler networkHandler;
     private Dictionary<NetworkConnection, GameObject> playerInConnection;
+    private Color[] playerColor = { Color.red, Color.blue, Color.green, Color.magenta };
     #endregion
 
     #region Public Methods
@@ -81,7 +82,6 @@ public class NetworkHandler : NetworkManager
     {
         // Preserve the gameobject through the scene loadings
         DontDestroyOnLoad(this);
-        Debug.Log(NetworkHandler.instance.isNetworkActive);
         if (isTesting && !NetworkHandler.instance.isNetworkActive)
         {
             NetworkHandler.instance.StartHost();
@@ -170,8 +170,10 @@ public class NetworkHandler : NetworkManager
         GameObject player = AddPlayerToScene(conn, playerControllerId);
         Debug.Log("OnServerAddPlayer");
 
+        player.GetComponent<CarUserControl>().ChangeColor(playerColor[playerInConnection.Count]);
+
         // Register the player in the network list
-        foreach(KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
+        foreach (KeyValuePair<NetworkConnection, GameObject> entry in playerInConnection)
         {
             player.GetComponent<ArrowIndicators>().RpcAddPlayer(entry.Key.connectionId, entry.Value);
             entry.Value.GetComponent<ArrowIndicators>().RpcAddPlayer(conn.connectionId, player);
@@ -179,7 +181,6 @@ public class NetworkHandler : NetworkManager
 
         // Update the internal record
         NetworkHandler.instance.playerInConnection.Add(conn, player);
-
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
