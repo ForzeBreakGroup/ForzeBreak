@@ -9,7 +9,9 @@ public class NetworkPlayerData : NetworkPlayerBase
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         this.SerializeView(stream, info);
+        NetworkPlayerInput.SerializeView(stream, info);
         NetworkPlayerMovement.SerializeView(stream, info);
+        NetworkPlayerVisual.SerializeView(stream, info);
     }
 
     public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)

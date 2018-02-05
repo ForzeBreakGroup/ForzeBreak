@@ -76,6 +76,6 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
 
     public virtual void SerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("Serializing View");
+        return;
     }
 }

@@ -23,9 +23,4 @@ public class NetworkPlayerInput : NetworkPlayerBase
         horizontalAxis = Input.GetAxis("Horizontal");
         verticalAxis = Input.GetAxis("Vertical");
     }
-
-    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        base.SerializeView(stream, info);
-    }
 }
