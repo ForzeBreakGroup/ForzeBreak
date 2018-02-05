@@ -73,6 +73,22 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    private NetworkPlayerCollision playerCollision;
+    protected NetworkPlayerCollision NetworkPlayerCollision
+    {
+        get
+        {
+            if (!playerCollision)
+            {
+                playerCollision = GetComponent(typeof(NetworkPlayerCollision)) as NetworkPlayerCollision;
+                if (!playerCollision)
+                {
+                    Debug.LogError("NetworkPlayerCollision Script must be attached to Player Object");
+                }
+            }
+            return playerCollision;
+        }
+    }
 
     public virtual void SerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

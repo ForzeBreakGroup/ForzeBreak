@@ -9,7 +9,7 @@ using UnityEngine;
  * Only for hanlding collision between players, and keeping record of damages of the player vehicle.
  * Analyze the collision and applies different force based on collision analysis
  */
-public class DamageSystem : MonoBehaviour
+public class DamageSystem : NetworkPlayerCollision
 {
     /// <summary>
     /// Sealed class to define constants for damage system
@@ -64,77 +64,22 @@ public class DamageSystem : MonoBehaviour
     #endregion
 
     #region Private Methods
-    /// <summary>
-    /// Enum defines the collision result
-    /// </summary>
-    private enum CollisionResult
+    protected override CollisionResult CollisionEvent(Collision collision)
     {
-        /// <summary>
-        /// Analysis result indicate the vehicle is a collider, the angle between contact point and vehicle direction is within [-45, 45] degrees
-        /// </summary>
-        Collider,
-
-        /// <summary>
-        /// Analysis result indicate the vehicle is a receiver, the angle between contact point and vehicle direction is out of [-45, 45] degrees
-        /// </summary>
-        Receiver
-    };
-
-    /// <summary>
-    /// Using this life-hook method to initialize
-    /// </summary>
-    private void Awake()
-    {
+        return CollisionResult.Receiver;
     }
 
-    /// <summary>
-    /// Life-hook method when collision happens
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
+    protected override void ResolveCollision(CollisionResult collisionResult, float force)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collisionResult == CollisionResult.Collider)
         {
-            Rigidbody rg = GetComponent<Rigidbody>();
-            if (rg.velocity.magnitude > collision.rigidbody.velocity.magnitude)
-            {
-                rg.velocity = Vector3.zero;
-            }
-            else
-            {
-                rg.AddExplosionForce(collision.impulse.magnitude, collision.contacts[0].point, 30, collision.impulse.magnitude, ForceMode.Impulse);
-            }
+
         }
-    }
-    /*
-    {
-        // Only deals with player collision, other collision objects are handled by their own script
-        if (collision.transform.tag == "Player")
+        else
         {
-            // Logging information to console
-            if (enableLog)
-            {
-                Debug.Log("OnCollisionEnter triggered by " + gameObject.name);
-            }
-
-            // Different collision results different force applied
-            switch (AnalyzeCollision(collision.contacts[0].normal))
-            {
-                // Collider - the vehicle causing the collision, mitigates forces received
-                case CollisionResult.Collider:
-                    ColliderReciprocalForce(collision.impulse, collision.contacts[0].point);
-                    break;
-
-                // Receiver - the vehicle receiving the collision force, full force applied
-                case CollisionResult.Receiver:
-                default:
-                    ReceiverAmplifiedForce(collision.gameObject.GetComponent<Rigidbody>().velocity, collision.contacts[0].point);
-                    break;
-            }
 
         }
     }
-    */
 
     /// <summary>
     /// Use the angle between normalized contact point and normalized vehicle rotation to determine if the
