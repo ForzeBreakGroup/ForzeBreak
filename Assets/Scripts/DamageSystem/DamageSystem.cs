@@ -61,6 +61,8 @@ public class DamageSystem : MonoBehaviour
     /// Enables logging information on Console
     /// </summary>
     [SerializeField] private bool enableLog = false;
+
+    private Rigidbody rb;
     #endregion
 
     #region Private Methods
@@ -85,6 +87,7 @@ public class DamageSystem : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -95,46 +98,20 @@ public class DamageSystem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Rigidbody rg = GetComponent<Rigidbody>();
-            if (rg.velocity.magnitude > collision.rigidbody.velocity.magnitude)
+            TimeManager.instance.SlowMotion();
+
+            if (AnalyzeCollision(collision) == CollisionResult.Collider)
             {
-                rg.velocity = Vector3.zero;
+                Debug.Log("Collider");
+                rb.velocity = Vector3.zero;
             }
             else
             {
-                rg.AddExplosionForce(collision.impulse.magnitude, collision.contacts[0].point, 30, collision.impulse.magnitude, ForceMode.Impulse);
+                Debug.Log("Receiver");
+                rb.AddExplosionForce(collision.impulse.magnitude * damageAmplifyPercentage / 10.0f, collision.contacts[0].point, 300.0f, 3.0f, ForceMode.Impulse);
             }
         }
     }
-    /*
-    {
-        // Only deals with player collision, other collision objects are handled by their own script
-        if (collision.transform.tag == "Player")
-        {
-            // Logging information to console
-            if (enableLog)
-            {
-                Debug.Log("OnCollisionEnter triggered by " + gameObject.name);
-            }
-
-            // Different collision results different force applied
-            switch (AnalyzeCollision(collision.contacts[0].normal))
-            {
-                // Collider - the vehicle causing the collision, mitigates forces received
-                case CollisionResult.Collider:
-                    ColliderReciprocalForce(collision.impulse, collision.contacts[0].point);
-                    break;
-
-                // Receiver - the vehicle receiving the collision force, full force applied
-                case CollisionResult.Receiver:
-                default:
-                    ReceiverAmplifiedForce(collision.gameObject.GetComponent<Rigidbody>().velocity, collision.contacts[0].point);
-                    break;
-            }
-
-        }
-    }
-    */
 
     /// <summary>
     /// Use the angle between normalized contact point and normalized vehicle rotation to determine if the
@@ -142,17 +119,39 @@ public class DamageSystem : MonoBehaviour
     /// </summary>
     /// <param name="contactNorm">Average of collision contact points norm</param>
     /// <returns>Result of collision analysis, receiver or collider</returns>
-    private CollisionResult AnalyzeCollision(Vector3 contactNorm)
+    private CollisionResult AnalyzeCollision(Collision collision)
     {
-        float collisionAngle = Vector3.Angle(GetComponent<Rigidbody>().velocity, -contactNorm);
+        Vector3 contactNormal = collision.contacts[0].normal;
+        float selfCollisionAngle = Vector3.Angle(rb.velocity, -contactNormal);
+        float otherCollisionAngle = Vector3.Angle(collision.rigidbody.velocity, -contactNormal);
 
         if (enableLog)
         {
-            Debug.Log("Vehicle Velocity: " + GetComponent<Rigidbody>().velocity + ", Contact Point: " + contactNorm + ", Angle: " + collisionAngle);
+            Debug.Log("Vehicle Velocity: " + rb.velocity + ", My Angle: " + selfCollisionAngle + ", Other Angle: " + otherCollisionAngle);
         }
 
-        if (collisionAngle < colliderAngle)
+        /* Compares two collider's velocity, bigger one with correct angle wins the clash
+         * If both velocity are equal, the one with better angle wins the clash
+         * If both velocity and angle are equal, both flies away
+         */
+        // Compare velocity and hitting angle
+        if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude &&
+            selfCollisionAngle < colliderAngle)
         {
+            // Handling case of same velocity
+            if (rb.velocity.magnitude == collision.rigidbody.velocity.magnitude)
+            {
+                // Wins the clash if collision angle is better
+                if (selfCollisionAngle > otherCollisionAngle)
+                {
+                    return CollisionResult.Collider;
+                }
+                else
+                {
+                    return CollisionResult.Receiver;
+                }
+            }
+
             return CollisionResult.Collider;
         }
 
