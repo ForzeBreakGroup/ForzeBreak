@@ -15,7 +15,7 @@ MonoBehaviour:
   VoiceAppID: 
   ChatAppID: 
   HostType: 1
-  PreferredRegion: 1
+  PreferredRegion: 6
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -44,4 +44,5 @@ MonoBehaviour:
   - TaggedPlayer
   - CollisionEvent
   - NetworkCollision
+  - SpawnPlayer
   DisableAutoOpenWizard: 1

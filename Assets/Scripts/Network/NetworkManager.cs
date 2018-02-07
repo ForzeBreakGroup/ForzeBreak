@@ -42,9 +42,11 @@ public class NetworkManager : PunBehaviour
 
     #region Private Members
     private static NetworkManager networkManager;
-    private Vector3[] spawnPosition;
     [SerializeField] private string playerPrefabName = "Player";
     [SerializeField] private string onlineSceneName = "Arena1";
+
+    private List<NetworkSpawnPoint> spawnPositions;
+    private int spawnPoint = 0;
     #endregion
 
     #region Public Methods
@@ -70,7 +72,7 @@ public class NetworkManager : PunBehaviour
     #region Private Methods
     private void Start()
     {
-        SceneManager.sceneLoaded += this.OnLevelLoad;
+        SceneManager.sceneLoaded += this.OnLevelLoaded;
     }
 
     private void Awake()
@@ -94,17 +96,64 @@ public class NetworkManager : PunBehaviour
         }
         else
         {
+            // Configure PhotonNetwork settings
             PhotonNetwork.automaticallySyncScene = true;
             PhotonNetwork.sendRate = 20;
             PhotonNetwork.sendRateOnSerialize = 20;
         }
     }
 
-    private void OnLevelLoad(Scene scene, LoadSceneMode sceneMode)
+    private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if (!PhotonNetwork.inRoom) return;
+        Debug.Log("Scene Loaded");
+        if (PhotonNetwork.isMasterClient)
+        {
+            RegisterSpawnLocations();
+            Vector3 pos;
+            Quaternion rot;
+            GetSpawnPoint(out pos, out rot);
+            SpawnPlayer(pos, rot);
+        }
+    }
 
-        localPlayer = PhotonNetwork.Instantiate(playerPrefabName, Vector3.zero, Quaternion.identity, 0);
+    [PunRPC]
+    private void SpawnPlayer(Vector3 position, Quaternion rotation)
+    {
+        if (!PhotonNetwork.inRoom)
+            return;
+
+        localPlayer = PhotonNetwork.Instantiate(playerPrefabName, position, rotation, 0);
+    }
+
+    private void GetSpawnPoint(out Vector3 position, out Quaternion rotation)
+    {
+        // Validate spawn position has content
+        if (spawnPositions == null || spawnPositions.Count == 0)
+        {
+            // Find the spawn locations if spawn positions are invalid
+            RegisterSpawnLocations();
+
+            // If spawn positions still invalid, return Vector3.zero
+            if (spawnPositions == null || spawnPositions.Count == 0)
+            {
+                position = Vector3.zero;
+                rotation = Quaternion.identity;
+            }
+        }
+        position = spawnPositions[spawnPoint].spawnPoint;
+        rotation = spawnPositions[spawnPoint].spawnRotation;
+        spawnPoint = ++spawnPoint % spawnPositions.Count;
+    }
+
+    private void RegisterSpawnLocations()
+    {
+        spawnPoint = 0;
+        spawnPositions = new List<NetworkSpawnPoint>();
+        NetworkSpawnPoint[] spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
+        foreach (NetworkSpawnPoint sp in spawnPoints)
+        {
+            spawnPositions.Add(sp);
+        }
     }
     #endregion
 
@@ -151,6 +200,20 @@ public class NetworkManager : PunBehaviour
         if (isLocalTesting)
         {
             PhotonNetwork.JoinOrCreateRoom("Testing", new RoomOptions(), null);
+        }
+    }
+
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        Debug.Log("Player Joined: " + newPlayer.ID);
+        base.OnPhotonPlayerConnected(newPlayer);
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            Vector3 pos;
+            Quaternion rot;
+            GetSpawnPoint(out pos, out rot);
+            photonView.RPC("SpawnPlayer", newPlayer, pos, rot);
         }
     }
     #endregion
