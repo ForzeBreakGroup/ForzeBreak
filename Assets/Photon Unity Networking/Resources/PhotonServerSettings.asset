@@ -34,6 +34,7 @@ MonoBehaviour:
   - Flash
   - InstantiateRpc
   - Marco
+  - NetworkCollision
   - PickupItemInit
   - Polo
   - PunPickup
@@ -41,8 +42,6 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - RPCSpawnPlayer
   - TaggedPlayer
-  - CollisionEvent
-  - NetworkCollision
-  - SpawnPlayer
   DisableAutoOpenWizard: 1

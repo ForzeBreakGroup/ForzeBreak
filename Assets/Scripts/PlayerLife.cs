@@ -10,21 +10,22 @@ using UnityEngine.SceneManagement;
  * Network synchronized script to manage client player's life during match.
  * Calls to host to change scene once a player's life has been depleted.
  */
-public class PlayerLife : MonoBehaviour
+public class PlayerLife : NetworkPlayerData
 {
     #region Private Members
     /// <summary>
     ///  Player's remaining life synchronized and managed by server/host
     /// </summary>
-    private int playerLife = 3;
+    [SerializeField] private int playerLife = 3;
 
     /// <summary>
     /// Networked Command method to request the host to change the scene.
     /// </summary>
     private void CmdPlayerLifeDepleted()
     {
-        // Change scene
-        SceneManager.LoadScene("End");
+        RaiseEventOptions evtOptions = new RaiseEventOptions();
+        evtOptions.Receivers = ReceiverGroup.MasterClient;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerDeath, null, true, evtOptions);
     }
     #endregion
 
@@ -40,8 +41,8 @@ public class PlayerLife : MonoBehaviour
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
         // Reset transform
-        transform.rotation = Quaternion.Euler(Vector3.zero);
-        transform.position = Vector3.zero;
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
     }
     #endregion
 

@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class NetworkPlayerData : NetworkPlayerBase
 {
-    [SerializeField] int health = 100;
+    [SerializeField] protected Vector3 spawnPosition;
+    [SerializeField] protected Quaternion spawnRotation;
+
+    private void Start()
+    {
+        spawnPosition = Vector3.zero;
+        spawnRotation = Quaternion.identity;
+    }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         this.SerializeView(stream, info);
+
         NetworkPlayerInput.SerializeView(stream, info);
         NetworkPlayerMovement.SerializeView(stream, info);
         NetworkPlayerVisual.SerializeView(stream, info);
         NetworkPlayerCollision.SerializeView(stream, info);
     }
 
-    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void RegisterSpawnInformation(Vector3 pos, Quaternion rot)
     {
-        if (stream.isWriting)
-        {
-            stream.SendNext(health);
-        }
-        else if (stream.isReading)
-        {
-            health = (int)stream.ReceiveNext();
-        }
+        spawnPosition = pos;
+        spawnRotation = rot;
     }
 }

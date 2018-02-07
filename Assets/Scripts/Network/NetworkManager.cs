@@ -106,23 +106,30 @@ public class NetworkManager : PunBehaviour
     private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         Debug.Log("Scene Loaded");
+
+        // Host will handle all the client spawning including providing spawn location and rotation
         if (PhotonNetwork.isMasterClient)
         {
             RegisterSpawnLocations();
             Vector3 pos;
             Quaternion rot;
             GetSpawnPoint(out pos, out rot);
-            SpawnPlayer(pos, rot);
+            RPCSpawnPlayer(pos, rot);
         }
     }
 
     [PunRPC]
-    private void SpawnPlayer(Vector3 position, Quaternion rotation)
+    private void RPCSpawnPlayer(Vector3 position, Quaternion rotation)
     {
         if (!PhotonNetwork.inRoom)
             return;
 
         localPlayer = PhotonNetwork.Instantiate(playerPrefabName, position, rotation, 0);
+        ((NetworkPlayerData)localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(position, rotation);
+
+        RaiseEventOptions evtOptions = new RaiseEventOptions();
+        evtOptions.Receivers = ReceiverGroup.MasterClient;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, null, true, evtOptions);
     }
 
     private void GetSpawnPoint(out Vector3 position, out Quaternion rotation)
@@ -169,6 +176,16 @@ public class NetworkManager : PunBehaviour
         }
     }
 
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Left Room");
+        base.OnLeftRoom();
+
+        RaiseEventOptions evtOptions = new RaiseEventOptions();
+        evtOptions.Receivers = ReceiverGroup.MasterClient;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, null, true, evtOptions);
+    }
+
     public override void OnCreatedRoom()
     {
         Debug.Log("Created Room");
@@ -180,6 +197,7 @@ public class NetworkManager : PunBehaviour
         Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonJoinRoomFailed(codeAndMsg);
     }
+
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
         Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
@@ -213,7 +231,7 @@ public class NetworkManager : PunBehaviour
             Vector3 pos;
             Quaternion rot;
             GetSpawnPoint(out pos, out rot);
-            photonView.RPC("SpawnPlayer", newPlayer, pos, rot);
+            photonView.RPC("RPCSpawnPlayer", newPlayer, pos, rot);
         }
     }
     #endregion
