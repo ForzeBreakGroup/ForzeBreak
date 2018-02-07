@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: dcef85e19fd785f40af825eee7f1309b
-timeCreated: 1516846786
+guid: 0809c8ea5921ba440a46468037bdc810
+timeCreated: 1517947358
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material_6
+    2100000: lambert1
+    2100002: Green
+    2100004: Blue
+    2100006: Pink
+    2100008: Orange
+    2100010: Red
+    2100012: Yellow
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Object_1
+    4300000: New_Wheel_Arena
     9500000: //RootNode
   externalObjects: {}
   materials:

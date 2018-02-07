@@ -1,18 +1,16 @@
 fileFormatVersion: 2
-guid: d7e42fb1e62083a4ba7adfe962f8c198
-timeCreated: 1516912850
+guid: 6e0417fe014c18343bf1adcc9b376204
+timeCreated: 1518035667
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Center_Ring
-    100002: //RootNode
-    400000: Center_Ring
-    400002: //RootNode
-    2100000: lambert1
-    2300000: Center_Ring
-    3300000: Center_Ring
-    4300000: Center_Ring
+    100000: //RootNode
+    400000: //RootNode
+    2100000: lambert16
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: HighDivPizza4
     9500000: //RootNode
   externalObjects: {}
   materials:
