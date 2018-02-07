@@ -74,6 +74,7 @@ public class DamageSystem : NetworkPlayerCollision
         if (result == CollisionResult.Collider)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
         else
         {

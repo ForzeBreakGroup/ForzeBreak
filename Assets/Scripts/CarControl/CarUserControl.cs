@@ -9,7 +9,6 @@ using UnityEngine;
  */
 public class CarUserControl : NetworkPlayerInput
 {
-    public Color color;
     public GameObject cam;
     private CarControlWheels carControlWheels; // the car controller we want to use
     private BoostControl boostControl;
@@ -25,13 +24,6 @@ public class CarUserControl : NetworkPlayerInput
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
-
-        // Change the color of player vehicle to assigned color
-        Material mat = transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material;
-        if (mat.color != color)
-        {
-            mat.color = color;
-        }
     }
 
     protected override void PlayerInputUpdate()
@@ -62,11 +54,6 @@ public class CarUserControl : NetworkPlayerInput
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
         flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");
         
-    }
-
-    public void ChangeColor(Color c)
-    {
-        color = c;
     }
 }
 

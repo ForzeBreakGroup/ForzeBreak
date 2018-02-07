@@ -4,7 +4,34 @@ using UnityEngine;
 
 public class MatchManager : Photon.MonoBehaviour
 {
+    private NetworkSpawnPoint[] spawnPoints;
     private Dictionary<PhotonPlayer, bool> playersStillAlive;
+    private static MatchManager matchManager;
+    public static MatchManager instance
+    {
+        get
+        {
+            if (!matchManager)
+            {
+                matchManager = FindObjectOfType(typeof(MatchManager)) as MatchManager;
+                if (!matchManager)
+                {
+                    Debug.LogError("MatchManager Script must be attached to an active GameObject in Scene");
+                }
+                else
+                {
+                    matchManager.Init();
+                }
+            }
+
+            return matchManager;
+        }
+    }
+
+    private void Init()
+    {
+        spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
+    }
 
     private void Awake()
     {
@@ -13,19 +40,19 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void OnEnable()
     {
-        PhotonNetwork.OnEventCall += EvtPlayerDeathEventHandler;
-        PhotonNetwork.OnEventCall += EvtAddPlayerEventHandler;
-        PhotonNetwork.OnEventCall += EvtRemovePlayerEventHandler;
+        PhotonNetwork.OnEventCall += EvtPlayerDeathHandler;
+        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
+        PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
     }
 
     private void OnDisable()
     {
-        PhotonNetwork.OnEventCall -= EvtPlayerDeathEventHandler;
-        PhotonNetwork.OnEventCall -= EvtAddPlayerEventHandler;
-        PhotonNetwork.OnEventCall -= EvtRemovePlayerEventHandler;
+        PhotonNetwork.OnEventCall -= EvtPlayerDeathHandler;
+        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
+        PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
     }
 
-    private void EvtAddPlayerEventHandler(byte evtCode, object content, int senderid)
+    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
         {
@@ -39,7 +66,7 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
-    private void EvtRemovePlayerEventHandler(byte evtCode, object content, int senderid)
+    private void EvtRemovePlayerFromMatchHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && PhotonNetwork.isMasterClient)
         {
@@ -53,7 +80,7 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
-    private void EvtPlayerDeathEventHandler(byte evtCode, object content, int senderid)
+    private void EvtPlayerDeathHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte) ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
         {
@@ -75,5 +102,14 @@ public class MatchManager : Photon.MonoBehaviour
                 PhotonNetwork.LoadLevel("End");
             }
         }
+    }
+
+    public void SpawnPlayer(string playerPrefabName)
+    {
+        int playerCount = PhotonNetwork.countOfPlayers;
+        Vector3 pos = spawnPoints[playerCount % spawnPoints.Length].spawnPoint;
+        Quaternion rot = spawnPoints[playerCount % spawnPoints.Length].spawnRotation;
+        NetworkManager.localPlayer = PhotonNetwork.Instantiate(playerPrefabName, pos, rot, 0);
+        ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
     }
 }

@@ -314,12 +314,12 @@ GameObject:
   - component: {fileID: 54323536511501222}
   - component: {fileID: 114311918752152702}
   - component: {fileID: 114101839404356720}
-  - component: {fileID: 114713690045134044}
   - component: {fileID: 114154092980463582}
   - component: {fileID: 114754004366044882}
   - component: {fileID: 114717635520710594}
   - component: {fileID: 114897829746237984}
   - component: {fileID: 114216797478839944}
+  - component: {fileID: 114051419598388708}
   m_Layer: 0
   m_Name: Tank_Wheels
   m_TagString: Player
@@ -1092,6 +1092,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 0.25, z: 0.65009654}
   m_Center: {x: 0, y: 0.049999997, z: -0.024951756}
+--- !u!114 &114051419598388708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676727889975342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d3b9a03f2009246a0772ce66729093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLife: 3
 --- !u!114 &114066133291417142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1208,17 +1220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
   skidParticles: {fileID: 0}
---- !u!114 &114713690045134044
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676727889975342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763b06745445aa94d9217d97916c3046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114717635520710594
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -107,60 +107,7 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Scene Loaded");
 
-        // Host will handle all the client spawning including providing spawn location and rotation
-        if (PhotonNetwork.isMasterClient)
-        {
-            RegisterSpawnLocations();
-            Vector3 pos;
-            Quaternion rot;
-            GetSpawnPoint(out pos, out rot);
-            RPCSpawnPlayer(pos, rot);
-        }
-    }
-
-    [PunRPC]
-    private void RPCSpawnPlayer(Vector3 position, Quaternion rotation)
-    {
-        if (!PhotonNetwork.inRoom)
-            return;
-
-        localPlayer = PhotonNetwork.Instantiate(playerPrefabName, position, rotation, 0);
-        ((NetworkPlayerData)localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(position, rotation);
-
-        RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.MasterClient;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, null, true, evtOptions);
-    }
-
-    private void GetSpawnPoint(out Vector3 position, out Quaternion rotation)
-    {
-        // Validate spawn position has content
-        if (spawnPositions == null || spawnPositions.Count == 0)
-        {
-            // Find the spawn locations if spawn positions are invalid
-            RegisterSpawnLocations();
-
-            // If spawn positions still invalid, return Vector3.zero
-            if (spawnPositions == null || spawnPositions.Count == 0)
-            {
-                position = Vector3.zero;
-                rotation = Quaternion.identity;
-            }
-        }
-        position = spawnPositions[spawnPoint].spawnPoint;
-        rotation = spawnPositions[spawnPoint].spawnRotation;
-        spawnPoint = ++spawnPoint % spawnPositions.Count;
-    }
-
-    private void RegisterSpawnLocations()
-    {
-        spawnPoint = 0;
-        spawnPositions = new List<NetworkSpawnPoint>();
-        NetworkSpawnPoint[] spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
-        foreach (NetworkSpawnPoint sp in spawnPoints)
-        {
-            spawnPositions.Add(sp);
-        }
+        MatchManager.instance.SpawnPlayer(playerPrefabName);
     }
     #endregion
 
@@ -225,14 +172,6 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            Vector3 pos;
-            Quaternion rot;
-            GetSpawnPoint(out pos, out rot);
-            photonView.RPC("RPCSpawnPlayer", newPlayer, pos, rot);
-        }
     }
     #endregion
 }
