@@ -53,8 +53,7 @@ public class TimeManager : MonoBehaviour
 
     private IEnumerator FrameSlowEffect()
     {
-        float waitTime = slowdownFrame * Time.timeScale;
-        Debug.Log(waitTime);
+        float waitTime = slowdownFrame * Time.fixedDeltaTime;
         Time.timeScale = slowdownFactor;
 
         yield return new WaitForSecondsRealtime(waitTime);
@@ -66,7 +65,6 @@ public class TimeManager : MonoBehaviour
     {
         float waitBeforePause = 10 * Time.fixedDeltaTime;
         float waitTime = slowdownFrame * Time.fixedDeltaTime;
-        Debug.Log(waitTime);
         yield return new WaitForSecondsRealtime(waitBeforePause);
 
         Time.timeScale = slowdownFactor;

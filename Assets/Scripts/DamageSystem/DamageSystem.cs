@@ -114,6 +114,7 @@ public class DamageSystem : MonoBehaviour
             {
                 Debug.Log("Collider");
                 rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
             else
             {
@@ -202,11 +203,11 @@ public class DamageSystem : MonoBehaviour
         switch (effectMode)
         {
             case CollisionEffect.FlyOffEffect:
-                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.5f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 50.0f, collisionPoint, 300.0f, 0.2f, ForceMode.Impulse);
                 break;
             case CollisionEffect.UpwardEffect:
             default:
-                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 50.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
                 break;
         }
     }
