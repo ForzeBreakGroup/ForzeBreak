@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    private enum ESlowMotionEffect
+    {
+        FrameSlow,
+        ShortPause
+    };
+
     [Range(0.001f, 1.0f)]
     [SerializeField] private float slowdownFactor = 0.05f;
     [SerializeField] private int slowdownFrame = 5;
-    private bool slowing = false;
-    private int elapsedFrame = 0;
+    [SerializeField] private bool enable = true;
+    [SerializeField] private ESlowMotionEffect effectMode = ESlowMotionEffect.FrameSlow;
+    
     private static TimeManager timeManager;
     public static TimeManager instance
     {
@@ -27,23 +34,45 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void SlowMotion()
     {
-        if (slowing)
+        if (enable)
         {
-            ++elapsedFrame;
-            if (elapsedFrame > slowdownFrame)
+            switch (effectMode)
             {
-                Time.timeScale = 1;
+                case ESlowMotionEffect.ShortPause:
+                    StartCoroutine(ShortPauseEffect());
+                    break;
+                case ESlowMotionEffect.FrameSlow:
+                default:
+                    StartCoroutine(FrameSlowEffect());
+                    break;
             }
         }
     }
 
-
-    public void SlowMotion()
+    private IEnumerator FrameSlowEffect()
     {
+        float waitTime = slowdownFrame * Time.timeScale;
+        Debug.Log(waitTime);
         Time.timeScale = slowdownFactor;
-        elapsedFrame = 0;
-        slowing = true;
+
+        yield return new WaitForSecondsRealtime(waitTime);
+
+        Time.timeScale = 1;
+    }
+
+    private IEnumerator ShortPauseEffect()
+    {
+        float waitBeforePause = 10 * Time.fixedDeltaTime;
+        float waitTime = slowdownFrame * Time.fixedDeltaTime;
+        Debug.Log(waitTime);
+        yield return new WaitForSecondsRealtime(waitBeforePause);
+
+        Time.timeScale = slowdownFactor;
+
+        yield return new WaitForSecondsRealtime(waitTime);
+
+        Time.timeScale = 1;
     }
 }

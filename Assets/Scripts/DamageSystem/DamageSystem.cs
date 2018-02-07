@@ -9,6 +9,13 @@ using UnityEngine;
  * Only for hanlding collision between players, and keeping record of damages of the player vehicle.
  * Analyze the collision and applies different force based on collision analysis
  */
+
+public enum CollisionEffect
+{
+    UpwardEffect,
+    FlyOffEffect
+};
+
 public class DamageSystem : MonoBehaviour
 {
     /// <summary>
@@ -21,6 +28,8 @@ public class DamageSystem : MonoBehaviour
     }
 
     #region Private Members
+    [SerializeField] private CollisionEffect effectMode = CollisionEffect.UpwardEffect;
+
     /// <summary>
     /// Damage Amplification % that will be applied into calculation of damage, bound by min and max value determined in constant class
     /// </summary>
@@ -63,9 +72,7 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] private bool enableLog = false;
 
     private Rigidbody rb;
-    #endregion
 
-    #region Private Methods
     /// <summary>
     /// Enum defines the collision result
     /// </summary>
@@ -81,6 +88,9 @@ public class DamageSystem : MonoBehaviour
         /// </summary>
         Receiver
     };
+    #endregion
+
+    #region Private Methods
 
     /// <summary>
     /// Using this life-hook method to initialize
@@ -108,7 +118,8 @@ public class DamageSystem : MonoBehaviour
             else
             {
                 Debug.Log("Receiver");
-                rb.AddExplosionForce(collision.impulse.magnitude * damageAmplifyPercentage / 10.0f, collision.contacts[0].point, 300.0f, 3.0f, ForceMode.Impulse);
+                ReceiverAmplifiedForce(collision.impulse, collision.contacts[0].point);
+                //rb.AddExplosionForce(collision.impulse.magnitude * damageAmplifyPercentage / 10.0f, collision.contacts[0].point, 300.0f, 3.0f, ForceMode.Impulse);
             }
         }
     }
@@ -188,21 +199,16 @@ public class DamageSystem : MonoBehaviour
     /// <param name="collisionPoint">Impact point from Collision class</param>
     private void ReceiverAmplifiedForce(Vector3 impulse, Vector3 collisionPoint)
     {
-        // Force = |impact force| * additional amplification * % dmg
-        //float explosionForce = impulse.magnitude * receiverAdditionalAmplification * damageAmplifyPercentage / 100.0f;
-
-        // Logging information on console
-        if (enableLog)
+        switch (effectMode)
         {
-            Debug.Log("Receiver Amplified Force: ");
-           // Debug.Log("Applying " + explosionForce + " at: " + collisionPoint + new Vector3(0, -receiverUpwardEffect, 0));
-           // Debug.Log("Amplified from: " + impulse.magnitude + " to: " + explosionForce);
+            case CollisionEffect.FlyOffEffect:
+                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.5f, ForceMode.Impulse);
+                break;
+            case CollisionEffect.UpwardEffect:
+            default:
+                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
+                break;
         }
-
-        // Apply explosion force at specified location with upward effect
-        GetComponent<Rigidbody>().AddForce((impulse + Vector3.up * receiverUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification * 10, ForceMode.Impulse);
-
-        Debug.Log((impulse + Vector3.up * receiverUpwardEffect) * damageAmplifyPercentage * receiverAdditionalAmplification * 10);
     }
     #endregion
 

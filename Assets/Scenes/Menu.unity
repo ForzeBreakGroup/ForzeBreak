@@ -188,6 +188,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
+        type: 2}
+      propertyPath: m_Channels.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4600898447616078, guid: d07f7941e149b8a4abf2334a015c6078, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -224,8 +229,36 @@ Prefab:
         type: 2}
       propertyPath: m_PlayerPrefab
       value: 
-      objectReference: {fileID: 1676727889975342, guid: 1dfe2cd04da1d514f99495ebd841cb1d,
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
         type: 2}
+      propertyPath: m_OfflineScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
+        type: 2}
+      propertyPath: m_CustomConfig
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
+        type: 2}
+      propertyPath: isNetworkActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386551105349994, guid: d07f7941e149b8a4abf2334a015c6078,
+        type: 2}
+      propertyPath: matchMaker
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825513656032288, guid: d07f7941e149b8a4abf2334a015c6078, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114850017184805470, guid: d07f7941e149b8a4abf2334a015c6078, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d07f7941e149b8a4abf2334a015c6078, type: 2}
