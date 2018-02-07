@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Photon;
 
 /*
  * Author: Robin
@@ -8,7 +7,7 @@ using Photon;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : Photon.MonoBehaviour
+public class CarUserControl : NetworkPlayerInput
 {
     public Color color;
     public GameObject cam;
@@ -35,12 +34,7 @@ public class CarUserControl : Photon.MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        enabled = photonView.isMine;
-    }
-
-    private void FixedUpdate()
+    protected override void PlayerInputUpdate()
     {
         // keyboard Input
         float h = Input.GetAxis("Horizontal");
@@ -55,19 +49,19 @@ public class CarUserControl : Photon.MonoBehaviour
         v = (v == 0) ? -controllerTrigger : v;
         carControlWheels.Move(h, v, v, handbrake);
 
-        if(boost)
+        if (boost)
             boostControl.Boost();
         else
             boostControl.Recover();
-        
-        flipControl.Flip(flip,h);
 
+        flipControl.Flip(flip, h);
     }
 
     private void Update()
     {
         boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");        
+        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");
+        
     }
 
     public void ChangeColor(Color c)

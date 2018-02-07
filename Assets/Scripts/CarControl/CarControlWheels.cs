@@ -14,7 +14,7 @@ internal enum SpeedType
     KPH
 }
 
-public class CarControlWheels : MonoBehaviour
+public class CarControlWheels : NetworkPlayerMovement
 {
     [SerializeField] private CarDriveType carDriveType = CarDriveType.FourWheelDrive;
     [SerializeField] private GameObject[] wheelMeshes = new GameObject[4];
@@ -81,6 +81,61 @@ public class CarControlWheels : MonoBehaviour
         MaxSpeed = topspeed;
     }
 
+    public void Move(float steering, float accel, float footbrake, float handbrake)
+    {
+        IsWheelsGround = true;
+        for (int i = 0; i < 4; i++)
+        {
+            Quaternion quat;
+            Vector3 position;
+            wheelColliders[i].GetWorldPose(out position, out quat);
+            wheelMeshes[i].transform.position = position;
+            wheelMeshes[i].transform.rotation = quat;
+
+            WheelHit wheelhit;
+            wheelColliders[i].GetGroundHit(out wheelhit);
+            if (wheelhit.normal == Vector3.zero)
+                IsWheelsGround = false;
+        }
+
+        //clamp input values
+        steering = Mathf.Clamp(steering, -1, 1);
+        AccelInput = accel = Mathf.Clamp(accel, 0, 1);
+        BrakeInput = footbrake = -1 * Mathf.Clamp(footbrake, -1, 0);
+        handbrake = Mathf.Clamp(handbrake, 0, 1);
+
+        if (handbrake <= 0f)
+        {
+            wheelColliders[2].brakeTorque = 0;
+            wheelColliders[3].brakeTorque = 0;
+        }
+        //Set the steer on the front wheels.
+        //Assuming that wheels 0 and 1 are the front wheels.
+        steerAngle = steering * maximumSteerAngle;
+        wheelColliders[0].steerAngle = steerAngle;
+        wheelColliders[1].steerAngle = steerAngle;
+
+        SteerHelper();
+        ApplyDrive(accel, footbrake);
+        CapSpeed();
+
+        //Set the handbrake.
+        //Assuming that wheels 2 and 3 are the rear wheels.
+        if (handbrake > 0f)
+        {
+            var hbTorque = handbrake * maxHandbrakeTorque;
+            wheelColliders[2].brakeTorque = hbTorque;
+            wheelColliders[3].brakeTorque = hbTorque;
+        }
+
+
+        CalculateRevs();
+        GearChanging();
+
+        AddDownForce();
+        //CheckForWheelSpin();
+        TractionControl();
+    }
 
     private void GearChanging()
     {
@@ -136,61 +191,6 @@ public class CarControlWheels : MonoBehaviour
     }
 
 
-    public void Move(float steering, float accel, float footbrake, float handbrake)
-    {
-        IsWheelsGround = true;
-        for (int i = 0; i < 4; i++)
-        {
-            Quaternion quat;
-            Vector3 position;
-            wheelColliders[i].GetWorldPose(out position, out quat);
-            wheelMeshes[i].transform.position = position;
-            wheelMeshes[i].transform.rotation = quat;
-
-            WheelHit wheelhit;
-            wheelColliders[i].GetGroundHit(out wheelhit);
-            if (wheelhit.normal == Vector3.zero)
-                IsWheelsGround = false;
-        }
-
-        //clamp input values
-        steering = Mathf.Clamp(steering, -1, 1);
-        AccelInput = accel = Mathf.Clamp(accel, 0, 1);
-        BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
-        handbrake = Mathf.Clamp(handbrake, 0, 1);
-
-        if (handbrake <= 0f)
-        {
-            wheelColliders[2].brakeTorque = 0;
-            wheelColliders[3].brakeTorque = 0;
-        }
-        //Set the steer on the front wheels.
-        //Assuming that wheels 0 and 1 are the front wheels.
-        steerAngle = steering*maximumSteerAngle;
-        wheelColliders[0].steerAngle = steerAngle;
-        wheelColliders[1].steerAngle = steerAngle;
-
-        SteerHelper();
-        ApplyDrive(accel, footbrake);
-        CapSpeed();
-
-        //Set the handbrake.
-        //Assuming that wheels 2 and 3 are the rear wheels.
-        if (handbrake > 0f)
-        {
-            var hbTorque = handbrake*maxHandbrakeTorque;
-            wheelColliders[2].brakeTorque = hbTorque;
-            wheelColliders[3].brakeTorque = hbTorque;
-        }
-
-
-        CalculateRevs();
-        GearChanging();
-
-        AddDownForce();
-        //CheckForWheelSpin();
-        TractionControl();
-    }
 
 
     private void CapSpeed()

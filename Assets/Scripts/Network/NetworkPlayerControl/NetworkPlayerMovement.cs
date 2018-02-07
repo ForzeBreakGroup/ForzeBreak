@@ -17,19 +17,14 @@ public class NetworkPlayerMovement : NetworkPlayerBase
 
     private void FixedUpdate()
     {
-        if (photonView.isMine)
+        if (!photonView.isMine)
         {
-            Vector3 movement = new Vector3(NetworkPlayerInput.horizontalAxis, rb.velocity.y, NetworkPlayerInput.verticalAxis);
-            rb.velocity = movement;
-        }
-        else
-        {
-            UpdateNetworPosition();
+            UpdateNetworkPosition();
             UpdateNetworkRotation();
         }
     }
 
-    private void UpdateNetworkRotation()
+    private void UpdateNetworkPosition()
     {
         float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
         float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkedReceiveTime);
@@ -37,14 +32,21 @@ public class NetworkPlayerMovement : NetworkPlayerBase
 
         Vector3 exterpolatedPosition = networkPos + rb.velocity * totalTimePassed;
         Vector3 predictPosition = Vector3.MoveTowards(rb.position, exterpolatedPosition, rb.velocity.magnitude * Time.deltaTime);
+
+        if (Mathf.Abs(rb.position.y - predictPosition.y) < 1f)
+        {
+            predictPosition.y = rb.position.y;
+        }
+
         if (Vector3.Distance(rb.position, exterpolatedPosition) > 2f)
         {
             predictPosition = exterpolatedPosition;
         }
-        rb.position = predictPosition;
+
+        rb.MovePosition(predictPosition);
     }
 
-    private void UpdateNetworPosition()
+    private void UpdateNetworkRotation()
     {
         rb.rotation = Quaternion.RotateTowards(rb.rotation, networkRot, 180f * Time.deltaTime);
     }

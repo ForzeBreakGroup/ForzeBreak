@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class NetworkPlayerInput : NetworkPlayerBase
 {
-    public Camera cam;
-    public float horizontalAxis = 0;
-    public float verticalAxis = 0;
-
-    private void Start()
+    private void Awake()
     {
         enabled = photonView.isMine;
-
-        if (photonView.isMine)
-        {
-            Instantiate(cam).gameObject.GetComponent<PlayerCamera>().target = this.gameObject;
-        }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        horizontalAxis = Input.GetAxis("Horizontal");
-        verticalAxis = Input.GetAxis("Vertical");
+        PlayerInputUpdate();
+    }
+
+    protected virtual void PlayerInputUpdate()
+    {
     }
 }

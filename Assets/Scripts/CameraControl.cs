@@ -20,7 +20,7 @@ public class CameraControl : MonoBehaviour {
     [SerializeField] private bool followRoll = false;
     [SerializeField] private bool followTilt = false;
 
-    private GameObject target;
+    public GameObject target;
     private float lastFlatAngle;
     private Rigidbody targetRigidbody;
     private float currentTurnAmount;

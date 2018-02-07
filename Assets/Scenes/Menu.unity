@@ -677,7 +677,7 @@ Prefab:
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
       propertyPath: playerPrefabName
-      value: PlayerObj
+      value: Tank_Wheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f06ce1498daa68f4bac88c448296c823, type: 2}

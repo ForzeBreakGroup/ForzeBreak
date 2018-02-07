@@ -64,21 +64,34 @@ public class DamageSystem : NetworkPlayerCollision
     #endregion
 
     #region Private Methods
-    protected override CollisionResult CollisionEvent(Collision collision)
+    protected override CollisionResult CollisionEvent(Collision collision, out float force, out Vector3 contactPoint)
     {
-        return CollisionResult.Receiver;
-    }
+        CollisionResult result = AnalyzeCollision(collision.contacts[0].normal);
 
-    protected override void ResolveCollision(CollisionResult collisionResult, float force)
-    {
-        if (collisionResult == CollisionResult.Collider)
+        force = collision.impulse.magnitude;
+        contactPoint = collision.contacts[0].point;
+
+        if (result == CollisionResult.Collider)
         {
-
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         else
         {
-
+            ApplyExplosionForce(force, contactPoint);
         }
+
+        return result;
+    }
+
+    protected override void ResolveCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
+    {
+        ApplyExplosionForce(force, contactPoint);
+    }
+
+    private void ApplyExplosionForce(float force, Vector3 point)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddExplosionForce(force * damageAmplifyPercentage / 100.0f, point, receiverExplosionRadius, receiverUpwardEffect, ForceMode.Impulse);
     }
 
     /// <summary>

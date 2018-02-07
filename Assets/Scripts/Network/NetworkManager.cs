@@ -95,6 +95,8 @@ public class NetworkManager : PunBehaviour
         else
         {
             PhotonNetwork.automaticallySyncScene = true;
+            PhotonNetwork.sendRate = 20;
+            PhotonNetwork.sendRateOnSerialize = 20;
         }
     }
 

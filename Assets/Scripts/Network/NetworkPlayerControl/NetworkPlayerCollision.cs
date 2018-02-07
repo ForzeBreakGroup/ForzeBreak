@@ -13,25 +13,40 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (PhotonNetwork.isMasterClient && collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            CollisionResult collisionResult = CollisionEvent(collision);
-            photonView.RPC("NetworkCollision", PhotonPlayer.Find(this.gameObject.GetPhotonView().ownerId), collisionResult, collision.impulse.magnitude);
+            if (photonView.isMine)
+            {
+                float force;
+                Vector3 point;
+                CollisionEvent(collision, out force, out point);
+            }
+            else
+            {
+                float force;
+                Vector3 point;
+                CollisionResult collisionResult = CollisionEvent(collision, out force, out point);
+                photonView.RPC("NetworkCollision", PhotonPlayer.Find(collision.gameObject.GetPhotonView().ownerId), collisionResult, force, point);
+            }
         }
     }
 
-    protected virtual CollisionResult CollisionEvent(Collision collision)
+    protected virtual CollisionResult CollisionEvent(Collision collision, out float force, out Vector3 collisionPoint)
     {
+        force = 0;
+        collisionPoint = Vector3.zero;
         return CollisionResult.Receiver;
     }
 
     [PunRPC]
-    private void NetworkCollision(CollisionResult collisionResult, float force)
+    private void NetworkCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
     {
-        ResolveCollision(collisionResult, force);
+        Debug.Log(collisionResult);
+        Debug.Log(force);
+        ResolveCollision(collisionResult, force, contactPoint);
     }
 
-    protected virtual void ResolveCollision(CollisionResult collisionResult, float force)
+    protected virtual void ResolveCollision(CollisionResult collisionResult, float force, Vector3 point)
     {
 
     }
