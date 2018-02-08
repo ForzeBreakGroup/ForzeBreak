@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 05187abf9d9739a41a0713816d36966f
+timeCreated: 1518131843
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Buggy_2
+    100002: eg
+    100004: Egine
+    100006: front_tire
+    100008: front_tire_1
+    100010: Lam
+    100012: pasted__TankPlaceHolder3_Leg_FRT_L
+    100014: pasted__TankPlaceHolder3_Leg_FRT_L1
+    100016: pasted__TankPlaceHolder3_Leg_FRT_L2
+    100018: pasted__TankPlaceHolder3_Leg_FRT_L3
+    100020: rear_tire
+    100022: rear_tire2
+    100024: skul
+    100026: Soba
+    100028: Soba1
+    100030: //RootNode
+    400000: Buggy_2
+    400002: eg
+    400004: Egine
+    400006: front_tire
+    400008: front_tire_1
+    400010: Lam
+    400012: pasted__TankPlaceHolder3_Leg_FRT_L
+    400014: pasted__TankPlaceHolder3_Leg_FRT_L1
+    400016: pasted__TankPlaceHolder3_Leg_FRT_L2
+    400018: pasted__TankPlaceHolder3_Leg_FRT_L3
+    400020: rear_tire
+    400022: rear_tire2
+    400024: skul
+    400026: Soba
+    400028: Soba1
+    400030: //RootNode
+    2300000: Buggy_2
+    2300002: eg
+    2300004: Egine
+    2300006: front_tire
+    2300008: front_tire_1
+    2300010: Lam
+    2300012: pasted__TankPlaceHolder3_Leg_FRT_L
+    2300014: pasted__TankPlaceHolder3_Leg_FRT_L1
+    2300016: pasted__TankPlaceHolder3_Leg_FRT_L2
+    2300018: pasted__TankPlaceHolder3_Leg_FRT_L3
+    2300020: rear_tire
+    2300022: rear_tire2
+    2300024: skul
+    2300026: Soba
+    2300028: Soba1
+    3300000: Buggy_2
+    3300002: eg
+    3300004: Egine
+    3300006: front_tire
+    3300008: front_tire_1
+    3300010: Lam
+    3300012: pasted__TankPlaceHolder3_Leg_FRT_L
+    3300014: pasted__TankPlaceHolder3_Leg_FRT_L1
+    3300016: pasted__TankPlaceHolder3_Leg_FRT_L2
+    3300018: pasted__TankPlaceHolder3_Leg_FRT_L3
+    3300020: rear_tire
+    3300022: rear_tire2
+    3300024: skul
+    3300026: Soba
+    3300028: Soba1
+    4300000: eg
+    4300002: Egine
+    4300004: Lam
+    4300006: skul
+    4300008: Buggy_2
+    4300010: rear_tire2
+    4300012: pasted__TankPlaceHolder3_Leg_FRT_L
+    4300014: pasted__TankPlaceHolder3_Leg_FRT_L1
+    4300016: rear_tire
+    4300018: front_tire_1
+    4300020: pasted__TankPlaceHolder3_Leg_FRT_L2
+    4300022: pasted__TankPlaceHolder3_Leg_FRT_L3
+    4300024: front_tire
+    4300026: Soba
+    4300028: Soba1
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn1
+    second: {fileID: 2100000, guid: 17204c36e295d5d4a8fccd933dacb65a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: 419a03b57f2cb074f83faefe7981156a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 81207f16a8f8f2448b8b0284ea0541c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__blinn3
+    second: {fileID: 2100000, guid: f0f2638e9e623104292b66603ac9b39e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
