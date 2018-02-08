@@ -12,7 +12,8 @@ using UnityEngine;
  */
 public class CameraControl : MonoBehaviour {
 
-    
+
+    public GameObject target;
     [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private float turnSpeed = 15f;
     [SerializeField] private float smoothTurnTime = 0.2f;
@@ -20,20 +21,13 @@ public class CameraControl : MonoBehaviour {
     [SerializeField] private bool followRoll = false;
     [SerializeField] private bool followTilt = false;
 
-    private GameObject target;
     private float lastFlatAngle;
-    private Rigidbody targetRigidbody;
     private float currentTurnAmount;
     private float turnSpeedVelocityChange;
     private Vector3 rollUp = Vector3.up;
 
     private Vector3 oldPosition;
-    void Awake()
-    {
-        target = transform.root.gameObject;
-        targetRigidbody = target.GetComponent<Rigidbody>();
-    }
-	
+    
     
 	void FixedUpdate () {
         FollowTarget(Time.deltaTime);

@@ -49,6 +49,7 @@ public class CarControlWheels : MonoBehaviour
     
     public bool IsBoosting { get; set; }
     public bool IsWheelsGround { get; set; }
+    public bool IsAnyWheelGround { get; set; }
     public bool Skidding { get; private set; }
     public float BrakeInput { get; private set; }
     public float CurrentSteerAngle{ get { return steerAngle; }}
@@ -58,7 +59,7 @@ public class CarControlWheels : MonoBehaviour
     public float AccelInput { get; private set; }
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -79,6 +80,8 @@ public class CarControlWheels : MonoBehaviour
         currentTorque = fullTorqueOverAllWheels - (tractionControl * fullTorqueOverAllWheels);
 
         MaxSpeed = topspeed;
+
+        IsBoosting = false;
     }
 
 
@@ -139,6 +142,7 @@ public class CarControlWheels : MonoBehaviour
     public void Move(float steering, float accel, float footbrake, float handbrake)
     {
         IsWheelsGround = true;
+        IsAnyWheelGround = false;
         for (int i = 0; i < 4; i++)
         {
             Quaternion quat;
@@ -151,6 +155,8 @@ public class CarControlWheels : MonoBehaviour
             wheelColliders[i].GetGroundHit(out wheelhit);
             if (wheelhit.normal == Vector3.zero)
                 IsWheelsGround = false;
+            else
+                IsAnyWheelGround = true;
         }
 
         //clamp input values
@@ -344,26 +350,26 @@ public class CarControlWheels : MonoBehaviour
     // 2) plays tiure skidding sounds
     // 3) leaves skidmarks on the ground
     // these effects are controlled through the WheelEffects class
-    private void CheckForWheelSpin()
-    {
-        // loop through all wheels
-        for (int i = 0; i < 4; i++)
-        {
-            WheelHit wheelHit;
-            wheelColliders[i].GetGroundHit(out wheelHit);
+    //private void CheckForWheelSpin()
+    //{
+    //    // loop through all wheels
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        WheelHit wheelHit;
+    //        wheelColliders[i].GetGroundHit(out wheelHit);
 
-            // is the tire slipping above the given threshhold
-            if (Mathf.Abs(wheelHit.forwardSlip) >= slipLimit || Mathf.Abs(wheelHit.sidewaysSlip) >= slipLimit)
-            {
-                wheelEffects[i].EmitTyreSmoke();
+    //        // is the tire slipping above the given threshhold
+    //        if (Mathf.Abs(wheelHit.forwardSlip) >= slipLimit || Mathf.Abs(wheelHit.sidewaysSlip) >= slipLimit)
+    //        {
+    //            wheelEffects[i].EmitTyreSmoke();
                 
-                continue;
-            }
+    //            continue;
+    //        }
             
-            // end the trail generation
-            wheelEffects[i].EndSkidTrail();
-        }
-    }
+    //        // end the trail generation
+    //        wheelEffects[i].EndSkidTrail();
+    //    }
+    //}
 
 }
 
