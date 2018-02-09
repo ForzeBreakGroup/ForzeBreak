@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Wall4
+  m_Name: Futuristic-Interior-Design-20-polygonal-and-geometric-objects-youll-love
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: af174290417c58f40b533b81bb715295, type: 3}
+        m_Texture: {fileID: 2800000, guid: c6da9d4ed39c8c944944719c1c1f7303, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -36,11 +36,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 5, y: 1}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 692db57b0a0434d408cc2a04a09af4d0, type: 3}
-        m_Scale: {x: 5, y: 1}
+        m_Texture: {fileID: 2800000, guid: 4e595f512c8fafd4c8142cf0b073d251, type: 3}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
