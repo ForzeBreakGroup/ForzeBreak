@@ -331,7 +331,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: List
+  m_Text: Local
 --- !u!222 &1079921766
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -482,8 +482,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1717205293}
   - {fileID: 1916447095}
+  - {fileID: 1717205293}
   - {fileID: 1466997660}
   m_Father: {fileID: 1938721623}
   m_RootOrder: 0
@@ -775,7 +775,7 @@ RectTransform:
   m_Children:
   - {fileID: 1628021326}
   m_Father: {fileID: 1441632426}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -898,7 +898,7 @@ RectTransform:
   m_Children:
   - {fileID: 1079921764}
   m_Father: {fileID: 1441632426}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -944,8 +944,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ListGames
+      - m_Target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+          type: 2}
+        m_MethodName: SinglePlayerMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

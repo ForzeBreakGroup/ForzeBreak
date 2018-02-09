@@ -14,7 +14,7 @@ using Photon;
 public class NetworkManager : PunBehaviour
 {
     #region Public Members
-    public bool isLocalTesting = false;
+    public bool offlineMode = false;
     public string gameVersion = "0.1.0";
     public static GameObject localPlayer;
     public static NetworkManager instance
@@ -50,6 +50,13 @@ public class NetworkManager : PunBehaviour
     #endregion
 
     #region Public Methods
+    public void SinglePlayerMode()
+    {
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.offlineMode = true;
+        offlineMode = true;
+    }
+
     public void CreateGame()
     {
         RoomOptions roomOptions = new RoomOptions();
@@ -162,9 +169,10 @@ public class NetworkManager : PunBehaviour
         Debug.Log("JoinedLobby");
         base.OnJoinedLobby();
 
-        if (isLocalTesting)
+        if (offlineMode)
         {
-            PhotonNetwork.JoinOrCreateRoom("Testing", new RoomOptions(), null);
+            PhotonNetwork.offlineMode = true;
+            PhotonNetwork.CreateRoom("");
         }
     }
 
@@ -172,6 +180,12 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("JoinedMaster");
+        base.OnConnectedToMaster();
     }
     #endregion
 }
