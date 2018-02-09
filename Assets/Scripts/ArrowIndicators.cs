@@ -36,8 +36,6 @@ public class ArrowIndicators : MonoBehaviour
         GameObject trackPlayer = Instantiate(arrowIndicator, this.transform);
         CarUserControl carControl = playerObject.GetComponent<CarUserControl>();
         trackPlayer.GetComponent<TrackPlayer>().objectToTrack = playerObject;
-        trackPlayer.GetComponent<TrackPlayer>().ChangeScheme(carControl.color);
-        carControl.ChangeColor(carControl.color);
         arrowList.Add(uniqueId, trackPlayer);
     }
 
