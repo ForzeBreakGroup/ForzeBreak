@@ -14,7 +14,7 @@ internal enum SpeedType
     KPH
 }
 
-public class CarControlWheels : MonoBehaviour
+public class CarControlWheels : NetworkPlayerMovement
 {
     [SerializeField] private CarDriveType carDriveType = CarDriveType.FourWheelDrive;
     [SerializeField] private GameObject[] wheelMeshes = new GameObject[4];
@@ -61,6 +61,8 @@ public class CarControlWheels : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
+        base.AssignRigidbody();
+
         for (int i = 0; i < 4; i++)
         {
             wheelColliders[i] = wheelCollidersObjects[i].GetComponent<WheelCollider>();
@@ -292,8 +294,6 @@ public class CarControlWheels : MonoBehaviour
             wheelColliders[0].attachedRigidbody.AddForce(-transform.up*downforce*
                                                         wheelColliders[0].attachedRigidbody.velocity.magnitude);
     }
-
-        
 
     // crude traction control that reduces the power to wheel if the car is wheel spinning too much
     private void TractionControl()

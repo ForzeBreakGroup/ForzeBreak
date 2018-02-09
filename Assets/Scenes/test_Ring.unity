@@ -193,7 +193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &404018201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,8 +206,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camPrefeb: {fileID: 1071636056247922, guid: 2c2675f54f58f924888cb20762cb6730, type: 2}
+<<<<<<< HEAD
   carPrefeb: {fileID: 1225670559274192, guid: 1ff28d08aed44b646a0997b69fe1e0de, type: 2}
   playerAmount: 1
+=======
+  carPrefeb: {fileID: 1401548003739844, guid: 5e453baa69a223f4bb0103865b57d0a8, type: 2}
+  playerAmount: 2
+>>>>>>> 65303304bc3cfa671bafc4739e46c5a0358579ef
 --- !u!4 &404018202
 Transform:
   m_ObjectHideFlags: 0

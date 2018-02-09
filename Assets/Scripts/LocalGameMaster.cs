@@ -37,6 +37,7 @@ public class LocalGameMaster : MonoBehaviour
                 for (int i = 0; i < playerAmount; i++)
                 {
                     spawnPoint = transform.Find("SpawnPoints").GetChild(i);
+                    Debug.Log(spawnPoint.name);
                     GameObject car = Instantiate(carPrefeb, spawnPoint.position, spawnPoint.rotation);
                     car.GetComponent<CarUserControl>().playerNum = i+1;
                     GameObject cam = Instantiate(camPrefeb, spawnPoint.position, spawnPoint.rotation);

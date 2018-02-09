@@ -7,7 +7,7 @@ using UnityEngine;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : MonoBehaviour
+public class CarUserControl : NetworkPlayerInput
 {
     public Color color;
     public int playerNum;

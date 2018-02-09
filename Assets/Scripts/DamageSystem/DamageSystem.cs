@@ -16,7 +16,7 @@ public enum CollisionEffect
     FlyOffEffect
 };
 
-public class DamageSystem : MonoBehaviour
+public class DamageSystem : NetworkPlayerCollision
 {
     /// <summary>
     /// Sealed class to define constants for damage system
@@ -34,37 +34,43 @@ public class DamageSystem : MonoBehaviour
     /// Damage Amplification % that will be applied into calculation of damage, bound by min and max value determined in constant class
     /// </summary>
     [Range(DamageSystemConstants.baseDamagePercentage, DamageSystemConstants.maxDamagePercentage)]
-    [SerializeField] private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
+    [SerializeField]
+    private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
 
     /// <summary>
     /// Allowance angle to determine the vehicle is collider or receiver
     /// </summary>
     [Range(0, 45)]
-    [SerializeField] private float colliderAngle = 45.0f;
+    [SerializeField]
+    private float colliderAngle = 45.0f;
 
     /// <summary>
     /// Additional upward effect applied to Collider
     /// </summary>
     [Range(0, 1)]
-    [SerializeField] private float colliderUpwardEffect = 0.0f;
+    [SerializeField]
+    private float colliderUpwardEffect = 0.0f;
 
     /// <summary>
     /// Additional amplification force to Receiver
     /// </summary>
     [Range(0, 3)]
-    [SerializeField] private float receiverAdditionalAmplification = 1.0f;
+    [SerializeField]
+    private float receiverAdditionalAmplification = 1.0f;
 
     /// <summary>
     /// Explosion radius applied to the Receiver, should be propotional to Receiver Upward Effect
     /// </summary>
     [Range(1, 10)]
-    [SerializeField] private float receiverExplosionRadius = 3.0f;
+    [SerializeField]
+    private float receiverExplosionRadius = 3.0f;
 
     /// <summary>
     /// Additional upward effect applied to Receiver
     /// </summary>
     [Range(1, 10)]
-    [SerializeField] private float receiverUpwardEffect = 2.0f;
+    [SerializeField]
+    private float receiverUpwardEffect = 2.0f;
 
     /// <summary>
     /// Enables logging information on Console
@@ -72,22 +78,6 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] private bool enableLog = false;
 
     private Rigidbody rb;
-
-    /// <summary>
-    /// Enum defines the collision result
-    /// </summary>
-    private enum CollisionResult
-    {
-        /// <summary>
-        /// Analysis result indicate the vehicle is a collider, the angle between contact point and vehicle direction is within [-45, 45] degrees
-        /// </summary>
-        Collider,
-
-        /// <summary>
-        /// Analysis result indicate the vehicle is a receiver, the angle between contact point and vehicle direction is out of [-45, 45] degrees
-        /// </summary>
-        Receiver
-    };
     #endregion
 
     #region Private Methods
@@ -100,28 +90,44 @@ public class DamageSystem : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    /// <summary>
-    /// Life-hook method when collision happens
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
+    protected override CollisionResult CollisionEvent(Collision collision, out float force, out Vector3 contactPoint)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            TimeManager.instance.SlowMotion();
+        CollisionResult result = AnalyzeCollision(collision);
 
-            if (AnalyzeCollision(collision) == CollisionResult.Collider)
+        force = collision.impulse.magnitude;
+        contactPoint = collision.contacts[0].point;
+
+        if (photonView.isMine)
+        {
+            if (result == CollisionResult.Collider)
             {
-                Debug.Log("Collider");
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
             else
             {
-                Debug.Log("Receiver");
-                ReceiverAmplifiedForce(collision.impulse, collision.contacts[0].point);
-                //rb.AddExplosionForce(collision.impulse.magnitude * damageAmplifyPercentage / 10.0f, collision.contacts[0].point, 300.0f, 3.0f, ForceMode.Impulse);
+                ApplyExplosionForce(force, contactPoint);
             }
+        }
+
+        return result;
+    }
+
+    protected override void ResolveCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
+    {
+        if (enableLog)
+        {
+            Debug.Log(string.Format("Collision Result: {0}, Force: {1}, ContactPoint: {2}", collisionResult, force, contactPoint));
+        }
+
+        if (collisionResult == CollisionResult.Collider)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        else
+        {
+            ApplyExplosionForce(force, contactPoint);
         }
     }
 
@@ -147,8 +153,7 @@ public class DamageSystem : MonoBehaviour
          * If both velocity and angle are equal, both flies away
          */
         // Compare velocity and hitting angle
-        if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude &&
-            selfCollisionAngle < colliderAngle)
+        if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude)
         {
             // Handling case of same velocity
             if (rb.velocity.magnitude == collision.rigidbody.velocity.magnitude)
@@ -198,16 +203,16 @@ public class DamageSystem : MonoBehaviour
     /// </summary>
     /// <param name="impulse">Impulse force from Collision class</param>
     /// <param name="collisionPoint">Impact point from Collision class</param>
-    private void ReceiverAmplifiedForce(Vector3 impulse, Vector3 collisionPoint)
+    private void ApplyExplosionForce(float impulse, Vector3 collisionPoint)
     {
         switch (effectMode)
         {
             case CollisionEffect.FlyOffEffect:
-                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 50.0f, collisionPoint, 300.0f, 0.2f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.6f, ForceMode.Impulse);
                 break;
             case CollisionEffect.UpwardEffect:
             default:
-                rb.AddExplosionForce(impulse.magnitude * damageAmplifyPercentage / 50.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
                 break;
         }
     }
