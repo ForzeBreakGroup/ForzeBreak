@@ -14,7 +14,7 @@ using Photon;
 public class NetworkManager : PunBehaviour
 {
     #region Public Members
-    public bool offlineMode = false;
+    public static bool offlineMode = false;
     public string gameVersion = "0.1.0";
     public static GameObject localPlayer;
     public static NetworkManager instance
@@ -41,38 +41,49 @@ public class NetworkManager : PunBehaviour
     #endregion
 
     #region Private Members
+    private enum ConnectionState
+    {
+        IDLE,
+        CREATE,
+        JOIN
+    };
+
     private static NetworkManager networkManager;
     [SerializeField] private string playerPrefabName = "Player";
     [SerializeField] private string onlineSceneName = "Arena1";
 
     private List<NetworkSpawnPoint> spawnPositions;
     private int spawnPoint = 0;
+
+    [Range(1, 4)]
+    [SerializeField]
+    private int numberOfLocalPlayers = 1;
+    private static ConnectionState state = ConnectionState.IDLE;
     #endregion
 
     #region Public Methods
     public void SinglePlayerMode()
     {
-        PhotonNetwork.Disconnect();
-        PhotonNetwork.offlineMode = true;
-        offlineMode = true;
+        DisconnectFromPhoton();
     }
 
     public void CreateGame()
     {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.IsOpen = true;
-        roomOptions.IsVisible = true;
-        roomOptions.MaxPlayers = 4;
-        roomOptions.PlayerTtl = 7500;
-        roomOptions.EmptyRoomTtl = 1000;
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
-
-        PhotonNetwork.CreateRoom(null, roomOptions, null);
+        state = ConnectionState.CREATE;
+        if (!PhotonNetwork.connected)
+        {
+            ConnectingToPhotonServer();
+        }
     }
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRandomRoom();
+        state = ConnectionState.JOIN;
+        if (!PhotonNetwork.connected)
+        {
+            ConnectingToPhotonServer();
+        }
+
     }
     #endregion
 
@@ -95,7 +106,17 @@ public class NetworkManager : PunBehaviour
         networkManager.Init();
     }
 
+    private void OnApplicationQuit()
+    {
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.offlineMode = false;
+    }
+
     private void Init()
+    {
+    }
+
+    private void ConnectingToPhotonServer()
     {
         if (!PhotonNetwork.ConnectUsingSettings(gameVersion))
         {
@@ -110,11 +131,46 @@ public class NetworkManager : PunBehaviour
         }
     }
 
+    private void CreateRoomInPhotonServer()
+    {
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.IsOpen = true;
+        roomOptions.IsVisible = true;
+        roomOptions.MaxPlayers = 4;
+        roomOptions.PlayerTtl = 7500;
+        roomOptions.EmptyRoomTtl = 1000;
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
+
+        PhotonNetwork.CreateRoom(null, roomOptions, null);
+    }
+
+    private void JoinRandomGameInPhotonServer()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
+
     private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         Debug.Log("Scene Loaded");
+        
+        if (offlineMode)
+        {
+            MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
+        }
+        else
+        {
+            MatchManager.instance.SpawnPlayer(playerPrefabName);
+        }
+    }
 
-        MatchManager.instance.SpawnPlayer(playerPrefabName);
+    private void DisconnectFromPhoton()
+    {
+        offlineMode = true;
+        if (PhotonNetwork.connected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        PhotonNetwork.offlineMode = true;
     }
     #endregion
 
@@ -169,10 +225,14 @@ public class NetworkManager : PunBehaviour
         Debug.Log("JoinedLobby");
         base.OnJoinedLobby();
 
-        if (offlineMode)
+        Debug.Log(state);
+        if (state == ConnectionState.CREATE)
         {
-            PhotonNetwork.offlineMode = true;
-            PhotonNetwork.CreateRoom("");
+            CreateRoomInPhotonServer();
+        }
+        else if(state == ConnectionState.JOIN)
+        {
+            JoinRandomGameInPhotonServer();
         }
     }
 
@@ -186,6 +246,11 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("JoinedMaster");
         base.OnConnectedToMaster();
+
+        if (offlineMode)
+        {
+            PhotonNetwork.CreateRoom("");
+        }
     }
     #endregion
 }

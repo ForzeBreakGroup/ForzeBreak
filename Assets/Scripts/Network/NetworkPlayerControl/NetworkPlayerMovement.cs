@@ -55,8 +55,6 @@ public class NetworkPlayerMovement : NetworkPlayerBase
     {
         if (stream.isWriting)
         {
-            Debug.Log(stream);
-            Debug.Log(rb);
             stream.SendNext(rb.position);
             stream.SendNext(rb.rotation);
             stream.SendNext(rb.velocity);

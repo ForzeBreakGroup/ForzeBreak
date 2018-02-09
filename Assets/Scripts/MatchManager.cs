@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MatchManager : Photon.MonoBehaviour
 {
+    public GameObject cam;
     private NetworkSpawnPoint[] spawnPoints;
     private Dictionary<PhotonPlayer, bool> playersStillAlive;
     private static MatchManager matchManager;
@@ -36,6 +37,10 @@ public class MatchManager : Photon.MonoBehaviour
     private void Awake()
     {
         playersStillAlive = new Dictionary<PhotonPlayer, bool>();
+        if (!cam)
+        {
+            Debug.LogError("Camera Not Attached");
+        }
     }
 
     private void OnEnable()
@@ -104,12 +109,68 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
+    public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
+    {
+        foreach (string name in Input.GetJoystickNames())
+        {
+            Debug.Log(name);
+        }
+
+        switch (numberOfPlayers)
+        {
+            case 1:
+                for (int i = 0; i < numberOfPlayers; i++)
+                {
+                    GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
+                    GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
+                    go.GetComponent<CameraControl>().target = car;
+                }
+                break;
+
+            case 2:
+                for (int i = 0; i < numberOfPlayers; i++)
+                {
+                    GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
+                    car.GetComponent<CarUserControl>().playerNum = i + 1;
+                    GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
+                    go.GetComponent<CameraControl>().target = car;
+
+                    float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;
+                    float marginY = (i > 1) ? 0.5f : 0f;
+
+                    go.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, 1f);
+
+                }
+                break;
+            default:
+                for (int i = 0; i < numberOfPlayers; i++)
+                {
+                    GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
+                    car.GetComponent<CarUserControl>().playerNum = i + 1;
+                    GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
+                    go.GetComponent<CameraControl>().target = car;
+
+                    float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;
+                    float marginY = (i > 1) ? 0f : 0.5f;
+
+                    go.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, 0.5f);
+
+                }
+                break;
+
+        }
+    }
+
     public void SpawnPlayer(string playerPrefabName)
     {
         int playerCount = PhotonNetwork.countOfPlayers;
         Vector3 pos = spawnPoints[playerCount % spawnPoints.Length].spawnPoint;
         Quaternion rot = spawnPoints[playerCount % spawnPoints.Length].spawnRotation;
+
         NetworkManager.localPlayer = PhotonNetwork.Instantiate(playerPrefabName, pos, rot, 0);
         ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+
+        GameObject go = Instantiate(cam);
+        go.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
     }
 }

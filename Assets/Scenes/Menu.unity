@@ -451,6 +451,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: numberOfLocalPlayers
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: offlineMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f06ce1498daa68f4bac88c448296c823, type: 2}
   m_IsPrefabParent: 0
