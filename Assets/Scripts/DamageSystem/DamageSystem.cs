@@ -97,14 +97,17 @@ public class DamageSystem : NetworkPlayerCollision
         force = collision.impulse.magnitude;
         contactPoint = collision.contacts[0].point;
 
-        if (result == CollisionResult.Collider)
+        if (photonView.isMine)
         {
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        }
-        else
-        {
-            ApplyExplosionForce(force, contactPoint);
+            if (result == CollisionResult.Collider)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                ApplyExplosionForce(force, contactPoint);
+            }
         }
 
         return result;
@@ -112,7 +115,20 @@ public class DamageSystem : NetworkPlayerCollision
 
     protected override void ResolveCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
     {
-        ApplyExplosionForce(force, contactPoint);
+        if (enableLog)
+        {
+            Debug.Log(string.Format("Collision Result: {0}, Force: {1}, ContactPoint: {2}", collisionResult, force, contactPoint));
+        }
+
+        if (collisionResult == CollisionResult.Collider)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        else
+        {
+            ApplyExplosionForce(force, contactPoint);
+        }
     }
 
     /// <summary>

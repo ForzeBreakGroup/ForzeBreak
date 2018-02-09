@@ -17,12 +17,14 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         {
             if (photonView.isMine)
             {
+                Debug.Log("OnCollisionEvent: Local");
                 float force;
                 Vector3 point;
                 CollisionEvent(collision, out force, out point);
             }
             else
             {
+                Debug.Log("OnCollisionEvent: Remote");
                 float force;
                 Vector3 point;
                 CollisionResult collisionResult = CollisionEvent(collision, out force, out point);
