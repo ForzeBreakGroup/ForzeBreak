@@ -225,7 +225,6 @@ public class NetworkManager : PunBehaviour
         Debug.Log("JoinedLobby");
         base.OnJoinedLobby();
 
-        Debug.Log(state);
         if (state == ConnectionState.CREATE)
         {
             CreateRoomInPhotonServer();
