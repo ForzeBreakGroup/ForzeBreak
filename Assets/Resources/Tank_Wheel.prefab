@@ -1241,6 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectMode: 1
   damageAmplifyPercentage: 500
   colliderAngle: 45
   colliderUpwardEffect: 0
