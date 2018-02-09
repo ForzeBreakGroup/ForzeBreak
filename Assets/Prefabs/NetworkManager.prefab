@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocalTesting: 0
   gameVersion: 0.1.0
+  playerPrefabName: Tank_Wheel
+  onlineSceneName: Online

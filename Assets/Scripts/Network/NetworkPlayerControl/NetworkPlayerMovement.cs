@@ -5,15 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerMovement : NetworkPlayerBase
 {
-    private Rigidbody rb;
+    protected Rigidbody rb;
     private Vector3 networkPos;
     private Quaternion networkRot;
     private double lastNetworkedReceiveTime = 0;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 
     private void FixedUpdate()
     {
@@ -24,6 +19,11 @@ public class NetworkPlayerMovement : NetworkPlayerBase
         }
     }
 
+    public void AssignRigidbody()
+    {
+        rb = GetComponent<Rigidbody>();
+
+    }
     private void UpdateNetworkPosition()
     {
         float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
@@ -55,6 +55,8 @@ public class NetworkPlayerMovement : NetworkPlayerBase
     {
         if (stream.isWriting)
         {
+            Debug.Log(stream);
+            Debug.Log(rb);
             stream.SendNext(rb.position);
             stream.SendNext(rb.rotation);
             stream.SendNext(rb.velocity);
