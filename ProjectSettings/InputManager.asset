@@ -486,6 +486,22 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
+    m_Name: Controller_Button_X
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: joystick button 2
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: Controller1_Button_X
     descriptiveName: 
     descriptiveNegativeName: 
@@ -549,6 +565,22 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 4
+  - serializedVersion: 3
+    m_Name: Controller1_Button_Y
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: joystick button 3
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Controller1_Button_Y
     descriptiveName: 
