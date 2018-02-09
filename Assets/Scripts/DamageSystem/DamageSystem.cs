@@ -137,8 +137,7 @@ public class DamageSystem : NetworkPlayerCollision
          * If both velocity and angle are equal, both flies away
          */
         // Compare velocity and hitting angle
-        if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude &&
-            selfCollisionAngle < colliderAngle)
+        if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude)
         {
             // Handling case of same velocity
             if (rb.velocity.magnitude == collision.rigidbody.velocity.magnitude)
@@ -193,7 +192,7 @@ public class DamageSystem : NetworkPlayerCollision
         switch (effectMode)
         {
             case CollisionEffect.FlyOffEffect:
-                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 1f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.6f, ForceMode.Impulse);
                 break;
             case CollisionEffect.UpwardEffect:
             default:
