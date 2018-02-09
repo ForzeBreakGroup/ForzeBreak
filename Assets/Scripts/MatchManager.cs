@@ -122,6 +122,7 @@ public class MatchManager : Photon.MonoBehaviour
                 for (int i = 0; i < numberOfPlayers; i++)
                 {
                     GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
+                    car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     go.GetComponent<CameraControl>().target = car;
                 }
@@ -132,6 +133,7 @@ public class MatchManager : Photon.MonoBehaviour
                 {
                     GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
                     car.GetComponent<CarUserControl>().playerNum = i + 1;
+                    car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     go.GetComponent<CameraControl>().target = car;
 
@@ -147,6 +149,7 @@ public class MatchManager : Photon.MonoBehaviour
                 {
                     GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
                     car.GetComponent<CarUserControl>().playerNum = i + 1;
+                    car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     GameObject go = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
                     go.GetComponent<CameraControl>().target = car;
 
