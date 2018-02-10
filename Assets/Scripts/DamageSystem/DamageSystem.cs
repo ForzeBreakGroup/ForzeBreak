@@ -117,7 +117,9 @@ public class DamageSystem : NetworkPlayerCollision
     {
         if (enableLog)
         {
-            Debug.Log(string.Format("Collision Result: {0}, Force: {1}, ContactPoint: {2}", collisionResult, force, contactPoint));
+            Debug.Log("Resolving Collision Event: " + photonView.viewID);
+            Debug.Log(string.Format("Collision Result: {0}, Receiving Force: {1}, Contact Point: {2}", collisionResult, force, contactPoint));
+            Debug.Log(string.Format("Vehicle Position: {0}, Distance Between Contact Point: {1}", rb.position, Vector3.Distance(rb.position, contactPoint)));
         }
 
         if (collisionResult == CollisionResult.Collider)
@@ -139,14 +141,10 @@ public class DamageSystem : NetworkPlayerCollision
     /// <returns>Result of collision analysis, receiver or collider</returns>
     private CollisionResult AnalyzeCollision(Collision collision)
     {
+        CollisionResult result = CollisionResult.Receiver;
         Vector3 contactNormal = collision.contacts[0].normal;
         float selfCollisionAngle = Vector3.Angle(rb.velocity, -contactNormal);
         float otherCollisionAngle = Vector3.Angle(collision.rigidbody.velocity, -contactNormal);
-
-        if (enableLog)
-        {
-            Debug.Log("Vehicle Velocity: " + rb.velocity + ", My Angle: " + selfCollisionAngle + ", Other Angle: " + otherCollisionAngle);
-        }
 
         /* Compares two collider's velocity, bigger one with correct angle wins the clash
          * If both velocity are equal, the one with better angle wins the clash
@@ -155,25 +153,34 @@ public class DamageSystem : NetworkPlayerCollision
         // Compare velocity and hitting angle
         if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude)
         {
+            result = CollisionResult.Collider;
+
             // Handling case of same velocity
             if (rb.velocity.magnitude == collision.rigidbody.velocity.magnitude)
             {
                 // Wins the clash if collision angle is better
                 if (selfCollisionAngle > otherCollisionAngle)
                 {
-                    return CollisionResult.Collider;
+                    result = CollisionResult.Collider;
                 }
                 else
                 {
-                    return CollisionResult.Receiver;
+                    result = CollisionResult.Receiver;
                 }
             }
+        }
 
-            return CollisionResult.Collider;
+        if (enableLog)
+        {
+            Debug.Log("Analyze Collision: " + result);
+            Debug.Log(string.Format("My force: {0}, Their force: {1}", rb.velocity.magnitude, collision.rigidbody.velocity.magnitude));
+            Debug.Log(string.Format("Contact Point: {0}, Contact Point Normal: {1}", collision.contacts[0].point, collision.contacts[0].normal));
+            Debug.Log(string.Format("My velocity: {0}, Angle: {1}", rb.velocity, selfCollisionAngle));
+            Debug.Log(string.Format("Other's velocity: {0}, Angle: {1}", collision.rigidbody.velocity, otherCollisionAngle));
         }
 
         // Otherwise, the entity is receiver
-        return CollisionResult.Receiver;
+        return result;
     }
 
     /// <summary>
