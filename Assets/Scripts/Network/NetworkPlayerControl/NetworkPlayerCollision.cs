@@ -13,23 +13,14 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        // Host side collision check
+        if (collision.gameObject.tag == "Player" && PhotonNetwork.isMasterClient)
         {
-            if (photonView.isMine)
-            {
-                Debug.Log("OnCollisionEvent: Local");
-                float force;
-                Vector3 point;
-                CollisionEvent(collision, out force, out point);
-            }
-            else
-            {
-                Debug.Log("OnCollisionEvent: Remote");
-                float force;
-                Vector3 point;
-                CollisionResult collisionResult = CollisionEvent(collision, out force, out point);
-                photonView.RPC("NetworkCollision", PhotonPlayer.Find(collision.gameObject.GetPhotonView().ownerId), collisionResult, force, point);
-            }
+            Debug.Log("OnCollisionEvent Triggered by Player: " + photonView.viewID);
+            float force;
+            Vector3 point;
+            CollisionResult collisionResult = CollisionEvent(collision, out force, out point);
+            photonView.RPC("NetworkCollision", PhotonPlayer.Find(gameObject.GetPhotonView().ownerId), collisionResult, force, point);
         }
     }
 
@@ -41,10 +32,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     }
 
     [PunRPC]
-    private void NetworkCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
+    protected void NetworkCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
     {
-        Debug.Log(collisionResult);
-        Debug.Log(force);
         ResolveCollision(collisionResult, force, contactPoint);
     }
 

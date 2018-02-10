@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 114571423198515052}
   - component: {fileID: 114937029471642614}
   - component: {fileID: 114094868656332456}
-  - component: {fileID: 114233338269783496}
   m_Layer: 0
   m_Name: Tank_Wheel
   m_TagString: Player
@@ -1132,17 +1131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
   skidParticles: {fileID: 0}
---- !u!114 &114233338269783496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401548003739844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8c26e42f414bf49b2297eb4d8711d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114257998899234586
 MonoBehaviour:
   m_ObjectHideFlags: 1
