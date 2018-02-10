@@ -107,6 +107,8 @@ GameObject:
   - component: {fileID: 114272873532637912}
   - component: {fileID: 114370458041932418}
   - component: {fileID: 114837642368711272}
+  - component: {fileID: 114809773956244456}
+  - component: {fileID: 114784902815334822}
   m_Layer: 0
   m_Name: War_Buggy
   m_TagString: Untagged
@@ -1538,6 +1540,44 @@ MonoBehaviour:
   revRangeBoundary: 1
   slipLimit: 0.2
   brakeTorque: 100000000
+--- !u!114 &114784902815334822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1225670559274192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114809773956244456}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &114809773956244456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1225670559274192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d3b9a03f2009246a0772ce66729093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLife: 3
 --- !u!114 &114837642368711272
 MonoBehaviour:
   m_ObjectHideFlags: 1
