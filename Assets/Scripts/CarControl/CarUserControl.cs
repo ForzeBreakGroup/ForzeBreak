@@ -7,10 +7,11 @@ using UnityEngine;
  * Description:
  * Apply Input to CarControlWheels script, handle all inputs including keyboard and controller
  */
-public class CarUserControl : MonoBehaviour
+public class CarUserControl : NetworkPlayerInput
 {
     public Color color;
-    public GameObject cam;
+    public int playerNum;
+
     private CarControlWheels carControlWheels; // the car controller we want to use
     private BoostControl boostControl;
     private FlipControl flipControl;
@@ -18,20 +19,14 @@ public class CarUserControl : MonoBehaviour
     private bool boost = false;
     private bool flip = false;
 
-    private void Start()
+    private void Awake()
     {
-        GameObject obj = Instantiate<GameObject>(cam, this.transform);
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
+        playerNum = 1;
 
-        // Change the color of player vehicle to assigned color
-        Material mat = transform.Find("Model").transform.Find("Tank_Body").GetComponent<MeshRenderer>().material;
-        if (mat.color != color)
-        {
-            mat.color = color;
-        }
     }
 
     private void FixedUpdate()
@@ -40,33 +35,48 @@ public class CarUserControl : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         float handbrake = Input.GetAxis("Handbrake");
+
         // controller Input
-        float controllerX = Input.GetAxis("Controller_X_Axis");
-        float controllerTrigger = Input.GetAxis("Controller_Trigger_Axis");
+        float controllerX = Input.GetAxis("Controller" + playerNum + "_X_Axis");
+        float controllerTrigger = Input.GetAxis("Controller" + playerNum + "_Trigger_Axis");
 
         //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
         v = (v == 0) ? -controllerTrigger : v;
         carControlWheels.Move(h, v, v, handbrake);
 
-        if(boost)
-            boostControl.Boost();
-        else
-            boostControl.Recover();
-        
-        flipControl.Flip(flip,h);
 
+
+
+        boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller" + playerNum + "_Button_B");
+        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller" + playerNum + "_Button_A");
+        if (boostControl!=null)
+        {
+            if (boost)
+                boostControl.Boost();
+            else
+                boostControl.Recover();
+        }
+
+        if(flipControl!=null)
+            flipControl.Flip(flip,h);
+    
     }
 
     private void Update()
     {
-        boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller_Button_A");        
+            
     }
 
     public void ChangeColor(Color c)
     {
         color = c;
+        Material mat = transform.Find("Model").transform.Find("Body").GetComponent<MeshRenderer>().material;
+        // Change the color of player vehicle to assigned color
+        if (mat.color != color)
+        {
+            mat.color = color;
+        }
     }
 }
 

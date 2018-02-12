@@ -6,16 +6,17 @@ public class FlipControl : MonoBehaviour {
 
     private Rigidbody carRigidbody;
     private CarControlWheels carController;
-    private bool canFlip = true;
-    private bool carBodyGrounded = false;
     [SerializeField] private float flipCD = 0.2f;
     [SerializeField] private float upForce_wheelsGrounded = 7500f;
     [SerializeField] private float upForce_overturned = 3500f;
     [SerializeField] private float sideForce = 1000f;
-
+    
+    private bool canFlip = true;
+    private bool carBodyGrounded = false;
     private float nextFlip = 0.0f;
+    private float sideTorque = 0.0f;
 
-    private void Start()
+    private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();
@@ -23,40 +24,45 @@ public class FlipControl : MonoBehaviour {
 
     public void Flip(bool flipInput, float dir)
     {
-        if (Time.time>nextFlip)
+        if (Time.time > nextFlip)
         {
             canFlip = true;
         }
-        
+
+
+        if (!carController.IsAnyWheelGround)
+        {
+            sideTorque = Mathf.Lerp(0, sideForce, 0.7f);
+            carRigidbody.AddRelativeTorque(-Vector3.forward * sideTorque * dir, ForceMode.Acceleration);
+        }
+        else
+        {
+            sideTorque = 0.0f;
+        }
+
         if (flipInput == false)
             return;
 
-        if(canFlip)
+        if (canFlip)
         {
             if (carController.IsWheelsGround)
             {
-                Debug.Log("aaa");
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
 
                 carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.Impulse);
 
-                if(dir>0)
-                    carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
-                else
-                    carRigidbody.AddRelativeTorque(Vector3.forward * sideForce, ForceMode.Acceleration);
-
             }
-            else if(transform.up.y<0&&carBodyGrounded)
+            else if (transform.up.y < 0 && carBodyGrounded)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
-                
+
                 carRigidbody.AddForce(Vector3.up * upForce_overturned, ForceMode.Impulse);
                 if (dir > 0)
-                    carRigidbody.AddRelativeTorque(-transform.forward * sideForce, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(-Vector3.forward * 1000f, ForceMode.Acceleration);
                 else
-                    carRigidbody.AddRelativeTorque(Vector3.forward * sideForce, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(Vector3.forward * 1000f, ForceMode.Acceleration);
             }
 
 

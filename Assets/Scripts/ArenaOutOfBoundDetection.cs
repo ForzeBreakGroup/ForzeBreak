@@ -14,8 +14,8 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerLife pl = other.GetComponentInParent<PlayerLife>();
-            pl.DecrementPlayerLife();
+            NetworkPlayerData playerData = other.GetComponentInParent<NetworkPlayerData>();
+            playerData.DecrementPlayerLife();
         }
     }
 }

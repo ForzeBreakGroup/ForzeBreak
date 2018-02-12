@@ -16,7 +16,7 @@ public class BoostControl : MonoBehaviour {
     private Rigidbody carRigidbody;
     private CarControlWheels carController;
 
-    private void Start()
+    private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();

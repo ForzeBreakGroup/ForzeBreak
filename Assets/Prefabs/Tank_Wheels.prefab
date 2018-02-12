@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4573777271800318}
   - component: {fileID: 146918822901116010}
-  - component: {fileID: 114228642779406330}
   m_Layer: 0
   m_Name: WheelCollider_FL
   m_TagString: Untagged
@@ -165,7 +164,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4055586461718334}
   - component: {fileID: 146815347846981636}
-  - component: {fileID: 114836198106804858}
   m_Layer: 0
   m_Name: WheelCollider_BR
   m_TagString: Untagged
@@ -182,7 +180,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4333542090003650}
   - component: {fileID: 146622885819790572}
-  - component: {fileID: 114623748051626838}
   m_Layer: 0
   m_Name: WheelCollider_BL
   m_TagString: Untagged
@@ -246,7 +243,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4987277369328098}
   - component: {fileID: 146261834323506252}
-  - component: {fileID: 114066133291417142}
   m_Layer: 0
   m_Name: WheelCollider_FR
   m_TagString: Untagged
@@ -315,11 +311,8 @@ GameObject:
   - component: {fileID: 114311918752152702}
   - component: {fileID: 114101839404356720}
   - component: {fileID: 114713690045134044}
-  - component: {fileID: 114154092980463582}
-  - component: {fileID: 114754004366044882}
   - component: {fileID: 114717635520710594}
   - component: {fileID: 114897829746237984}
-  - component: {fileID: 114216797478839944}
   m_Layer: 0
   m_Name: Tank_Wheels
   m_TagString: Player
@@ -1092,19 +1085,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 0.25, z: 0.65009654}
   m_Center: {x: 0, y: 0.049999997, z: -0.024951756}
---- !u!114 &114066133291417142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1590403642036180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636e0dbdeb8609c4d8d12ed131865e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
-  skidParticles: {fileID: 0}
 --- !u!114 &114101839404356720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1117,49 +1097,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  cam: {fileID: 1071636056247922, guid: 2c2675f54f58f924888cb20762cb6730, type: 2}
---- !u!114 &114154092980463582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676727889975342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmplifyPercentage: 500
-  colliderAngle: 45
-  colliderUpwardEffect: 0
-  receiverAdditionalAmplification: 1
-  receiverExplosionRadius: 3
-  receiverUpwardEffect: 2
-  enableLog: 1
---- !u!114 &114216797478839944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676727889975342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bc4206caf0c304fa70b66dbafbe838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114228642779406330
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015888878113368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636e0dbdeb8609c4d8d12ed131865e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
-  skidParticles: {fileID: 0}
 --- !u!114 &114311918752152702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1184,8 +1121,8 @@ MonoBehaviour:
   - {fileID: 1491205311695650}
   centreOfMassOffset: {x: 0, y: 0, z: 0}
   maximumSteerAngle: 30
-  steerHelper: 0.3
-  tractionControl: 1
+  steerHelper: 0.8
+  tractionControl: 0.5
   fullTorqueOverAllWheels: 3500
   reverseTorque: 500
   maxHandbrakeTorque: 100000000
@@ -1195,19 +1132,6 @@ MonoBehaviour:
   revRangeBoundary: 1
   slipLimit: 0.2
   brakeTorque: 100000000
---- !u!114 &114623748051626838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491205311695650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636e0dbdeb8609c4d8d12ed131865e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
-  skidParticles: {fileID: 0}
 --- !u!114 &114713690045134044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1236,32 +1160,6 @@ MonoBehaviour:
   energyDecay: 0.5
   energyRecover: 1
   maxEnergy: 100
---- !u!114 &114754004366044882
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1676727889975342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b32c97b2f7b500a4a8f8a05e5f97ce23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowIndicator: {fileID: 1222006281803610, guid: 26de9c17f51b5b641809452d4132bfa5,
-    type: 2}
---- !u!114 &114836198106804858
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1477167313066022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636e0dbdeb8609c4d8d12ed131865e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
-  skidParticles: {fileID: 0}
 --- !u!114 &114897829746237984
 MonoBehaviour:
   m_ObjectHideFlags: 1
