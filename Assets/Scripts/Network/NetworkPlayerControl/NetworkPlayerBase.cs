@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Base class for NetworkPlayers, this obtains all other possible NetworkPlayer components for cross-referencing easier
+ * if the component derives from this class 
+ */
 public class NetworkPlayerBase : Photon.MonoBehaviour
 {
+    /// <summary>
+    /// Internal reference to NetworkPlayerInput
+    /// </summary>
     private NetworkPlayerInput playerInput;
     protected NetworkPlayerInput NetworkPlayerInput
     {
