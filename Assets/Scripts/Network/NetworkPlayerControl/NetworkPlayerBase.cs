@@ -8,7 +8,7 @@ using Photon;
  * 
  * Description:
  * Base class for NetworkPlayers, this obtains all other possible NetworkPlayer components for cross-referencing easier
- * if the component derives from this class 
+ * if the component derives from this class, using singleton pattern for all components
  */
 public class NetworkPlayerBase : Photon.MonoBehaviour
 {
@@ -32,6 +32,9 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Internal reference to NetworkPlayerVisual
+    /// </summary>
     private NetworkPlayerVisual playerVisual;
     protected NetworkPlayerVisual NetworkPlayerVisual
     {
@@ -49,6 +52,9 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Internal reference to NetworkPlayerMovement
+    /// </summary>
     private NetworkPlayerMovement playerMovement;
     protected NetworkPlayerMovement NetworkPlayerMovement
     {
@@ -66,6 +72,9 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Internal reference to NetworkPlayerData
+    /// </summary>
     private NetworkPlayerData playerData;
     protected NetworkPlayerData NetworkPlayerData
     {
@@ -83,6 +92,9 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Internal reference to NetworkPlayerCollision
+    /// </summary>
     private NetworkPlayerCollision playerCollision;
     protected NetworkPlayerCollision NetworkPlayerCollision
     {
@@ -100,6 +112,11 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Virtual method for send/receive photon data
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
     public virtual void SerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         return;

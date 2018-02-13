@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Base class for handling the player metadata required to transfer between network and shares to all other clients
+ */
 public class NetworkPlayerData : NetworkPlayerBase
 {
     #region Private Members
@@ -89,6 +95,11 @@ public class NetworkPlayerData : NetworkPlayerBase
         }
     }
 
+    /// <summary>
+    /// Registers the spawn information of the player
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="rot"></param>
     public void RegisterSpawnInformation(Vector3 pos, Quaternion rot)
     {
         spawnPosition = pos;
