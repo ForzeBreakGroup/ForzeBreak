@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MatchManager : Photon.MonoBehaviour
 {
-    private static Color[] playerColors = new Color[4] { Color.blue, Color.red, Color.yellow, Color.green };
     public GameObject cam;
     private NetworkSpawnPoint[] spawnPoints;
     private Dictionary<PhotonPlayer, bool> playersStillAlive;
@@ -33,7 +32,6 @@ public class MatchManager : Photon.MonoBehaviour
     private void Init()
     {
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
-
     }
 
     private void Awake()
@@ -162,6 +160,7 @@ public class MatchManager : Photon.MonoBehaviour
 
         NetworkManager.localPlayer = PhotonNetwork.Instantiate(playerPrefabName, pos, rot, 0);
         ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+        ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
 
         GameObject go = Instantiate(cam);
         go.GetComponent<CameraControl>().target = NetworkManager.localPlayer;

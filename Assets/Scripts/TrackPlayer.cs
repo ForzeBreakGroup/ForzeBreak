@@ -13,20 +13,25 @@ public class TrackPlayer : MonoBehaviour
     /// <summary>
     /// Game Object to track with
     /// </summary>
-    public GameObject objectToTrack;
+    [SerializeField] private GameObject objectToTrack;
 
     /// <summary>
-    /// Changes the arrow to predetermined scheme option
+    /// Assign the target to the arrow to follow, the arrow changes it's color accordingly
     /// </summary>
-    /// <param name="scheme"></param>
-    public void ChangeScheme(Color c)
+    /// <param name="target"></param>
+    public void AssignTarget(GameObject target)
     {
-        Material mat = transform.Find("Arrow_Test").GetComponent<MeshRenderer>().material;
-
-        if (mat)
+        if (!target)
         {
-            mat.color = c;
+            Debug.LogError("Target Does not Exist");
         }
+
+        // Deserialize color property obtained from target player
+        float[] serializedColor = PhotonPlayer.Find(target.GetPhotonView().ownerId).CustomProperties["Color"] as float[];
+        Color c = new Color(serializedColor[0], serializedColor[1], serializedColor[2], serializedColor[3]);
+        transform.Find("Arrow_Test").GetComponent<Renderer>().material.color = c;
+
+        objectToTrack = target;
     }
 
     private void Update()

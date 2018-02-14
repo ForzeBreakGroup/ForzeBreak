@@ -49,7 +49,6 @@ public class ArrowIndicators : Photon.MonoBehaviour
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && photonView.isMine)
         {
             PhotonPlayer newPlayer = (PhotonPlayer)content;
-            Debug.Log(newPlayer.ID);
 
             // Loop through all objects in game to make sure all players are included
             NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
@@ -60,7 +59,7 @@ public class ArrowIndicators : Photon.MonoBehaviour
                     if (!arrowList.ContainsKey(p.photonView.ownerId))
                     {
                         GameObject arrow = Instantiate(arrowIndicator, this.transform);
-                        arrow.GetComponent<TrackPlayer>().objectToTrack = p.gameObject;
+                        arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
                         arrowList.Add(p.photonView.ownerId, arrow);
                     }
                 }

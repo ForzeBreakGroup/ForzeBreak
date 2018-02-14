@@ -117,6 +117,9 @@ public class NetworkManager : PunBehaviour
     /// Default connection state
     /// </summary>
     private static ConnectionState state = ConnectionState.IDLE;
+
+
+    Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
     #region Public Methods
@@ -254,7 +257,7 @@ public class NetworkManager : PunBehaviour
         {
             MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
         }
-        else
+        else if (PhotonNetwork.isMasterClient)
         {
             MatchManager.instance.SpawnPlayer(playerPrefabName);
         }
@@ -283,10 +286,29 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Joined Room");
         base.OnJoinedRoom();
 
+        // Set custom property to identify player's color
+        ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
+
+        // Unity Color cannot be serailized through photon, manual serializing it
+        Color c = playerColors[PhotonNetwork.countOfPlayers - 1];
+        float[] serializedColor = new float[4];
+        serializedColor[0] = c.r;
+        serializedColor[1] = c.g;
+        serializedColor[2] = c.b;
+        serializedColor[3] = c.a;
+
+        playerInfo.Add("Color", serializedColor);
+        PhotonNetwork.player.SetCustomProperties(playerInfo);
+
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
+            // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
+        }
+        else
+        {
+            MatchManager.instance.SpawnPlayer(playerPrefabName);
         }
     }
 
