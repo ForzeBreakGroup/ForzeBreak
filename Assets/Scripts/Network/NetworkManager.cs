@@ -300,7 +300,7 @@ public class NetworkManager : PunBehaviour
 
         // Raise an event across current in-game players to notify a player has left
         RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.MasterClient;
+        evtOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, null, true, evtOptions);
     }
 
@@ -353,10 +353,22 @@ public class NetworkManager : PunBehaviour
         }
     }
 
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        base.OnPhotonPlayerDisconnected(otherPlayer);
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, otherPlayer, true, options);
+    }
+
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
+
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, newPlayer, true, options);
     }
 
     /// <summary>

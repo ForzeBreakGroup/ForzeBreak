@@ -35,7 +35,6 @@ public class TrackPlayer : MonoBehaviour
         if (objectToTrack)
         {
             transform.LookAt(objectToTrack.transform);
-            objectToTrack.GetComponent<Renderer>();
         }
     }
 }

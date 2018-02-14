@@ -32,6 +32,7 @@ public class MatchManager : Photon.MonoBehaviour
     private void Init()
     {
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
+
     }
 
     private void Awake()
@@ -61,12 +62,11 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
         {
-            Debug.Log("EvtAddPlayerEvent");
-            PhotonPlayer player = PhotonPlayer.Find(senderid);
+            PhotonPlayer newPlayer = (PhotonPlayer)content;
 
-            if (!playersStillAlive.ContainsKey(player))
+            if (!playersStillAlive.ContainsKey(newPlayer))
             {
-                playersStillAlive.Add(player, true);
+                playersStillAlive.Add(newPlayer, true);
             }
         }
     }
@@ -76,11 +76,11 @@ public class MatchManager : Photon.MonoBehaviour
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && PhotonNetwork.isMasterClient)
         {
             Debug.Log("EvtRemovePlayerEvent");
-            PhotonPlayer player = PhotonPlayer.Find(senderid);
+            PhotonPlayer otherPlayer = (PhotonPlayer)content;
 
-            if (!playersStillAlive.ContainsKey(player))
+            if (!playersStillAlive.ContainsKey(otherPlayer))
             {
-                playersStillAlive.Remove(player);
+                playersStillAlive.Remove(otherPlayer);
             }
         }
     }
@@ -164,7 +164,7 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(string playerPrefabName)
+    public void SpawnPlayer(string playerPrefabName, bool offlineMode = false)
     {
         int playerCount = PhotonNetwork.countOfPlayers;
         Vector3 pos = spawnPoints[playerCount % spawnPoints.Length].spawnPoint;

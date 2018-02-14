@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
 /*
  * Author: Jason Lin
@@ -10,7 +11,7 @@ using UnityEngine;
  * Methods to add/remove arrow
  */
 
-public class ArrowIndicators : MonoBehaviour
+public class ArrowIndicators : Photon.MonoBehaviour
 {
     /// <summary>
     /// Arrow Indicator GameObject
@@ -18,7 +19,7 @@ public class ArrowIndicators : MonoBehaviour
     public GameObject arrowIndicator;
 
     /// <summary>
-    /// Dictioanry to keep track of which connection id is connecting with which player object
+    /// Dictioanry to keep track of which connection id is connecting to which arrow
     /// </summary>
     private Dictionary<int, GameObject> arrowList;
 
@@ -30,23 +31,54 @@ public class ArrowIndicators : MonoBehaviour
         }
         arrowList = new Dictionary<int, GameObject>();
     }
-    
-    public void RpcAddPlayer(int uniqueId, GameObject playerObject)
+
+    private void OnEnable()
     {
-        GameObject trackPlayer = Instantiate(arrowIndicator, this.transform);
-        CarUserControl carControl = playerObject.GetComponent<CarUserControl>();
-        trackPlayer.GetComponent<TrackPlayer>().objectToTrack = playerObject;
-        arrowList.Add(uniqueId, trackPlayer);
+        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
+        PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
     }
 
-    public void RpcRemovePlayer(int uniqueId)
+    private void OnDisable()
     {
-        GameObject arrow = null;
-        if (arrowList.TryGetValue(uniqueId, out arrow))
-        {
-            Destroy(arrow);
-        }
+        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
+        PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
+    }
 
-        arrowList.Remove(uniqueId);
+    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
+    {
+        if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && photonView.isMine)
+        {
+            PhotonPlayer newPlayer = (PhotonPlayer)content;
+            Debug.Log(newPlayer.ID);
+
+            // Loop through all objects in game to make sure all players are included
+            NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
+            foreach(NetworkPlayerData p in playersInGame)
+            {
+                if (!p.photonView.isMine)
+                {
+                    if (!arrowList.ContainsKey(p.photonView.ownerId))
+                    {
+                        GameObject arrow = Instantiate(arrowIndicator, this.transform);
+                        arrow.GetComponent<TrackPlayer>().objectToTrack = p.gameObject;
+                        arrowList.Add(p.photonView.ownerId, arrow);
+                    }
+                }
+            }
+        }
+    }
+
+    private void EvtRemovePlayerFromMatchHandler(byte evtCode, object content, int senderid)
+    {
+        if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && photonView.isMine)
+        {
+            PhotonPlayer otherPlayer = (PhotonPlayer)content;
+
+            // Find the arrow matching the player left the game then destroy it
+            if (arrowList.ContainsKey(otherPlayer.ID))
+            {
+                Destroy(arrowList[otherPlayer.ID]);
+            }
+        }
     }
 }
