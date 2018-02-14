@@ -59,9 +59,9 @@ public class CarControlWheels : NetworkPlayerMovement
     public float AccelInput { get; private set; }
 
     // Use this for initialization
-    private void Awake()
+    protected override void Awake()
     {
-        base.AssignRigidbody();
+        base.Awake();
 
         for (int i = 0; i < 4; i++)
         {
