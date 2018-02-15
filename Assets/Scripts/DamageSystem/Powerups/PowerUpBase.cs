@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
-public class PowerUpBase : MonoBehaviour
+public class PowerUpBase : Photon.MonoBehaviour
 {
+    protected ReticleSystem[] reticleTargets;
+
+    protected virtual void Awake()
+    {
+        reticleTargets = GetComponentsInChildren<ReticleSystem>();
+    }
+
     protected virtual void OnPress()
     {
 
