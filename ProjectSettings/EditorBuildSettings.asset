@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Online.unity
     guid: f272d273d7742db4999a5ff855837add
+  - enabled: 1
+    path: Assets/Scenes/Test_Miguel.unity
+    guid: 8e0dfee18a948a342961b1b0121feb20
