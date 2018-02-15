@@ -25,7 +25,7 @@ public class CarUserControl : NetworkPlayerInput
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
-        playerNum = 1;
+        playerNum = 0;
 
     }
 

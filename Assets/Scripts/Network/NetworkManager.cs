@@ -17,6 +17,7 @@ public class NetworkManager : PunBehaviour
     public static bool offlineMode = false;
     public string gameVersion = "0.1.0";
     public static GameObject localPlayer;
+
     public static NetworkManager instance
     {
         get
@@ -38,6 +39,9 @@ public class NetworkManager : PunBehaviour
             return networkManager;
         }
     }
+    
+    [Range(1, 4)]
+    public int numberOfLocalPlayers = 1;
     #endregion
 
     #region Private Members
@@ -55,9 +59,6 @@ public class NetworkManager : PunBehaviour
     private List<NetworkSpawnPoint> spawnPositions;
     private int spawnPoint = 0;
 
-    [Range(1, 4)]
-    [SerializeField]
-    private int numberOfLocalPlayers = 1;
     private static ConnectionState state = ConnectionState.IDLE;
     #endregion
 

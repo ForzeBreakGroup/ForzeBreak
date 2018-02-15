@@ -150,9 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f17f4e519706642adb29436aa0d1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 20541751787433842, guid: b2c4b0e640ef4b044839dd3196fcc688, type: 2}
-  horizontalAxis: 0
-  verticalAxis: 0
 --- !u!114 &114459953604465960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d3b9a03f2009246a0772ce66729093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  playerLife: 3
 --- !u!114 &114582829960727150
 MonoBehaviour:
   m_ObjectHideFlags: 1

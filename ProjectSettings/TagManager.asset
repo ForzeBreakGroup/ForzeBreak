@@ -7,6 +7,7 @@ TagManager:
   - DeathBound
   - UI_SpeedBar
   - UI_BoostBar
+  - UISoundMaster
   layers:
   - Default
   - TransparentFX
