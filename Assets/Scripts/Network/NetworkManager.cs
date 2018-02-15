@@ -17,6 +17,7 @@ public class NetworkManager : PunBehaviour
     public static bool offlineMode = false;
     public string gameVersion = "0.1.0";
     public static GameObject localPlayer;
+    public static Camera playerCamera;
 
     public static NetworkManager instance
     {
