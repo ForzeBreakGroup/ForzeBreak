@@ -33,6 +33,11 @@ public class NetworkManager : PunBehaviour
     public static GameObject localPlayer;
 
     /// <summary>
+    /// A static reference to the player camera used by this remote client
+    /// </summary>
+    public static Camera playerCamera;
+
+    /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
     /// </summary>
     public static NetworkManager instance
@@ -290,7 +295,8 @@ public class NetworkManager : PunBehaviour
         ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
 
         // Unity Color cannot be serailized through photon, manual serializing it
-        Color c = playerColors[PhotonNetwork.countOfPlayers - 1];
+        Debug.Log(PhotonNetwork.playerList.Length);
+        Color c = playerColors[PhotonNetwork.playerList.Length - 1];
         float[] serializedColor = new float[4];
         serializedColor[0] = c.r;
         serializedColor[1] = c.g;
@@ -378,6 +384,7 @@ public class NetworkManager : PunBehaviour
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
     {
         base.OnPhotonPlayerDisconnected(otherPlayer);
+
         RaiseEventOptions options = new RaiseEventOptions();
         options.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, otherPlayer, true, options);

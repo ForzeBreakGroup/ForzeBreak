@@ -46,10 +46,8 @@ public class ArrowIndicators : Photon.MonoBehaviour
 
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
     {
-        if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && photonView.isMine)
+        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawnFinished && photonView.isMine)
         {
-            PhotonPlayer newPlayer = (PhotonPlayer)content;
-
             // Loop through all objects in game to make sure all players are included
             NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
             foreach(NetworkPlayerData p in playersInGame)

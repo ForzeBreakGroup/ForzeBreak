@@ -32,9 +32,10 @@ public class TrackPlayer : MonoBehaviour
         transform.Find("Arrow_Test").GetComponent<Renderer>().material.color = c;
 
         objectToTrack = target;
+        GetComponentInChildren<ReticleSystem>().EnableReticleSystem(objectToTrack);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Start tracking if target is provided
         if (objectToTrack)

@@ -154,7 +154,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     public void SpawnPlayer(string playerPrefabName)
     {
-        int playerCount = PhotonNetwork.countOfPlayers;
+        int playerCount = PhotonNetwork.playerList.Length;
         Vector3 pos = spawnPoints[playerCount % spawnPoints.Length].spawnPoint;
         Quaternion rot = spawnPoints[playerCount % spawnPoints.Length].spawnRotation;
 
@@ -162,7 +162,12 @@ public class MatchManager : Photon.MonoBehaviour
         ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
         ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
 
-        GameObject go = Instantiate(cam);
-        go.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
+        GameObject mainCamera = Instantiate(cam);
+        mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
+        NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawnFinished, null, true, options);
     }
 }
