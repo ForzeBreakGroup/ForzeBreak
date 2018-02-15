@@ -10,6 +10,18 @@ using UnityEngine;
  */
 public class ReticleSystem : MonoBehaviour
 {
+    #region Public Members
+    /// <summary>
+    /// Boolean indicate if the target is in sight
+    /// </summary>
+    public bool targetInSight = false;
+
+    /// <summary>
+    /// The Target this arrow is pointing at
+    /// </summary>
+    public GameObject target;
+    #endregion
+
     #region Private Members
     /// <summary>
     /// Boolean flag indicate if the ReticleSystem for this arrow is enabled
@@ -26,11 +38,6 @@ public class ReticleSystem : MonoBehaviour
     /// </summary>
     private Collider objectCollider;
 
-    /// <summary>
-    /// The Target this arrow is pointing at
-    /// </summary>
-    private GameObject target;
-
     #endregion
 
     #region Private Methods
@@ -45,6 +52,7 @@ public class ReticleSystem : MonoBehaviour
         if (reticleEnable)
         {
             GetComponent<Renderer>().enabled = true;
+            targetInSight = false;
             // Test the target object's collider bound overlaps with player's camera
             if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(cam), objectCollider.bounds))
             {
@@ -56,6 +64,7 @@ public class ReticleSystem : MonoBehaviour
                     if (hit.transform.gameObject == target)
                     {
                         GetComponent<Renderer>().enabled = false;
+                        targetInSight = true;
                     }
                 }
             }
