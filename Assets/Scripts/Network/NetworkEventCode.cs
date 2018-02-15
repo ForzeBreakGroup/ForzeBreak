@@ -21,7 +21,12 @@ public enum ENetworkEventCode : byte
     OnRemovePlayerFromMatch = (byte)0x01,
 
     /// <summary>
-    /// Event raised by individual client, when a client died
+    /// Event raised by individual client when a client avatar is spawned
+    /// </summary>
+    OnPlayerSpawnFinished = (byte)0x02,
+
+    /// <summary>
+    /// Event raised by individual client when a client died
     /// </summary>
     OnPlayerDeath = (byte)0x12,
 };

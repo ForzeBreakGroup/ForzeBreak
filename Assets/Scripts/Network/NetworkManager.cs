@@ -33,6 +33,11 @@ public class NetworkManager : PunBehaviour
     public static GameObject localPlayer;
 
     /// <summary>
+    /// A static reference to the player camera used by this remote client
+    /// </summary>
+    public static Camera playerCamera;
+
+    /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
     /// </summary>
     public static NetworkManager instance
@@ -117,6 +122,9 @@ public class NetworkManager : PunBehaviour
     /// Default connection state
     /// </summary>
     private static ConnectionState state = ConnectionState.IDLE;
+
+
+    Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
     #region Public Methods
@@ -254,7 +262,7 @@ public class NetworkManager : PunBehaviour
         {
             MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
         }
-        else
+        else if (PhotonNetwork.isMasterClient)
         {
             MatchManager.instance.SpawnPlayer(playerPrefabName);
         }
@@ -283,10 +291,30 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Joined Room");
         base.OnJoinedRoom();
 
+        // Set custom property to identify player's color
+        ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
+
+        // Unity Color cannot be serailized through photon, manual serializing it
+        Debug.Log(PhotonNetwork.playerList.Length);
+        Color c = playerColors[PhotonNetwork.playerList.Length - 1];
+        float[] serializedColor = new float[4];
+        serializedColor[0] = c.r;
+        serializedColor[1] = c.g;
+        serializedColor[2] = c.b;
+        serializedColor[3] = c.a;
+
+        playerInfo.Add("Color", serializedColor);
+        PhotonNetwork.player.SetCustomProperties(playerInfo);
+
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
+            // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
+        }
+        else
+        {
+            MatchManager.instance.SpawnPlayer(playerPrefabName);
         }
     }
 
@@ -300,7 +328,7 @@ public class NetworkManager : PunBehaviour
 
         // Raise an event across current in-game players to notify a player has left
         RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.MasterClient;
+        evtOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, null, true, evtOptions);
     }
 
@@ -353,10 +381,23 @@ public class NetworkManager : PunBehaviour
         }
     }
 
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        base.OnPhotonPlayerDisconnected(otherPlayer);
+
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, otherPlayer, true, options);
+    }
+
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
+
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, newPlayer, true, options);
     }
 
     /// <summary>
