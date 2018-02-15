@@ -29,4 +29,11 @@ public class NetworkPlayerVisual : NetworkPlayerBase
 
         mat.color = c;
     }
+
+    [PunRPC]
+    protected void AddPowerUpComponent()
+    {
+        Debug.Log("Add Missile Component");
+        gameObject.AddComponent<MissileVersion1>();
+    }
 }

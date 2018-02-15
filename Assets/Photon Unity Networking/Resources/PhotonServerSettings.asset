@@ -27,6 +27,7 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - AddPowerUpComponent
   - Chat
   - ColorRpc
   - DestroyRpc
