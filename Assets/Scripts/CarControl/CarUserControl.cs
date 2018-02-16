@@ -35,7 +35,7 @@ public class CarUserControl : NetworkPlayerInput
     {
         // keyboard Input
         float h = Input.GetAxis("Horizontal_Keyboard");
-        float v = Input.GetAxis("Horizontal_Keyboard");
+        float v = Input.GetAxis("Vertical_Keyboard");
         float handbrake = Input.GetAxis("Handbrake_Keyboard");
 
         // controller Input
