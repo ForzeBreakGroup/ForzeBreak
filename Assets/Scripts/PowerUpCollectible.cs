@@ -36,6 +36,7 @@ public class PowerUpCollectible : Photon.MonoBehaviour
             if (PhotonNetwork.isMasterClient)
             {
                 PhotonView view = other.transform.root.gameObject.GetPhotonView();
+                view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
             }
 
