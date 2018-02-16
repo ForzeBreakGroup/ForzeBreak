@@ -32,11 +32,27 @@ public class MissileMovement : Photon.MonoBehaviour
             {
 
             }
+
+            transform.position = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         // Create explosion at impact point
+    }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else if (stream.isReading)
+        {
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 }

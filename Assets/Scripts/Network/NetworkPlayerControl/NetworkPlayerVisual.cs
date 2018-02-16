@@ -31,9 +31,10 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     }
 
     [PunRPC]
-    protected void AddPowerUpComponent()
+    protected void AddPowerUpComponent(string powerupName)
     {
-        Debug.Log("Add Missile Component");
-        gameObject.AddComponent<MissileVersion1>();
+        GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
+        weapon.transform.parent = transform;
+        ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
     }
 }

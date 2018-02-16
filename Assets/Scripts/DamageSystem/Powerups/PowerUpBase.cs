@@ -13,10 +13,11 @@ using Photon;
 public class PowerUpBase : Photon.MonoBehaviour
 {
     protected ReticleSystem[] reticleTargets;
+    protected Dictionary<string, Vector3> weaponModelOffset;
 
-    protected virtual void Awake()
+    public virtual void AdjustModel()
     {
-        reticleTargets = GetComponentsInChildren<ReticleSystem>();
+        reticleTargets = transform.root.gameObject.GetComponents<ReticleSystem>();
     }
 
     protected virtual void OnPress()
