@@ -14356,8 +14356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  missileInterval: 1.5
-  missileDuration: 2
+  missileInterval: 0.5
+  missileDuration: 5
 --- !u!114 &114529641677689094
 MonoBehaviour:
   m_ObjectHideFlags: 1
