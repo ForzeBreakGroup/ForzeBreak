@@ -36,9 +36,12 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     [PunRPC]
     protected void AddPowerUpComponent(string powerupName)
     {
-        GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
+        if (photonView.isMine)
+        {
+            GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
 
-        weapon.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
-        ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
+            weapon.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
+            ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
+        }
     }
 }

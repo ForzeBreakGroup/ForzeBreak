@@ -88,7 +88,7 @@ public class MissileVersion1 : PowerUpBase
 
         if (elapsedTime > missileDuration)
         {
-            PhotonView.Destroy(this.gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 
