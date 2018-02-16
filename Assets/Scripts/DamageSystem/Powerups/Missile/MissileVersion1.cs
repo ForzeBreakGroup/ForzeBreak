@@ -15,6 +15,13 @@ public class MissileVersion1 : PowerUpBase
 
     private Dictionary<ReticleSystem, float> lockOnSystem;
 
+    private Transform launchLocation;
+
+    private void Awake()
+    {
+        launchLocation = transform.Find("MissileLaunchPoint");
+    }
+
     public override void AdjustModel()
     {
         base.AdjustModel();
@@ -86,7 +93,7 @@ public class MissileVersion1 : PowerUpBase
 
     private void FireMissileTowardsTarget(GameObject lockOnTarget)
     {
-        GameObject missile = PhotonNetwork.Instantiate("Missile", transform.position, Quaternion.identity, 0);
+        GameObject missile = PhotonNetwork.Instantiate("Missile", launchLocation.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
     }
 }
