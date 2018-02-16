@@ -11,26 +11,30 @@ public class MissileVersion1 : PowerUpBase
     [SerializeField] private float missileDuration = 2f;
 
     private bool missileStartFiring = false;
+    private float elapsedTime = 0.0f;
 
     private Dictionary<ReticleSystem, float> lockOnSystem;
 
-    protected override void Awake()
+    public override void AdjustModel()
     {
-        base.Awake();
-        Debug.Log("Missile Equiped");
-        Debug.Log(reticleTargets.Length);
-        // Initialize the lock on system
-        lockOnSystem = new Dictionary<ReticleSystem, float>();
-        foreach (ReticleSystem rs in reticleTargets)
+        base.AdjustModel();
+
+        // Handling picking up same powerup
+        MissileVersion1[] missileVersion1 = GetComponents<MissileVersion1>();
+        if (missileVersion1.Length > 1)
         {
-            lockOnSystem.Add(rs, 0);
+            DestroyImmediate(this);
         }
+
+        // Move the weapon model to desired places
+        transform.localPosition = new Vector3(-0.03f, 0.35f, 0.25f);
+        transform.localRotation = Quaternion.Euler(new Vector3(31, 0, 0));
     }
 
     protected override void OnPress()
     {
         missileStartFiring = true;
-        Debug.Log("MissileStartFiring");
+        PhotonNetwork.Instantiate("Missile", Vector3.zero, Quaternion.identity, 0);
     }
 
     private void FixedUpdate()
@@ -38,26 +42,47 @@ public class MissileVersion1 : PowerUpBase
         // If missle fire key has been pressed
         if (missileStartFiring)
         {
-            foreach (KeyValuePair<ReticleSystem, float> entry in lockOnSystem)
+            List<ReticleSystem> keys = new List<ReticleSystem>(lockOnSystem.Keys);
+            foreach(ReticleSystem key in keys)
             {
-                float lockOnDuration = entry.Value;
-                lockOnDuration += Time.deltaTime;
+                float lockOnDuration;
 
-                if (lockOnDuration > missileInterval)
+                // If target is insight, then start the count down
+                if (key.targetInSight)
                 {
-                    // Fire a missile
-                    FireMissileTowardsTarget(entry.Key.target);
+                    lockOnDuration = lockOnSystem[key];
+                    lockOnDuration += Time.deltaTime;
+
+                    // If countdown reached threshold, fire the missile
+                    if (lockOnDuration > missileInterval)
+                    {
+                        // Fire a missile
+                        Debug.Log(key.target);
+                        FireMissileTowardsTarget(key.target);
+                        lockOnDuration = 0;
+                    }
+                }
+                // If target is not in sight, reset the countdown
+                else
+                {
                     lockOnDuration = 0;
                 }
 
-                lockOnSystem[entry.Key] = lockOnDuration;
+                lockOnSystem[key] = lockOnDuration;
             }
+
+            elapsedTime += Time.deltaTime;
+        }
+
+        if (elapsedTime > missileDuration)
+        {
+            Destroy(this);
         }
     }
 
     private void FireMissileTowardsTarget(GameObject lockOnTarget)
     {
-        Debug.Log("Missile Fired");
-        PhotonNetwork.Instantiate("Missile", Vector3.zero, Quaternion.identity, 1);
+        GameObject missile = PhotonNetwork.Instantiate("Missile", transform.position, Quaternion.identity, 1);
+        missile.GetComponent<MissileMovement>().target = lockOnTarget;
     }
 }
