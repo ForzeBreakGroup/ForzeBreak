@@ -14,7 +14,7 @@ public class PowerUpBase : Photon.MonoBehaviour
 {
     public int playerNum;
     protected ReticleSystem[] reticleTargets;
-    
+
     private void Awake()
     {
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
@@ -22,7 +22,8 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     public virtual void AdjustModel()
     {
-        reticleTargets = transform.root.gameObject.GetComponents<ReticleSystem>();
+        enabled = transform.root.gameObject.GetPhotonView().isMine;
+        reticleTargets = transform.root.gameObject.GetComponentsInChildren<ReticleSystem>();
     }
 
     protected virtual void OnPress()

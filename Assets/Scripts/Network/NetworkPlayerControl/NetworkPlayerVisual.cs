@@ -20,21 +20,28 @@ public class NetworkPlayerVisual : NetworkPlayerBase
 
     public void InitializeVehicleWithPlayerColor()
     {
-        Material mat = transform.Find("Model").Find("Tank_Body").GetComponent<Renderer>().material;
+        Renderer[] rend = transform.Find("Model").Find("Body").GetComponentsInChildren<Renderer>();
 
         //Deserialize color through network
         Debug.Log("OwnerId: " + photonView.ownerId + ", viewID: " + photonView.viewID);
         float[] serializeColor = PhotonPlayer.Find(photonView.ownerId).CustomProperties["Color"] as float[];
         Color c = new Color(serializeColor[0], serializeColor[1], serializeColor[2], serializeColor[3]);
 
-        mat.color = c;
+        foreach(Renderer r in rend)
+        {
+            r.material.color = c;
+        }
     }
 
     [PunRPC]
     protected void AddPowerUpComponent(string powerupName)
     {
-        GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
-        weapon.transform.parent = transform;
-        ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
+        Debug.Log(photonView.isMine);
+        if (photonView.isMine)
+        {
+            GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
+            weapon.transform.parent = transform;
+            ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
+        }
     }
 }

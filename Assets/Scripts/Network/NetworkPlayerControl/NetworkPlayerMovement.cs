@@ -69,28 +69,32 @@ public class NetworkPlayerMovement : NetworkPlayerBase
     /// </summary>
     private void UpdateNetworkPosition()
     {
-        // Figure out how much time has passed since the network receiving time with network latency
-        float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
-        float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkedReceiveTime);
-        float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
-
-        // Guess the next position based on velocity and network position with given time difference
-        Vector3 exterpolatedPosition = networkPos + rb.velocity * totalTimePassed;
-        Vector3 predictPosition = Vector3.MoveTowards(rb.position, exterpolatedPosition, rb.velocity.magnitude * Time.deltaTime);
-
-        // Prevent vehicle from jittering Y-axis
-        if (Mathf.Abs(rb.position.y - predictPosition.y) < 1f)
+        if (rb.velocity != Vector3.zero || rb.angularVelocity != Vector3.zero)
         {
-            predictPosition.y = rb.position.y;
-        }
+            // Figure out how much time has passed since the network receiving time with network latency
+            float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
+            float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkedReceiveTime);
+            float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
 
-        // Hard snap the position if vehicle flew off way too much
-        if (Vector3.Distance(rb.position, exterpolatedPosition) > 2f)
-        {
-            predictPosition = exterpolatedPosition;
-        }
+            // Guess the next position based on velocity and network position with given time difference
+            Vector3 exterpolatedPosition = networkPos + rb.velocity * totalTimePassed;
+            Vector3 predictPosition = Vector3.MoveTowards(rb.position, exterpolatedPosition, rb.velocity.magnitude * Time.deltaTime);
 
-        rb.MovePosition(predictPosition);
+            // Prevent vehicle from jittering Y-axis
+            if (Mathf.Abs(rb.position.y - predictPosition.y) < 1f)
+            {
+                predictPosition.y = rb.position.y;
+            }
+
+            // Hard snap the position if vehicle flew off way too much
+            if (Vector3.Distance(rb.position, exterpolatedPosition) > 2f)
+            {
+                predictPosition = exterpolatedPosition;
+            }
+
+            rb.MovePosition(predictPosition);
+
+        }
     }
 
     /// <summary>

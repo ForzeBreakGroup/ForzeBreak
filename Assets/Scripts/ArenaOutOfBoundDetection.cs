@@ -12,7 +12,7 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.transform.root.tag == "Player")
         {
             NetworkPlayerData playerData = other.GetComponentInParent<NetworkPlayerData>();
             playerData.DecrementPlayerLife();
