@@ -350,17 +350,22 @@ Prefab:
     - target: {fileID: 114635107220701660, guid: 1abab03c943dbe74e9245b62701c523d,
         type: 2}
       propertyPath: viewIdField
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114635107220701660, guid: 1abab03c943dbe74e9245b62701c523d,
         type: 2}
       propertyPath: instantiationId
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114785823919358282, guid: 1abab03c943dbe74e9245b62701c523d,
         type: 2}
       propertyPath: cooldown
-      value: 30
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114785823919358282, guid: 1abab03c943dbe74e9245b62701c523d,
+        type: 2}
+      propertyPath: powerupName
+      value: MachineGun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1abab03c943dbe74e9245b62701c523d, type: 2}
@@ -554,7 +559,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4289775585125806, guid: 1abab03c943dbe74e9245b62701c523d, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114635107220701660, guid: 1abab03c943dbe74e9245b62701c523d,
         type: 2}
