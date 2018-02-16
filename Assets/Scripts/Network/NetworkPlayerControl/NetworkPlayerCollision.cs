@@ -35,7 +35,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     private void OnCollisionEnter(Collision collision)
     {
         // Host side collision check
-        if (collision.gameObject.tag == "Player" && PhotonNetwork.isMasterClient)
+        if (collision.transform.root.tag == "Player" && PhotonNetwork.isMasterClient)
         {
             Debug.Log("OnCollisionEvent Triggered by Player: " + photonView.viewID);
 

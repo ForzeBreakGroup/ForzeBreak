@@ -6,7 +6,7 @@ InputManager:
   serializedVersion: 2
   m_Axes:
   - serializedVersion: 3
-    m_Name: Horizontal
+    m_Name: Horizontal_Keyboard
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -22,7 +22,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Vertical
+    m_Name: Vertical_Keyboard
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -38,7 +38,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Handbrake
+    m_Name: Handbrake_Keyboard
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -54,7 +54,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller0_X_Axis
+    m_Name: Horizontal_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -70,7 +70,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_X_Axis
+    m_Name: Horizontal_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -86,7 +86,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_X_Axis
+    m_Name: Horizontal_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -102,7 +102,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_X_Axis
+    m_Name: Horizontal_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -118,7 +118,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_X_Axis
+    m_Name: Horizontal_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -134,7 +134,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Controller0_Y_Axis
+    m_Name: Vertical_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -150,7 +150,7 @@ InputManager:
     axis: 1
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Y_Axis
+    m_Name: Vertical_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -166,7 +166,7 @@ InputManager:
     axis: 1
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Y_Axis
+    m_Name: Vertical_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -182,7 +182,7 @@ InputManager:
     axis: 1
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Y_Axis
+    m_Name: Vertical_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -198,7 +198,7 @@ InputManager:
     axis: 1
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Y_Axis
+    m_Name: Vertical_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -214,7 +214,7 @@ InputManager:
     axis: 1
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Controller0_Trigger_Axis
+    m_Name: Trigger_Axis_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -230,7 +230,7 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Trigger_Axis
+    m_Name: Trigger_Axis_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -246,7 +246,7 @@ InputManager:
     axis: 2
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Trigger_Axis
+    m_Name: Trigger_Axis_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -262,7 +262,7 @@ InputManager:
     axis: 2
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Trigger_Axis
+    m_Name: Trigger_Axis_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -278,7 +278,7 @@ InputManager:
     axis: 2
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Trigger_Axis
+    m_Name: Trigger_Axis_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -326,7 +326,7 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller0_Button_A
+    m_Name: Flip_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -342,7 +342,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Button_A
+    m_Name: Flip_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -358,7 +358,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Button_A
+    m_Name: Flip_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -374,7 +374,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Button_A
+    m_Name: Flip_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -390,7 +390,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Button_A
+    m_Name: Flip_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -406,7 +406,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Controller0_Button_B
+    m_Name: Boost_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick button 1
@@ -422,7 +422,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Button_B
+    m_Name: Boost_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 1 button 1
@@ -438,7 +438,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Button_B
+    m_Name: Boost_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 2 button 1
@@ -454,7 +454,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Button_B
+    m_Name: Boost_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 3 button 1
@@ -470,7 +470,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Button_B
+    m_Name: Boost_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 4 button 1
@@ -486,7 +486,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Controller0_Button_X
+    m_Name: Powerups_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick button 2
@@ -502,7 +502,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Button_X
+    m_Name: Powerups_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 1 button 2
@@ -518,7 +518,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Button_X
+    m_Name: Powerups_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 2 button 2
@@ -534,7 +534,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Button_X
+    m_Name: Powerups_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 3 button 2
@@ -550,7 +550,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Button_X
+    m_Name: Powerups_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 4 button 2
@@ -566,7 +566,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Controller0_Button_Y
+    m_Name: WeaponFire_Controller0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick button 3
@@ -582,7 +582,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Controller1_Button_Y
+    m_Name: WeaponFire_Controller1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 1 button 3
@@ -598,7 +598,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Controller2_Button_Y
+    m_Name: WeaponFire_Controller2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 2 button 3
@@ -614,7 +614,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Controller3_Button_Y
+    m_Name: WeaponFire_Controller3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 3 button 3
@@ -630,7 +630,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Controller4_Button_Y
+    m_Name: WeaponFire_Controller4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: joystick 4 button 3
@@ -646,7 +646,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Mouse_Left
+    m_Name: WeaponFire_Mouse
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -662,11 +662,27 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Mouse_Right
+    m_Name: Boost_Mouse
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: mouse 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 2
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Flip_Keyboard
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: space
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
