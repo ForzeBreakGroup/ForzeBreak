@@ -10,11 +10,6 @@ public class ImpactExplosion : Photon.MonoBehaviour
     {
         StartCoroutine(DestroyAfterSeconds());
     }
-
-    private void Update()
-    {
-    }
-
     IEnumerator DestroyAfterSeconds()
     {
         yield return new WaitForSeconds(destroyDelay);
