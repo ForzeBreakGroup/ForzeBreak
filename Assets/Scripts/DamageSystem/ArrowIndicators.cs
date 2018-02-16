@@ -85,6 +85,7 @@ public class ArrowIndicators : Photon.MonoBehaviour
                     {
                         // Create an arrow for this specific remote client
                         GameObject arrow = Instantiate(arrowIndicator, this.transform);
+                        arrow.transform.localScale = new Vector3(1, 1, 1);
                         arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
                         arrowList.Add(p.photonView.ownerId, arrow);
                     }

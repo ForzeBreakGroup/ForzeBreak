@@ -15,13 +15,6 @@ public class TrackPlayer : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject objectToTrack;
 
-    private void Awake()
-    {
-        Transform arrowModel = transform.Find("Arrow_Test");
-        Bounds bound = transform.root.Find("Colliders").GetComponentInChildren<Collider>().bounds;
-        arrowModel.localPosition = new Vector3(bound.extents.x * 1.5f, 0, 0);
-    }
-
     /// <summary>
     /// Assign the target to the arrow to follow, the arrow changes it's color accordingly
     /// </summary>

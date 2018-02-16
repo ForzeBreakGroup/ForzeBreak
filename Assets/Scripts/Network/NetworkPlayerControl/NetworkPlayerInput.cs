@@ -13,7 +13,7 @@ public class NetworkPlayerInput : NetworkPlayerBase
     /// <summary>
     /// Enables the input script only on local player
     /// </summary>
-    private void Awake()
+    protected virtual void Awake()
     {
         enabled = photonView.isMine;
     }
