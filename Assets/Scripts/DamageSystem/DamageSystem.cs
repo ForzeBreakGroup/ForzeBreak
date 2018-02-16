@@ -247,5 +247,11 @@ public class DamageSystem : NetworkPlayerCollision
             damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
         }
     }
+
+    [PunRPC]
+    public void CreateExplosion(float force, Vector3 explosionCenter)
+    {
+
+    }
     #endregion
 }

@@ -44,4 +44,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - CreateExplosion
   DisableAutoOpenWizard: 1

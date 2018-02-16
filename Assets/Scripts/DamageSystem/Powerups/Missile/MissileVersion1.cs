@@ -20,6 +20,7 @@ public class MissileVersion1 : PowerUpBase
     private void Awake()
     {
         launchLocation = transform.Find("MissileLaunchPoint");
+        Debug.Log(launchLocation);
     }
 
     public override void AdjustModel()
@@ -40,7 +41,7 @@ public class MissileVersion1 : PowerUpBase
         }
 
         // Move the weapon model to desired places
-        transform.localPosition = new Vector3(2.4f, 0.7f, 0.25f);
+        transform.localPosition = new Vector3(-2.057f, 1.417f, 1.044f);
         transform.localRotation = Quaternion.identity;
     }
 

@@ -83,19 +83,9 @@ public class MissileMovement : NetworkPowerUpMovement
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Instantiate(bulletEffecte, transform.position, transform.rotation);
-        // Let Host determine if the collision happened
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 300);
         Vector3 impactPos = transform.position;
-        Debug.Log(impactPos);
+
+        PhotonNetwork.Instantiate("Explosion1", impactPos, Quaternion.identity, 0);
         PhotonNetwork.Destroy(gameObject);
-        foreach (Collider c in colliders)
-        {
-            Rigidbody r = c.GetComponent<Rigidbody>();
-            if (r != null)
-            {
-                r.AddExplosionForce(5000, impactPos, 3);
-            }
-        }
     }
 }
