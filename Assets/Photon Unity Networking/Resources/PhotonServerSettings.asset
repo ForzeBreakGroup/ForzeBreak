@@ -30,6 +30,7 @@ MonoBehaviour:
   - AddPowerUpComponent
   - Chat
   - ColorRpc
+  - CreateExplosion
   - DestroyRpc
   - DoJump
   - Flash
@@ -43,7 +44,6 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
-  - TaggedPlayer
-  - CreateExplosion
   - SetParent
+  - TaggedPlayer
   DisableAutoOpenWizard: 1
