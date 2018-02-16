@@ -86,7 +86,7 @@ public class ReticleSystem : MonoBehaviour
         }
         this.target = target;
         cam = NetworkManager.playerCamera;
-        objectCollider = target.transform.Find("Collider").GetComponentInChildren<Collider>();
+        objectCollider = target.transform.Find("Colliders").GetComponentInChildren<Collider>();
         reticleEnable = true;
     }
 

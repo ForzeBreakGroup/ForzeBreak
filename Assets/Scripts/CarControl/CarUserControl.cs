@@ -19,8 +19,10 @@ public class CarUserControl : NetworkPlayerInput
     private bool boost = false;
     private bool flip = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
@@ -45,9 +47,6 @@ public class CarUserControl : NetworkPlayerInput
         v = (v == 0) ? -controllerTrigger : v;
         carControlWheels.Move(h, v, v, handbrake);
 
-
-
-
         boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
         flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
         if (boostControl!=null)
@@ -62,12 +61,7 @@ public class CarUserControl : NetworkPlayerInput
             flipControl.Flip(flip,h);
     
     }
-
-    private void Update()
-    {
-            
-    }
-
+    
     public void ChangeColor(Color c)
     {
         color = c;
