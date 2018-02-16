@@ -251,7 +251,8 @@ public class DamageSystem : NetworkPlayerCollision
     [PunRPC]
     public void CreateExplosion(float force, Vector3 explosionCenter)
     {
-
+        Debug.Log("Explosion!!");
+        ApplyExplosionForce(force, explosionCenter);
     }
     #endregion
 }

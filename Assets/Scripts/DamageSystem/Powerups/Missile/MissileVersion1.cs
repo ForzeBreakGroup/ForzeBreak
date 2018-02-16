@@ -19,8 +19,8 @@ public class MissileVersion1 : PowerUpBase
 
     private void Awake()
     {
+        this.enabled = photonView.isMine;
         launchLocation = transform.Find("MissileLaunchPoint");
-        Debug.Log(launchLocation);
     }
 
     public override void AdjustModel()
@@ -88,7 +88,7 @@ public class MissileVersion1 : PowerUpBase
 
         if (elapsedTime > missileDuration)
         {
-            Destroy(this.gameObject);
+            PhotonView.Destroy(this.gameObject);
         }
     }
 

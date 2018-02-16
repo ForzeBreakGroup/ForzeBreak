@@ -50,4 +50,19 @@ public class PowerUpBase : Photon.MonoBehaviour
             OnHold();
         }
     }
+
+    [PunRPC]
+    protected void SetParent(int parentID)
+    {
+        NetworkPlayerVisual[] players = FindObjectsOfType<NetworkPlayerVisual>();
+        GameObject target = null;
+        foreach(NetworkPlayerVisual p in players)
+        {
+            if (p.transform.root.gameObject.GetPhotonView().viewID == parentID)
+            {
+                target = p.transform.root.gameObject;
+            }
+        }
+        transform.SetParent(target.transform);
+    }
 }
