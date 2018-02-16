@@ -46,4 +46,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - SetParent
   - TaggedPlayer
+  - RemovePowerUpComponent
   DisableAutoOpenWizard: 1

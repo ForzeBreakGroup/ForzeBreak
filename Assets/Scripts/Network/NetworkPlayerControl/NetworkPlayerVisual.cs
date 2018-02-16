@@ -10,6 +10,8 @@ using UnityEngine;
  */
 public class NetworkPlayerVisual : NetworkPlayerBase
 {
+    protected GameObject currentEquipped;
+
     private void Awake()
     {
         if (!photonView.isMine)
@@ -38,12 +40,23 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     {
         if (photonView.isMine && photonView.viewID == targetID)
         {
-            Debug.Log("Called");
-            Debug.Log(targetID);
-            GameObject weapon = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
+            currentEquipped = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
 
-            weapon.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
-            ((PowerUpBase)weapon.GetComponent(typeof(PowerUpBase))).AdjustModel();
+            currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
+            ((PowerUpBase)currentEquipped.GetComponent(typeof(PowerUpBase))).AdjustModel();
+        }
+    }
+
+    [PunRPC]
+    protected void RemovePowerUpComponent(int targetID)
+    {
+        if (photonView.isMine && photonView.viewID == targetID)
+        {
+            if (currentEquipped != null)
+            {
+                PhotonNetwork.Destroy(currentEquipped);
+                currentEquipped = null;
+            }
         }
     }
 }
