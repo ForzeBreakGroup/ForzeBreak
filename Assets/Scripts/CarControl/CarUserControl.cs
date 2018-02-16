@@ -62,12 +62,7 @@ public class CarUserControl : NetworkPlayerInput
             flipControl.Flip(flip,h);
     
     }
-
-    private void Update()
-    {
-            
-    }
-
+    
     public void ChangeColor(Color c)
     {
         color = c;

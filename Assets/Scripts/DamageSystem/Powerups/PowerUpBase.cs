@@ -12,10 +12,9 @@ using Photon;
  */
 public class PowerUpBase : Photon.MonoBehaviour
 {
-    private int playerNum;
+    public int playerNum;
     protected ReticleSystem[] reticleTargets;
-    protected Dictionary<string, Vector3> weaponModelOffset;
-
+    
     private void Awake()
     {
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
@@ -44,15 +43,15 @@ public class PowerUpBase : Photon.MonoBehaviour
     protected virtual void Update()
     {
         // Get input from player
-        if (Input.GetButtonDown("WeaponFire_Controller" + playerNum))
+        if (Input.GetButtonDown("WeaponFire_Mouse") || Input.GetButtonDown("WeaponFire_Controller" + playerNum))
         {
             OnPress();
         }
-        else if (Input.GetButtonUp("WeaponFire_Controller" + playerNum))
+        else if (Input.GetButtonUp("WeaponFire_Mouse") || Input.GetButtonUp("WeaponFire_Controller" + playerNum))
         {
             OnRelease();
         }
-        else if (Input.GetButton("WeaponFire_Controller" + playerNum))
+        else if (Input.GetButton("WeaponFire_Mouse") || Input.GetButton("WeaponFire_Controller" + playerNum))
         {
             OnHold();
         }
