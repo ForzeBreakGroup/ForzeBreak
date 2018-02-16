@@ -15,6 +15,8 @@ public class TrackPlayer : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject objectToTrack;
 
+    private bool trackingInitialized = false;
+
     /// <summary>
     /// Assign the target to the arrow to follow, the arrow changes it's color accordingly
     /// </summary>
@@ -33,6 +35,8 @@ public class TrackPlayer : MonoBehaviour
 
         objectToTrack = target;
         GetComponentInChildren<ReticleSystem>().EnableReticleSystem(objectToTrack);
+
+        trackingInitialized = true;
     }
 
     private void FixedUpdate()
@@ -41,6 +45,11 @@ public class TrackPlayer : MonoBehaviour
         if (objectToTrack)
         {
             transform.LookAt(objectToTrack.transform);
+        }
+
+        if (trackingInitialized && !objectToTrack)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

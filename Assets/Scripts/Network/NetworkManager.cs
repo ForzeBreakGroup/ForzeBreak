@@ -383,6 +383,7 @@ public class NetworkManager : PunBehaviour
 
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
     {
+        Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
 
         RaiseEventOptions options = new RaiseEventOptions();

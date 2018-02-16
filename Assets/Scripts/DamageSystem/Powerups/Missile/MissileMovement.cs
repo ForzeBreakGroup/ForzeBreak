@@ -3,56 +3,99 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
-public class MissileMovement : Photon.MonoBehaviour
+public enum FlyUpEffect
+{
+    StraightUp,
+    HalfWay,
+};
+
+public class MissileMovement : NetworkPowerUpMovement
 {
     public GameObject target;
 
     [Range(1, 2)]
     [SerializeField] private float flyupDuration = 1.0f;
+    private Vector3 flyUpDestination;
+
+    [SerializeField] private FlyUpEffect flyUpEffectOption = FlyUpEffect.HalfWay;
 
     [Range(1, 10)]
     [SerializeField] private float diveSpeed = 1.0f;
 
     private float elapsedTime = 0.0f;
-
-    private void FixedUpdate()
+    private enum MissileMovementState
     {
-        if (target != null)
+        FlyUp,
+        Diving
+    };
+    private MissileMovementState state = MissileMovementState.FlyUp;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        GetComponent<Collider>().enabled = false;
+    }
+
+    public void Fire()
+    {
+        // Calculate the flyUpDestination
+        if (flyUpEffectOption == FlyUpEffect.HalfWay)
         {
-            elapsedTime += Time.deltaTime;
+            flyUpDestination = new Vector3( (target.transform.position.x + transform.position.x) / 2,
+                                            (target.transform.position.y + transform.position.y) / 2,
+                                            (target.transform.position.z + transform.position.z) / 2);
+            flyUpDestination += new Vector3(0, 12, 0);
+        }
+        else if (flyUpEffectOption == FlyUpEffect.StraightUp)
+        {
+            flyUpDestination = transform.position + new Vector3(0, 12, 0);
+        }
 
-            // Missile will fly up towards sky first
-            if (elapsedTime < flyupDuration)
-            {
+        this.transform.LookAt(flyUpDestination);
+    }
 
-            }
-
-            // Then it will dive towards the target with accelerated speed
-            else
-            {
-
-            }
-
-            transform.position = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime);
+    protected override void Move()
+    {
+        base.Move();
+        // Missile will fly up towards sky first
+        switch (state)
+        {
+            case MissileMovementState.Diving:
+                transform.LookAt(target.transform);
+                rb.AddRelativeForce(Vector3.forward * 50, ForceMode.Force);
+                break;
+            case MissileMovementState.FlyUp:
+            default:
+                if (Vector3.Distance(transform.position, flyUpDestination) >= 1f)
+                {
+                    rb.AddRelativeForce(Vector3.forward * 20, ForceMode.Force);
+                }
+                else
+                {
+                    state = MissileMovementState.Diving;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    GetComponent<Collider>().enabled = true;
+                }
+                break;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Create explosion at impact point
-    }
-
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
+        //Instantiate(bulletEffecte, transform.position, transform.rotation);
+        // Let Host determine if the collision happened
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 300);
+        Vector3 impactPos = transform.position;
+        Debug.Log(impactPos);
+        PhotonNetwork.Destroy(gameObject);
+        foreach (Collider c in colliders)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-        }
-        else if (stream.isReading)
-        {
-            transform.position = (Vector3)stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
+            Rigidbody r = c.GetComponent<Rigidbody>();
+            if (r != null)
+            {
+                r.AddExplosionForce(5000, impactPos, 3);
+            }
         }
     }
 }

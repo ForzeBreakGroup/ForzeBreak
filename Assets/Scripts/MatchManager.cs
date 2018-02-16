@@ -77,7 +77,7 @@ public class MatchManager : Photon.MonoBehaviour
             Debug.Log("EvtRemovePlayerEvent");
             PhotonPlayer otherPlayer = (PhotonPlayer)content;
 
-            if (!playersStillAlive.ContainsKey(otherPlayer))
+            if (playersStillAlive.ContainsKey(otherPlayer))
             {
                 playersStillAlive.Remove(otherPlayer);
             }

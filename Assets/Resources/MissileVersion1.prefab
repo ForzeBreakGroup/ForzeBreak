@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  missileInterval: 0.5
+  missileInterval: 1
   missileDuration: 2

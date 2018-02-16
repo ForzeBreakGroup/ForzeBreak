@@ -24,17 +24,14 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     protected virtual void OnPress()
     {
-
     }
 
     protected virtual void OnHold()
     {
-
     }
 
     protected virtual void OnRelease()
     {
-
     }
 
     protected virtual void Update()

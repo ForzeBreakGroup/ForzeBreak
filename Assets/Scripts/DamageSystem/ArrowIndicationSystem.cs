@@ -11,7 +11,7 @@ using Photon;
  * Methods to add/remove arrow
  */
 
-public class ArrowIndicators : Photon.MonoBehaviour
+public class ArrowIndicationSystem : Photon.MonoBehaviour
 {
     #region Private Members
 
@@ -105,12 +105,15 @@ public class ArrowIndicators : Photon.MonoBehaviour
     {
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && photonView.isMine)
         {
+            Debug.Log("Arrow Indicator Remove Player");
             PhotonPlayer otherPlayer = (PhotonPlayer)content;
 
             // Find the arrow matching the player left the game then destroy it
             if (arrowList.ContainsKey(otherPlayer.ID))
             {
+                Debug.Log("Remove Arrow Indicator");
                 Destroy(arrowList[otherPlayer.ID]);
+                arrowList.Remove(otherPlayer.ID);
             }
         }
     }

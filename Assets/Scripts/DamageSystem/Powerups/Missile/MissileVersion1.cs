@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MissileVersion1 : PowerUpBase
 {
-    [Range(0.1f, 1.0f)]
-    [SerializeField] private float missileInterval = 0.5f;
+    [Range(0.1f, 2.0f)]
+    [SerializeField] private float missileInterval = 1.5f;
 
     [Range(1, 5)]
     [SerializeField] private float missileDuration = 2f;
@@ -63,7 +63,7 @@ public class MissileVersion1 : PowerUpBase
                 if (key.targetInSight)
                 {
                     lockOnDuration = lockOnSystem[key];
-                    lockOnDuration += Time.deltaTime;
+                    lockOnDuration += Time.fixedDeltaTime;
 
                     // If countdown reached threshold, fire the missile
                     if (lockOnDuration > missileInterval)
@@ -82,12 +82,12 @@ public class MissileVersion1 : PowerUpBase
                 lockOnSystem[key] = lockOnDuration;
             }
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
         }
 
         if (elapsedTime > missileDuration)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -95,5 +95,6 @@ public class MissileVersion1 : PowerUpBase
     {
         GameObject missile = PhotonNetwork.Instantiate("Missile", launchLocation.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
+        missile.GetComponent<MissileMovement>().Fire();
     }
 }
