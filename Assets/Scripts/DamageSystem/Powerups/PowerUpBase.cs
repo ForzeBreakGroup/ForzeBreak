@@ -16,14 +16,10 @@ public class PowerUpBase : Photon.MonoBehaviour
     protected ReticleSystem[] reticleTargets;
     protected Dictionary<string, Vector3> weaponModelOffset;
 
-    private void Awake()
-    {
-        playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
-    }
-
     public virtual void AdjustModel()
     {
-        reticleTargets = transform.root.gameObject.GetComponents<ReticleSystem>();
+        enabled = transform.root.gameObject.GetPhotonView().isMine;
+        reticleTargets = transform.root.gameObject.GetComponentsInChildren<ReticleSystem>();
     }
 
     protected virtual void OnPress()

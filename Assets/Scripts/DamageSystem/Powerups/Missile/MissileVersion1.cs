@@ -26,15 +26,19 @@ public class MissileVersion1 : PowerUpBase
             DestroyImmediate(this);
         }
 
+        lockOnSystem = new Dictionary<ReticleSystem, float>();
+        foreach (ReticleSystem reticleSystem in reticleTargets)
+        {
+            lockOnSystem.Add(reticleSystem, 0);
+        }
+
         // Move the weapon model to desired places
         transform.localPosition = new Vector3(-0.03f, 0.35f, 0.25f);
-        transform.localRotation = Quaternion.Euler(new Vector3(31, 0, 0));
     }
 
     protected override void OnPress()
     {
         missileStartFiring = true;
-        PhotonNetwork.Instantiate("Missile", Vector3.zero, Quaternion.identity, 0);
     }
 
     private void FixedUpdate()
@@ -57,7 +61,6 @@ public class MissileVersion1 : PowerUpBase
                     if (lockOnDuration > missileInterval)
                     {
                         // Fire a missile
-                        Debug.Log(key.target);
                         FireMissileTowardsTarget(key.target);
                         lockOnDuration = 0;
                     }
@@ -82,7 +85,7 @@ public class MissileVersion1 : PowerUpBase
 
     private void FireMissileTowardsTarget(GameObject lockOnTarget)
     {
-        GameObject missile = PhotonNetwork.Instantiate("Missile", transform.position, Quaternion.identity, 1);
+        GameObject missile = PhotonNetwork.Instantiate("Missile", transform.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
     }
 }

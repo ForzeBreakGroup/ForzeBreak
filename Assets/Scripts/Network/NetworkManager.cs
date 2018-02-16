@@ -124,7 +124,7 @@ public class NetworkManager : PunBehaviour
     private static ConnectionState state = ConnectionState.IDLE;
 
 
-    Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
+    [SerializeField] Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
     #region Public Methods

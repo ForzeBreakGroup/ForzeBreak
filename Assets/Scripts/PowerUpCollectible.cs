@@ -33,7 +33,8 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     {
         if (!powerUpCollected && other.transform.root.tag == "Player")
         {
-            other.transform.root.gameObject.GetPhotonView().RPC("AddPowerUpComponent", PhotonTargets.All, powerupName);
+            Debug.Log("Sending");
+            other.transform.root.gameObject.GetPhotonView().RPC("AddPowerUpComponent", PhotonPlayer.Find(other.transform.root.gameObject.GetPhotonView().viewID), powerupName);
 
             powerUpCollected = true;
             elapsedTime = 0;
