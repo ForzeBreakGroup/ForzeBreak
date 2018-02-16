@@ -32,13 +32,13 @@ public class CarUserControl : NetworkPlayerInput
     private void FixedUpdate()
     {
         // keyboard Input
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        float handbrake = Input.GetAxis("Handbrake");
+        float h = Input.GetAxis("Horizontal_Keyboard");
+        float v = Input.GetAxis("Horizontal_Keyboard");
+        float handbrake = Input.GetAxis("Handbrake_Keyboard");
 
         // controller Input
-        float controllerX = Input.GetAxis("Controller" + playerNum + "_X_Axis");
-        float controllerTrigger = Input.GetAxis("Controller" + playerNum + "_Trigger_Axis");
+        float controllerX = Input.GetAxis("Horizontal_Controller" + playerNum);
+        float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + playerNum);
 
         //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
@@ -48,8 +48,8 @@ public class CarUserControl : NetworkPlayerInput
 
 
 
-        boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller" + playerNum + "_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller" + playerNum + "_Button_A");
+        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
+        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
         if (boostControl!=null)
         {
             if (boost)
