@@ -30,9 +30,10 @@ public class BulletMovement : NetworkPowerUpMovement
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity,0);
-        PhotonNetwork.Destroy(gameObject);
-
+        if (photonView.isMine)
+        {
+            PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }
