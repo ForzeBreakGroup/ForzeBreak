@@ -26,6 +26,16 @@ public enum ENetworkEventCode : byte
     OnPlayerSpawnFinished = (byte)0x02,
 
     /// <summary>
+    /// Event raised by individual client when the player pressed ready
+    /// </summary>
+    OnPlayerReady = (byte)0x03,
+
+    /// <summary>
+    /// Event raised by master client when all players are ready for actions
+    /// </summary>
+    OnPlayerSpawning = (byte)0x04,
+
+    /// <summary>
     /// Event raised by individual client when a client died
     /// </summary>
     OnPlayerDeath = (byte)0x12,

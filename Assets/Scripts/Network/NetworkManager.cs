@@ -262,10 +262,6 @@ public class NetworkManager : PunBehaviour
         {
             MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
         }
-        else if (PhotonNetwork.isMasterClient)
-        {
-            MatchManager.instance.SpawnPlayer(playerPrefabName);
-        }
     }
 
     /// <summary>
@@ -304,6 +300,7 @@ public class NetworkManager : PunBehaviour
         serializedColor[3] = c.a;
 
         playerInfo.Add("Color", serializedColor);
+        playerInfo.Add("PlayerNumber", (int)(PhotonNetwork.playerList.Length - 1));
         PhotonNetwork.player.SetCustomProperties(playerInfo);
 
         // The host will call the change scene
@@ -311,10 +308,6 @@ public class NetworkManager : PunBehaviour
         {
             // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
-        }
-        else
-        {
-            MatchManager.instance.SpawnPlayer(playerPrefabName);
         }
     }
 
