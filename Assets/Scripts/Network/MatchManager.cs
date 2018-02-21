@@ -10,6 +10,7 @@ public class MatchManager : Photon.MonoBehaviour
     private Dictionary<PhotonPlayer, bool> playersStillAlive;
     private static MatchManager matchManager;
     private Dictionary<PhotonPlayer, bool> playersReady;
+    private GameObject lobbyUI;
     public static MatchManager instance
     {
         get
@@ -33,6 +34,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void Init()
     {
+        lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
     }
 
     private void Awake()
@@ -53,6 +55,7 @@ public class MatchManager : Photon.MonoBehaviour
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
         PhotonNetwork.OnEventCall += EvtPlayerReadyHandler;
         PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
+        PhotonNetwork.OnEventCall += EvtRoundOverHandler;
     }
 
     private void OnDisable()
@@ -61,7 +64,8 @@ public class MatchManager : Photon.MonoBehaviour
         PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
         PhotonNetwork.OnEventCall -= EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
+        PhotonNetwork.OnEventCall -= EvtSpawnPlayerHandler;
+        PhotonNetwork.OnEventCall -= EvtRoundOverHandler;
     }
 
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
@@ -100,19 +104,35 @@ public class MatchManager : Photon.MonoBehaviour
             playersStillAlive[sender] = false;
 
             uint aliveCount = 0;
+            PhotonPlayer surviver;
             foreach(KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
             {
                 if (entry.Value)
                 {
                     ++aliveCount;
+                    surviver = entry.Key;
                 }
             }
 
             if (aliveCount <= 1)
             {
-                PhotonNetwork.LoadLevel("End");
+                RoundOver();
             }
         }
+    }
+
+    private void RoundOver()
+    {
+        List<PhotonPlayer> keyEntry = new List<PhotonPlayer>(playersReady.Keys);
+
+        foreach(PhotonPlayer player in keyEntry)
+        {
+            playersReady[player] = false;
+        }
+
+        RaiseEventOptions options = new RaiseEventOptions();
+        options.Receivers = ReceiverGroup.All;
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, null, true, options);
     }
 
     private void EvtPlayerReadyHandler(byte evtCode, object content, int senderid)
@@ -144,7 +164,7 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (evtCode == (byte) ENetworkEventCode.OnPlayerSpawning)
         {
-            Debug.Log("Spawning");
+            lobbyUI.SetActive(false);
 
             int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
             Vector3 pos = spawnPoints[playerNumber].spawnPoint;
@@ -161,6 +181,15 @@ public class MatchManager : Photon.MonoBehaviour
             RaiseEventOptions options = new RaiseEventOptions();
             options.Receivers = ReceiverGroup.All;
             PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawnFinished, null, true, options);
+        }
+    }
+
+    private void EvtRoundOverHandler(byte evtCode, object content, int senderid)
+    {
+        if (evtCode == (byte) ENetworkEventCode.OnRoundOver)
+        {
+            DestroyPlayerObject();
+            MatchManager.instance.TransitionToLobby();
         }
     }
 
@@ -205,6 +234,22 @@ public class MatchManager : Photon.MonoBehaviour
                 }
                 cameraControl.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, (numberOfPlayers == 2) ? 1f : 0.5f);
             }
+        }
+    }
+
+    public void TransitionToLobby()
+    {
+        lobbyUI.SetActive(true);
+    }
+
+    public void DestroyPlayerObject()
+    {
+        if (NetworkManager.localPlayer != null && NetworkManager.playerCamera != null)
+        {
+            PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
+            Destroy(NetworkManager.playerCamera.transform.root.gameObject);
+            NetworkManager.localPlayer = null;
+            NetworkManager.playerCamera = null;
         }
     }
 }

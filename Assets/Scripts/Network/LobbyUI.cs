@@ -6,7 +6,7 @@ using Photon;
 
 public class LobbyUI : Photon.MonoBehaviour
 {
-    private bool isReady = false;
+    private bool isReady;
     private int numberOfPlayers = 1;
 
     Text readyText;
@@ -19,9 +19,6 @@ public class LobbyUI : Photon.MonoBehaviour
         notReadyText = transform.Find("NotReadyText").GetComponent<Text>();
         playerConn = transform.Find("PlayerConn").GetComponent<Text>();
 
-        readyText.enabled = isReady;
-        notReadyText.enabled = !isReady;
-        playerConn.text = PhotonNetwork.playerList.Length + " / 4";
         if (PhotonNetwork.playerList.Length > 1)
         {
             playerConn.color = Color.green;
@@ -36,14 +33,17 @@ public class LobbyUI : Photon.MonoBehaviour
     {
         PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall += EvtPlayersSpawningHandler;
+
+        isReady = false;
+        readyText.enabled = isReady;
+        notReadyText.enabled = !isReady;
+        playerConn.text = PhotonNetwork.playerList.Length + " / 4";
     }
 
     private void OnDisable()
     {
         PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtPlayersSpawningHandler;
     }
 
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
@@ -78,14 +78,6 @@ public class LobbyUI : Photon.MonoBehaviour
         }
     }
 
-    private void EvtPlayersSpawningHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
-        {
-            this.gameObject.SetActive(false);
-        }
-    }
-
     public void ReadyState()
     {
         isReady = !isReady;
@@ -96,6 +88,4 @@ public class LobbyUI : Photon.MonoBehaviour
         options.Receivers = ReceiverGroup.MasterClient;
         PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerReady, isReady, true, options);
     }
-
-
 }

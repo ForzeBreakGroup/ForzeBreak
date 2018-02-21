@@ -36,6 +36,11 @@ public enum ENetworkEventCode : byte
     OnPlayerSpawning = (byte)0x04,
 
     /// <summary>
+    /// Event raised by master client when a round has finished
+    /// </summary>
+    OnRoundOver = (byte)0x05,
+
+    /// <summary>
     /// Event raised by individual client when a client died
     /// </summary>
     OnPlayerDeath = (byte)0x12,

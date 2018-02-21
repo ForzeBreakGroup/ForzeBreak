@@ -262,6 +262,7 @@ public class NetworkManager : PunBehaviour
         {
             MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
         }
+        MatchManager.instance.TransitionToLobby();
     }
 
     /// <summary>
