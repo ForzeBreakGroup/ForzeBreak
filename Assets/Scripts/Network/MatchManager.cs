@@ -10,8 +10,6 @@ public class MatchManager : Photon.MonoBehaviour
     private Dictionary<PhotonPlayer, bool> playersStillAlive;
     private static MatchManager matchManager;
     private Dictionary<PhotonPlayer, bool> playersReady;
-    private bool isReady = false;
-    private GameObject lobbyUI;
     public static MatchManager instance
     {
         get
@@ -42,7 +40,6 @@ public class MatchManager : Photon.MonoBehaviour
         playersStillAlive = new Dictionary<PhotonPlayer, bool>();
         playersReady = new Dictionary<PhotonPlayer, bool>();
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
-        lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
         if (!cam)
         {
             Debug.LogError("Camera Not Attached");
@@ -122,7 +119,6 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (evtCode == (byte) ENetworkEventCode.OnPlayerReady && PhotonNetwork.isMasterClient)
         {
-            Debug.Log("Player is Ready");
             PhotonPlayer sender = PhotonPlayer.Find(senderid);
             playersReady[sender] = (bool)content;
 
@@ -134,10 +130,8 @@ public class MatchManager : Photon.MonoBehaviour
                     ++numOfReady;
                 }
             }
-            Debug.Log(numOfReady);
-            Debug.Log(PhotonNetwork.playerList.Length);
 
-            if (numOfReady == PhotonNetwork.playerList.Length)
+            if (numOfReady == PhotonNetwork.playerList.Length && PhotonNetwork.playerList.Length > 1)
             {
                 RaiseEventOptions options = new RaiseEventOptions();
                 options.Receivers = ReceiverGroup.All;
@@ -151,7 +145,6 @@ public class MatchManager : Photon.MonoBehaviour
         if (evtCode == (byte) ENetworkEventCode.OnPlayerSpawning)
         {
             Debug.Log("Spawning");
-            lobbyUI.SetActive(false);
 
             int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
             Vector3 pos = spawnPoints[playerNumber].spawnPoint;
@@ -213,13 +206,5 @@ public class MatchManager : Photon.MonoBehaviour
                 cameraControl.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, (numberOfPlayers == 2) ? 1f : 0.5f);
             }
         }
-    }
-
-    public void ReadyState()
-    {
-        isReady = !isReady;
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.MasterClient;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerReady, isReady, true, options);
     }
 }
