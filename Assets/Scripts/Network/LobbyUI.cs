@@ -6,7 +6,7 @@ using Photon;
 
 public class LobbyUI : Photon.MonoBehaviour
 {
-    private bool isReady = false;
+    private bool isReady;
     private int numberOfPlayers = 1;
 
     Text readyText;
@@ -54,14 +54,17 @@ public class LobbyUI : Photon.MonoBehaviour
     {
         PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall += EvtPlayersSpawningHandler;
+
+        isReady = false;
+        readyText.enabled = isReady;
+        notReadyText.enabled = !isReady;
+        playerConn.text = PhotonNetwork.playerList.Length + " / 4";
     }
 
     private void OnDisable()
     {
         PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtPlayersSpawningHandler;
     }
 
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
@@ -77,14 +80,6 @@ public class LobbyUI : Photon.MonoBehaviour
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch)
         {
             NetworkDisplay();
-        }
-    }
-
-    private void EvtPlayersSpawningHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
-        {
-            this.gameObject.SetActive(false);
         }
     }
 

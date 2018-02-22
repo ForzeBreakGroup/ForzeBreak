@@ -14,13 +14,11 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
     {
         if (other.transform.root.tag == "Player")
         {
-            NetworkPlayerData playerData = other.GetComponentInParent<NetworkPlayerData>();
-            playerData.DecrementPlayerLife();
-            
+            MatchManager.instance.DestroyPlayerObject();
+
+            RaiseEventOptions options = new RaiseEventOptions();
+            options.Receivers = ReceiverGroup.MasterClient;
+            PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, null, true, options);
         }
     }
-
-
-
-
 }
