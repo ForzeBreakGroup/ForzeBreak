@@ -292,7 +292,7 @@ public class NetworkManager : PunBehaviour
         ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
 
         // Unity Color cannot be serailized through photon, manual serializing it
-        Debug.Log(PhotonNetwork.playerList.Length);
+
         Color c = playerColors[PhotonNetwork.playerList.Length - 1];
         float[] serializedColor = new float[4];
         serializedColor[0] = c.r;
