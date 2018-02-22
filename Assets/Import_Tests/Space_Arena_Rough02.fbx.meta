@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 454e88b0adb8fbf4787f3411c635a3ae
+timeCreated: 1519183700
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Arena_Main_Body
+    100002: Arena_Spike_Detail
+    100004: Arena_Spike_Detail1
+    100006: Arena_Spike_Detail2
+    100008: Arena_Spike_Detail3
+    100010: Arena_Spike_Detail4
+    100012: Arena_Spike_Detail5
+    100014: Arena_Spike_Detail6
+    100016: Arena_Spike_Detail7
+    100018: Arena_Spike_Detail8
+    100020: Arena_Spike_Detail9
+    100022: Arena_Whole
+    100024: audience
+    100026: Audience_Pod
+    100028: Audience_Pod1
+    100030: Audience_Pod2
+    100032: Audience_Pod3
+    100034: Audience_Pod4
+    100036: Audience_Pod5
+    100038: Audience_Pod6
+    100040: Bottom_Ring_Support
+    100042: Bottom_Ring_Support1
+    100044: Bottom_Spiral
+    100046: Main_Arena_V012
+    100048: //RootNode
+    400000: Arena_Main_Body
+    400002: Arena_Spike_Detail
+    400004: Arena_Spike_Detail1
+    400006: Arena_Spike_Detail2
+    400008: Arena_Spike_Detail3
+    400010: Arena_Spike_Detail4
+    400012: Arena_Spike_Detail5
+    400014: Arena_Spike_Detail6
+    400016: Arena_Spike_Detail7
+    400018: Arena_Spike_Detail8
+    400020: Arena_Spike_Detail9
+    400022: Arena_Whole
+    400024: audience
+    400026: Audience_Pod
+    400028: Audience_Pod1
+    400030: Audience_Pod2
+    400032: Audience_Pod3
+    400034: Audience_Pod4
+    400036: Audience_Pod5
+    400038: Audience_Pod6
+    400040: Bottom_Ring_Support
+    400042: Bottom_Ring_Support1
+    400044: Bottom_Spiral
+    400046: Main_Arena_V012
+    400048: //RootNode
+    2100000: Pods
+    2100002: Underside1
+    2100004: Outer_Edge1
+    2100006: Middle_Ring_Wholes
+    2100008: Ramps1
+    2100010: Stadium_Floor
+    2100012: Outer_Ring1
+    2300000: Arena_Spike_Detail
+    2300002: Arena_Spike_Detail1
+    2300004: Arena_Spike_Detail2
+    2300006: Arena_Spike_Detail3
+    2300008: Arena_Spike_Detail4
+    2300010: Arena_Spike_Detail5
+    2300012: Arena_Spike_Detail6
+    2300014: Arena_Spike_Detail7
+    2300016: Arena_Spike_Detail8
+    2300018: Arena_Spike_Detail9
+    2300020: Audience_Pod
+    2300022: Audience_Pod1
+    2300024: Audience_Pod2
+    2300026: Audience_Pod3
+    2300028: Audience_Pod4
+    2300030: Audience_Pod5
+    2300032: Audience_Pod6
+    2300034: Bottom_Ring_Support
+    2300036: Bottom_Ring_Support1
+    2300038: Bottom_Spiral
+    2300040: Main_Arena_V012
+    3300000: Arena_Spike_Detail
+    3300002: Arena_Spike_Detail1
+    3300004: Arena_Spike_Detail2
+    3300006: Arena_Spike_Detail3
+    3300008: Arena_Spike_Detail4
+    3300010: Arena_Spike_Detail5
+    3300012: Arena_Spike_Detail6
+    3300014: Arena_Spike_Detail7
+    3300016: Arena_Spike_Detail8
+    3300018: Arena_Spike_Detail9
+    3300020: Audience_Pod
+    3300022: Audience_Pod1
+    3300024: Audience_Pod2
+    3300026: Audience_Pod3
+    3300028: Audience_Pod4
+    3300030: Audience_Pod5
+    3300032: Audience_Pod6
+    3300034: Bottom_Ring_Support
+    3300036: Bottom_Ring_Support1
+    3300038: Bottom_Spiral
+    3300040: Main_Arena_V012
+    4300000: Bottom_Ring_Support
+    4300002: Bottom_Ring_Support1
+    4300004: Bottom_Spiral
+    4300006: Arena_Spike_Detail
+    4300008: Arena_Spike_Detail1
+    4300010: Arena_Spike_Detail2
+    4300012: Arena_Spike_Detail3
+    4300014: Arena_Spike_Detail4
+    4300016: Arena_Spike_Detail5
+    4300018: Arena_Spike_Detail6
+    4300020: Arena_Spike_Detail7
+    4300022: Arena_Spike_Detail8
+    4300024: Arena_Spike_Detail9
+    4300026: Audience_Pod
+    4300028: Audience_Pod1
+    4300030: Audience_Pod2
+    4300032: Audience_Pod3
+    4300034: Audience_Pod4
+    4300036: Audience_Pod5
+    4300038: Audience_Pod6
+    4300040: Main_Arena_V012
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
