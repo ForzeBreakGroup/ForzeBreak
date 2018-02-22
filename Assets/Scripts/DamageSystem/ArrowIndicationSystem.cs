@@ -51,6 +51,7 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
     {
         PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
+        EventManager.StartListening("AddPlayerToMatch", EvtAddPlayerToMatchHandler);
     }
 
     /// <summary>
@@ -60,6 +61,7 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
     {
         PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
+        EventManager.StopListening("AddPlayerToMatch", EvtAddPlayerToMatchHandler);
     }
 
     /// <summary>
@@ -89,6 +91,29 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
                         arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
                         arrowList.Add(p.photonView.ownerId, arrow);
                     }
+                }
+            }
+        }
+    }
+
+    private void EvtAddPlayerToMatchHandler()
+    {
+        CarUserControl[] playersInGame = FindObjectsOfType<CarUserControl>();
+        int myNum = gameObject.GetComponent<CarUserControl>().playerNum;
+        foreach (CarUserControl p in playersInGame)
+        {
+            int playerNum = p.gameObject.GetComponent<CarUserControl>().playerNum;
+            // If the photonView is not myself, means it's other player
+            if (playerNum != myNum)
+            {
+                // If the dictionary record does not have the photonView ID start tracking it
+                if (!arrowList.ContainsKey(playerNum))
+                {
+                    // Create an arrow for this specific remote client
+                    GameObject arrow = Instantiate(arrowIndicator, this.transform);
+                    arrow.transform.localScale = new Vector3(1, 1, 1);
+                    arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
+                    arrowList.Add(playerNum, arrow);
                 }
             }
         }

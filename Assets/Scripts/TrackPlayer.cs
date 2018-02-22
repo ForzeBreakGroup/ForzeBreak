@@ -29,8 +29,16 @@ public class TrackPlayer : MonoBehaviour
         }
 
         // Deserialize color property obtained from target player
-        float[] serializedColor = PhotonPlayer.Find(target.GetPhotonView().ownerId).CustomProperties["Color"] as float[];
-        Color c = new Color(serializedColor[0], serializedColor[1], serializedColor[2], serializedColor[3]);
+        Color c;
+        if (NetworkManager.offlineMode)
+        {
+            c = NetworkManager.instance.GetPlayerColor(target.GetComponent<CarUserControl>().playerNum - 1);
+        }
+        else
+        {
+            float[] serializedColor = PhotonPlayer.Find(target.GetPhotonView().ownerId).CustomProperties["Color"] as float[];
+            c = new Color(serializedColor[0], serializedColor[1], serializedColor[2], serializedColor[3]);
+        }
         transform.Find("Arrow_Test").GetComponent<Renderer>().material.color = c;
 
         objectToTrack = target;

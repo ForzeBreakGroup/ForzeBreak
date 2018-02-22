@@ -10,6 +10,8 @@ using UnityEngine;
  */
 public class NetworkPlayerData : NetworkPlayerBase
 {
+    public Camera localCam;
+
     #region Private Members
     /// <summary>
     ///  Player's remaining life synchronized and managed by server/host

@@ -21,6 +21,24 @@ public class LobbyUI : Photon.MonoBehaviour
 
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
+
+        if(NetworkManager.offlineMode)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            NetworkDisplay();
+        }
+    }
+
+    private void LocalDisplay()
+    {
+        playerConn.text = "";
+    }
+
+    private void NetworkDisplay()
+    {
         playerConn.text = PhotonNetwork.playerList.Length + " / 4";
         if (PhotonNetwork.playerList.Length > 1)
         {
@@ -50,15 +68,7 @@ public class LobbyUI : Photon.MonoBehaviour
     {
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch)
         {
-            playerConn.text = PhotonNetwork.playerList.Length + " / 4";
-            if (PhotonNetwork.playerList.Length > 1)
-            {
-                playerConn.color = Color.green;
-            }
-            else
-            {
-                playerConn.color = Color.red;
-            }
+            NetworkDisplay();
         }
     }
 
@@ -66,15 +76,7 @@ public class LobbyUI : Photon.MonoBehaviour
     {
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch)
         {
-            playerConn.text = PhotonNetwork.playerList.Length + " / 4";
-            if (PhotonNetwork.playerList.Length > 1)
-            {
-                playerConn.color = Color.green;
-            }
-            else
-            {
-                playerConn.color = Color.red;
-            }
+            NetworkDisplay();
         }
     }
 
@@ -92,10 +94,15 @@ public class LobbyUI : Photon.MonoBehaviour
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
 
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.MasterClient;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerReady, isReady, true, options);
+        if (NetworkManager.offlineMode)
+        {
+            EventManager.TriggerEvent("OnPlayerReady");
+        }
+        else
+        {
+            RaiseEventOptions options = new RaiseEventOptions();
+            options.Receivers = ReceiverGroup.MasterClient;
+            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerReady, isReady, true, options);
+        }
     }
-
-
 }

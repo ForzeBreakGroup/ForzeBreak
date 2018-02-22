@@ -48,6 +48,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void OnEnable()
     {
+        // Network Event listener
         PhotonNetwork.OnEventCall += EvtPlayerDeathHandler;
         PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
@@ -57,13 +58,15 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void OnDisable()
     {
+        // Network Event listener
         PhotonNetwork.OnEventCall -= EvtPlayerDeathHandler;
         PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
         PhotonNetwork.OnEventCall -= EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
+        PhotonNetwork.OnEventCall -= EvtSpawnPlayerHandler;
     }
 
+    #region Event Handlers
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
@@ -93,14 +96,14 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void EvtPlayerDeathHandler(byte evtCode, object content, int senderid)
     {
-        if (evtCode == (byte) ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
+        if (evtCode == (byte)ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
         {
             Debug.Log("Player Death Event Handler");
             PhotonPlayer sender = PhotonPlayer.Find(senderid);
             playersStillAlive[sender] = false;
 
             uint aliveCount = 0;
-            foreach(KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
+            foreach (KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
             {
                 if (entry.Value)
                 {
@@ -117,13 +120,13 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void EvtPlayerReadyHandler(byte evtCode, object content, int senderid)
     {
-        if (evtCode == (byte) ENetworkEventCode.OnPlayerReady && PhotonNetwork.isMasterClient)
+        if (evtCode == (byte)ENetworkEventCode.OnPlayerReady && PhotonNetwork.isMasterClient)
         {
             PhotonPlayer sender = PhotonPlayer.Find(senderid);
             playersReady[sender] = (bool)content;
 
             int numOfReady = 0;
-            foreach(KeyValuePair<PhotonPlayer, bool> entry in playersReady)
+            foreach (KeyValuePair<PhotonPlayer, bool> entry in playersReady)
             {
                 if (entry.Value)
                 {
@@ -142,7 +145,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void EvtSpawnPlayerHandler(byte evtCode, object content, int senderid)
     {
-        if (evtCode == (byte) ENetworkEventCode.OnPlayerSpawning)
+        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
         {
             Debug.Log("Spawning");
 
@@ -163,14 +166,11 @@ public class MatchManager : Photon.MonoBehaviour
             PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawnFinished, null, true, options);
         }
     }
+    #endregion
 
+    #region Local Gameplay
     public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
     {
-        foreach (string name in Input.GetJoystickNames())
-        {
-            Debug.Log(name);
-        }
-
         // Loop every number of player necessary to create object
         for (int i = 0; i < numberOfPlayers; ++i)
         {
@@ -204,7 +204,11 @@ public class MatchManager : Photon.MonoBehaviour
                     marginY = (i > 1) ? 0f : 0.5f;
                 }
                 cameraControl.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, (numberOfPlayers == 2) ? 1f : 0.5f);
+                car.GetComponent<NetworkPlayerData>().localCam = cameraControl.GetComponentInChildren<Camera>();
             }
+            car.GetComponent<NetworkPlayerVisual>().InitializeVehicleWithPlayerColor();
         }
+        EventManager.TriggerEvent("AddPlayerToMatch");
     }
+    #endregion
 }

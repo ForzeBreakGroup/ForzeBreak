@@ -124,7 +124,8 @@ public class NetworkManager : PunBehaviour
     private static ConnectionState state = ConnectionState.IDLE;
 
 
-    [SerializeField] Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
+    [SerializeField]
+    Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
     #region Public Methods
@@ -159,7 +160,11 @@ public class NetworkManager : PunBehaviour
         {
             ConnectingToPhotonServer();
         }
+    }
 
+    public Color GetPlayerColor(int index)
+    {
+        return playerColors[index];
     }
     #endregion
 
@@ -256,8 +261,6 @@ public class NetworkManager : PunBehaviour
     /// <param name="sceneMode"></param>
     private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        Debug.Log("Scene Loaded");
-
         if (offlineMode)
         {
             MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
@@ -276,6 +279,24 @@ public class NetworkManager : PunBehaviour
         }
         PhotonNetwork.offlineMode = true;
     }
+
+    private void SetPlayerCustomProperties()
+    {
+        // Set custom property to identify player's color
+        ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
+
+        // Unity Color cannot be serailized through photon, manual serializing it
+        Color c = playerColors[PhotonNetwork.playerList.Length - 1];
+        float[] serializedColor = new float[4];
+        serializedColor[0] = c.r;
+        serializedColor[1] = c.g;
+        serializedColor[2] = c.b;
+        serializedColor[3] = c.a;
+
+        playerInfo.Add("Color", serializedColor);
+        playerInfo.Add("PlayerNumber", (int)(PhotonNetwork.playerList.Length - 1));
+        PhotonNetwork.player.SetCustomProperties(playerInfo);
+    }
     #endregion
 
     #region Photon SDK Overrides
@@ -287,21 +308,11 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Joined Room");
         base.OnJoinedRoom();
 
-        // Set custom property to identify player's color
-        ExitGames.Client.Photon.Hashtable playerInfo = new ExitGames.Client.Photon.Hashtable();
-
-        // Unity Color cannot be serailized through photon, manual serializing it
-        Debug.Log(PhotonNetwork.playerList.Length);
-        Color c = playerColors[PhotonNetwork.playerList.Length - 1];
-        float[] serializedColor = new float[4];
-        serializedColor[0] = c.r;
-        serializedColor[1] = c.g;
-        serializedColor[2] = c.b;
-        serializedColor[3] = c.a;
-
-        playerInfo.Add("Color", serializedColor);
-        playerInfo.Add("PlayerNumber", (int)(PhotonNetwork.playerList.Length - 1));
-        PhotonNetwork.player.SetCustomProperties(playerInfo);
+        // Only needed in network mode
+        if (!offlineMode)
+        {
+            SetPlayerCustomProperties();
+        }
 
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)

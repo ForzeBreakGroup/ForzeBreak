@@ -25,9 +25,16 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         Renderer[] rend = transform.Find("Model").Find("Body").GetComponentsInChildren<Renderer>();
 
         //Deserialize color through network
-        Debug.Log("OwnerId: " + photonView.ownerId + ", viewID: " + photonView.viewID);
-        float[] serializeColor = PhotonPlayer.Find(photonView.ownerId).CustomProperties["Color"] as float[];
-        Color c = new Color(serializeColor[0], serializeColor[1], serializeColor[2], serializeColor[3]);
+        Color c;
+        if (NetworkManager.offlineMode)
+        {
+            c = NetworkManager.instance.GetPlayerColor(GetComponent<CarUserControl>().playerNum - 1);
+        }
+        else
+        {
+            float[] serializeColor = PhotonPlayer.Find(photonView.ownerId).CustomProperties["Color"] as float[];
+            c = new Color(serializeColor[0], serializeColor[1], serializeColor[2], serializeColor[3]);
+        }
 
         foreach(Renderer r in rend)
         {
