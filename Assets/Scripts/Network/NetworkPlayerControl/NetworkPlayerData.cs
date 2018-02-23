@@ -52,16 +52,6 @@ public class NetworkPlayerData : NetworkPlayerBase
     }
 
     /// <summary>
-    /// Networked Command method to request the host to change the scene.
-    /// </summary>
-    private void CmdPlayerLifeDepleted()
-    {
-        RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.MasterClient;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerDeath, null, true, evtOptions);
-    }
-
-    /// <summary>
     /// Photon SerializeView method for synchronizing data between all clients
     /// </summary>
     /// <param name="stream"></param>
@@ -76,26 +66,6 @@ public class NetworkPlayerData : NetworkPlayerBase
         NetworkPlayerCollision.SerializeView(stream, info);
     }
     #endregion
-
-    /// <summary>
-    /// Used by local player object to decrease the current player's life and reflect to server
-    /// </summary>
-    public void DecrementPlayerLife()
-    {
-        // Decrements the current player life
-        --playerLife;
-
-        if (playerLife <= 0)
-        {
-            // Calls to server if player's life reached threshold
-            CmdPlayerLifeDepleted();
-        }
-        else
-        {
-            // Calls respawn the player
-            TargetRespawn();
-        }
-    }
 
     /// <summary>
     /// Registers the spawn information of the player
