@@ -56,7 +56,7 @@ public class MissileVersion2 : PowerUpBase
         --missileCapacity;
         if (missileCapacity <= 0)
         {
-            PhotonNetwork.Destroy(this.gameObject);
+            UnloadPowerUp();
         }
     }
 

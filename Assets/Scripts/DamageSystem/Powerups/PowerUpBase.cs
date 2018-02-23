@@ -65,4 +65,13 @@ public class PowerUpBase : Photon.MonoBehaviour
         }
         transform.SetParent(target.transform);
     }
+
+    protected virtual void UnloadPowerUp()
+    {
+        PhotonView view = transform.root.gameObject.GetPhotonView();
+        if (view.isMine)
+        {
+            view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
+        }
+    }
 }
