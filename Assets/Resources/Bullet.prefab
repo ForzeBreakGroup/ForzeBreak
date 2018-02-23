@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1261805292484670}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.1308756, y: -2.9645185, z: 2.2015314}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   explosionRadius: 2
   explosionForce: 1000
   existingTime: 3
+  playerNum: 0
 --- !u!114 &114623089129864078
 MonoBehaviour:
   m_ObjectHideFlags: 1

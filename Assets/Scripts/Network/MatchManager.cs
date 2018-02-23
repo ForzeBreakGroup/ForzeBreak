@@ -37,6 +37,10 @@ public class MatchManager : Photon.MonoBehaviour
     private void Init()
     {
         lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
+
+
+
+
     }
 
     private void Awake()
@@ -198,6 +202,10 @@ public class MatchManager : Photon.MonoBehaviour
             NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
             ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
             ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+
+            FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(true);
+            FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
+
 
             GameObject mainCamera = Instantiate(cam);
             mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;

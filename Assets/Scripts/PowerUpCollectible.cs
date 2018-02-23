@@ -9,7 +9,7 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     private bool powerUpCollected = false;
     private float elapsedTime = 0.0f;
     [SerializeField] private float cooldown = 5.0f;
-    [SerializeField] protected string powerupName = "MissileVersion1";
+    public string powerupName = "MissileVersion1";
 
     protected void Awake()
     {
@@ -39,6 +39,8 @@ public class PowerUpCollectible : Photon.MonoBehaviour
                 view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
             }
+
+
 
             powerUpCollected = true;
             elapsedTime = 0;
