@@ -65,10 +65,12 @@ public class MissileMovement : NetworkPowerUpMovement
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 impactPos = transform.position;
-        Debug.Log("Missile Collision");
+        if (collision.transform.root.tag != "PowerUp")
+        {
+            Vector3 impactPos = transform.position;
 
-        PhotonNetwork.Instantiate("Explosion1", impactPos, Quaternion.identity, 0);
-        PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Instantiate("Explosion1", impactPos, Quaternion.identity, 0);
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }

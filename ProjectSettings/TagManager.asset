@@ -8,6 +8,7 @@ TagManager:
   - UI_SpeedBar
   - UI_BoostBar
   - UISoundMaster
+  - PowerUp
   layers:
   - Default
   - TransparentFX

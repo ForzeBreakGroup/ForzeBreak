@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114908199458133950}
   m_Layer: 0
   m_Name: Missile
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1474,7 +1474,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   flyupDuration: 1
-  flyUpEffectOption: 2
   diveSpeed: 10
 --- !u!136 &136618553438118798
 CapsuleCollider:
