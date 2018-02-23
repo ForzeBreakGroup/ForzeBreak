@@ -37,7 +37,8 @@ public class CannonControl : PowerUpBase
         if(Time.time>nextFire)
         {
             nextFire = Time.time + fireRate;
-            PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
+            GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
+            bullet.GetComponent<BulletMovement>().playerNum = playerNum;
         }
     }
 

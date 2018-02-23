@@ -1639,9 +1639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipCD: 0.2
-  upForce_wheelsGrounded: 7500
+  upForce_wheelsGrounded: 5000
   upForce_overturned: 3500
-  sideForce: 0
+  sideForce: 800
 --- !u!146 &146291895851106022
 WheelCollider:
   m_ObjectHideFlags: 1

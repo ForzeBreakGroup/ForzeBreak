@@ -14,7 +14,6 @@ public class FlipControl : MonoBehaviour {
     private bool canFlip = true;
     private bool carBodyGrounded = false;
     private float nextFlip = 0.0f;
-    private float sideTorque = 0.0f;
 
     private void Awake()
     {
@@ -30,30 +29,24 @@ public class FlipControl : MonoBehaviour {
         }
 
 
-        if (!carController.IsAnyWheelGround)
-        {
-            sideTorque = Mathf.Lerp(0, sideForce, 0.7f);
-            carRigidbody.AddRelativeTorque(-Vector3.forward * sideTorque * dir, ForceMode.Acceleration);
-        }
-        else
-        {
-            sideTorque = 0.0f;
-        }
-
         if (flipInput == false)
             return;
 
         if (canFlip)
         {
-            if (carController.IsWheelsGround)
+            if (carController.IsAnyWheelGround)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
 
                 carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.Impulse);
+                if (dir > 0)
+                    carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
+                else
+                    carRigidbody.AddRelativeTorque(Vector3.forward * sideForce, ForceMode.Acceleration);
 
             }
-            else if (transform.up.y < 0 && carBodyGrounded)
+            else if (transform.up.y < 0.2 && carBodyGrounded)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
@@ -69,7 +62,8 @@ public class FlipControl : MonoBehaviour {
         }
 
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionStay(Collision collision)
     {
         carBodyGrounded = true;
     }

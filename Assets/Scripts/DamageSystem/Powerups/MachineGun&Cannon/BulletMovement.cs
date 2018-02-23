@@ -10,6 +10,8 @@ public class BulletMovement : NetworkPowerUpMovement
     public float explosionForce = 1000f;
     public float existingTime = 3f;
 
+    public int playerNum;
+
     private float spawnTime = 0f;
     protected override void Awake()
     {
@@ -32,8 +34,21 @@ public class BulletMovement : NetworkPowerUpMovement
     {
         if (photonView.isMine)
         {
-            PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
-            PhotonNetwork.Destroy(gameObject);
+            if(collision.transform.root.CompareTag("Player"))
+            {
+                if (collision.transform.root.GetComponent<CarUserControl>().playerNum != playerNum)
+                {
+                   
+                    PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
+                    PhotonNetwork.Destroy(gameObject);
+                   
+                }
+            }
+            else
+            {
+                PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 }
