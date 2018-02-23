@@ -16,6 +16,14 @@ public enum CollisionEffect
     FlyOffEffect
 };
 
+public enum DamageThreshold
+{
+    Healthy,
+    LightDamage,
+    Damaged,
+    HeavilyDamage,
+};
+
 public class DamageSystem : NetworkPlayerCollision
 {
     /// <summary>
@@ -106,7 +114,7 @@ public class DamageSystem : NetworkPlayerCollision
             }
             else
             {
-                ApplyExplosionForce(force, contactPoint);
+                ApplyExplosionForce(force, contactPoint, 300.0f);
             }
         }
 
@@ -129,7 +137,7 @@ public class DamageSystem : NetworkPlayerCollision
         }
         else
         {
-            ApplyExplosionForce(force, contactPoint);
+            ApplyExplosionForce(force, contactPoint, 300.0f);
         }
     }
 
@@ -210,16 +218,17 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     /// <param name="impulse">Impulse force from Collision class</param>
     /// <param name="collisionPoint">Impact point from Collision class</param>
-    private void ApplyExplosionForce(float impulse, Vector3 collisionPoint)
+    private void ApplyExplosionForce(float impulse, Vector3 collisionPoint, float radius)
     {
+        Debug.Log(impulse);
         switch (effectMode)
         {
             case CollisionEffect.FlyOffEffect:
-                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.6f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, radius, 0.2f, ForceMode.Impulse);
                 break;
             case CollisionEffect.UpwardEffect:
             default:
-                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, radius, 3.0f, ForceMode.Impulse);
                 break;
         }
     }
@@ -249,10 +258,10 @@ public class DamageSystem : NetworkPlayerCollision
     }
 
     [PunRPC]
-    public void CreateExplosion(float force, Vector3 explosionCenter)
+    public void CreateExplosion(float force, Vector3 explosionCenter, float radius)
     {
-        Debug.Log("Explosion!!");
-        ApplyExplosionForce(force, explosionCenter);
+        IncreaseDamage(30);
+        ApplyExplosionForce(force, explosionCenter, radius);
     }
     #endregion
 }
