@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Path_Finding_Test.unity
     guid: 88ae2def8e689304882ec5361eab0dac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/test_Ring.unity
     guid: 433b0fe6a656d3d4d94bcbade7bdfb28
   - enabled: 1
@@ -29,3 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test_Miguel.unity
     guid: 8e0dfee18a948a342961b1b0121feb20
+  - enabled: 1
+    path: Assets/Scenes/Test_Ring2.unity
+    guid: 13964776d6b8a804c9ef10530ab865af
