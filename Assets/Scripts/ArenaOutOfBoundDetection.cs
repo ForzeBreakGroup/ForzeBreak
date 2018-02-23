@@ -16,9 +16,11 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
         {
             MatchManager.instance.DestroyPlayerObject();
 
+            int playerId = other.transform.root.gameObject.GetPhotonView().ownerId;
+
             RaiseEventOptions options = new RaiseEventOptions();
             options.Receivers = ReceiverGroup.MasterClient;
-            PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, null, true, options);
+            PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, playerId, true, options);
         }
     }
 }

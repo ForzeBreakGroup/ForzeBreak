@@ -48,6 +48,12 @@ public class MatchManager : Photon.MonoBehaviour
         {
             Debug.LogError("Camera Not Attached");
         }
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            playersStillAlive.Add(PhotonNetwork.masterClient, true);
+            playersReady.Add(PhotonNetwork.masterClient, false);
+        }
     }
 
     private void OnEnable()
@@ -83,6 +89,7 @@ public class MatchManager : Photon.MonoBehaviour
 
             if (!playersStillAlive.ContainsKey(newPlayer))
             {
+                Debug.Log("Add player:" + newPlayer);
                 playersStillAlive.Add(newPlayer, true);
             }
         }
@@ -106,8 +113,8 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (evtCode == (byte)ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
         {
-            Debug.Log("Player Death Event Handler");
-            PhotonPlayer sender = PhotonPlayer.Find(senderid);
+            int deathId = (int)content;
+            PhotonPlayer sender = PhotonPlayer.Find(deathId);
             playersStillAlive[sender] = false;
 
             uint aliveCount = 0;
@@ -130,11 +137,17 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void RoundOver()
     {
-        List<PhotonPlayer> keyEntry = new List<PhotonPlayer>(playersReady.Keys);
+        List<PhotonPlayer> readyEntry = new List<PhotonPlayer>(playersReady.Keys);
 
-        foreach(PhotonPlayer player in keyEntry)
+        foreach(PhotonPlayer player in readyEntry)
         {
             playersReady[player] = false;
+        }
+
+        List<PhotonPlayer> aliveEntry = new List<PhotonPlayer>(playersStillAlive.Keys);
+        foreach(PhotonPlayer player in aliveEntry)
+        {
+            playersStillAlive[player] = true;
         }
 
         RaiseEventOptions options = new RaiseEventOptions();
