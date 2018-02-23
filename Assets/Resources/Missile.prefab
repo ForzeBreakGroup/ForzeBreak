@@ -1474,8 +1474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   flyupDuration: 1
-  flyUpEffectOption: 1
-  diveSpeed: 1
+  flyUpEffectOption: 2
+  diveSpeed: 10
 --- !u!136 &136618553438118798
 CapsuleCollider:
   m_ObjectHideFlags: 1

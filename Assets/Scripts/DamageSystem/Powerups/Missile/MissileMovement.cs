@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
-public enum FlyUpEffect
-{
-    StraightUp,
-    HalfWay,
-};
-
 public class MissileMovement : NetworkPowerUpMovement
 {
     public GameObject target;
@@ -17,10 +11,8 @@ public class MissileMovement : NetworkPowerUpMovement
     [SerializeField] private float flyupDuration = 1.0f;
     private Vector3 flyUpDestination;
 
-    [SerializeField] private FlyUpEffect flyUpEffectOption = FlyUpEffect.HalfWay;
-
     [Range(1, 10)]
-    [SerializeField] private float diveSpeed = 1.0f;
+    [SerializeField] private float diveSpeed = 10.0f;
 
     private float elapsedTime = 0.0f;
     private enum MissileMovementState
@@ -38,20 +30,9 @@ public class MissileMovement : NetworkPowerUpMovement
 
     public void Fire()
     {
-        // Calculate the flyUpDestination
-        if (flyUpEffectOption == FlyUpEffect.HalfWay)
-        {
-            flyUpDestination = new Vector3( (target.transform.position.x + transform.position.x) / 2,
-                                            (target.transform.position.y + transform.position.y) / 2,
-                                            (target.transform.position.z + transform.position.z) / 2);
-            flyUpDestination += new Vector3(0, 12, 0);
-        }
-        else if (flyUpEffectOption == FlyUpEffect.StraightUp)
-        {
-            flyUpDestination = transform.position + new Vector3(0, 12, 0);
-        }
-
-        this.transform.LookAt(flyUpDestination);
+        transform.LookAt(target.transform);
+        flyUpDestination = transform.position + transform.forward;
+        state = MissileMovementState.FlyUp;
     }
 
     protected override void Move()
@@ -61,7 +42,8 @@ public class MissileMovement : NetworkPowerUpMovement
         switch (state)
         {
             case MissileMovementState.Diving:
-                transform.LookAt(target.transform);
+                Quaternion q = Quaternion.LookRotation(target.transform.position - transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, q, diveSpeed * Time.deltaTime);
                 rb.AddRelativeForce(Vector3.forward * 50, ForceMode.Force);
                 break;
             case MissileMovementState.FlyUp:
@@ -84,6 +66,7 @@ public class MissileMovement : NetworkPowerUpMovement
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 impactPos = transform.position;
+        Debug.Log("Missile Collision");
 
         PhotonNetwork.Instantiate("Explosion1", impactPos, Quaternion.identity, 0);
         PhotonNetwork.Destroy(gameObject);

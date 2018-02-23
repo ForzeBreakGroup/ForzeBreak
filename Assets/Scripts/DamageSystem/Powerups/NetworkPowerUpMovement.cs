@@ -14,6 +14,7 @@ public class NetworkPowerUpMovement : Photon.MonoBehaviour
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        //StartCoroutine(DestroyCoroutine());
     }
 
     protected virtual void FixedUpdate()
@@ -69,5 +70,11 @@ public class NetworkPowerUpMovement : Photon.MonoBehaviour
 
             lastReceivedTime = (float)info.timestamp;
         }
+    }
+
+    IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(10);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }
