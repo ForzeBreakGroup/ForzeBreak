@@ -7,8 +7,8 @@ public class FlipControl : MonoBehaviour {
     private Rigidbody carRigidbody;
     private CarControlWheels carController;
     [SerializeField] private float flipCD = 0.2f;
-    [SerializeField] private float upForce_wheelsGrounded = 7500f;
-    [SerializeField] private float upForce_overturned = 3500f;
+    [SerializeField] private float upForce_wheelsGrounded = 5f;
+    [SerializeField] private float upForce_overturned = 5f;
     [SerializeField] private float sideForce = 1000f;
     
     private bool canFlip = true;
@@ -39,7 +39,7 @@ public class FlipControl : MonoBehaviour {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
 
-                carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.Impulse);
+                carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.VelocityChange);
                 if (dir > 0)
                     carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
                 else
@@ -51,7 +51,7 @@ public class FlipControl : MonoBehaviour {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
 
-                carRigidbody.AddForce(Vector3.up * upForce_overturned, ForceMode.Impulse);
+                carRigidbody.AddForce(Vector3.up * upForce_overturned, ForceMode.VelocityChange);
                 if (dir > 0)
                     carRigidbody.AddRelativeTorque(-Vector3.forward * 1000f, ForceMode.Acceleration);
                 else

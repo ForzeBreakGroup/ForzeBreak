@@ -1537,6 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d3b9a03f2009246a0772ce66729093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localCam: {fileID: 0}
   playerLife: 3
 --- !u!114 &114598554706095042
 MonoBehaviour:
@@ -1549,7 +1550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e7da0a228014f95a6d6763c0a135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carDriveType: 2
   wheelMeshes:
   - {fileID: 1988383934019452}
   - {fileID: 1507417170287838}
@@ -1562,17 +1562,11 @@ MonoBehaviour:
   - {fileID: 1210579190752744}
   centreOfMassOffset: {x: 0, y: 0, z: 0}
   maximumSteerAngle: 35
-  steerHelper: 0.5
-  tractionControl: 1
-  fullTorqueOverAllWheels: 4000
-  reverseTorque: 2800
-  maxHandbrakeTorque: 100000000
+  steerHelper: 0.7
+  fullTorqueOverAllWheels: 30
+  reverseTorque: 20
   downforce: 100
-  speedType: 0
   topspeed: 30
-  revRangeBoundary: 1
-  slipLimit: 0.2
-  brakeTorque: 100000000
 --- !u!114 &114710704862589420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1588,7 +1582,7 @@ MonoBehaviour:
   energy: 100
   boostMaxSpeed: 50
   energyDecay: 0.5
-  energyRecover: 1
+  energyRecover: 0.001
   maxEnergy: 100
 --- !u!114 &114712495376854006
 MonoBehaviour:
@@ -1639,9 +1633,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipCD: 0.2
-  upForce_wheelsGrounded: 5000
-  upForce_overturned: 3500
-  sideForce: 800
+  upForce_wheelsGrounded: 6
+  upForce_overturned: 3
+  sideForce: 1000
 --- !u!146 &146291895851106022
 WheelCollider:
   m_ObjectHideFlags: 1
@@ -1654,7 +1648,7 @@ WheelCollider:
     spring: 70000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.15
+  m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -1683,7 +1677,7 @@ WheelCollider:
     spring: 70000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.15
+  m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -1712,7 +1706,7 @@ WheelCollider:
     spring: 70000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.15
+  m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -1741,7 +1735,7 @@ WheelCollider:
     spring: 70000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.15
+  m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
