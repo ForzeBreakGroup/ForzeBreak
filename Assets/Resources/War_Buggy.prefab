@@ -1582,7 +1582,7 @@ MonoBehaviour:
   energy: 100
   boostMaxSpeed: 50
   energyDecay: 0.5
-  energyRecover: 0.001
+  energyRecover: 0.05
   maxEnergy: 100
 --- !u!114 &114712495376854006
 MonoBehaviour:

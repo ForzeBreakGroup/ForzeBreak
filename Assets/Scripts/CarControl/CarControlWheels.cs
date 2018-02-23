@@ -73,7 +73,6 @@ public class CarControlWheels : NetworkPlayerMovement
     public void Move(float steering, float accel, float footbrake, float handbrake)
     {
 
-        Debug.Log(carRigidbody.velocity.magnitude);
         IsWheelsGround = true;
         IsAnyWheelGround = false;
         for (int i = 0; i < 4; i++)
