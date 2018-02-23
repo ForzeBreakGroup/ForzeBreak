@@ -29,6 +29,11 @@ public class UIWeaponIconControl : MonoBehaviour {
         {
             displayedIcon.sprite = resources[2];
         }
+
+        else if(name == "")
+        {
+            displayedIcon.sprite = resources[0];
+        }
     }
     
 }

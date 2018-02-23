@@ -12,8 +12,11 @@ public class NetworkPlayerVisual : NetworkPlayerBase
 {
     protected GameObject currentEquipped;
 
+    private Transform canvas;
+
     private void Awake()
     {
+        canvas = GameObject.Find("Canvas").transform;
         if (!photonView.isMine)
         {
             InitializeVehicleWithPlayerColor();
@@ -51,6 +54,10 @@ public class NetworkPlayerVisual : NetworkPlayerBase
 
             currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
             ((PowerUpBase)currentEquipped.GetComponent(typeof(PowerUpBase))).AdjustModel();
+
+            canvas.Find("WeaponIcon").GetComponent<UIWeaponIconControl>().changeIcon(powerupName);
+
+
         }
     }
 
@@ -61,6 +68,8 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         {
             if (currentEquipped != null)
             {
+                canvas.Find("WeaponIcon").GetComponent<UIWeaponIconControl>().changeIcon("");
+
                 PhotonNetwork.Destroy(currentEquipped);
                 currentEquipped = null;
             }

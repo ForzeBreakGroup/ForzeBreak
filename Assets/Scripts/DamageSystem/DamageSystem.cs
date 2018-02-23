@@ -43,7 +43,7 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     [Range(DamageSystemConstants.baseDamagePercentage, DamageSystemConstants.maxDamagePercentage)]
     [SerializeField]
-    private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
+    public float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
 
     /// <summary>
     /// Allowance angle to determine the vehicle is collider or receiver
