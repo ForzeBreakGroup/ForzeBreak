@@ -211,6 +211,7 @@ public class MatchManager : Photon.MonoBehaviour
 
             FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(true);
             FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
+            FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(true);
 
 
             GameObject mainCamera = Instantiate(cam);

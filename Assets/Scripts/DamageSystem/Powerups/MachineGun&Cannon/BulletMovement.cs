@@ -34,20 +34,12 @@ public class BulletMovement : NetworkPowerUpMovement
     {
         if (photonView.isMine)
         {
-            if(collision.transform.root.CompareTag("Player"))
+            if (collision.gameObject != gameObject)
             {
-                if (collision.transform.root.GetComponent<CarUserControl>().playerNum != playerNum)
-                {
-                   
-                    PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
-                    PhotonNetwork.Destroy(gameObject);
-                   
-                }
-            }
-            else
-            {
+
                 PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
                 PhotonNetwork.Destroy(gameObject);
+
             }
         }
     }
