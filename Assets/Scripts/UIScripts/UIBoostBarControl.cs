@@ -11,7 +11,7 @@ public class UIBoostBarControl : MonoBehaviour {
     BoostControl bc;
 
     // Use this for initialization
-    void Awake()
+    void OnEnable()
     {
         progressBar = transform.Find("ProgressBar").gameObject.GetComponent<Image>();
         percentage = transform.Find("Text").gameObject.GetComponent<Text>();

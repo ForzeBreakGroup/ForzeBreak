@@ -12,12 +12,10 @@ public class UIWeaponIconControl : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake()    
+    private void OnEnable()
     {
         displayedIcon = GetComponent<Image>();
-
     }
-    
 
     public void changeIcon(string name)
     {

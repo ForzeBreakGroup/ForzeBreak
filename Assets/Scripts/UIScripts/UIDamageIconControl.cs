@@ -13,7 +13,8 @@ public class UIDamageIconControl : MonoBehaviour {
 
     private DamageSystem damageSystem;
     // Use this for initialization
-    void Awake()
+
+    private void OnEnable()
     {
         displayedIcon = GetComponent<Image>();
 

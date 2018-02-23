@@ -213,7 +213,6 @@ public class MatchManager : Photon.MonoBehaviour
             FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
             FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(true);
 
-
             GameObject mainCamera = Instantiate(cam);
             mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
             NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
@@ -288,6 +287,9 @@ public class MatchManager : Photon.MonoBehaviour
             numOfLocalPlayers = num;
         }
         lobbyUI.SetActive(true);
+        FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(false);
+        FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(false);
+        FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(false);
         lobbyUI.GetComponent<LobbyUI>().DisplayWinner(winnerID);
     }
 
