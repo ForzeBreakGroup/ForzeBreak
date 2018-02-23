@@ -261,11 +261,7 @@ public class NetworkManager : PunBehaviour
     /// <param name="sceneMode"></param>
     private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if (offlineMode)
-        {
-            MatchManager.instance.SpawnLocalPlayers(playerPrefabName, numberOfLocalPlayers);
-        }
-        MatchManager.instance.TransitionToLobby();
+        MatchManager.instance.TransitionToLobby(playerPrefabName, numberOfLocalPlayers);
     }
 
     /// <summary>

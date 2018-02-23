@@ -11,6 +11,8 @@ public class MatchManager : Photon.MonoBehaviour
     private static MatchManager matchManager;
     private Dictionary<PhotonPlayer, bool> playersReady;
     private GameObject lobbyUI;
+    private string playerPrefabName = "War_Buggy";
+    private int numOfLocalPlayers = 0;
     public static MatchManager instance
     {
         get
@@ -57,6 +59,8 @@ public class MatchManager : Photon.MonoBehaviour
         PhotonNetwork.OnEventCall += EvtPlayerReadyHandler;
         PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
         PhotonNetwork.OnEventCall += EvtRoundOverHandler;
+
+        EventManager.StartListening("OnPlayerReady", EvtPlayerReadyHandler);
     }
 
     private void OnDisable()
@@ -163,6 +167,11 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
+    private void EvtPlayerReadyHandler()
+    {
+        SpawnLocalPlayers(playerPrefabName, numOfLocalPlayers); 
+    }
+
     private void EvtSpawnPlayerHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
@@ -192,7 +201,7 @@ public class MatchManager : Photon.MonoBehaviour
         if (evtCode == (byte) ENetworkEventCode.OnRoundOver)
         {
             DestroyPlayerObject();
-            MatchManager.instance.TransitionToLobby();
+            MatchManager.instance.TransitionToLobby(playerPrefabName, numOfLocalPlayers);
         }
     }
     #endregion
@@ -201,6 +210,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
     {
+        lobbyUI.SetActive(false);
         // Loop every number of player necessary to create object
         for (int i = 0; i < numberOfPlayers; ++i)
         {
@@ -238,12 +248,16 @@ public class MatchManager : Photon.MonoBehaviour
             }
             car.GetComponent<NetworkPlayerVisual>().InitializeVehicleWithPlayerColor();
         }
-        EventManager.TriggerEvent("AddPlayerToMatch");
     }
     #endregion
 
-    public void TransitionToLobby()
+    public void TransitionToLobby(string name, int num)
     {
+        if (NetworkManager.offlineMode)
+        {
+            playerPrefabName = name;
+            numOfLocalPlayers = num;
+        }
         lobbyUI.SetActive(true);
     }
 
