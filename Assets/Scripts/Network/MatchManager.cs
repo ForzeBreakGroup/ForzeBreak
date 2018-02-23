@@ -122,24 +122,30 @@ public class MatchManager : Photon.MonoBehaviour
             playersStillAlive[sender] = false;
 
             uint aliveCount = 0;
-            PhotonPlayer surviver;
+            PhotonPlayer survivor = null;
             foreach(KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
             {
                 if (entry.Value)
                 {
                     ++aliveCount;
-                    surviver = entry.Key;
+                    survivor = entry.Key;
                 }
             }
 
             if (aliveCount <= 1)
             {
-                RoundOver();
+                int winner = -1;
+                if (survivor != null)
+                {
+                    winner = survivor.ID;
+                }
+
+                RoundOver(winner);
             }
         }
     }
 
-    private void RoundOver()
+    private void RoundOver(int winnerID)
     {
         List<PhotonPlayer> readyEntry = new List<PhotonPlayer>(playersReady.Keys);
 
@@ -156,7 +162,7 @@ public class MatchManager : Photon.MonoBehaviour
 
         RaiseEventOptions options = new RaiseEventOptions();
         options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, null, true, options);
+        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, winnerID, true, options);
     }
 
     private void EvtPlayerReadyHandler(byte evtCode, object content, int senderid)
@@ -221,8 +227,9 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (evtCode == (byte) ENetworkEventCode.OnRoundOver)
         {
+            int winnerId = (int)content;
             DestroyPlayerObject();
-            MatchManager.instance.TransitionToLobby(playerPrefabName, numOfLocalPlayers);
+            MatchManager.instance.TransitionToLobby(playerPrefabName, numOfLocalPlayers, winnerId);
         }
     }
     #endregion
@@ -272,7 +279,7 @@ public class MatchManager : Photon.MonoBehaviour
     }
     #endregion
 
-    public void TransitionToLobby(string name, int num)
+    public void TransitionToLobby(string name, int num, int winnerID = -2)
     {
         if (NetworkManager.offlineMode)
         {
@@ -280,6 +287,7 @@ public class MatchManager : Photon.MonoBehaviour
             numOfLocalPlayers = num;
         }
         lobbyUI.SetActive(true);
+        lobbyUI.GetComponent<LobbyUI>().DisplayWinner(winnerID);
     }
 
     public void DestroyPlayerObject()

@@ -12,12 +12,14 @@ public class LobbyUI : Photon.MonoBehaviour
     Text readyText;
     Text notReadyText;
     Text playerConn;
+    Text winnerText;
 
     private void Awake()
     {
         readyText = transform.Find("ReadyText").GetComponent<Text>();
         notReadyText = transform.Find("NotReadyText").GetComponent<Text>();
         playerConn = transform.Find("PlayerConn").GetComponent<Text>();
+        winnerText = transform.Find("WinnerText").GetComponent<Text>();
 
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
@@ -80,6 +82,31 @@ public class LobbyUI : Photon.MonoBehaviour
         if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch)
         {
             NetworkDisplay();
+        }
+    }
+
+    public void DisplayWinner(int winnerID)
+    {
+        if (winnerID == -2)
+        {
+            winnerText.text = "Get READY for FrozeBreak!";
+        }
+
+        else if (winnerID == -1)
+        {
+            winnerText.text = "Close Game! It was a tie";
+        }
+
+        else
+        {
+            if ((winnerID - 1) == (int)PhotonNetwork.player.CustomProperties["PlayerNumber"])
+            {
+                winnerText.text = "Victory!";
+            }
+            else
+            {
+                winnerText.text = string.Format("Winner is Player {0}", winnerID);
+            }
         }
     }
 
