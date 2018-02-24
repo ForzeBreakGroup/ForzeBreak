@@ -15,6 +15,7 @@ public class UIWeaponIconControl : MonoBehaviour {
     private void OnEnable()
     {
         displayedIcon = GetComponent<Image>();
+        changeIcon("");
     }
 
     public void changeIcon(string name)
