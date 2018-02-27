@@ -37,10 +37,6 @@ public class MatchManager : Photon.MonoBehaviour
     private void Init()
     {
         lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
-
-
-
-
     }
 
     private void Awake()

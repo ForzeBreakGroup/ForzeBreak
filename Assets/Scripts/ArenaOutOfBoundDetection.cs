@@ -12,9 +12,10 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.tag == "Player" && PhotonNetwork.isMasterClient)
+        PhotonView view = other.transform.root.gameObject.GetPhotonView();
+        if (other.transform.root.tag == "Player" && view.isMine)
         {
-            int playerId = other.transform.root.gameObject.GetPhotonView().ownerId;
+            int playerId = view.ownerId;
             MatchManager.instance.DestroyPlayerObject();
 
             RaiseEventOptions options = new RaiseEventOptions();
