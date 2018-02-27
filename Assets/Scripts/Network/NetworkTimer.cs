@@ -62,7 +62,8 @@ public class NetworkTimer : Photon.MonoBehaviour
             {
                 RaiseEventOptions options = new RaiseEventOptions();
                 options.Receivers = ReceiverGroup.All;
-                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, null, true, options);
+                int drawId = -1;
+                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, drawId , true, options);
             }
         }
     }
