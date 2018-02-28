@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Stadium_Floor 1
+  m_Name: StadiumFloor_Neon_Blue_Cropped
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
@@ -19,11 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 7f365bdc31bfbc7428cf163e4ae6ecc2, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Cube:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 888030eac573d584e949ef3e81613098, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -43,14 +39,10 @@ Material:
         m_Scale: {x: 10, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 34d2c6aca308f1c45a83599d585448a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: c7805d6a6de75454db746ce15f748176, type: 3}
         m_Scale: {x: 10, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MotionTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -59,10 +51,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -76,10 +64,8 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 1
     - _Mode: 0
-    - _MotionAmount: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -88,5 +74,3 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
