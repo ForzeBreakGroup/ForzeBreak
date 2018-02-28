@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionForce: 4000
+  ExplosionRadius: 30
 --- !u!114 &114895396954934584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb182cd135790c040b57131dfd0c3494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyDelay: 0.5
+  destroyDelay: 0.25
 --- !u!135 &135237702460626054
 SphereCollider:
   m_ObjectHideFlags: 1
