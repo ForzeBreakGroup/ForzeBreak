@@ -9,10 +9,14 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     private bool powerUpCollected = false;
     private float elapsedTime = 0.0f;
     [SerializeField] private float cooldown = 5.0f;
-    public string powerupName = "MissileVersion1";
+    public PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
+    private PowerUpGrade powerUpGrade;
+
+    //public string powerupName = "MissileVersion1";
 
     protected void Awake()
     {
+        powerUpGrade = new PowerUpGrade();
         rend = GetComponent<Renderer>();
     }
 
@@ -36,6 +40,7 @@ public class PowerUpCollectible : Photon.MonoBehaviour
             PhotonView view = other.transform.root.gameObject.GetPhotonView();
             if (view.isMine)
             {
+                string powerupName = powerUpGrade.GetRandomPowerUp(powerUpTier);
                 view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
             }

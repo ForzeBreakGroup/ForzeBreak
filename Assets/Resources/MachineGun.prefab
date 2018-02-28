@@ -1851,4 +1851,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  componentOffset: {x: 0, y: 2.43, z: -1.54}
   fireRate: 0.5

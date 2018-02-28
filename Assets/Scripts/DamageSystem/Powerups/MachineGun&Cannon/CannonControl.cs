@@ -28,7 +28,7 @@ public class CannonControl : PowerUpBase
         }
 
         // Move the weapon model to desired places
-        transform.localPosition = new Vector3(0, 2.43f, -1.54f);
+        transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.identity;
     }
 

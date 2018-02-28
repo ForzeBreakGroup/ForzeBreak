@@ -14,6 +14,7 @@ public class PowerUpBase : Photon.MonoBehaviour
 {
     public int playerNum = 0;
     protected ReticleSystem[] reticleTargets;
+    [SerializeField] protected Vector3 componentOffset;
 
     public virtual void AdjustModel()
     {

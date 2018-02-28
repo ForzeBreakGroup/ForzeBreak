@@ -14356,6 +14356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  componentOffset: {x: -2.057, y: 1.417, z: 1.044}
   missileCapacity: 4
 --- !u!114 &114802764856179886
 MonoBehaviour:

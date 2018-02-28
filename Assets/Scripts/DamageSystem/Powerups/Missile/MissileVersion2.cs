@@ -38,7 +38,7 @@ public class MissileVersion2 : PowerUpBase
         }
 
         // Move the weapon model to desired places
-        transform.localPosition = new Vector3(-2.057f, 1.417f, 1.044f);
+        transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.identity;
     }
 
