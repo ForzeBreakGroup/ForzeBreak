@@ -22,5 +22,6 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
             options.Receivers = ReceiverGroup.MasterClient;
             PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, playerId, true, options);
         }
+
     }
 }

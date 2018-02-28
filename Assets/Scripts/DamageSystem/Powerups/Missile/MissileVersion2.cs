@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MissileVersion2 : PowerUpBase
 {
@@ -10,6 +11,8 @@ public class MissileVersion2 : PowerUpBase
     private List<ReticleSystem> lockOnSystem;
 
     private Transform launchLocation;
+
+    private bool fired = false;
 
     private void Awake()
     {
@@ -48,8 +51,16 @@ public class MissileVersion2 : PowerUpBase
             if (ret.targetInSight)
             {
                 // Fire a missile
+                ret.DisplayReticleUI(false);
                 FireMissileTowardsTarget(ret.target);
+                break;
             }
+        }
+
+        // If no targets were found, display missile no target animation
+        if (!fired)
+        {
+            lockOnSystem[0].DisplayReticleUI(true);
         }
 
         // If all missiles fired, destroy the launcher
@@ -58,6 +69,9 @@ public class MissileVersion2 : PowerUpBase
         {
             UnloadPowerUp();
         }
+
+        // Reset missile fire state
+        fired = false;
     }
 
     private void FireMissileTowardsTarget(GameObject lockOnTarget)
@@ -65,5 +79,6 @@ public class MissileVersion2 : PowerUpBase
         GameObject missile = PhotonNetwork.Instantiate("Missile", launchLocation.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
         missile.GetComponent<MissileMovement>().Fire();
+        fired = true;
     }
 }
