@@ -13,8 +13,8 @@ public class PowerUpGrade
 
     private string[] commonPowerUp =
     {
-        //"MissileVersion2",
-        //"MachineGun",
+        "MissileVersion2",
+        "MachineGun",
         "SpikeRam"
     };
 

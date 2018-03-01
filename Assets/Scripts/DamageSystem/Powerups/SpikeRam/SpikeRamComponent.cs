@@ -23,7 +23,7 @@ public class SpikeRamComponent : PowerUpBase
     private void OnSpikeRamCollision(Collision collision)
     {
         PhotonView otherPhotonView = collision.transform.root.gameObject.GetPhotonView();
-        if (collision.transform.root.tag == "Player" && otherPhotonView.isMine)
+        if (collision.transform.root.tag == "Player")
         {
             otherPhotonView.RPC("CreateExplosion", PhotonPlayer.Find(otherPhotonView.viewID), (float)damage, transform.position, 30.0f);
             --capacity;
