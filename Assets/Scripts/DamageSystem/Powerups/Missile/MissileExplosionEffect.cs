@@ -10,11 +10,12 @@ public class MissileExplosionEffect : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
-        if (other.transform.root.tag == "Player" && otherPhotonView.isMine)
+        //PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
+        if (other.transform.root.tag == "Player")
         {
             Vector3 impactCenter = transform.position;
-            otherPhotonView.RPC("CreateExplosion", PhotonPlayer.Find(otherPhotonView.viewID), ExplosionForce, transform.position, ExplosionRadius);
+            other.transform.root.GetComponent<DamageSystem>().CreateExplosion(ExplosionForce, transform.position, ExplosionRadius);
+            //otherPhotonView.RPC("CreateExplosion", PhotonPlayer.Find(otherPhotonView.viewID), ExplosionForce, transform.position, ExplosionRadius);
         }
     }
 }

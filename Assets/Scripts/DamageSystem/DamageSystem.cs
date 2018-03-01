@@ -260,9 +260,12 @@ public class DamageSystem : NetworkPlayerCollision
     [PunRPC]
     public void CreateExplosion(float force, Vector3 explosionCenter, float radius)
     {
-        Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
-        IncreaseDamage(30);
-        ApplyExplosionForce(force, explosionCenter, radius);
+        if (gameObject.GetPhotonView().isMine)
+        {
+            Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
+            IncreaseDamage(30);
+            ApplyExplosionForce(force, explosionCenter, radius);
+        }
     }
     #endregion
 }
