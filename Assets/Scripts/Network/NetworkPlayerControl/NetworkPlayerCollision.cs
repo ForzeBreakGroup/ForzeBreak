@@ -27,6 +27,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         Receiver
     };
 
+    /*
     /// <summary>
     /// Unity lifehook event when Collision happens
     /// The server-side has the authority over when the collision happens, as well as the analysis result
@@ -34,19 +35,20 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        // Host side collision check
-        if (collision.transform.root.tag == "Player" && PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("OnCollisionEvent Triggered by Player: " + photonView.viewID);
+    // Host side collision check
+    if (collision.transform.root.tag == "Player" && PhotonNetwork.isMasterClient)
+    {
+        Debug.Log("OnCollisionEvent Triggered by Player: " + photonView.viewID);
 
-            float force;
-            Vector3 point;
-            PlayerCollisionResult collisionResult = CollisionEvent(collision, out force, out point);
+        float force;
+        Vector3 point;
+        PlayerCollisionResult collisionResult = CollisionEvent(collision, out force, out point);
 
-            // Calling PhotonRPC to individual player
-            photonView.RPC("NetworkCollision", PhotonPlayer.Find(gameObject.GetPhotonView().ownerId), collisionResult, force, point);
-        }
+        // Calling PhotonRPC to individual player
+        photonView.RPC("NetworkCollision", PhotonPlayer.Find(gameObject.GetPhotonView().ownerId), collisionResult, force, point);
     }
+}
+    */
 
     /// <summary>
     /// Callback function that child class must override, this dictates the reaction of collision

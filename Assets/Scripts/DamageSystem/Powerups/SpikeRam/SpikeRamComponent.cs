@@ -15,16 +15,29 @@ public class SpikeRamComponent : PowerUpBase
     {
         transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.identity;
+
+        // Attach ram spike collision script to the parent object
+        transform.root.gameObject.AddComponent<SpikeRamCollision>().callbackFunc = OnSpikeRamCollision;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnSpikeRamCollision(Collision collision)
     {
-        PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
-        if (other.transform.root.tag == "Player")
+        PhotonView otherPhotonView = collision.transform.root.gameObject.GetPhotonView();
+        if (collision.transform.root.tag == "Player" && otherPhotonView.isMine)
         {
-            Debug.Log("Spike RAM!");
             otherPhotonView.RPC("CreateExplosion", PhotonPlayer.Find(otherPhotonView.viewID), (float)damage, transform.position, 30.0f);
             --capacity;
+
+            if (capacity <= 0)
+            {
+                UnloadPowerUp();
+            }
         }
+    }
+
+    protected override void UnloadPowerUp()
+    {
+        base.UnloadPowerUp();
+        Destroy(transform.root.gameObject.GetComponent<SpikeRamCollision>());
     }
 }
