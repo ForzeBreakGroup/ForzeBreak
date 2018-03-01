@@ -24,7 +24,7 @@ public class BoostControl : MonoBehaviour {
 
     public void Boost()
     {
-        if (carController.IsWheelsGround&&energy>0)
+        if (energy>0)
         {
             carController.IsBoosting = true;
             carController.MaxSpeed = boostMaxSpeed;
