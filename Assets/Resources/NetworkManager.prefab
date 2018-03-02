@@ -51,7 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2d61fe1fa89234abbffe9cb1ac58d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocalTesting: 0
   gameVersion: 0.1.0
   playerPrefabName: Tank_Wheel
   onlineSceneName: Online
+  numberOfLocalPlayers: 1
+  playerColors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
