@@ -30,12 +30,14 @@ public class PowerUpSpawn : Photon.MonoBehaviour
 
     private void OnEnable()
     {
-        PhotonNetwork.OnEventCall += OnPowerUpCollected;
+        PhotonNetwork.OnEventCall += OnPowerUpCollectedHandler;
+        PhotonNetwork.OnEventCall += OnRoundOverHandler;
     }
 
     private void OnDisable()
     {
-        PhotonNetwork.OnEventCall -= OnPowerUpCollected;
+        PhotonNetwork.OnEventCall -= OnPowerUpCollectedHandler;
+        PhotonNetwork.OnEventCall -= OnRoundOverHandler;
     }
 
     private void SpawnCollectible()
@@ -64,18 +66,23 @@ public class PowerUpSpawn : Photon.MonoBehaviour
         }
     }
 
-    [PunRPC]
-    private void OnPowerUpCollected(byte evtCode, object content, int senderid)
+    private void OnRoundOverHandler(byte evtCode, object content, int senderid)
+    {
+        if (evtCode == (byte)ENetworkEventCode.OnRoundOver)
+        {
+            elapsedTime = cooldown;
+            inCooldown = true;
+        }
+    }
+
+    private void OnPowerUpCollectedHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnPowerUpCollected && collectible != null)
         {
-            Debug.Log("OnPowerUpCollected");
             Vector3 powerUpPos = (Vector3)content;
 
             if (powerUpPos == transform.position)
             {
-                Debug.Log("Power Up has been collected");
-                Debug.Log(collectible);
                 PhotonNetwork.Destroy(collectible);
                 elapsedTime = 0;
                 inCooldown = true;
