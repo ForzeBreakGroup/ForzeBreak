@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114635107220701660}
   - component: {fileID: 114785823919358282}
   m_Layer: 0
-  m_Name: PowerUpCollectible Health
+  m_Name: PowerUpCollectible Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
