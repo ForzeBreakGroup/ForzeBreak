@@ -9,6 +9,7 @@ TagManager:
   - UI_BoostBar
   - UISoundMaster
   - PowerUp
+  - PowerUpSpawn
   layers:
   - Default
   - TransparentFX

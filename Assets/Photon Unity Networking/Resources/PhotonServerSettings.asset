@@ -47,4 +47,5 @@ MonoBehaviour:
   - SetParent
   - TaggedPlayer
   - RemovePowerUpComponent
+  - OnPowerUpCollected
   DisableAutoOpenWizard: 1

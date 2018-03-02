@@ -5,8 +5,7 @@ using Photon;
 
 public class PowerUpCollectible : Photon.MonoBehaviour
 {
-    private Renderer rend;
-    private bool powerUpCollected = false;
+    public bool powerUpCollected = false;
     private float elapsedTime = 0.0f;
     [SerializeField] private float cooldown = 5.0f;
     public PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
@@ -17,20 +16,6 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     protected void Awake()
     {
         powerUpGrade = new PowerUpGrade();
-        rend = GetComponent<Renderer>();
-    }
-
-    protected void Update()
-    {
-        if(powerUpCollected)
-        {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime >= cooldown)
-            {
-                powerUpCollected = false;
-                EnablingPowerup(!powerUpCollected);
-            }
-        }
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -45,15 +30,22 @@ public class PowerUpCollectible : Photon.MonoBehaviour
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
             }
 
+            RaiseEventOptions options = new RaiseEventOptions();
+            options.Receivers = ReceiverGroup.MasterClient;
+
+            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPowerUpCollected, transform.position, true, options);
+
+            // Hide in remote client side to create illusion of powerup has been collected immediately, otherwise, it will have delay to wait for masterclient to destroy the object
+            foreach(Transform t in transform)
+            {
+                Renderer rend = t.GetComponent<Renderer>();
+                if (rend)
+                {
+                    rend.enabled = false;
+                }
+            }
+            transform.GetComponent<Renderer>().enabled = false;
             powerUpCollected = true;
-            elapsedTime = 0;
-
-            EnablingPowerup(!powerUpCollected);
         }
-    }
-
-    private void EnablingPowerup(bool enable)
-    {
-        rend.enabled = enable;
     }
 }

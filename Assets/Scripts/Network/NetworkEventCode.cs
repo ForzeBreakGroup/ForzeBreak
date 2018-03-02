@@ -41,6 +41,11 @@ public enum ENetworkEventCode : byte
     OnRoundOver = (byte)0x05,
 
     /// <summary>
+    /// Event raised by remote client when they picked up a powerup
+    /// </summary>
+    OnPowerUpCollected = (byte)0x06,
+
+    /// <summary>
     /// Event raised by individual client when a client died
     /// </summary>
     OnPlayerDeath = (byte)0x12,
