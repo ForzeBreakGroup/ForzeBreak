@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ExampleWorld
+  m_Shader: {fileID: 4800000, guid: 850f01441d3ab914cb5b6a27f7fbe67e, type: 3}
+  m_ShaderKeywords: IS_CLIP_ENABLED _EMISSION _NORMALMODE_ON _TOGGLESWITCH1_ON _USEWORLDPOS_ON
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BurnDistributionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BurnTexture:
+        m_Texture: {fileID: 2800000, guid: bea7fa376f932ba419f3d1fc95bd1a2b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissTexture:
+        m_Texture: {fileID: 2800000, guid: 2a4eaa9a53dd3404cb0f2358f556b578, type: 3}
+        m_Scale: {x: 40, y: 40}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveTexture:
+        m_Texture: {fileID: 2800000, guid: c72a4cfc6aff9594bbf78865caa0e621, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emis:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlowDistributionTex:
+        m_Texture: {fileID: 2800000, guid: 7a14a4758e8fd2546a4e74106290ddc3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ASEOutlineWidth: 6.91
+    - _BumpScale: 1
+    - _BurnDistance: 0.029
+    - _BurnDistribution: 0.921
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 1
+    - _Dissolve: 0.606
+    - _DissolveDistance: 0.87
+    - _Distance: 0
+    - _DistanceInWorld: 1
+    - _Distribution: 0.1
+    - _DstBlend: 0
+    - _EmissionInterpolation: 1.07
+    - _Float0: 0.3
+    - _Float1: 1
+    - _Float2: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 1
+    - _GlossyReflections: 1
+    - _GlowBurnTex: 2
+    - _GlowDistance: 0.067
+    - _GlowDistribution: 0.679
+    - _Interpolation: 0.94
+    - _Metallic: 1
+    - _MirrorMode: 0
+    - _Mode: 0
+    - _NormalMode: 1
+    - _OcclusionStrength: 1
+    - _Outline: 0
+    - _Parallax: 0.02
+    - _ScaleBurnTex: 1
+    - _ScaleDissolveTex: 11.8
+    - _ScaleGlowTex: 2
+    - _ScrollXSpeed: 0.5
+    - _ScrollYSpeed: 0.5
+    - _Smo: 1
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StartPoint: 1.58
+    - _ToggleSwitch0: 0
+    - _ToggleSwitch1: 1
+    - _TransAmbient: 0.47
+    - _TransDirect: 0.106
+    - _TransNormalDistortion: 0.553
+    - _TransScattering: 27.4
+    - _TransShadow: 0.652
+    - _Translucency: 34.1
+    - _UVSec: 0
+    - _UseWorldPos: 1
+    - _ZWrite: 1
+    - __dirty: 0
+    - _isClipEnabled: 1
+    - _isInvert: 0
+    m_Colors:
+    - _ASEOutlineColor: {r: 1, g: 0.35294116, b: 0.47342792, a: 0}
+    - _AlbedoColor: {r: 0.20588237, g: 0.20588237, b: 0.20588237, a: 0}
+    - _BurnColor: {r: 1.2505293, g: 1.6324644, b: 3.0370002, a: 1}
+    - _BurnDistributionColor: {r: 0.41911763, g: 0, b: 0, a: 1}
+    - _BurnSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _Center: {r: -4.04, g: 1.53, b: -1.51, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
+    - _DissolveColor: {r: 1.2830768, g: 0.6657655, b: 1.9264706, a: 1}
+    - _DissolveSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GlowDistributionColor: {r: 0, g: 0.44482756, b: 1.5, a: 1}
+    - _GlowSpeed: {r: 0.19, g: 0, b: 0, a: 0}
+    - _MetallicColor: {r: 1, g: 1, b: 1, a: 0}
+    - _OutlineColor: {r: 0, g: 1, b: 0, a: 1}
+    - _Speed: {r: 0.06, g: -0.2, b: -12.13, a: 0}
+    - _StartPoint1: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}
+    - _WorldPos: {r: -3.58, g: 0.71, b: 0, a: 0}
