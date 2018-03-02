@@ -5,6 +5,9 @@ using Photon;
 
 public class PowerUpCollectible : Photon.MonoBehaviour
 {
+    public bool randomMode = true;
+    public string powerupName;
+
     public bool powerUpCollected = false;
     private float elapsedTime = 0.0f;
     [SerializeField] private float cooldown = 5.0f;
@@ -23,7 +26,10 @@ public class PowerUpCollectible : Photon.MonoBehaviour
             PhotonView view = other.transform.root.gameObject.GetPhotonView();
             if (view.isMine)
             {
-                string powerupName = powerUpGrade.GetRandomPowerUp(powerUpTier);
+                if(randomMode)
+                {
+                    powerupName = powerUpGrade.GetRandomPowerUp(powerUpTier);
+                }
                 view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
             }
