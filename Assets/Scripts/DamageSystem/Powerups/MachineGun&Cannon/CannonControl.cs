@@ -6,6 +6,8 @@ public class CannonControl : PowerUpBase
 {
 
     public float fireRate = 0.5f;
+    public int ammo = 10;
+
     private Transform bulletSpawn;
     private float nextFire = 0.0f;
 
@@ -39,8 +41,16 @@ public class CannonControl : PowerUpBase
             nextFire = Time.time + fireRate;
             GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
             bullet.GetComponent<BulletMovement>().playerNum = playerNum;
+            ammo--;
+
+            if(ammo<0)
+            {
+                UnloadPowerUp();
+            }
         }
     }
+
+
 
 
 }
