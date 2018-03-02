@@ -11,8 +11,6 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     public PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
     private PowerUpGrade powerUpGrade;
 
-    //public string powerupName = "MissileVersion1";
-
     protected void Awake()
     {
         powerUpGrade = new PowerUpGrade();
