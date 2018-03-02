@@ -8,14 +8,14 @@ public class PowerUpGrade
     {
         EPIC,
         RARE,
-        COMMON
+        COMMON,
     };
 
-    private string[] commonPowerUp =
+    private static string[] commonPowerUp =
     {
-        "MissileVersion2",
-        "MachineGun",
-        "SpikeRam"
+        StaticData.MISSILE_NAME,
+        StaticData.CANNON_NAME,
+        StaticData.SPIKERAM_NAME
     };
 
     public string GetRandomPowerUp(TierLevel tier)

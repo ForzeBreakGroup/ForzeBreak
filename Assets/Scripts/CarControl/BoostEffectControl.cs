@@ -18,6 +18,7 @@ class BoostEffectControl : Photon.MonoBehaviour
 
     private void Awake()
     {
+        enabled = transform.root.gameObject.GetPhotonView().isMine;
         foreach (ParticleSystem engineParticleSystem in EngineParticleSystems)
             _enginePsMaterials.Add(engineParticleSystem.GetComponent<Renderer>().material);
 
