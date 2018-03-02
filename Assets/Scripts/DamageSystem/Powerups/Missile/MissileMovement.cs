@@ -44,13 +44,13 @@ public class MissileMovement : NetworkPowerUpMovement
             case MissileMovementState.Diving:
                 Quaternion q = Quaternion.LookRotation(target.transform.position - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, q, diveSpeed * Time.deltaTime);
-                rb.AddRelativeForce(Vector3.forward * 50, ForceMode.Force);
+                rb.AddRelativeForce(Vector3.forward * 100, ForceMode.Force);
                 break;
             case MissileMovementState.FlyUp:
             default:
                 if (Vector3.Distance(transform.position, flyUpDestination) >= 1f)
                 {
-                    rb.AddRelativeForce(Vector3.forward * 20, ForceMode.Force);
+                    rb.AddRelativeForce(Vector3.forward * 100, ForceMode.Force);
                 }
                 else
                 {
