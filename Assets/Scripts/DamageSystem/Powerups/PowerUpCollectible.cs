@@ -32,24 +32,24 @@ public class PowerUpCollectible : Photon.MonoBehaviour
                 }
                 view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
                 view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
-            }
 
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.MasterClient;
+                RaiseEventOptions options = new RaiseEventOptions();
+                options.Receivers = ReceiverGroup.MasterClient;
 
-            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPowerUpCollected, transform.position, true, options);
+                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPowerUpCollected, transform.position, true, options);
 
-            // Hide in remote client side to create illusion of powerup has been collected immediately, otherwise, it will have delay to wait for masterclient to destroy the object
-            foreach(Transform t in transform)
-            {
-                Renderer rend = t.GetComponent<Renderer>();
-                if (rend)
+                // Hide in remote client side to create illusion of powerup has been collected immediately, otherwise, it will have delay to wait for masterclient to destroy the object
+                foreach (Transform t in transform)
                 {
-                    rend.enabled = false;
+                    Renderer rend = t.GetComponent<Renderer>();
+                    if (rend)
+                    {
+                        rend.enabled = false;
+                    }
                 }
+                transform.GetComponent<Renderer>().enabled = false;
+                powerUpCollected = true;
             }
-            transform.GetComponent<Renderer>().enabled = false;
-            powerUpCollected = true;
         }
     }
 }
