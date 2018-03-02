@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionForce: 4000
   ExplosionRadius: 30
+  ExplosionDuration: 0.2
 --- !u!114 &114895396954934584
 MonoBehaviour:
   m_ObjectHideFlags: 1
