@@ -201,6 +201,9 @@ public class MatchManager : Photon.MonoBehaviour
             Vector3 pos = spawnPoints[playerNumber].spawnPoint;
             Quaternion rot = spawnPoints[playerNumber].spawnRotation;
 
+
+            GameObject mainCamera = Instantiate(cam);
+
             NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
             ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
             ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
@@ -209,7 +212,6 @@ public class MatchManager : Photon.MonoBehaviour
             FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
             FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(true);
 
-            GameObject mainCamera = Instantiate(cam);
             mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
             NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
 

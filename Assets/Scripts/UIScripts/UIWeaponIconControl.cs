@@ -28,8 +28,13 @@ public class UIWeaponIconControl : MonoBehaviour {
         {
             displayedIcon.sprite = resources[2];
         }
+        else if (name == StaticData.SPIKERAM_NAME)
+        {
+            displayedIcon.sprite = resources[3];
+        }
 
-        else if(name == "")
+
+        else if (name == "")
         {
             displayedIcon.sprite = resources[0];
         }

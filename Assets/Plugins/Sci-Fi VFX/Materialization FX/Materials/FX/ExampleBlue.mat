@@ -7,391 +7,194 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ExampleBlue
-  m_Shader: {fileID: 4800000, guid: c1f8d719ff76ff146890d75247d177e8, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: IS_CLIP_ENABLED _EMISSION _NORMALMODE_ON _TOGGLESWITCH1_ON
   m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs:
-    - first:
-        name: _Albedo
-      second:
+    - _Albedo:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _BumpMap
-      second:
+    - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _BurnDistributionTex
-      second:
+    - _BurnDistributionTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _BurnTexture
-      second:
+    - _BurnTexture:
         m_Texture: {fileID: 2800000, guid: bea7fa376f932ba419f3d1fc95bd1a2b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailAlbedoMap
-      second:
+    - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailMask
-      second:
+    - _DetailMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailNormalMap
-      second:
+    - _DetailNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DissTexture
-      second:
+    - _DissTexture:
         m_Texture: {fileID: 2800000, guid: 2a4eaa9a53dd3404cb0f2358f556b578, type: 3}
         m_Scale: {x: 40, y: 40}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DissolveTexture
-      second:
+    - _DissolveTexture:
         m_Texture: {fileID: 2800000, guid: a2479cd6fcbccb24e94c4176da0a84f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _Emis
-      second:
+    - _Emis:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _Emission
-      second:
+    - _Emission:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _EmissionMap
-      second:
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _EmissionTex
-      second:
+    - _EmissionTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _EmissionTexture
-      second:
+    - _EmissionTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _GlowDistributionTex
-      second:
+    - _GlowDistributionTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTex
-      second:
+    - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MetallicGlossMap
-      second:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MetallicTex
-      second:
+    - _MetallicTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MetallicTexture
-      second:
+    - _MetallicTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _Normal
-      second:
+    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _NormalMap
-      second:
+    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _OcclusionMap
-      second:
+    - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _ParallaxMap
-      second:
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _TextureSample0
-      second:
+    - _TextureSample0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _TextureSample1
-      second:
+    - _TextureSample1:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _texcoord
-      second:
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - first:
-        name: _ASEOutlineWidth
-      second: 6.91
-    - first:
-        name: _BumpScale
-      second: 1
-    - first:
-        name: _BurnDistance
-      second: 0.06
-    - first:
-        name: _BurnDistribution
-      second: 0.612
-    - first:
-        name: _Cutoff
-      second: 0
-    - first:
-        name: _DetailNormalMapScale
-      second: 1
-    - first:
-        name: _Dissolve
-      second: 0
-    - first:
-        name: _DissolveDistance
-      second: 0.338
-    - first:
-        name: _Distance
-      second: 0.58
-    - first:
-        name: _DistanceInWorld
-      second: 0
-    - first:
-        name: _Distribution
-      second: 0.1
-    - first:
-        name: _DstBlend
-      second: 0
-    - first:
-        name: _EmissionInterpolation
-      second: 1.07
-    - first:
-        name: _Float0
-      second: 0.3
-    - first:
-        name: _Float1
-      second: 1
-    - first:
-        name: _Float2
-      second: 0
-    - first:
-        name: _GlossMapScale
-      second: 1
-    - first:
-        name: _Glossiness
-      second: 1
-    - first:
-        name: _GlossyReflections
-      second: 1
-    - first:
-        name: _GlowDistance
-      second: 0.044
-    - first:
-        name: _GlowDistribution
-      second: 0
-    - first:
-        name: _Interpolation
-      second: 0.94
-    - first:
-        name: _Metallic
-      second: 1
-    - first:
-        name: _MirrorMode
-      second: 0
-    - first:
-        name: _Mode
-      second: 0
-    - first:
-        name: _NormalMode
-      second: 1
-    - first:
-        name: _OcclusionStrength
-      second: 1
-    - first:
-        name: _Outline
-      second: 0
-    - first:
-        name: _Parallax
-      second: 0.02
-    - first:
-        name: _ScaleBurnTex
-      second: 1
-    - first:
-        name: _ScaleDissolveTex
-      second: 2
-    - first:
-        name: _ScaleGlowTex
-      second: 1
-    - first:
-        name: _ScrollXSpeed
-      second: 0.5
-    - first:
-        name: _ScrollYSpeed
-      second: 0.5
-    - first:
-        name: _Smo
-      second: 1
-    - first:
-        name: _Smoothness
-      second: 1
-    - first:
-        name: _SmoothnessTextureChannel
-      second: 0
-    - first:
-        name: _SpecularHighlights
-      second: 1
-    - first:
-        name: _SrcBlend
-      second: 1
-    - first:
-        name: _StartPoint
-      second: 0.39
-    - first:
-        name: _ToggleSwitch0
-      second: 0
-    - first:
-        name: _ToggleSwitch1
-      second: 1
-    - first:
-        name: _TransAmbient
-      second: 0.47
-    - first:
-        name: _TransDirect
-      second: 0.106
-    - first:
-        name: _TransNormalDistortion
-      second: 0.553
-    - first:
-        name: _TransScattering
-      second: 27.4
-    - first:
-        name: _TransShadow
-      second: 0.652
-    - first:
-        name: _Translucency
-      second: 34.1
-    - first:
-        name: _UVSec
-      second: 0
-    - first:
-        name: _UseWorldPos
-      second: 0
-    - first:
-        name: _ZWrite
-      second: 1
-    - first:
-        name: __dirty
-      second: 0
-    - first:
-        name: _isClipEnabled
-      second: 1
-    - first:
-        name: _isInvert
-      second: 0
+    - _ASEOutlineWidth: 6.91
+    - _BumpScale: 1
+    - _BurnDistance: 0.06
+    - _BurnDistribution: 0.612
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 1
+    - _Dissolve: 0
+    - _DissolveDistance: 0.338
+    - _Distance: 0.58
+    - _DistanceInWorld: 0
+    - _Distribution: 0.1
+    - _DstBlend: 0
+    - _EmissionInterpolation: 1.07
+    - _Float0: 0.3
+    - _Float1: 1
+    - _Float2: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 1
+    - _GlossyReflections: 1
+    - _GlowDistance: 0.044
+    - _GlowDistribution: 0
+    - _Interpolation: 0.94
+    - _Metallic: 1
+    - _MirrorMode: 0
+    - _Mode: 0
+    - _NormalMode: 1
+    - _OcclusionStrength: 1
+    - _Outline: 0
+    - _Parallax: 0.02
+    - _ScaleBurnTex: 1
+    - _ScaleDissolveTex: 2
+    - _ScaleGlowTex: 1
+    - _ScrollXSpeed: 0.5
+    - _ScrollYSpeed: 0.5
+    - _Smo: 1
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StartPoint: 0.25
+    - _ToggleSwitch0: 0
+    - _ToggleSwitch1: 1
+    - _TransAmbient: 0.47
+    - _TransDirect: 0.106
+    - _TransNormalDistortion: 0.553
+    - _TransScattering: 27.4
+    - _TransShadow: 0.652
+    - _Translucency: 34.1
+    - _UVSec: 0
+    - _UseWorldPos: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _isClipEnabled: 1
+    - _isInvert: 0
     m_Colors:
-    - first:
-        name: _ASEOutlineColor
-      second: {r: 1, g: 0.35294116, b: 0.47342792, a: 0}
-    - first:
-        name: _AlbedoColor
-      second: {r: 0.102941155, g: 0.102941155, b: 0.102941155, a: 0}
-    - first:
-        name: _BurnColor
-      second: {r: 0, g: 0.9881035, b: 2.605, a: 1}
-    - first:
-        name: _BurnDistributionColor
-      second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _BurnSpeed
-      second: {r: 0.19, g: 0, b: 0, a: 0}
-    - first:
-        name: _Center
-      second: {r: -4.04, g: 1.53, b: -1.51, a: 0}
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
-    - first:
-        name: _Color0
-      second: {r: 1, g: 1, b: 1, a: 0}
-    - first:
-        name: _DissolveColor
-      second: {r: 0.5661764, g: 1.1859027, b: 2.2, a: 1}
-    - first:
-        name: _DissolveSpeed
-      second: {r: 0, g: -0.2, b: 0, a: 0}
-    - first:
-        name: _Emission
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _EmissionColor
-      second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _GlowDistributionColor
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _GlowSpeed
-      second: {r: 0.19, g: 0, b: 0, a: 0}
-    - first:
-        name: _MetallicColor
-      second: {r: 1, g: 1, b: 1, a: 0}
-    - first:
-        name: _OutlineColor
-      second: {r: 0, g: 1, b: 0, a: 1}
-    - first:
-        name: _Speed
-      second: {r: 0.06, g: -0.2, b: -12.13, a: 0}
-    - first:
-        name: _StartPoint1
-      second: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-    - first:
-        name: _Vector0
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _WorldPos
-      second: {r: -5.57, g: 1.53, b: -1.68, a: 0}
+    - _ASEOutlineColor: {r: 1, g: 0.35294116, b: 0.47342792, a: 0}
+    - _AlbedoColor: {r: 0.102941155, g: 0.102941155, b: 0.102941155, a: 0}
+    - _BurnColor: {r: 0, g: 0.9881035, b: 2.605, a: 1}
+    - _BurnDistributionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BurnSpeed: {r: 0.19, g: 0, b: 0, a: 0}
+    - _Center: {r: -4.04, g: 1.53, b: -1.51, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
+    - _DissolveColor: {r: 0.5661764, g: 1.1859027, b: 2.2, a: 1}
+    - _DissolveSpeed: {r: 0, g: -0.2, b: 0, a: 0}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _GlowDistributionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _GlowSpeed: {r: 0.19, g: 0, b: 0, a: 0}
+    - _MetallicColor: {r: 1, g: 1, b: 1, a: 0}
+    - _OutlineColor: {r: 0, g: 1, b: 0, a: 1}
+    - _Speed: {r: 0.06, g: -0.2, b: -12.13, a: 0}
+    - _StartPoint1: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}
+    - _WorldPos: {r: -5.57, g: 1.53, b: -1.68, a: 0}

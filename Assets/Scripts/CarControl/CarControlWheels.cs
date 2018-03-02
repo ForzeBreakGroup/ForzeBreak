@@ -91,11 +91,18 @@ public class CarControlWheels : NetworkPlayerMovement
                 IsAnyWheelGround = true;
         }
 
+
         //clamp input values
         steering = Mathf.Clamp(steering, -1, 1);
         AccelInput = accel = Mathf.Clamp(accel, 0, 1);
         BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
         handbrake = Mathf.Clamp(handbrake, 0, 1);
+
+        if(accel == 0)
+        {
+            carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * 0.1f);
+        }
+
 
         //Set the steer on the front wheels.
         //Assuming that wheels 0 and 1 are the front wheels.
@@ -141,7 +148,7 @@ public class CarControlWheels : NetworkPlayerMovement
         if (CurrentSpeed > 1f && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
         {
             if (IsWheelsGround)
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * 0.5f);
+                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * 0.3f);
         }
         else
         {
@@ -155,7 +162,7 @@ public class CarControlWheels : NetworkPlayerMovement
         if (CurrentSpeed > 1f && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
         {
             if (IsWheelsGround)
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * 0.5f);
+                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * 0.3f);
         }
         else if (footbrake > 0)
         {

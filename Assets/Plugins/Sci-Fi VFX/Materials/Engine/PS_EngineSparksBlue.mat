@@ -72,7 +72,7 @@ Material:
     - _GlossyReflections: 1
     - _InvFade: 3
     - _Metallic: 0
-    - _Mix: 0.5
+    - _Mix: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _POW: 4.36
