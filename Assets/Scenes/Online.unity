@@ -927,6 +927,11 @@ Prefab:
       propertyPath: instantiationId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114878610701652970, guid: d78848bc2b7adcb4cbf686eb2936b562,
+        type: 2}
+      propertyPath: cooldown
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
   m_IsPrefabParent: 0
@@ -1074,6 +1079,11 @@ Prefab:
     - target: {fileID: 1816533664646410, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
       propertyPath: m_Name
       value: CollectibleSpawnPoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114878610701652970, guid: d78848bc2b7adcb4cbf686eb2936b562,
+        type: 2}
+      propertyPath: cooldown
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
@@ -1502,6 +1512,11 @@ Prefab:
     - target: {fileID: 1816533664646410, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
       propertyPath: m_Name
       value: CollectibleSpawnPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114878610701652970, guid: d78848bc2b7adcb4cbf686eb2936b562,
+        type: 2}
+      propertyPath: cooldown
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
@@ -2290,6 +2305,11 @@ Prefab:
     - target: {fileID: 1816533664646410, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}
       propertyPath: m_Name
       value: CollectibleSpawnPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114878610701652970, guid: d78848bc2b7adcb4cbf686eb2936b562,
+        type: 2}
+      propertyPath: cooldown
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d78848bc2b7adcb4cbf686eb2936b562, type: 2}

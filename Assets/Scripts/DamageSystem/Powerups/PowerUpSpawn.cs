@@ -77,13 +77,19 @@ public class PowerUpSpawn : Photon.MonoBehaviour
 
     private void OnPowerUpCollectedHandler(byte evtCode, object content, int senderid)
     {
-        if (evtCode == (byte)ENetworkEventCode.OnPowerUpCollected && collectible != null)
+        if (evtCode == (byte)ENetworkEventCode.OnPowerUpCollected)
         {
             Vector3 powerUpPos = (Vector3)content;
 
             if (powerUpPos == transform.position)
             {
-                PhotonNetwork.Destroy(collectible);
+                Debug.Log("PowerUo Collected Handler Called by: " + gameObject.name);
+                if (collectible != null)
+                {
+                    Debug.Log("Destroying all collectible");
+                    PhotonNetwork.Destroy(collectible);
+                }
+
                 elapsedTime = 0;
                 inCooldown = true;
             }
@@ -97,6 +103,7 @@ public class PowerUpSpawn : Photon.MonoBehaviour
             elapsedTime += Time.deltaTime;
             if (inCooldown && elapsedTime >= cooldown)
             {
+                Debug.Log("Spawning new collectible");
                 inCooldown = false;
                 SpawnCollectible();
             }
