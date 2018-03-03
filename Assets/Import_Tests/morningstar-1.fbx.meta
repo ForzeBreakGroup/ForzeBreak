@@ -1,0 +1,228 @@
+fileFormatVersion: 2
+guid: 76dbb7704d9a8be43ab80de20633e803
+timeCreated: 1518754954
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: morning_star 1
+    100002: //RootNode
+    100004: pCylinder114
+    100006: pCylinder115
+    100008: pCylinder116
+    100010: pCylinder117
+    100012: pCylinder122
+    100014: pCylinder123
+    100016: pCylinder124
+    100018: pCylinder125
+    100020: pCylinder126
+    100022: pCylinder127
+    100024: pCylinder128
+    100026: pTorus1
+    100028: spike
+    100030: spike1
+    100032: spike10
+    100034: spike11
+    100036: spike12
+    100038: spike3
+    100040: spike4
+    100042: spike5
+    100044: spike6
+    100046: spike7
+    100048: spike8
+    100050: spike9
+    100052: splike2
+    400000: morning_star 1
+    400002: //RootNode
+    400004: pCylinder114
+    400006: pCylinder115
+    400008: pCylinder116
+    400010: pCylinder117
+    400012: pCylinder122
+    400014: pCylinder123
+    400016: pCylinder124
+    400018: pCylinder125
+    400020: pCylinder126
+    400022: pCylinder127
+    400024: pCylinder128
+    400026: pTorus1
+    400028: spike
+    400030: spike1
+    400032: spike10
+    400034: spike11
+    400036: spike12
+    400038: spike3
+    400040: spike4
+    400042: spike5
+    400044: spike6
+    400046: spike7
+    400048: spike8
+    400050: spike9
+    400052: splike2
+    2300000: morning_star 1
+    2300002: pCylinder114
+    2300004: pCylinder115
+    2300006: pCylinder116
+    2300008: pCylinder117
+    2300010: pCylinder122
+    2300012: pCylinder123
+    2300014: pCylinder124
+    2300016: pCylinder125
+    2300018: pCylinder126
+    2300020: pCylinder127
+    2300022: pCylinder128
+    2300024: pTorus1
+    2300026: spike
+    2300028: spike1
+    2300030: spike10
+    2300032: spike11
+    2300034: spike12
+    2300036: spike3
+    2300038: spike4
+    2300040: spike5
+    2300042: spike6
+    2300044: spike7
+    2300046: spike8
+    2300048: spike9
+    2300050: splike2
+    3300000: morning_star 1
+    3300002: pCylinder114
+    3300004: pCylinder115
+    3300006: pCylinder116
+    3300008: pCylinder117
+    3300010: pCylinder122
+    3300012: pCylinder123
+    3300014: pCylinder124
+    3300016: pCylinder125
+    3300018: pCylinder126
+    3300020: pCylinder127
+    3300022: pCylinder128
+    3300024: pTorus1
+    3300026: spike
+    3300028: spike1
+    3300030: spike10
+    3300032: spike11
+    3300034: spike12
+    3300036: spike3
+    3300038: spike4
+    3300040: spike5
+    3300042: spike6
+    3300044: spike7
+    3300046: spike8
+    3300048: spike9
+    3300050: splike2
+    4300000: pCylinder125
+    4300002: pCylinder126
+    4300004: spike7
+    4300006: spike
+    4300008: spike6
+    4300010: pCylinder124
+    4300012: pTorus1
+    4300014: spike8
+    4300016: spike5
+    4300018: spike4
+    4300020: spike3
+    4300022: pCylinder115
+    4300024: pCylinder114
+    4300026: pCylinder117
+    4300028: splike2
+    4300030: spike1
+    4300032: spike12
+    4300034: spike11
+    4300036: spike10
+    4300038: pCylinder116
+    4300040: pCylinder127
+    4300042: pCylinder128
+    4300044: spike9
+    4300046: pCylinder122
+    4300048: morning_star
+    4300050: pCylinder123
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: 419a03b57f2cb074f83faefe7981156a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 81207f16a8f8f2448b8b0284ea0541c4, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

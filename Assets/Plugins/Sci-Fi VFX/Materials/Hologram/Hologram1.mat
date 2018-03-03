@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hologram1
+  m_Shader: {fileID: 4800000, guid: 053e4279a99bc5f458a231ffe6a35ad0, type: 3}
+  m_ShaderKeywords: ORIENTATION
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 5b1a64ea234fb2343b8d0686c51280de, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex1:
+        m_Texture: {fileID: 2800000, guid: 36e0a02c0316e0b40bd7ffc8eb437a7f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex2:
+        m_Texture: {fileID: 2800000, guid: 7ce51c638aeaa3840ab61c4a4af3885b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlickerTexture:
+        m_Texture: {fileID: 2800000, guid: 9d903017bd4bd344e976cdb4cf902b6d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlitchTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Illum:
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 8ff96dbed3bc8ab44a7842f0bc5c934a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertDeformTex:
+        m_Texture: {fileID: 2800000, guid: 357928dd8c8088440b4662373bd09d7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlbedoIntencity: 20
+    - _Alpha: 0.696
+    - _AlphaCutout: 1.85
+    - _BumpScale: 1
+    - _CirclesCount: 0.74
+    - _CullOff: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _Distort: 1
+    - _DotProduct: -0.32
+    - _DstBlend: 0
+    - _Emission: -16
+    - _FillWithRed: 1
+    - _Float0: 0.1
+    - _Float2: 2
+    - _Fresnel: 3
+    - _FresnelWidth: 3
+    - _Glit: 2
+    - _Glitch: 0.68
+    - _GlitchInterval: 0.99
+    - _GlitchSpeed: 0.775
+    - _GlitchStepping: 0.67
+    - _GlitchSteppingSpeed: 2
+    - _GlitchhttpsyoutubeU7PvBnaYnggt1671Speed: 2
+    - _Glossiness: 1
+    - _GlowTiling: 0.37
+    - _GridSpacing: 0.45
+    - _GridThickness: 0.05
+    - _IntersectionThreshold: 0.1
+    - _InvFade: 0.01
+    - _Metallic: 1
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Offset: 927.2
+    - _Orientation: 1
+    - _Parallax: 0.02
+    - _Res: 39.59
+    - _Rim: 9.4
+    - _Scale: 385
+    - _Scan: 0.83
+    - _ScanStep: 0.22
+    - _ScanTiling: 27
+    - _ScrollSpeedU: 2
+    - _ScrollSpeedV: 0
+    - _Shininess: 1
+    - _Smoothness: 1
+    - _Speed: 11
+    - _SrcBlend: 1
+    - _Thickness: 4.51
+    - _Tiling: 0
+    - _TilingWidth: 0.71
+    - _UVSec: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _myTime: 0.5
+    - point_size: 12.06
+    m_Colors:
+    - _BaseColour: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.3602941, g: 0.81470585, b: 1, a: 0.97}
+    - _DistanceFade: {r: 20, g: 50, b: 0, a: 0}
+    - _DistortSpeed: {r: 8.67, g: 2.5, b: 3.21, a: 0.94}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlickerSpeed: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _Glitch: {r: -0.35, g: 0, b: 0, a: 0}
+    - _GlitchOffset: {r: 0.2, g: 0, b: 0, a: 0}
+    - _GlitchSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _GlowSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _GridColour: {r: 0.5, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskColor: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Params: {r: 0.53, g: 65.9, b: 31, a: 0.5}
+    - _Params2: {r: 2.61, g: 0.93, b: 0, a: 0}
+    - _RimColor: {r: 0, g: 0.64638513, b: 1.2839152, a: 1}
+    - _ScanSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 1, g: 0.051470578, b: 0.051470578, a: 1}
+    - _TintColor: {r: 0.47794116, g: 0.69756585, b: 1, a: 1}

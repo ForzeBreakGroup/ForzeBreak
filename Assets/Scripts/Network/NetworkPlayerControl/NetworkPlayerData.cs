@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Base class for handling the player metadata required to transfer between network and shares to all other clients
+ */
 public class NetworkPlayerData : NetworkPlayerBase
 {
+    public Camera localCam;
+
     #region Private Members
     /// <summary>
     ///  Player's remaining life synchronized and managed by server/host
@@ -44,16 +52,6 @@ public class NetworkPlayerData : NetworkPlayerBase
     }
 
     /// <summary>
-    /// Networked Command method to request the host to change the scene.
-    /// </summary>
-    private void CmdPlayerLifeDepleted()
-    {
-        RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.MasterClient;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerDeath, null, true, evtOptions);
-    }
-
-    /// <summary>
     /// Photon SerializeView method for synchronizing data between all clients
     /// </summary>
     /// <param name="stream"></param>
@@ -70,25 +68,10 @@ public class NetworkPlayerData : NetworkPlayerBase
     #endregion
 
     /// <summary>
-    /// Used by local player object to decrease the current player's life and reflect to server
+    /// Registers the spawn information of the player
     /// </summary>
-    public void DecrementPlayerLife()
-    {
-        // Decrements the current player life
-        --playerLife;
-
-        if (playerLife <= 0)
-        {
-            // Calls to server if player's life reached threshold
-            CmdPlayerLifeDepleted();
-        }
-        else
-        {
-            // Calls respawn the player
-            TargetRespawn();
-        }
-    }
-
+    /// <param name="pos"></param>
+    /// <param name="rot"></param>
     public void RegisterSpawnInformation(Vector3 pos, Quaternion rot)
     {
         spawnPosition = pos;

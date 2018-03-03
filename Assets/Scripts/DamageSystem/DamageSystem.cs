@@ -16,6 +16,14 @@ public enum CollisionEffect
     FlyOffEffect
 };
 
+public enum DamageThreshold
+{
+    Healthy,
+    LightDamage,
+    Damaged,
+    HeavilyDamage,
+};
+
 public class DamageSystem : NetworkPlayerCollision
 {
     /// <summary>
@@ -35,7 +43,7 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     [Range(DamageSystemConstants.baseDamagePercentage, DamageSystemConstants.maxDamagePercentage)]
     [SerializeField]
-    private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
+    public float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
 
     /// <summary>
     /// Allowance angle to determine the vehicle is collider or receiver
@@ -90,30 +98,30 @@ public class DamageSystem : NetworkPlayerCollision
         rb = GetComponent<Rigidbody>();
     }
 
-    protected override CollisionResult CollisionEvent(Collision collision, out float force, out Vector3 contactPoint)
+    protected override PlayerCollisionResult CollisionEvent(Collision collision, out float force, out Vector3 contactPoint)
     {
-        CollisionResult result = AnalyzeCollision(collision);
+        PlayerCollisionResult result = AnalyzeCollision(collision);
 
         force = collision.impulse.magnitude;
         contactPoint = collision.contacts[0].point;
 
         if (photonView.isMine)
         {
-            if (result == CollisionResult.Collider)
+            if (result == PlayerCollisionResult.Collider)
             {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
             else
             {
-                ApplyExplosionForce(force, contactPoint);
+                ApplyExplosionForce(force, contactPoint, 300.0f);
             }
         }
 
         return result;
     }
 
-    protected override void ResolveCollision(CollisionResult collisionResult, float force, Vector3 contactPoint)
+    protected override void ResolveCollision(PlayerCollisionResult collisionResult, float force, Vector3 contactPoint)
     {
         if (enableLog)
         {
@@ -122,14 +130,14 @@ public class DamageSystem : NetworkPlayerCollision
             Debug.Log(string.Format("Vehicle Position: {0}, Distance Between Contact Point: {1}", rb.position, Vector3.Distance(rb.position, contactPoint)));
         }
 
-        if (collisionResult == CollisionResult.Collider)
+        if (collisionResult == PlayerCollisionResult.Collider)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
         else
         {
-            ApplyExplosionForce(force, contactPoint);
+            ApplyExplosionForce(force, contactPoint, 300.0f);
         }
     }
 
@@ -139,9 +147,9 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     /// <param name="contactNorm">Average of collision contact points norm</param>
     /// <returns>Result of collision analysis, receiver or collider</returns>
-    private CollisionResult AnalyzeCollision(Collision collision)
+    private PlayerCollisionResult AnalyzeCollision(Collision collision)
     {
-        CollisionResult result = CollisionResult.Receiver;
+        PlayerCollisionResult result = PlayerCollisionResult.Receiver;
         Vector3 contactNormal = collision.contacts[0].normal;
         float selfCollisionAngle = Vector3.Angle(rb.velocity, -contactNormal);
         float otherCollisionAngle = Vector3.Angle(collision.rigidbody.velocity, -contactNormal);
@@ -153,7 +161,7 @@ public class DamageSystem : NetworkPlayerCollision
         // Compare velocity and hitting angle
         if (rb.velocity.magnitude >= collision.rigidbody.velocity.magnitude)
         {
-            result = CollisionResult.Collider;
+            result = PlayerCollisionResult.Collider;
 
             // Handling case of same velocity
             if (rb.velocity.magnitude == collision.rigidbody.velocity.magnitude)
@@ -161,11 +169,11 @@ public class DamageSystem : NetworkPlayerCollision
                 // Wins the clash if collision angle is better
                 if (selfCollisionAngle > otherCollisionAngle)
                 {
-                    result = CollisionResult.Collider;
+                    result = PlayerCollisionResult.Collider;
                 }
                 else
                 {
-                    result = CollisionResult.Receiver;
+                    result = PlayerCollisionResult.Receiver;
                 }
             }
         }
@@ -210,16 +218,17 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     /// <param name="impulse">Impulse force from Collision class</param>
     /// <param name="collisionPoint">Impact point from Collision class</param>
-    private void ApplyExplosionForce(float impulse, Vector3 collisionPoint)
+    private void ApplyExplosionForce(float impulse, Vector3 collisionPoint, float radius)
     {
+        Debug.Log(impulse);
         switch (effectMode)
         {
             case CollisionEffect.FlyOffEffect:
-                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 0.6f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, radius, 0.2f, ForceMode.Impulse);
                 break;
             case CollisionEffect.UpwardEffect:
             default:
-                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, 300.0f, 3.0f, ForceMode.Impulse);
+                rb.AddExplosionForce(impulse * damageAmplifyPercentage / 100.0f, collisionPoint, radius, 3.0f, ForceMode.Impulse);
                 break;
         }
     }
@@ -245,6 +254,17 @@ public class DamageSystem : NetworkPlayerCollision
         if (damageAmplifyPercentage < DamageSystemConstants.baseDamagePercentage)
         {
             damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
+        }
+    }
+
+    [PunRPC]
+    public void CreateExplosion(float force, Vector3 explosionCenter, float radius)
+    {
+        if (gameObject.GetPhotonView().isMine)
+        {
+            Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
+            IncreaseDamage(30);
+            ApplyExplosionForce(force, explosionCenter, radius);
         }
     }
     #endregion

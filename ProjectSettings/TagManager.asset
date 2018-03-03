@@ -7,6 +7,9 @@ TagManager:
   - DeathBound
   - UI_SpeedBar
   - UI_BoostBar
+  - UISoundMaster
+  - PowerUp
+  - PowerUpSpawn
   layers:
   - Default
   - TransparentFX

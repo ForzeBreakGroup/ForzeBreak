@@ -19,37 +19,36 @@ public class CarUserControl : NetworkPlayerInput
     private bool boost = false;
     private bool flip = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         // get the car controller
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
-        playerNum = 1;
+        playerNum = 0;
 
     }
 
     private void FixedUpdate()
     {
         // keyboard Input
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        float handbrake = Input.GetAxis("Handbrake");
+        float h = Input.GetAxis("Horizontal_Keyboard");
+        float v = Input.GetAxis("Vertical_Keyboard");
+        float handbrake = Input.GetAxis("Handbrake_Keyboard");
 
         // controller Input
-        float controllerX = Input.GetAxis("Controller" + playerNum + "_X_Axis");
-        float controllerTrigger = Input.GetAxis("Controller" + playerNum + "_Trigger_Axis");
+        float controllerX = Input.GetAxis("Horizontal_Controller" + playerNum);
+        float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + playerNum);
 
         //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
         v = (v == 0) ? -controllerTrigger : v;
         carControlWheels.Move(h, v, v, handbrake);
 
-
-
-
-        boost = Input.GetButton("Mouse_Left") || Input.GetButton("Controller" + playerNum + "_Button_B");
-        flip = Input.GetButtonDown("Mouse_Right") || Input.GetButtonDown("Controller" + playerNum + "_Button_A");
+        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
+        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
         if (boostControl!=null)
         {
             if (boost)
@@ -62,12 +61,7 @@ public class CarUserControl : NetworkPlayerInput
             flipControl.Flip(flip,h);
     
     }
-
-    private void Update()
-    {
-            
-    }
-
+    
     public void ChangeColor(Color c)
     {
         color = c;

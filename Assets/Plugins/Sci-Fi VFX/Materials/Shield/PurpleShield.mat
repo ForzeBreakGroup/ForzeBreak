@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: PurpleShield
+  m_Shader: {fileID: 4800000, guid: 72af4290cdbde4a40b53d687fb23ad83, type: 3}
+  m_ShaderKeywords: _CULLOFF_OFF _DISSOLVEDIRECTION_ON _ENABLENOISE_ON
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CollisionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisplaceTexture:
+        m_Texture: {fileID: 2800000, guid: d784595d7b8bfef41ac0a5bd8fa0a662, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 2800000, guid: c72a4cfc6aff9594bbf78865caa0e621, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionTex:
+        m_Texture: {fileID: 2800000, guid: b587e55def015f44a85b53f331894e4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionTexture:
+        m_Texture: {fileID: 2800000, guid: 9c40e42f0e9b29243956308ee0579565, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTe:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTexture:
+        m_Texture: {fileID: 2800000, guid: 2d0e89ed49dc310458a829401e07eea9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e28b5ed144afcfa4ba0b6e147ecde7c3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 2d0e89ed49dc310458a829401e07eea9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 607018668f839ac47a1faf51e7f63f8b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Amount: 0.5
+    - _BumpScale: 1
+    - _CollisionAnimationTime: 0
+    - _CollisionSize: 0
+    - _CollisionTime: 0
+    - _CullOff: 0
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _Direction: 0
+    - _Displace: 0.98
+    - _DisplacePatternSize: 0.88
+    - _DissolveDirection: 1
+    - _DissolveDistance: 0.1
+    - _DissolveGlow: 0.505
+    - _DissolvePatternSize: 1
+    - _Distort: 0
+    - _Distortion: 0.013
+    - _DistortionPatternSize: 1
+    - _DstBlend: 0
+    - _EnableNoise: 1
+    - _Fresnel: 8
+    - _FresnelWidth: 1.48
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Glow: 0.1
+    - _Intersection: 0.072
+    - _IntersectionThreshold: 0.08
+    - _InvFade: 1
+    - _Metallic: 1
+    - _Mode: 0
+    - _Noise: 0.57
+    - _NoiseScale: 0.2
+    - _NoiseSpeed: 150
+    - _NoiseT: 1
+    - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _Parallax: 0.02
+    - _PatternSize: 4
+    - _Rim: 8.54
+    - _Scale: 151
+    - _ScrollSpeedU: 0
+    - _ScrollSpeedV: 3
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _Speed: 0.05
+    - _SrcBlend: 1
+    - _StartPoint: 0.98
+    - _ToggleSwitch0: 0
+    - _UVSec: 0
+    - _WindQuality: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _offset: 0.99
+    m_Colors:
+    - _BaseColor: {r: 0.1, g: 0.1, b: 0.1, a: 0}
+    - _CollisionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _CollisionPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1.5159947, g: 0.67112505, b: 1.75525, a: 1}
+    - _DisplaceSpeedXY: {r: -0.03, g: 0.06, b: 0, a: 0}
+    - _DissolveGlowColor: {r: 3, g: 0.48529404, b: 2.410345, a: 1}
+    - _DissolveSpeed: {r: 0.19, g: 0, b: 0, a: 0}
+    - _DistanceFade: {r: 70, g: 0.3, b: 0, a: 0}
+    - _DistortionSpeedXY: {r: 0.28, g: 0.15, b: 0, a: 0}
+    - _EmissionColor: {r: 1.9588233, g: 1.6985295, b: 3, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _IntersectionColor: {r: 2.1020002, g: 0.58732367, b: 0.58732367, a: 1}
+    - _MainColor: {r: 0, g: 0.39310312, b: 3, a: 1}
+    - _MaskColor: {r: 1, g: 0, b: 0, a: 0.5}
+    - _Noise: {r: 800, g: 800, b: 0, a: 0}
+    - _NoiseSize: {r: 600, g: 600, b: 0, a: 0}
+    - _NoiseSpeedXY: {r: 700, g: 700, b: 0, a: 0}
+    - _OutlineColor: {r: 0, g: 0.75172424, b: 1, a: 1}
+    - _Params: {r: 0.48, g: 0.16, b: -0.18, a: 1}
+    - _RimColor: {r: 3.987, g: 0.498375, b: 0.498375, a: 1}
+    - _SonarWaveParams: {r: 1, g: 20, b: 20, a: 10}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _WaveColor: {r: 0.1, g: 0.1, b: 1, a: 0}

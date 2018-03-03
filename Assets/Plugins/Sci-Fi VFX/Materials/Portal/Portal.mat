@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Portal
+  m_Shader: {fileID: 4800000, guid: e06776d4e7138204fa1607b97d55ed9c, type: 3}
+  m_ShaderKeywords: _ENABLENOISE_ON _ROTATION_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutOutA:
+        m_Texture: {fileID: 2800000, guid: 7f972df61223f524892158ea9f79abd7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisplaceTexture:
+        m_Texture: {fileID: 2800000, guid: d784595d7b8bfef41ac0a5bd8fa0a662, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionTexture:
+        m_Texture: {fileID: 2800000, guid: d784595d7b8bfef41ac0a5bd8fa0a662, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTexture:
+        m_Texture: {fileID: 2800000, guid: a0ae2e76d7a8a214e9da2809a62c2b64, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a3e94c0f7f9dcd34f9b4bba3f22fe409, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 163632276e446414db3976d5befc6048, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 61c0b9c0523734e0e91bc6043c72a490, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 302951faffe230848aa0d3df7bb70faa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
+        m_Texture: {fileID: 2800000, guid: 51b8778271de7b34998dd099619f8b35, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: b4e07f49d7192f74d8fd9e16fe13c069, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: a0ae2e76d7a8a214e9da2809a62c2b64, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexOffsetTexture:
+        m_Texture: {fileID: 2800000, guid: b1d7fee26e54cc3498f6267f072a45b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ASEOutlineWidth: 0
+    - _Angle: 26.9
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DepthDistance: 0.05
+    - _DetailNormalMapScale: 1
+    - _Displace: 0.3
+    - _DisplaceScale: 3
+    - _Distortion: 0.05
+    - _DistortionPatternSize: 4
+    - _DistortionScale: 1.07
+    - _DistortionSpeed: 1.04
+    - _DstBlend: 0
+    - _EnableNoise: 1
+    - _Float0: 10
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _InvFade: 1
+    - _Magnitude: 1.11
+    - _MainScale: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _Noise: 0
+    - _NoiseScale: 0.52
+    - _NoiseSoeed: 0
+    - _NoiseSpeed: 10
+    - _NoiseStrength: 7.11
+    - _Normal: 0
+    - _NormalScale: 5
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PatternSize: 1
+    - _Radius: 1
+    - _Rotation: 1
+    - _RotationSpeed: 0
+    - _Scale: 0.36
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SwirlRotationSpeed: 1.45
+    - _SwirlSpeed: 0.127
+    - _Swirliness: 0.27
+    - _ToggleSwitch0: 1
+    - _UVSec: 0
+    - _WhirpoolRadius: 0.61
+    - _WhirpoolSpeed: 0.26
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 0.11724138, g: 1, b: 0, a: 1}
+    - _DepthEmission: {r: 0, g: 4.1724133, b: 5, a: 1}
+    - _DisplaceSpeedXY: {r: 0.02, g: 0.02, b: 0, a: 0}
+    - _DistortionSpeed: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _EmissionColor: {r: 3.2714002, g: 1.8014706, b: 7, a: 1}
+    - _EmissionSpeed: {r: 0, g: -0.1, b: 0, a: 0}
+    - _MainColor: {r: 0.6031726, g: 0.5530926, b: 1.2132353, a: 1}
+    - _MainSpee: {r: 0, g: 0.12, b: 0, a: 0}
+    - _MainSpeed: {r: 0, g: 0.05, b: 0, a: 0}
+    - _MainSpeedXY: {r: 0, g: 0.2, b: 0, a: 0}
+    - _Mains: {r: 0, g: 0.12, b: 0, a: 0}
+    - _NoiseSize: {r: 700, g: 700, b: 0, a: 0}
+    - _Rot: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Rotation: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotationAnchor: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotationSpeed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotationsPeed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _TintColor: {r: 0.3702941, g: 6.295, b: 0.6563135, a: 1}
+    - _Vector0: {r: 0, g: 0, b: -3.1, a: 0}
+    - _VertexOffset: {r: 0, g: 0, b: 3.59, a: 0}
