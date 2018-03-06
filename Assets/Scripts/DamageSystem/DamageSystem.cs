@@ -86,6 +86,8 @@ public class DamageSystem : NetworkPlayerCollision
     [SerializeField] private bool enableLog = false;
 
     private Rigidbody rb;
+
+    [SerializeField] private float baseFlyoffDistance = 30f;
     #endregion
 
     #region Private Methods
@@ -236,6 +238,7 @@ public class DamageSystem : NetworkPlayerCollision
     private void TrajectoryCollision(float impulse, Vector3 collisionPoint)
     {
         // Calculate the flyoff distance based on received force and damage amplification
+        float amplifiedFlyoffDistance = baseFlyoffDistance * damageAmplifyPercentage / 100.0f;
 
         // Find the landing point
 
