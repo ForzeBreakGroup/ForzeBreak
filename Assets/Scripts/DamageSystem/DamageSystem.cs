@@ -232,6 +232,21 @@ public class DamageSystem : NetworkPlayerCollision
                 break;
         }
     }
+
+    private void TrajectoryCollision(float impulse, Vector3 collisionPoint)
+    {
+        // Calculate the flyoff distance based on received force and damage amplification
+
+        // Find the landing point
+
+        // Disable physics
+
+        // Lerp the vehicle from start point to end point with trajectory arc
+
+        // Animate the vehicle flying
+
+        // Enable physics before landing, setting velocity to 0
+    }
     #endregion
 
     #region Public Methods
