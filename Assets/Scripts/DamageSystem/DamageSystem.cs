@@ -222,6 +222,7 @@ public class DamageSystem : NetworkPlayerCollision
     /// <param name="collisionPoint">Impact point from Collision class</param>
     private void ApplyExplosionForce(float impulse, Vector3 collisionPoint, float radius)
     {
+        TrajectoryCollision(impulse, collisionPoint);
         Debug.Log(impulse);
         switch (effectMode)
         {
@@ -241,6 +242,8 @@ public class DamageSystem : NetworkPlayerCollision
         float amplifiedFlyoffDistance = baseFlyoffDistance * damageAmplifyPercentage / 100.0f;
 
         // Find the landing point
+        Vector3 point = (collisionPoint - transform.position).normalized;
+        Debug.Log(string.Format("Vehicle Position: {0}, CollisionPoint: {1}, Normalized Flying Direction: {2}, Estimated Landing Position: {3}", transform.position, collisionPoint, point, point * amplifiedFlyoffDistance));
 
         // Disable physics
 
