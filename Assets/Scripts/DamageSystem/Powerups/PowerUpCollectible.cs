@@ -14,9 +14,13 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     public PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
     private PowerUpGrade powerUpGrade;
 
+
+    private FMOD.Studio.EventInstance pickupSound;
+
     protected void Awake()
     {
         powerUpGrade = new PowerUpGrade();
+        pickupSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_PowerupPickup");
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -26,7 +30,11 @@ public class PowerUpCollectible : Photon.MonoBehaviour
             PhotonView view = other.transform.root.gameObject.GetPhotonView();
             if (view.isMine)
             {
-                if(randomMode)
+
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(pickupSound, transform, GetComponent<Rigidbody>());
+                pickupSound.start();
+
+                if (randomMode)
                 {
                     powerupName = powerUpGrade.GetRandomPowerUp(powerUpTier);
                 }

@@ -98,9 +98,6 @@ public class CarControlWheels : NetworkPlayerMovement
         BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
         handbrake = Mathf.Clamp(handbrake, 0, 1);
 
-        Debug.Log("acc:" + accel + "   footbrake:" + footbrake);
-
-
 
         //Set the steer on the front wheels.
         //Assuming that wheels 0 and 1 are the front wheels.
@@ -142,6 +139,12 @@ public class CarControlWheels : NetworkPlayerMovement
 
     private void ApplyDrive(float accel, float footbrake)
     {
+
+        if(accel<0.01f&&footbrake<0.01f&&accel>-0.01f&&footbrake>-0.01f&&IsWheelsGround)
+        {
+            carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, 0.01f);
+        }
+
 
         if (CurrentSpeed > 1f && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
         {

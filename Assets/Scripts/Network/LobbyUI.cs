@@ -89,7 +89,7 @@ public class LobbyUI : Photon.MonoBehaviour
     {
         if (winnerID == -2)
         {
-            winnerText.text = "Get READY for FrozeBreak!";
+            winnerText.text = "Get READY for ForzeBreak!";
         }
 
         else if (winnerID == -1)

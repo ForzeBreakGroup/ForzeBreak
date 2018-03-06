@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{a046b8db-8c50-430d-8a5d-87e0c5b964f3}">
+        <property name="assetPath">
+            <value>SFX_Diegetic/SFX_VehicleFlip.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{7d3bcca8-8b26-43da-a32d-b98db5c43f26}</destination>
+        </relationship>
+    </object>
+</objects>

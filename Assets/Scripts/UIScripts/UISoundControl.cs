@@ -5,25 +5,30 @@ using System.Collections;
 
 public class UISoundControl : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public FMOD.Studio.EventInstance BGM;
 
-    public AudioClip onEnterSound;
-    public AudioClip onConfirmSound;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        DontDestroyOnLoad(gameObject);
+        BGM = FMODUnity.RuntimeManager.CreateInstance("event:/BGM/BGM");
+        BGM.start();
     }
 
     public void onHover()
     {
-        audioSource.PlayOneShot(onEnterSound);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_SwitchHover");
     }
 
     public void onConfirm()
     {
-        audioSource.PlayOneShot(onConfirmSound);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_SelectConfirm");
+
     }
 
-
+    private void OnDestroy()
+    {
+        BGM.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        BGM.release();
+    }
 }

@@ -21,6 +21,8 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
             RaiseEventOptions options = new RaiseEventOptions();
             options.Receivers = ReceiverGroup.MasterClient;
             PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, playerId, true, options);
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
         }
 
     }

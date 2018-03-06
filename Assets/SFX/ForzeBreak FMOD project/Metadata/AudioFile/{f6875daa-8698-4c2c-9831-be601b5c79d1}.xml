@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{f6875daa-8698-4c2c-9831-be601b5c79d1}">
+        <property name="assetPath">
+            <value>BGM/Sample 1.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>202.05600000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{7d3bcca8-8b26-43da-a32d-b98db5c43f26}</destination>
+        </relationship>
+    </object>
+</objects>

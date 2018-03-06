@@ -19,6 +19,9 @@ public class CarUserControl : NetworkPlayerInput
     private bool boost = false;
     private bool flip = false;
 
+    private FMOD.Studio.EventInstance engine;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +31,9 @@ public class CarUserControl : NetworkPlayerInput
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
         playerNum = 0;
+        engine = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleEngine");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine,transform,GetComponent<Rigidbody>());
+        engine.start();
 
     }
 
@@ -59,7 +65,11 @@ public class CarUserControl : NetworkPlayerInput
 
         if(flipControl!=null)
             flipControl.Flip(flip,h);
-    
+
+
+
+        engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
+
     }
     
     public void ChangeColor(Color c)

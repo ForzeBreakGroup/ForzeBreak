@@ -15,10 +15,15 @@ public class FlipControl : MonoBehaviour {
     private bool carBodyGrounded = false;
     private float nextFlip = 0.0f;
 
+
+    private FMOD.Studio.EventInstance flipSound;
+
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();
+
+        flipSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleFlip");
     }
 
     public void Flip(bool flipInput, float dir)
@@ -38,6 +43,9 @@ public class FlipControl : MonoBehaviour {
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
+
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(flipSound, transform, GetComponent<Rigidbody>());
+                flipSound.start();
 
                 carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.VelocityChange);
                 if (dir > 0)
