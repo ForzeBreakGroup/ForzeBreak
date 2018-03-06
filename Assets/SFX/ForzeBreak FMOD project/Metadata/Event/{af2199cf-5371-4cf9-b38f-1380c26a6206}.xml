@@ -125,6 +125,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{1831fccc-b341-41cd-b435-05baad4de801}">
+        <property name="volume">
+            <value>-6.5</value>
+        </property>
         <property name="name">
             <value>Mune BGM</value>
         </property>
@@ -153,6 +156,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{98534d03-9690-44d8-8088-284397a6cb21}">
+        <property name="volume">
+            <value>-6.5</value>
+        </property>
         <property name="name">
             <value>Fighting BGM</value>
         </property>
