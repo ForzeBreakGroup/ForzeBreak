@@ -87,7 +87,8 @@ public class DamageSystem : NetworkPlayerCollision
 
     private Rigidbody rb;
 
-    [SerializeField] private float baseFlyoffDistance = 30f;
+    [Range(0, 1)]
+    [SerializeField] private float upwardEffect = 0.7f;
     #endregion
 
     #region Private Methods
@@ -239,19 +240,22 @@ public class DamageSystem : NetworkPlayerCollision
     private void TrajectoryCollision(float impulse, Vector3 collisionPoint)
     {
         // Calculate the flyoff distance based on received force and damage amplification
-        float amplifiedFlyoffDistance = baseFlyoffDistance * damageAmplifyPercentage / 100.0f;
+        // Amplified flyoff distance = amplify %  * 1 unit per 10 force
+        float amplifiedFlyoffDistance = damageAmplifyPercentage / 100.0f * impulse / 10.0f;
 
         // Find the landing point
-        Vector3 point = (collisionPoint - transform.position).normalized;
-        Debug.Log(string.Format("Vehicle Position: {0}, CollisionPoint: {1}, Normalized Flying Direction: {2}, Estimated Landing Position: {3}", transform.position, collisionPoint, point, point * amplifiedFlyoffDistance));
+        Vector3 normalizedPoint = (transform.root.position - collisionPoint).normalized;
+        normalizedPoint.y = upwardEffect;
+        Vector3 estimateLandingPosition = normalizedPoint * amplifiedFlyoffDistance + transform.root.position;
 
-        // Disable physics
+        // Using trajectory formula d = v^2/g sin 2 theta to predict the velocity needed to hit the desire location
+        // Assuming the launching leviation is on flat surface, and theta is 45 degree, this will remove sin 2theta to 1
+        // Then the velocity can be found by v^2 = d * g, where d is the distance to travel, g is the gravitational force set by Unity project
+        Vector3 velocity = Mathf.Sqrt(amplifiedFlyoffDistance * Physics.gravity.magnitude) * normalizedPoint;
+        GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
 
-        // Lerp the vehicle from start point to end point with trajectory arc
 
-        // Animate the vehicle flying
-
-        // Enable physics before landing, setting velocity to 0
+        Debug.Log(string.Format("Fly Off Distance: {0}, Calculated velocity: {1}", amplifiedFlyoffDistance, velocity));
     }
     #endregion
 
@@ -285,7 +289,8 @@ public class DamageSystem : NetworkPlayerCollision
         {
             Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
             IncreaseDamage(30);
-            ApplyExplosionForce(force, explosionCenter, radius);
+            //ApplyExplosionForce(force, explosionCenter, radius);
+            TrajectoryCollision(force, explosionCenter);
         }
     }
     #endregion

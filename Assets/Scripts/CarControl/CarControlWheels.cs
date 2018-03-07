@@ -98,13 +98,6 @@ public class CarControlWheels : NetworkPlayerMovement
         BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
         handbrake = Mathf.Clamp(handbrake, 0, 1);
 
-<<<<<<< HEAD
-=======
-        //Debug.Log("acc:" + accel + "   footbrake:" + footbrake);
-
-
->>>>>>> Damage system with log
-
         //Set the steer on the front wheels.
         //Assuming that wheels 0 and 1 are the front wheels.
         steerAngle = steering*maximumSteerAngle;
