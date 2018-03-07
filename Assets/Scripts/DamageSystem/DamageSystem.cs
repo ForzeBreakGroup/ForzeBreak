@@ -88,7 +88,7 @@ public class DamageSystem : NetworkPlayerCollision
     private Rigidbody rb;
 
     [Range(0, 1)]
-    [SerializeField] private float upwardEffect = 0.7f;
+    [SerializeField] private float upwardEffect = 0.45f;
     #endregion
 
     #region Private Methods
@@ -241,7 +241,7 @@ public class DamageSystem : NetworkPlayerCollision
     {
         // Calculate the flyoff distance based on received force and damage amplification
         // Amplified flyoff distance = amplify %  * 1 unit per 10 force
-        float amplifiedFlyoffDistance = damageAmplifyPercentage / 100.0f * impulse / 10.0f;
+        float amplifiedFlyoffDistance = damageAmplifyPercentage / 100.0f * impulse;
 
         // Find the landing point
         Vector3 normalizedPoint = (transform.root.position - collisionPoint).normalized;
@@ -254,8 +254,10 @@ public class DamageSystem : NetworkPlayerCollision
         Vector3 velocity = Mathf.Sqrt(amplifiedFlyoffDistance * Physics.gravity.magnitude) * normalizedPoint;
         GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
 
-
-        Debug.Log(string.Format("Fly Off Distance: {0}, Calculated velocity: {1}", amplifiedFlyoffDistance, velocity));
+        if (enableLog)
+        {
+            Debug.Log(string.Format("Fly Off Distance: {0}, Calculated velocity: {1}", amplifiedFlyoffDistance, velocity));
+        }
     }
     #endregion
 
@@ -288,9 +290,14 @@ public class DamageSystem : NetworkPlayerCollision
         if (gameObject.GetPhotonView().isMine)
         {
             Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
-            IncreaseDamage(30);
-            //ApplyExplosionForce(force, explosionCenter, radius);
-            TrajectoryCollision(force, explosionCenter);
+
+            // Calculates damage received based on the force and explosion radius
+            float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
+            damage = Mathf.Clamp(damage, 0, Mathf.Infinity);
+            Debug.Log(damage);
+
+            IncreaseDamage(damage);
+            TrajectoryCollision(damage, explosionCenter);
         }
     }
     #endregion
