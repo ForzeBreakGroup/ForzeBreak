@@ -15,12 +15,16 @@ public class PowerUpBase : Photon.MonoBehaviour
     public int playerNum = 0;
     protected ReticleSystem[] reticleTargets;
     [SerializeField] protected Vector3 componentOffset;
+    [SerializeField] protected Vector3 componentAngle = Vector3.zero;
 
     public virtual void AdjustModel()
     {
         enabled = transform.root.gameObject.GetPhotonView().isMine;
         reticleTargets = transform.root.gameObject.GetComponentsInChildren<ReticleSystem>();
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
+
+        transform.localPosition = componentOffset;
+        transform.localRotation = Quaternion.Euler(componentAngle);
     }
 
     protected virtual void OnPress()

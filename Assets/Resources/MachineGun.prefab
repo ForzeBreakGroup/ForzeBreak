@@ -1900,7 +1900,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 1
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
@@ -1924,4 +1924,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 0
   componentOffset: {x: 0, y: 0.8, z: 1.264}
+  componentAngle: {x: 0, y: 0, z: 0}
   fireRate: 0.5
+  ammo: 10
