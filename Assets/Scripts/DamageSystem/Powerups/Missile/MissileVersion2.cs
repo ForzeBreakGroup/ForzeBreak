@@ -14,7 +14,6 @@ public class MissileVersion2 : PowerUpBase
 
     private bool fired = false;
 
-    private FMOD.Studio.EventInstance fireSound;
 
     private void Awake()
     {
@@ -22,7 +21,6 @@ public class MissileVersion2 : PowerUpBase
         launchLocation = transform.Find("MissileLaunchPoint");
 
 
-        fireSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_MissileLaunch");
     }
 
     public override void AdjustModel()
@@ -84,10 +82,6 @@ public class MissileVersion2 : PowerUpBase
         GameObject missile = PhotonNetwork.Instantiate("Missile", launchLocation.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
         missile.GetComponent<MissileMovement>().Fire();
-
-
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(fireSound, transform, GetComponent<Rigidbody>());
-        fireSound.start();
 
         fired = true;
     }

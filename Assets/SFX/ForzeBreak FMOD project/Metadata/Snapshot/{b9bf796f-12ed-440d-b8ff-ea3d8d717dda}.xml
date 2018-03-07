@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Snapshot" id="{b9bf796f-12ed-440d-b8ff-ea3d8d717dda}">
         <property name="name">
-            <value>SlowMotion</value>
+            <value>Mute</value>
         </property>
         <relationship name="mixer">
             <destination>{95d8b9d6-82ce-41e0-92d4-d333349dec1e}</destination>
@@ -44,7 +44,7 @@
             <value>volume</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-80</value>
         </property>
         <relationship name="automatableObject">
             <destination>{2b644d89-ee66-42e3-a2d7-54b9a4818494}</destination>
@@ -55,7 +55,7 @@
             <value>volume</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-80</value>
         </property>
         <relationship name="automatableObject">
             <destination>{5260aab7-1219-4782-a8b4-a3499f5b159b}</destination>
@@ -66,7 +66,7 @@
             <value>volume</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-80</value>
         </property>
         <relationship name="automatableObject">
             <destination>{53f181e4-2edb-4d47-bee8-af18d48c4a28}</destination>
@@ -99,7 +99,7 @@
             <value>volume</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-78</value>
         </property>
         <relationship name="automatableObject">
             <destination>{72c57691-cce8-4c09-89db-eddcb82841f5}</destination>

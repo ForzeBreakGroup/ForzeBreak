@@ -201,6 +201,9 @@ public class MatchManager : Photon.MonoBehaviour
             Vector3 pos = spawnPoints[playerNumber].spawnPoint;
             Quaternion rot = spawnPoints[playerNumber].spawnRotation;
 
+            FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
+
+            FindObjectOfType<ArenaOutOfBoundDetection>().Mute.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
             GameObject mainCamera = Instantiate(cam);
 
