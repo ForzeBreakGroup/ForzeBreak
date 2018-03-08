@@ -11,7 +11,7 @@ public class BoostControl : MonoBehaviour {
 
     public float boostPower = 30.0f;
     public float energy = 100.0f;
-    public float boostMaxSpeed = 30.0f;
+    public float boostMaxSpeed = 25.0f;
     public float energyDecay = 0.5f;
     public float energyRecover = 0.01f;
     public float maxEnergy = 100.0f;

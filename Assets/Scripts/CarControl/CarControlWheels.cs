@@ -173,10 +173,14 @@ public class CarControlWheels : NetworkPlayerMovement
         }
 
         //if moving backward, stop first by lerp then apply forward force
-        if (CurrentSpeed > 0.01f && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
+        if (CurrentSpeed > 0.1f && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
         {
             if (IsWheelsGround)
+            {
                 carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * 0.1f);
+                carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+
+            }
         }
         else
         {
@@ -187,10 +191,14 @@ public class CarControlWheels : NetworkPlayerMovement
         }
 
         //if moving forward, stop first by lerp then apply backward force
-        if (CurrentSpeed > 0.01f && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
+        if (CurrentSpeed > 0.1f && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
         {
             if (IsWheelsGround)
+            {
                 carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * 0.05f);
+                carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+
+            }
         }
         else if (footbrake > 0)
         {

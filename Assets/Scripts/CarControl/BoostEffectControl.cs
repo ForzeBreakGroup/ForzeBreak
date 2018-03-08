@@ -25,6 +25,8 @@ class BoostEffectControl : Photon.MonoBehaviour
         foreach (ParticleSystem engineParticleSystem in EngineParticleSystems)
             _enginePsMaterials.Add(engineParticleSystem.GetComponent<Renderer>().material);
 
+        UpdateColorBySpeed(false);
+
     }
 
     public void UpdateColorBySpeed(bool isBoostHold)

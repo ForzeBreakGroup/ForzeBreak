@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostPower: 30
   energy: 100
-  boostMaxSpeed: 30
+  boostMaxSpeed: 25
   energyDecay: 0.5
   energyRecover: 0.01
   maxEnergy: 100
