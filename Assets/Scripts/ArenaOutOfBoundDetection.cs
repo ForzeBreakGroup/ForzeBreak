@@ -10,12 +10,6 @@ using UnityEngine;
  */
 public class ArenaOutOfBoundDetection : MonoBehaviour
 {
-    public FMOD.Studio.EventInstance Mute;
-
-    private void Awake()
-    {
-        Mute = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Mute");
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,14 +25,8 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
 
-            StartCoroutine(startMute());
         }
 
     }
 
-    private IEnumerator startMute()
-    {
-        yield return new WaitForSeconds(3);
-        Mute.start();
-    }
 }

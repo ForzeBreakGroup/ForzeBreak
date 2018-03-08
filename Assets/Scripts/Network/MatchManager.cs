@@ -203,7 +203,6 @@ public class MatchManager : Photon.MonoBehaviour
 
             FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
 
-            FindObjectOfType<ArenaOutOfBoundDetection>().Mute.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
             GameObject mainCamera = Instantiate(cam);
 
