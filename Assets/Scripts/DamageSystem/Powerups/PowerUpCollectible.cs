@@ -27,18 +27,18 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     /// Boolean indicator if the collectible is in random mode
     /// </summary>
     [SerializeField]
-    private bool randomMode = true;
+    protected bool randomMode = true;
 
     /// <summary>
     /// Adjustable powerup tier level defined by PowreUpGrade class
     /// </summary>
     [SerializeField]
-    private PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
+    protected PowerUpGrade.TierLevel powerUpTier = PowerUpGrade.TierLevel.COMMON;
 
     /// <summary>
     /// Instance of powerup grade for random power up generation
     /// </summary>
-    private PowerUpGrade powerUpGrade;
+    protected PowerUpGrade powerUpGrade;
 
     /// <summary>
     /// FMOD sound effect instance
@@ -71,21 +71,6 @@ public class PowerUpCollectible : Photon.MonoBehaviour
                 FMODUnity.RuntimeManager.AttachInstanceToGameObject(pickupSound, transform, GetComponent<Rigidbody>());
                 pickupSound.start();
 
-                // Random generate powerup name
-                if (randomMode)
-                {
-                    powerupName = powerUpGrade.GetRandomPowerUp(powerUpTier);
-                }
-                
-                // Calls to the player owner using RPC to instantiate corresponding powerup from Resources folder
-                view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
-                view.RPC("AddPowerUpComponent", PhotonTargets.All, powerupName, view.viewID);
-
-                // Raise a photon event to master client to notify the powerup has been collected, the master client will then appropriately destroy the powerup
-                RaiseEventOptions options = new RaiseEventOptions();
-                options.Receivers = ReceiverGroup.MasterClient;
-                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPowerUpCollected, transform.position, true, options);
-
                 // Hide in remote client side to create illusion of powerup has been collected immediately, otherwise, it will have delay to wait for masterclient to destroy the object
                 // Since the network delay is never perfectly zero, hiding the object will reduce the effect of delayed powerup collect
                 foreach (Transform t in transform)
@@ -98,8 +83,15 @@ public class PowerUpCollectible : Photon.MonoBehaviour
                 }
                 transform.GetComponent<Renderer>().enabled = false;
                 powerUpCollected = true;
+
+                PowerUpCollected(view);
             }
         }
+    }
+
+    protected virtual void PowerUpCollected(PhotonView view)
+    {
+
     }
 
     #endregion
