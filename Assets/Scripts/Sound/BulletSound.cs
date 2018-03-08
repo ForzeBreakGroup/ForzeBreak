@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Bullet sound
+ */
 public class BulletSound : MonoBehaviour {
 
     private FMOD.Studio.EventInstance fireSound;

@@ -9,16 +9,26 @@ using UnityEngine;
  */
 public class CarUserControl : NetworkPlayerInput
 {
+    /// <summary>
+    /// Applying different color to different players
+    /// </summary>
     public Color color;
+    /// <summary>
+    /// for local game, indicate the player
+    /// </summary>
     public int playerNum;
 
-    private CarControlWheels carControlWheels; // the car controller we want to use
+
+    private CarControlWheels carControlWheels;
     private BoostControl boostControl;
     private FlipControl flipControl;
 
     private bool boost = false;
     private bool flip = false;
 
+    /// <summary>
+    /// engine sound
+    /// </summary>
     private FMOD.Studio.EventInstance engine;
 
 
@@ -42,7 +52,6 @@ public class CarUserControl : NetworkPlayerInput
         // keyboard Input
         float h = Input.GetAxis("Horizontal_Keyboard");
         float v = Input.GetAxis("Vertical_Keyboard");
-        float handbrake = Input.GetAxis("Handbrake_Keyboard");
 
         // controller Input
         float controllerX = Input.GetAxis("Horizontal_Controller" + playerNum);
@@ -51,10 +60,12 @@ public class CarUserControl : NetworkPlayerInput
         //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
         v = (v == 0) ? -controllerTrigger : v;
-        carControlWheels.Move(h, v, v, handbrake);
+        carControlWheels.Move(h, v, v);
 
         boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
         flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
+
+        //boost
         if (boostControl!=null)
         {
             if (boost)
@@ -63,15 +74,20 @@ public class CarUserControl : NetworkPlayerInput
                 boostControl.Recover();
         }
 
+        //flip
         if(flipControl!=null)
             flipControl.Flip(flip,h);
 
 
-
+        //change engine sound pitch
         engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
 
     }
     
+    /// <summary>
+    /// change color of the car
+    /// </summary>
+    /// <param name="c">color you want</param>
     public void ChangeColor(Color c)
     {
         color = c;

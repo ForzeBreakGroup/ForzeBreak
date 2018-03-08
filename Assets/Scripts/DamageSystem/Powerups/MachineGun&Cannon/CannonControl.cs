@@ -1,14 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Control class of the cannon.
+ */
 public class CannonControl : PowerUpBase
 {
-
-    public float fireRate = 0.5f;
-    public int ammo = 10;
-
+    /// <summary>
+    /// Time duration for next fire
+    /// </summary>
+    public float FireCD = 0.5f;
+    /// <summary>
+    /// Total Ammo, run out then destroy cannon
+    /// </summary>
+    public int Ammo = 10;
+    /// <summary>
+    /// Bullet spawn point.
+    /// </summary>
     private Transform bulletSpawn;
+
+
     private float nextFire = 0.0f;
 
 
@@ -30,21 +44,17 @@ public class CannonControl : PowerUpBase
             DestroyImmediate(this);
         }
 
-        // Move the weapon model to desired places
-        //transform.localPosition = componentOffset;
-        //transform.localRotation = Quaternion.identity;
     }
 
     protected override void OnHold() 
     {
         if(Time.time>nextFire)
         {
-            nextFire = Time.time + fireRate;
+            nextFire = Time.time + FireCD;
             GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
-            bullet.GetComponent<BulletMovement>().playerNum = playerNum;
-            ammo--;
+            Ammo--;
 
-            if (ammo<0)
+            if (Ammo<0)
             {
                 UnloadPowerUp();
             }

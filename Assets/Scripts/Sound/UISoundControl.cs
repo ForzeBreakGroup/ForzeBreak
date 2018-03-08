@@ -3,6 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * UI sound, Hover and Confirm Function are called by button on ui.
+ */
 public class UISoundControl : MonoBehaviour
 {
     public FMOD.Studio.EventInstance BGM;
