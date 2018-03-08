@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Update the damage UI
+ */
 public class UIDamageIconControl : MonoBehaviour {
 
 

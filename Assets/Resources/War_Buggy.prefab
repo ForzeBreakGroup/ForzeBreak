@@ -1906,9 +1906,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostPower: 30
   energy: 100
-  boostMaxSpeed: 50
+  boostMaxSpeed: 25
   energyDecay: 0.5
-  energyRecover: 0.05
+  energyRecover: 0.01
   maxEnergy: 100
 --- !u!114 &114175742806894734
 MonoBehaviour:
@@ -2010,18 +2010,18 @@ MonoBehaviour:
   - {fileID: 1633811492052092}
   - {fileID: 1139845544297606}
   - {fileID: 1061832778761826}
-  wheelCollidersObjects:
-  - {fileID: 1118207636340732}
-  - {fileID: 1836324056796762}
-  - {fileID: 1758871744210338}
-  - {fileID: 1495366918234752}
+  wheelColliders:
+  - {fileID: 146791343990703652}
+  - {fileID: 146631267304365952}
+  - {fileID: 146654316250394494}
+  - {fileID: 146209713561829158}
   centreOfMassOffset: {x: 0, y: 0, z: 0}
   maximumSteerAngle: 30
   steerHelper: 0.7
   fullTorqueOverAllWheels: 30
   reverseTorque: 20
   downforce: 100
-  topspeed: 30
+  topspeed: 15
 --- !u!114 &114621299955240402
 MonoBehaviour:
   m_ObjectHideFlags: 1

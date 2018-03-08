@@ -2,7 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Author: Robin Zhou
+ *
+ * Description:
+ * static value, make later change easier.
+ */
 public class StaticData : MonoBehaviour
 {
 

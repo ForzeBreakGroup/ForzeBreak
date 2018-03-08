@@ -108,6 +108,8 @@ public class DamageSystem : NetworkPlayerCollision
         Vector3 velocity = Mathf.Sqrt(amplifiedFlyoffDistance * Physics.gravity.magnitude) * normalizedPoint;
         GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
 
+        Debug.Log("Camerashake");
+
         if (enableLog)
         {
             Debug.Log(string.Format("Fly Off Distance: {0}, Calculated velocity: {1}", amplifiedFlyoffDistance, velocity));

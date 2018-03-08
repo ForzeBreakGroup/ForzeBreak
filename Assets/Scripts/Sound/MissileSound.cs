@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Missle Sound.
+ */
 public class MissileSound : MonoBehaviour {
 
     private FMOD.Studio.EventInstance fireSound;

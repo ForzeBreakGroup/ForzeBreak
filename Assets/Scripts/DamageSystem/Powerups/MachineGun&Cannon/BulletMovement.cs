@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Bullet moving class, bind to a single bullet.
+ * 
+ */
 public class BulletMovement : NetworkPowerUpMovement
 {
-    
-    public float velocity = 100f;
-    public float explosionRadius = 2.0f;
-    public float explosionForce = 1000f;
-    public float existingTime = 3f;
-
-    public int playerNum;
+    /// <summary>
+    /// Bullet moving speed
+    /// </summary>
+    public float Velocity = 100f;
+    /// <summary>
+    /// Bullet existing time duration
+    /// </summary>
+    public float ExistingTime = 3f;
 
     private float spawnTime = 0f;
     protected override void Awake()
     {
         base.Awake();
-        rb.velocity = velocity * transform.forward;
+        rb.velocity = Velocity * transform.forward;
         spawnTime = Time.time;
     }
     
@@ -24,7 +32,7 @@ public class BulletMovement : NetworkPowerUpMovement
     {
         base.Move();
 
-        if(Time.time>spawnTime+existingTime)
+        if(Time.time>spawnTime+ExistingTime)
         {
             PhotonNetwork.Destroy(gameObject);
         }
@@ -34,13 +42,8 @@ public class BulletMovement : NetworkPowerUpMovement
     {
         if (photonView.isMine)
         {
-            if (collision.gameObject != gameObject)
-            {
-
-                PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
-                PhotonNetwork.Destroy(gameObject);
-
-            }
+            PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
