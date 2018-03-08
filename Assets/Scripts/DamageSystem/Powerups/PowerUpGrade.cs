@@ -2,8 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * PowerUp grade class for generating appropriate tier level power up
+ */
 public class PowerUpGrade
 {
+    /// <summary>
+    /// Enum defines the tier level of power up
+    /// </summary>
     public enum TierLevel
     {
         EPIC,
@@ -11,6 +20,9 @@ public class PowerUpGrade
         COMMON,
     };
 
+    /// <summary>
+    /// Static name string for common tier level power up
+    /// </summary>
     private static string[] commonPowerUp =
     {
         StaticData.MISSILE_NAME,
@@ -18,6 +30,11 @@ public class PowerUpGrade
         StaticData.SPIKERAM_NAME
     };
 
+    /// <summary>
+    /// Public method to randomly generate powerup name based on the tier level given
+    /// </summary>
+    /// <param name="tier"></param>
+    /// <returns></returns>
     public string GetRandomPowerUp(TierLevel tier)
     {
         string[] poolBase;

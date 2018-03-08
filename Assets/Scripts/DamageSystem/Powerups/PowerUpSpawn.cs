@@ -2,52 +2,102 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Powerup spawn point to spawn assigned powerup prefabs
+ * 
+ */
 [System.Serializable]
 public struct PowerUpSpawnData
 {
+    /// <summary>
+    /// Powerup prefab
+    /// </summary>
     public GameObject powerUpItem;
 
+    /// <summary>
+    /// Possibility rate of spawning
+    /// </summary>
     [Range(0, 1)]
     public float powerUpSpawnRate;
 }
 
 public class PowerUpSpawn : Photon.MonoBehaviour
 {
+    #region Members
+
+    /// <summary>
+    /// List of powerup spawning object data
+    /// </summary>
     [SerializeField]
     private PowerUpSpawnData[] powerUpSpawnData;
 
+    /// <summary>
+    /// Internal refernece to the spawned object
+    /// </summary>
     private GameObject collectible;
 
+    /// <summary>
+    /// Adjustable cooldown before next spawn
+    /// </summary>
     [SerializeField]
     private float cooldown = 15.0f;
-    private float elapsedTime = 0;
-    private bool inCooldown = false;
 
+    /// <summary>
+    /// Internal cooldown counter
+    /// </summary>
+    private float elapsedTime = 0;
+
+    /// <summary>
+    /// Boolean indicate if the cooldown is enabled
+    /// </summary>
+    private bool inCooldown = false;
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// Spawn collectible when awaked
+    /// </summary>
     private void Awake()
     {
         SpawnCollectible();
     }
 
+    /// <summary>
+    /// Register to photon events
+    /// </summary>
     private void OnEnable()
     {
         PhotonNetwork.OnEventCall += OnPowerUpCollectedHandler;
         PhotonNetwork.OnEventCall += OnRoundOverHandler;
     }
 
+    /// <summary>
+    /// Deregister the photon events
+    /// </summary>
     private void OnDisable()
     {
         PhotonNetwork.OnEventCall -= OnPowerUpCollectedHandler;
         PhotonNetwork.OnEventCall -= OnRoundOverHandler;
     }
 
+    /// <summary>
+    /// Spawn one of pre-assigned collectible gameobject based on the possibility rating
+    /// </summary>
     private void SpawnCollectible()
     {
+        // Only masterclient will handle the logic
         if (PhotonNetwork.isMasterClient)
         {
-            float[] randValues = new float[powerUpSpawnData.Length];
+            // Highest value tracker
             float highestValue = 0f;
+
+            // Index of highest value
             int highestValueIndex = 0;
 
+            // Generate a random number for each possible power up
             for (int i = 0; i < powerUpSpawnData.Length; ++i)
             {
                 // Value = Random number [1, 10000] * spawn rate multiplier
@@ -61,11 +111,21 @@ public class PowerUpSpawn : Photon.MonoBehaviour
                 }
             }
 
+            // Destroy previous collectible if already existed
+            if (collectible)
+            {
+                PhotonNetwork.Destroy(collectible);
+            }
             collectible = PhotonNetwork.Instantiate(powerUpSpawnData[highestValueIndex].powerUpItem.name, transform.position, Quaternion.identity, 0);
-            Debug.Log(collectible);
         }
     }
 
+    /// <summary>
+    /// RoundOver event handler, force all spawn points to be in cooldown, and elapsed time counter becomes the cooldown time. Effectively, all spawn point will spawn new powerup immediately
+    /// </summary>
+    /// <param name="evtCode"></param>
+    /// <param name="content"></param>
+    /// <param name="senderid"></param>
     private void OnRoundOverHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnRoundOver)
@@ -75,6 +135,12 @@ public class PowerUpSpawn : Photon.MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When powerup is collected, the remote client will notify masterclient for properly destroy the object
+    /// </summary>
+    /// <param name="evtCode"></param>
+    /// <param name="content"></param>
+    /// <param name="senderid"></param>
     private void OnPowerUpCollectedHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnPowerUpCollected)
@@ -83,10 +149,8 @@ public class PowerUpSpawn : Photon.MonoBehaviour
 
             if (powerUpPos == transform.position)
             {
-                Debug.Log("PowerUo Collected Handler Called by: " + gameObject.name);
                 if (collectible != null)
                 {
-                    Debug.Log("Destroying all collectible");
                     PhotonNetwork.Destroy(collectible);
                 }
 
@@ -103,10 +167,11 @@ public class PowerUpSpawn : Photon.MonoBehaviour
             elapsedTime += Time.deltaTime;
             if (inCooldown && elapsedTime >= cooldown)
             {
-                Debug.Log("Spawning new collectible");
                 inCooldown = false;
                 SpawnCollectible();
             }
         }
     }
+
+    #endregion
 }

@@ -28,7 +28,7 @@ public class SpikeRamComponent : PowerUpBase
         PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
         if (other.transform.root.tag == "Player" && otherPhotonView.isMine)
         {
-            other.transform.root.GetComponent<DamageSystem>().CreateExplosion((float)force, transform.position, radius);
+            other.transform.root.GetComponent<DamageSystem>().ApplyDamageForce((float)force, transform.position, radius);
             --capacity;
 
             if (capacity <= 0)

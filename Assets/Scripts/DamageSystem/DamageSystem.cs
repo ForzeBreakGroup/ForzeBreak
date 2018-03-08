@@ -10,6 +10,9 @@ using UnityEngine;
  * Analyze the collision and applies different force based on collision analysis
  */
  
+/// <summary>
+/// Enum defines the damage threshold
+/// </summary>
 public enum DamageThreshold
 {
     Healthy,
@@ -37,12 +40,21 @@ public class DamageSystem : NetworkPlayerCollision
     [SerializeField]
     private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
     
+    /// <summary>
+    /// Adjustable threshold value for a healthy vehicle condition, if damages percentage is under this number, it is considered healthy
+    /// </summary>
     [SerializeField]
     private float healthyThreshold = 150.0f;
 
+    /// <summary>
+    /// Adjustable threshold value for a lightly damaged vehicle condition, if damage percentage is under this number, it is considered lightly damaged
+    /// </summary>
     [SerializeField]
     private float lightlyDamageThreshold = 250.0f;
 
+    /// <summary>
+    /// Adjustable threshold value for a heavily damaged vehicle condition
+    /// </summary>
     [SerializeField]
     private float heavilyDamageThreshold = 375.0f;
 
@@ -102,20 +114,6 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
-    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        base.SerializeView(stream, info);
-
-        if (stream.isWriting)
-        {
-            stream.SendNext(damageAmplifyPercentage);
-        }
-        else if(stream.isReading)
-        {
-            damageAmplifyPercentage = (float)stream.ReceiveNext();
-        }
-    }
-
     #endregion
 
     #region Public Methods
@@ -141,12 +139,17 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
-    public void CreateExplosion(float force, Vector3 explosionCenter, float radius)
+    /// <summary>
+    /// Apply the damage force to the vehicle, this method will automatically increase the damage percentage based on the distance from the impact center and radius of the effective area
+    /// </summary>
+    /// <param name="force"></param>
+    /// <param name="explosionCenter"></param>
+    /// <param name="radius"></param>
+    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius)
     {
+        // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
         {
-            Debug.Log(string.Format("Force: {0}, Center: {1}, Radius: {2}", force, explosionCenter, radius));
-
             // Calculates damage received based on the force and explosion radius
             float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
             damage = Mathf.Clamp(damage, 0, Mathf.Infinity);
@@ -156,6 +159,10 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
+    /// <summary>
+    /// Returns damage threshold based on internal damage percentage
+    /// </summary>
+    /// <returns></returns>
     public DamageThreshold GetDamageThreshold()
     {
         // Healthy
@@ -180,6 +187,25 @@ public class DamageSystem : NetworkPlayerCollision
         else
         {
             return DamageThreshold.Critical;
+        }
+    }
+
+    /// <summary>
+    /// Serialize the damage percentage to all remote clients
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
+    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        base.SerializeView(stream, info);
+
+        if (stream.isWriting)
+        {
+            stream.SendNext(damageAmplifyPercentage);
+        }
+        else if (stream.isReading)
+        {
+            damageAmplifyPercentage = (float)stream.ReceiveNext();
         }
     }
     #endregion
