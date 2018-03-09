@@ -19,8 +19,6 @@ public class MissileVersion2 : PowerUpBase
     {
         this.enabled = photonView.isMine;
         launchLocation = transform.Find("MissileLaunchPoint");
-
-
     }
 
     public override void AdjustModel()
@@ -39,10 +37,6 @@ public class MissileVersion2 : PowerUpBase
         {
             lockOnSystem.Add(reticleSystem);
         }
-
-        // Move the weapon model to desired places
-        //transform.localPosition = componentOffset;
-        //transform.localRotation = Quaternion.identity;
     }
 
     protected override void OnPress()

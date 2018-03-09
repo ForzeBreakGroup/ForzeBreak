@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 124431141644714686}
   - component: {fileID: 114397638253165340}
   - component: {fileID: 114161896256551956}
+  - component: {fileID: 114432702465315392}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -133,6 +134,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: f851732016b7ec241ac87b090dde06bf, type: 2}
+--- !u!114 &114432702465315392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1895025408697038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfc9fc2ef023ef448fc22bd2b65b6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 4247488482388702}
+  shakeDuration: 0
+  shakeAmount: 0.1
+  decreaseFactor: 1
 --- !u!114 &114489161439602398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +163,6 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 10
   turnSpeed: 10
-  smoothTurnTime: 0.1
   spinTurnLimit: 0
   followRoll: 0
   followTilt: 0

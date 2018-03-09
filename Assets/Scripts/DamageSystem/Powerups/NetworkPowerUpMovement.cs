@@ -3,73 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Base movement network synchronization class for all projectile powerups
+ */
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPowerUpMovement : Photon.MonoBehaviour
 {
+    #region Protected Members
+    /// <summary>
+    /// Internal reference to the rigidbody
+    /// </summary>
     protected Rigidbody rb;
-    protected float lastReceivedTime = 0;
-    protected Vector3 networkPos;
-    protected Quaternion networkRot;
 
+    /// <summary>
+    /// Timestamp for when the last synchronization time
+    /// </summary>
+    protected float lastReceivedTime = 0;
+
+    /// <summary>
+    /// The received position from network
+    /// </summary>
+    protected Vector3 networkPos;
+
+    /// <summary>
+    /// The received rotation from network
+    /// </summary>
+    protected Quaternion networkRot;
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// Finds the Rigidbody reference
+    /// </summary>
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         //StartCoroutine(DestroyCoroutine());
     }
 
+    /// <summary>
+    /// Unified fixed update entry point for all child class
+    /// </summary>
     protected virtual void FixedUpdate()
     {
         if (photonView.isMine)
         {
             Move();
         }
-        else
-        {
-
-        }
     }
 
-    protected void NetworkMove()
-    {
-        float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
-        float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastReceivedTime);
-        float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
-
-        // Missile will fly up towards sky first
-        Vector3 exterpolatedPosition = networkPos + rb.velocity * totalTimePassed;
-        Vector3 predictPosition = Vector3.MoveTowards(rb.position, exterpolatedPosition, rb.velocity.magnitude * Time.deltaTime);
-
-        if (Vector3.Distance(rb.position, exterpolatedPosition) > 2f)
-        {
-            predictPosition = exterpolatedPosition;
-        }
-        rb.MovePosition(predictPosition);
-        rb.rotation = Quaternion.RotateTowards(rb.rotation, networkRot, 180f * Time.deltaTime);
-    }
-
+    /// <summary>
+    /// For each inherited child class to override the movement
+    /// </summary>
     protected virtual void Move()
     {
 
-    }
-
-    protected void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
-        {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-            stream.SendNext(rb.velocity);
-            stream.SendNext(rb.angularVelocity);
-        }
-        else if (stream.isReading)
-        {
-            networkPos = (Vector3)stream.ReceiveNext();
-            networkRot = (Quaternion)stream.ReceiveNext();
-            rb.velocity = (Vector3)stream.ReceiveNext();
-            rb.angularVelocity = (Vector3)stream.ReceiveNext();
-
-            lastReceivedTime = (float)info.timestamp;
-        }
     }
 
     IEnumerator DestroyCoroutine()
@@ -77,4 +68,6 @@ public class NetworkPowerUpMovement : Photon.MonoBehaviour
         yield return new WaitForSeconds(10);
         PhotonNetwork.Destroy(this.gameObject);
     }
+
+    #endregion
 }

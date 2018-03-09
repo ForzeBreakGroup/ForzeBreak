@@ -34,7 +34,8 @@ sysinfo.txt
 *.unitypackage
 
 # FMOD
+*.log
 fmod_editor.log
 fmod.log
-Assets/FMODStudioCache.asset
-Assets/Resources/FMODStudioSettings.asset
+Assets/Scripts/Sound/MissileSound.cs
+Assets/Scripts/Sound/MissileSound.cs

@@ -15,12 +15,15 @@ public class NetworkPlayerInput : NetworkPlayerBase
     /// </summary>
     protected virtual void Awake()
     {
-        enabled = photonView.isMine;
+        //enabled = photonView.isMine;
     }
 
     private void FixedUpdate()
     {
-        PlayerInputUpdate();
+        if (photonView.isMine)
+        {
+            PlayerInputUpdate();
+        }
     }
 
     /// <summary>
