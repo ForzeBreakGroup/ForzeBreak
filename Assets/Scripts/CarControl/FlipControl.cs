@@ -44,6 +44,7 @@ public class FlipControl : MonoBehaviour {
 
         flipSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleFlip");
     }
+
     /// <summary>
     /// Flip function, call it every update.
     /// </summary>
@@ -91,8 +92,6 @@ public class FlipControl : MonoBehaviour {
                 else
                     carRigidbody.AddRelativeTorque(Vector3.forward * 1000f, ForceMode.Acceleration);
             }
-
-
         }
 
     }

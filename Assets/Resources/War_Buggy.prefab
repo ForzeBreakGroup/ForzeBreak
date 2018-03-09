@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 114182506026662142}
   - component: {fileID: 114621299955240402}
   - component: {fileID: 114117468940118094}
+  - component: {fileID: 114588205272943532}
   - component: {fileID: 114746530151634126}
   - component: {fileID: 114501710976548662}
   - component: {fileID: 114527540014986978}
@@ -1932,8 +1933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538af9328de7a4b478666523ed7a1a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
   playerNum: 0
+  boost: 0
+  flip: 0
 --- !u!114 &114276989030444090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2022,6 +2024,17 @@ MonoBehaviour:
   reverseTorque: 20
   downforce: 100
   topspeed: 15
+--- !u!114 &114588205272943532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1517994163518996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114621299955240402
 MonoBehaviour:
   m_ObjectHideFlags: 1
