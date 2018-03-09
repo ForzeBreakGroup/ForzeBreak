@@ -11239,15 +11239,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
+      propertyPath: SizeBySpeedModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0.991573
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
+      propertyPath: SizeBySpeedModule.curve.maxCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
+      propertyPath: SizeBySpeedModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 2}
