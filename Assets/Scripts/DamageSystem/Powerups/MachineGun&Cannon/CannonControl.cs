@@ -11,14 +11,12 @@ public class CannonControl : PowerUpBase
     private Transform bulletSpawn;
     private float nextFire = 0.0f;
 
-    private FMOD.Studio.EventInstance fireSound;
 
     private void Awake()
     {
         this.enabled = photonView.isMine;
         bulletSpawn = transform.Find("BulletSpawn");
 
-        fireSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_Cannon");
     }
 
     public override void AdjustModel()
@@ -45,11 +43,6 @@ public class CannonControl : PowerUpBase
             GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
             bullet.GetComponent<BulletMovement>().playerNum = playerNum;
             ammo--;
-
-
-            FMODUnity.RuntimeManager.AttachInstanceToGameObject(fireSound, transform, GetComponent<Rigidbody>());
-            fireSound.start();
-
 
             if (ammo<0)
             {

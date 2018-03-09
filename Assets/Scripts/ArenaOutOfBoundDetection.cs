@@ -10,6 +10,13 @@ using UnityEngine;
  */
 public class ArenaOutOfBoundDetection : MonoBehaviour
 {
+    public FMOD.Studio.EventInstance Mute;
+
+    private void Awake()
+    {
+        Mute = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Mute");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PhotonView view = other.transform.root.gameObject.GetPhotonView();
@@ -23,7 +30,15 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
             PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, playerId, true, options);
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
+
+            StartCoroutine(startMute());
         }
 
+    }
+
+    private IEnumerator startMute()
+    {
+        yield return new WaitForSeconds(3);
+        Mute.start();
     }
 }
