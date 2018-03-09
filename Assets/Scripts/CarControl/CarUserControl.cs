@@ -19,7 +19,7 @@ public class CarUserControl : NetworkPlayerInput
     private FlipControl flipControl;
 
     public bool boost = false;
-    private bool flip = false;
+    public bool flip = false;
 
 
     private FMOD.Studio.EventInstance engine;
@@ -77,10 +77,12 @@ public class CarUserControl : NetworkPlayerInput
         if (stream.isWriting)
         {
             stream.SendNext(boost);
+            stream.SendNext(flip);
         }
         else if (stream.isReading)
         {
             boost = (bool)stream.ReceiveNext();
+            flip = (bool)stream.ReceiveNext();
         }
     }
 }
