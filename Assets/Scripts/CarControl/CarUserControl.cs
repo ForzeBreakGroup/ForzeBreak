@@ -10,21 +10,16 @@ using UnityEngine;
 public class CarUserControl : NetworkPlayerInput
 {
     /// <summary>
-    /// Applying different color to different players
-    /// </summary>
-    public Color color;
-    /// <summary>
     /// for local game, indicate the player
     /// </summary>
     public int playerNum;
-
 
     private CarControlWheels carControlWheels;
     private BoostControl boostControl;
     private FlipControl flipControl;
 
-    private bool boost = false;
-    private bool flip = false;
+    public bool boost = false;
+    public bool flip = false;
 
     /// <summary>
     /// engine sound
@@ -41,14 +36,16 @@ public class CarUserControl : NetworkPlayerInput
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
         playerNum = 0;
+
         engine = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleEngine");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine,transform,GetComponent<Rigidbody>());
         engine.start();
-
     }
 
-    private void FixedUpdate()
+    protected override void PlayerInputUpdate()
     {
+        base.PlayerInputUpdate();
+
         // keyboard Input
         float h = Input.GetAxis("Horizontal_Keyboard");
         float v = Input.GetAxis("Vertical_Keyboard");
@@ -65,37 +62,27 @@ public class CarUserControl : NetworkPlayerInput
         boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
         flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
 
-        //boost
-        if (boostControl!=null)
-        {
-            if (boost)
-                boostControl.Boost();
-            else
-                boostControl.Recover();
-        }
-
         //flip
-        if(flipControl!=null)
-            flipControl.Flip(flip,h);
-
+        if (flipControl != null)
+            flipControl.Flip(flip, h);
 
         //change engine sound pitch
         engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
-
     }
-    
-    /// <summary>
-    /// change color of the car
-    /// </summary>
-    /// <param name="c">color you want</param>
-    public void ChangeColor(Color c)
+
+    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        color = c;
-        Material mat = transform.Find("Model").transform.Find("Body").GetComponent<MeshRenderer>().material;
-        // Change the color of player vehicle to assigned color
-        if (mat.color != color)
+        base.SerializeView(stream, info);
+
+        if (stream.isWriting)
         {
-            mat.color = color;
+            stream.SendNext(boost);
+            stream.SendNext(flip);
+        }
+        else if (stream.isReading)
+        {
+            boost = (bool)stream.ReceiveNext();
+            flip = (bool)stream.ReceiveNext();
         }
     }
 }

@@ -20,24 +20,38 @@ public class BoostControl : MonoBehaviour {
     private BoostEffectControl boostEffect;
     private Rigidbody carRigidbody;
     private CarControlWheels carController;
+    private CarUserControl carControlInput;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();
         boostEffect = GetComponentInChildren<BoostEffectControl>();
+        carControlInput = GetComponent<CarUserControl>();
+    }
+
+    private void LateUpdate()
+    {
+        if (carControlInput.boost)
+        {
+            Boost();
+        }
+        else
+        {
+            Recover();
+        }
     }
 
     public void Boost()
     {
-        if ((int)energy>1)
+        if ((int)energy > 1)
         {
             carController.IsBoosting = true;
             carController.MaxSpeed = boostMaxSpeed;
-            carRigidbody.AddForce(transform.forward*boostPower, ForceMode.Acceleration);
+            carRigidbody.AddForce(transform.forward * boostPower, ForceMode.Acceleration);
             energy = energy < 0 ? 0 : energy - energyDecay;
 
-            if(boostEffect!=null)
+            if (boostEffect != null)
             {
                 boostEffect.UpdateColorBySpeed(true);
             }
@@ -47,11 +61,12 @@ public class BoostControl : MonoBehaviour {
             Recover();
         }
     }
+
     public void Recover()
     {
         carController.IsBoosting = false;
 
-        if (energy< maxEnergy)
+        if (energy < maxEnergy)
             energy += energyRecover;
 
         if (boostEffect != null)
