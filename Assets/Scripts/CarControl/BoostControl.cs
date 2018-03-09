@@ -46,6 +46,7 @@ public class BoostControl : MonoBehaviour {
     {
         if ((int)energy > 1)
         {
+            carController.ApplyDrive(1,0);
             carController.IsBoosting = true;
             carController.MaxSpeed = boostMaxSpeed;
             carRigidbody.AddForce(transform.forward * boostPower, ForceMode.Acceleration);

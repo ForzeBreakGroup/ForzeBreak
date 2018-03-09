@@ -164,7 +164,7 @@ public class CarControlWheels : NetworkPlayerMovement
     /// </summary>
     /// <param name="accel">Accelerate input£¬ + for forward, - for backward</param>
     /// <param name="footbrake">foot brake input, - for brake</param>
-    private void ApplyDrive(float accel, float footbrake)
+    public void ApplyDrive(float accel, float footbrake)
     {
         //if no input, stop the car gradually
         if(accel<0.01f&&footbrake<0.01f&&accel>-0.01f&&footbrake>-0.01f&&IsWheelsGround)
