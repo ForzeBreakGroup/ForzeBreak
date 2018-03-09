@@ -52,7 +52,6 @@ public class CannonControl : PowerUpBase
         {
             nextFire = Time.time + FireCD;
             GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
-            bullet.GetComponent<BulletMovement>().playerNum = playerNum;
 
             Ammo--;
 
