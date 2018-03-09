@@ -13,6 +13,10 @@ using Photon;
  * 
  * By default, NetworkManager is not connected to the PhotonService. Once the player choose to CREATE or JOIN room
  * then it will start the connection
+ * 
+ * Remarks:
+ * The default code flow of the program.
+ * Online Mode -> Connect to Photon Server -> OnJoinMaster callback -> Join Random Room -> Join Random Room Failed (No room available) -> Create Room
  */
 public class NetworkManager : PunBehaviour
 {
@@ -137,25 +141,8 @@ public class NetworkManager : PunBehaviour
         DisconnectFromPhoton();
     }
 
-    /// <summary>
-    /// Connects to the PhotonServer and create room with default RoomOptions
-    /// </summary>
-    public void CreateGame()
+    public void OnlineMode()
     {
-        // Switch the connection state to CREATE, so when callback occur, can easily distinguish which action to take
-        state = ConnectionState.CREATE;
-        if (!PhotonNetwork.connected)
-        {
-            ConnectingToPhotonServer();
-        }
-    }
-
-    /// <summary>
-    /// Connects to the PhotonServer and join exisiting random room
-    /// </summary>
-    public void JoinRoom()
-    {
-        state = ConnectionState.JOIN;
         if (!PhotonNetwork.connected)
         {
             ConnectingToPhotonServer();
@@ -306,11 +293,11 @@ public class NetworkManager : PunBehaviour
         base.OnJoinedRoom();
 
         // Only needed in network mode
-        if (!offlineMode)
+        if (PhotonNetwork.connected)
         {
             SetPlayerCustomProperties();
         }
-
+        Debug.Log(PhotonNetwork.isMasterClient);
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
@@ -355,31 +342,14 @@ public class NetworkManager : PunBehaviour
     {
         Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonRandomJoinFailed(codeAndMsg);
+
+        CreateRoomInPhotonServer();
     }
 
     public override void OnPhotonCreateRoomFailed(object[] codeAndMsg)
     {
         Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonCreateRoomFailed(codeAndMsg);
-    }
-
-    /// <summary>
-    /// Overrides the OnJoinedLobby event, which is called when connecting to PhotonServer for the first time
-    /// Using ConnectionState to determine which action to take
-    /// </summary>
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("JoinedLobby");
-        base.OnJoinedLobby();
-
-        if (state == ConnectionState.CREATE)
-        {
-            CreateRoomInPhotonServer();
-        }
-        else if (state == ConnectionState.JOIN)
-        {
-            JoinRandomGameInPhotonServer();
-        }
     }
 
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
@@ -413,6 +383,10 @@ public class NetworkManager : PunBehaviour
         if (offlineMode)
         {
             PhotonNetwork.CreateRoom("");
+        }
+        else
+        {
+            JoinRandomGameInPhotonServer();
         }
     }
     #endregion
