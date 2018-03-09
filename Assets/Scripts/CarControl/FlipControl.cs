@@ -29,7 +29,7 @@ public class FlipControl : MonoBehaviour {
     /// side force applied when car is flipping. related to rotating speed.
     /// </summary>
     [SerializeField] private float sideForce = 1000f;
-
+    
     private bool canFlip = true;
     private bool carBodyGrounded = false;
     private float nextFlip = 0.0f;
@@ -65,7 +65,7 @@ public class FlipControl : MonoBehaviour {
         if (canFlip)
         {
             //grounded condition
-            if (carController.IsAnyWheelGround)
+            if (carController.IsAnyWheelGround|| carBodyGrounded)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
@@ -73,7 +73,6 @@ public class FlipControl : MonoBehaviour {
                 FMODUnity.RuntimeManager.AttachInstanceToGameObject(flipSound, transform, GetComponent<Rigidbody>());
                 flipSound.start();
 
-                //StartCoroutine(FlipRotate(2,dir));
                 carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.VelocityChange);
                 if (dir > 0)
                     carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
@@ -82,11 +81,10 @@ public class FlipControl : MonoBehaviour {
 
             }
             //upside down condition
-            else if (transform.up.y < 0.1f && carBodyGrounded)
+            else if (transform.up.y < 0.2 && carBodyGrounded)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
-
 
                 carRigidbody.AddForce(Vector3.up * upForce_overturned, ForceMode.VelocityChange);
                 if (dir > 0)
@@ -110,26 +108,4 @@ public class FlipControl : MonoBehaviour {
         carBodyGrounded = false;
     }
 
-
-
-    //IEnumerator FlipRotate(float duration, float dir)
-    //{
-    //    float startRotation = transform.eulerAngles.z;
-    //    Debug.Log(startRotation);
-
-    //    float endRotation = 360f;
-    //    if (dir > 0)
-    //        endRotation = 360f + startRotation;
-    //    else
-    //        endRotation = 360f - startRotation;
-
-    //    float t = 0.0f;
-    //    while (t < duration)
-    //    {
-    //        t += Time.deltaTime;
-    //        startRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
-    //        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, startRotation);
-    //        yield return null;
-    //    }
-    //}
 }

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="AudioFile" id="{f58eab4f-4b2e-4090-9900-dbd42a51b6dd}">
         <property name="assetPath">
-            <value>SFX_Diegetic/SFX_Explosion.wav</value>
+            <value>SFX_Diegetic/SFX_Cannon.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>
