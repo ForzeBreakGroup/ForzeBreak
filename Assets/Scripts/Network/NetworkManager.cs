@@ -238,7 +238,10 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void JoinRandomGameInPhotonServer()
     {
-        PhotonNetwork.JoinRandomRoom();
+        ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
+        roomInfo.Add("InGame", false);
+
+        PhotonNetwork.JoinRandomRoom(roomInfo, 0);
     }
 
     /// <summary>
@@ -297,10 +300,15 @@ public class NetworkManager : PunBehaviour
         {
             SetPlayerCustomProperties();
         }
-        Debug.Log(PhotonNetwork.isMasterClient);
+
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
+            // Set custom room property to distinguish the room is currently in game or not
+            ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
+            roomInfo.Add("InGame", false);
+            PhotonNetwork.room.SetCustomProperties(roomInfo);
+
             // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
         }
@@ -340,9 +348,7 @@ public class NetworkManager : PunBehaviour
     }
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonRandomJoinFailed(codeAndMsg);
-
         CreateRoomInPhotonServer();
     }
 
