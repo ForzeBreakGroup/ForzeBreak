@@ -19,7 +19,8 @@ public class CarUserControl : NetworkPlayerInput
     private FlipControl flipControl;
 
     public bool boost = false;
-    public bool flip = false;
+    private bool flip = false;
+
     protected override void Awake()
     {
         base.Awake();
