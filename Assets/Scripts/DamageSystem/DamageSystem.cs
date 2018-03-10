@@ -24,9 +24,9 @@ public enum DamageThreshold
 public class DamageSystem : NetworkPlayerCollision
 {
     /// <summary>
-    /// Sealed class to define constants for damage system
+    /// Public class to define constants for damage system
     /// </summary>
-    sealed class DamageSystemConstants
+    public class DamageSystemConstants
     {
         public const float baseDamagePercentage = 100.0f;
         public const float maxDamagePercentage = 500.0f;
@@ -38,7 +38,7 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     [Range(DamageSystemConstants.baseDamagePercentage, DamageSystemConstants.maxDamagePercentage)]
     [SerializeField]
-    private float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
+    public float damageAmplifyPercentage = DamageSystemConstants.baseDamagePercentage;
     
     /// <summary>
     /// Adjustable threshold value for a healthy vehicle condition, if damages percentage is under this number, it is considered healthy
@@ -107,8 +107,6 @@ public class DamageSystem : NetworkPlayerCollision
         // Then the velocity can be found by v^2 = d * g, where d is the distance to travel, g is the gravitational force set by Unity project
         Vector3 velocity = Mathf.Sqrt(amplifiedFlyoffDistance * Physics.gravity.magnitude) * normalizedPoint;
         GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
-
-        Debug.Log("Camerashake");
 
         if (enableLog)
         {
