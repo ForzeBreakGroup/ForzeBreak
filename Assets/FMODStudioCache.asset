@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 114223068718077450}
   MasterBankRef: {fileID: 114334643442141158}
   StringsBankRef: {fileID: 114623979966087772}
-  stringsBankWriteTime: 636562036914962672
+  stringsBankWriteTime: 636562152883298875
   cacheVersion: 2
 --- !u!114 &114009554472961936
 MonoBehaviour:
@@ -101,7 +101,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114770140632539398}
+  - {fileID: 114481509134385424}
   MinDistance: 0
   MaxDistance: 0
   Length: 354500
@@ -161,7 +161,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114575070413278682}
+  - {fileID: 114918975581681812}
   MinDistance: 1
   MaxDistance: 20
   Length: 5000
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\SShen\Desktop\ForzeBreak\Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636562036914932586
+  lastModified: 636562152883278811
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -337,6 +337,21 @@ MonoBehaviour:
   - Name: 
     Value: 4956192
   Exists: 0
+--- !u!114 &114481509134385424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Stage
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114499429241891972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636562036914962672
+  lastModified: 636562152883298875
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -675,6 +690,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stage
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114918975581681812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
   Min: 0
   Max: 1
   Default: 0

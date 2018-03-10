@@ -2060,7 +2060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e7cec1f276cb940b0d9f85eb30f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionEffect: {fileID: 0}
+  collisionEffect: {fileID: 1462247261863818, guid: 1c3d63d6c2edd5140a2ea79b14744618,
+    type: 2}
   damageAmplifyPercentage: 100
   healthyThreshold: 150
   lightlyDamageThreshold: 250
