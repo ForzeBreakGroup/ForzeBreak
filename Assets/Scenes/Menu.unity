@@ -288,6 +288,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4781437882789044, guid: a7a95b800638d1f47a3a632dc185457d,
     type: 2}
   m_PrefabInternal: {fileID: 2102490165}
+--- !u!1 &502134560 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1594498997224850, guid: f06ce1498daa68f4bac88c448296c823,
+    type: 2}
+  m_PrefabInternal: {fileID: 1400063389}
+--- !u!114 &502134561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 502134560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5790d5f5f776c40a267b8ac41baf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &575250961
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +803,86 @@ Prefab:
     - target: {fileID: 4779005729031822, guid: f06ce1498daa68f4bac88c448296c823, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: numberOfLocalPlayers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: offlineMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerPrefabName
+      value: War_Buggy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: onlineSceneName
+      value: Test_Miguel_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[0].r
+      value: 0.49545845
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[0].g
+      value: 0.49545845
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[0].b
+      value: 0.85294116
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[1].r
+      value: 0.7352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[1].g
+      value: 0.3352076
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[1].b
+      value: 0.3352076
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[2].r
+      value: 0.5190311
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[2].g
+      value: 0.9411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[2].b
+      value: 0.5190311
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[3].r
+      value: 0.9705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[3].g
+      value: 0.94329256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: playerColors.Array.data[3].b
+      value: 0.6280277
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f06ce1498daa68f4bac88c448296c823, type: 2}

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4779005729031822}
   - component: {fileID: 114638900475326966}
-  - component: {fileID: 114119274639583314}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -41,17 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114119274639583314
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1594498997224850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a5790d5f5f776c40a267b8ac41baf3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114638900475326966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,11 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameVersion: 0.1.0
-  playerPrefabName: War_Buggy
+  playerPrefabName: Tank_Wheel
   onlineSceneName: Online
   numberOfLocalPlayers: 1
   playerColors:
-  - {r: 0.49545845, g: 0.49545845, b: 0.85294116, a: 1}
-  - {r: 0.7352941, g: 0.3352076, b: 0.3352076, a: 1}
-  - {r: 0.5190311, g: 0.9411765, b: 0.5190311, a: 1}
-  - {r: 0.9705882, g: 0.94329256, b: 0.6280277, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

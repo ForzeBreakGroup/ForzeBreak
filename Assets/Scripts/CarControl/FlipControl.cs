@@ -65,7 +65,7 @@ public class FlipControl : MonoBehaviour {
         if (canFlip)
         {
             //grounded condition
-            if (carController.IsAnyWheelGround)
+            if (carController.IsAnyWheelGround|| carBodyGrounded)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
