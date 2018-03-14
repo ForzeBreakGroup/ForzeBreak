@@ -40,7 +40,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     // Host side collision check
     if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
     {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>().shakeDuration = 0.25f;
+            CameraShake.Shake();
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
     }
