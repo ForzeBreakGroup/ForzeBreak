@@ -81,6 +81,25 @@ public class MatchManager : Photon.MonoBehaviour
     }
 
     #region Event Handlers
+    [PunRPC]
+    public void RpcAddPlayerToMatch(PhotonPlayer newPlayer)
+    {
+        // MasterClient will be handling the events
+        if (PhotonNetwork.isMasterClient)
+        {
+            if (!playersStillAlive.ContainsKey(newPlayer))
+            {
+                playersStillAlive.Add(newPlayer, true);
+            }
+        }
+
+        // Remote clients will bypass the command to master client
+        else
+        {
+            photonView.RPC("RpcAddPlayerToMatch", PhotonTargets.MasterClient, newPlayer);
+        }
+    }
+
     private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
     {
         if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
