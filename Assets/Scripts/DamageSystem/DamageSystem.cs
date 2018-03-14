@@ -150,6 +150,8 @@ public class DamageSystem : NetworkPlayerCollision
         // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
         {
+            CameraShake.Shake();
+
             // Calculates damage received based on the force and explosion radius
             float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
             damage = Mathf.Clamp(damage, 0, Mathf.Infinity);
