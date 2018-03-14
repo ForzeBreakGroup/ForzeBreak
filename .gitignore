@@ -37,5 +37,7 @@ sysinfo.txt
 *.log
 fmod_editor.log
 fmod.log
+Assets/FMODStudioCache.asset
+Assets/StreamingAssets/*.bank
 Assets/Scripts/Sound/MissileSound.cs
 Assets/Scripts/Sound/MissileSound.cs
