@@ -138,7 +138,10 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     public void SinglePlayerMode()
     {
-        DisconnectFromPhoton();
+        if (PhotonNetwork.connected)
+        {
+            DisconnectFromPhoton();
+        }
     }
 
     public void OnlineMode()
@@ -147,6 +150,7 @@ public class NetworkManager : PunBehaviour
         {
             ConnectingToPhotonServer();
         }
+        OnConnectedToMaster();
     }
 
     public Color GetPlayerColor(int index)
@@ -175,6 +179,8 @@ public class NetworkManager : PunBehaviour
         DontDestroyOnLoad(gameObject);
         networkManager = this;
         networkManager.Init();
+
+        ConnectingToPhotonServer();
     }
 
     /// <summary>
@@ -228,7 +234,10 @@ public class NetworkManager : PunBehaviour
         roomOptions.MaxPlayers = 4;
         roomOptions.PlayerTtl = 7500;
         roomOptions.EmptyRoomTtl = 1000;
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
+
+        ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
+        roomInfo.Add("InGame", false);
+        roomOptions.CustomRoomProperties = roomInfo;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
@@ -304,11 +313,6 @@ public class NetworkManager : PunBehaviour
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
-            // Set custom room property to distinguish the room is currently in game or not
-            ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
-            roomInfo.Add("InGame", false);
-            PhotonNetwork.room.SetCustomProperties(roomInfo);
-
             // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
         }
@@ -373,9 +377,24 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
 
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, newPlayer, true, options);
+        MatchManager.instance.RpcAddPlayerToMatch(newPlayer);
+    }
+
+    public override void OnJoinedLobby()
+    {
+        base.OnJoinedLobby();
+    }
+
+    public override void OnReceivedRoomListUpdate()
+    {
+        base.OnReceivedRoomListUpdate();
+
+        RoomInfo[] rooms = PhotonNetwork.GetRoomList();
+        Debug.Log(rooms.Length);
+        foreach (RoomInfo info in rooms)
+        {
+            Debug.Log(info.CustomProperties["InGame"]);
+        }
     }
 
     /// <summary>
