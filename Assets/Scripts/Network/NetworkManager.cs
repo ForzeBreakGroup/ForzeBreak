@@ -313,11 +313,6 @@ public class NetworkManager : PunBehaviour
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)
         {
-            // Set custom room property to distinguish the room is currently in game or not
-            ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
-            roomInfo.Add("InGame", false);
-            PhotonNetwork.room.SetCustomProperties(roomInfo);
-
             // Load new scene
             PhotonNetwork.LoadLevel(onlineSceneName);
         }
