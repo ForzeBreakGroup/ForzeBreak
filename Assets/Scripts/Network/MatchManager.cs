@@ -297,7 +297,8 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (NetworkManager.localPlayer != null && NetworkManager.playerCamera != null)
         {
-            PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
+            //PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
+            PhotonNetwork.Destroy(NetworkManager.localPlayer);
             Destroy(NetworkManager.playerCamera.transform.root.gameObject);
             NetworkManager.localPlayer = null;
             NetworkManager.playerCamera = null;
