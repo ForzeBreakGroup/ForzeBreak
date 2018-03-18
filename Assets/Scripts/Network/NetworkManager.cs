@@ -162,6 +162,15 @@ public class NetworkManager : PunBehaviour
     {
         return playerColors[index];
     }
+
+    public void EnableTheRoom(bool enable)
+    {
+        if (PhotonNetwork.inRoom && PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.room.IsVisible = enable;
+            PhotonNetwork.room.IsOpen = enable;
+        }
+    }
     #endregion
 
     #region Private Methods
@@ -234,10 +243,6 @@ public class NetworkManager : PunBehaviour
         roomOptions.PlayerTtl = 7500;
         roomOptions.EmptyRoomTtl = 1000;
 
-        ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
-        roomInfo.Add("InGame", false);
-        roomOptions.CustomRoomProperties = roomInfo;
-
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
 
@@ -246,10 +251,7 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void JoinRandomGameInPhotonServer()
     {
-        ExitGames.Client.Photon.Hashtable roomInfo = new ExitGames.Client.Photon.Hashtable();
-        roomInfo.Add("InGame", false);
-
-        PhotonNetwork.JoinRandomRoom(roomInfo, 0);
+        PhotonNetwork.JoinRandomRoom(null, 0);
     }
 
     /// <summary>
@@ -353,16 +355,12 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
-
-        //MatchManager.instance.RemovePlayerFromMatchHandler(otherPlayer);
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
-
-        //MatchManager.instance.AddPlayerToMatchHandler(newPlayer);
     }
 
     public override void OnReceivedRoomListUpdate()
@@ -370,11 +368,6 @@ public class NetworkManager : PunBehaviour
         base.OnReceivedRoomListUpdate();
 
         RoomInfo[] rooms = PhotonNetwork.GetRoomList();
-        Debug.Log(rooms.Length);
-        foreach (RoomInfo info in rooms)
-        {
-            Debug.Log(info.CustomProperties["InGame"]);
-        }
     }
     #endregion
 }

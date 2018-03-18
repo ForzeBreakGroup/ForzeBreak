@@ -63,6 +63,9 @@ public class LobbyManager : Photon.MonoBehaviour
         // Master client will handle the scene transition when all players are ready
         if (PhotonNetwork.isMasterClient && numOfReady == PhotonNetwork.playerList.Length)
         {
+            // Close the room to prevent new players to join
+            NetworkManager.instance.EnableTheRoom(false);
+
             // Start countdown UI
 
             // Start coroutine for load scene
