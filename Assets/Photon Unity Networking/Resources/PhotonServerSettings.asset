@@ -53,4 +53,7 @@ MonoBehaviour:
   - RpcPlayerReady
   - RpcPlayerDeathHandler
   - RpcPlayerSpawnedHandler
+  - RpcPlayerJoinedSceneHandler
+  - RpcPlayerSpawningHandler
+  - RpcRoundStartHandler
   DisableAutoOpenWizard: 1

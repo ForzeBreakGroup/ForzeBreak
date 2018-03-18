@@ -8,6 +8,7 @@ public class MatchManager : Photon.MonoBehaviour
     public GameObject cam;
     private NetworkSpawnPoint[] spawnPoints;
     private Dictionary<int, bool> playersStillAlive;
+    private Dictionary<int, bool> playersInScene;
     private GameObject lobbyUI;
     private string playerPrefabName = "War_Buggy";
     private int numOfLocalPlayers = 0;
@@ -41,20 +42,27 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void Awake()
     {
+        // Initialize dictioanry for tracking players still alive in match
         playersStillAlive = new Dictionary<int, bool>();
+        playersInScene = new Dictionary<int, bool>();
+
+        foreach(PhotonPlayer player in PhotonNetwork.playerList)
+        {
+            playersStillAlive.Add(player.ID, true);
+            playersInScene.Add(player.ID, false);
+        }
+
+        // Find the spawn points
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
 
+        // Validate camera object is attached to script
         if (!cam)
         {
             Debug.LogError("Camera Not Attached");
         }
 
-        if (PhotonNetwork.isMasterClient)
-        {
-            playersStillAlive.Add(PhotonNetwork.masterClient.ID, true);
-        }
-
-        SpawnPlayer();
+        // Photon RPC call to let everyone know this client has joined the game
+        photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBuffered, PhotonNetwork.player.ID);
     }
 
     private void SpawnPlayer()
@@ -81,6 +89,45 @@ public class MatchManager : Photon.MonoBehaviour
     }
 
     #region Photon RPC Callers
+    [PunRPC]
+    public void RpcPlayerJoinedSceneHandler(int playerId)
+    {
+        playersInScene[playerId] = true;
+
+        // Master client will start the match
+        if (PhotonNetwork.isMasterClient)
+        {
+            // Loop through all entries to make sure every players are ready
+            foreach(KeyValuePair<int, bool> entry in playersInScene)
+            {
+                if (!entry.Value)
+                {
+                    goto playerNotReady;
+                }
+            }
+
+            // Once all players have joined the scene, start spawning
+            photonView.RPC("RpcRoundStartHandler", PhotonTargets.All);
+        }
+
+        // GOTO label if any of the player is not ready
+        playerNotReady:
+        return;
+    }
+
+    [PunRPC]
+    public void RpcRoundStartHandler()
+    {
+        // Spawn players
+        SpawnPlayer();
+
+        // Spawn power ups
+        PowerUpSpawnManager.instance.SpawnPowerUp();
+
+        // Start Round timer
+        // 
+    }
+
     [PunRPC]
     public void RpcPlayerSpawnedHandler(int playerId)
     {

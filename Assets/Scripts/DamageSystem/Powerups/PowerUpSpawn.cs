@@ -62,7 +62,7 @@ public class PowerUpSpawn : Photon.MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        SpawnCollectible();
+        //SpawnCollectible();
     }
 
     /// <summary>
@@ -71,7 +71,6 @@ public class PowerUpSpawn : Photon.MonoBehaviour
     private void OnEnable()
     {
         PhotonNetwork.OnEventCall += OnPowerUpCollectedHandler;
-        PhotonNetwork.OnEventCall += OnRoundOverHandler;
     }
 
     /// <summary>
@@ -80,13 +79,12 @@ public class PowerUpSpawn : Photon.MonoBehaviour
     private void OnDisable()
     {
         PhotonNetwork.OnEventCall -= OnPowerUpCollectedHandler;
-        PhotonNetwork.OnEventCall -= OnRoundOverHandler;
     }
 
     /// <summary>
     /// Spawn one of pre-assigned collectible gameobject based on the possibility rating
     /// </summary>
-    private void SpawnCollectible()
+    public void SpawnCollectible()
     {
         // Only masterclient will handle the logic
         if (PhotonNetwork.isMasterClient)
@@ -117,21 +115,6 @@ public class PowerUpSpawn : Photon.MonoBehaviour
                 PhotonNetwork.Destroy(collectible);
             }
             collectible = PhotonNetwork.Instantiate(powerUpSpawnData[highestValueIndex].powerUpItem.name, transform.position, Quaternion.identity, 0);
-        }
-    }
-
-    /// <summary>
-    /// RoundOver event handler, force all spawn points to be in cooldown, and elapsed time counter becomes the cooldown time. Effectively, all spawn point will spawn new powerup immediately
-    /// </summary>
-    /// <param name="evtCode"></param>
-    /// <param name="content"></param>
-    /// <param name="senderid"></param>
-    private void OnRoundOverHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnRoundOver)
-        {
-            elapsedTime = cooldown;
-            inCooldown = true;
         }
     }
 
