@@ -18,12 +18,12 @@ public class PowerUpDataChangeCollectible : PowerUpCollectible
         {
             case "PowerUp - Health":
                 
-                DamageSystem ds = NetworkManager.localPlayer.GetComponent<DamageSystem>();
+                DamageSystem ds = NetworkManager.instance.GetLocalPlayer().GetComponent<DamageSystem>();
                 ds.damageAmplifyPercentage = DamageSystem.DamageSystemConstants.baseDamagePercentage;
                 break;
 
             case "PowerUp - Energy":
-                BoostControl bc = NetworkManager.localPlayer.GetComponent<BoostControl>();
+                BoostControl bc = NetworkManager.instance.GetLocalPlayer().GetComponent<BoostControl>();
                 bc.energy = bc.maxEnergy;
                 break;
         }

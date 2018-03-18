@@ -3,15 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * MatchManager controls a match round's flow, from taking care of correct sequence of spawning to handling player's death across network/local split screen.
+ */
 public class MatchManager : Photon.MonoBehaviour
 {
-    public GameObject cam;
+    /// <summary>
+    /// Player camera prefab that will be instantiated during spawning player
+    /// </summary>
+    [SerializeField]
+    private GameObject playerCameraPrefab;
+
+    /// <summary>
+    /// Player spawn point pre-mapped in scene
+    /// </summary>
     private NetworkSpawnPoint[] spawnPoints;
+
+    /// <summary>
+    /// Dictionary data to keep track of which player is still alive, using player's photon ID / local player num as key
+    /// </summary>
     private Dictionary<int, bool> playersStillAlive;
+
+    /// <summary>
+    /// Dictionary data to keep track of player across network has finished loading the scene, using player's photon ID as key
+    /// </summary>
     private Dictionary<int, bool> playersInScene;
-    private GameObject lobbyUI;
+
+    /// <summary>
+    /// Default player vehicle prefab name
+    /// </summary>
     private string playerPrefabName = "War_Buggy";
-    private int numOfLocalPlayers = 0;
 
     private static MatchManager matchManager;
     public static MatchManager instance
@@ -37,9 +61,9 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void Init()
     {
-        lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
-    }
 
+    }
+    
     private void Awake()
     {
         // Initialize dictioanry for tracking players still alive in match
@@ -56,7 +80,7 @@ public class MatchManager : Photon.MonoBehaviour
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
 
         // Validate camera object is attached to script
-        if (!cam)
+        if (!playerCameraPrefab)
         {
             Debug.LogError("Camera Not Attached");
         }
@@ -76,16 +100,18 @@ public class MatchManager : Photon.MonoBehaviour
 
         FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
 
-        GameObject mainCamera = Instantiate(cam);
+        GameObject mainCamera = Instantiate(playerCameraPrefab);
 
-        NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
-        ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
-        ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+        GameObject playerGO = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
+        ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+        ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
 
-        mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
-        NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+        mainCamera.GetComponent<CameraControl>().target = playerGO;
+        Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
 
-        photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.localPlayer.GetPhotonView().ownerId);
+        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam);
+
+        photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, playerGO.GetPhotonView().ownerId);
     }
 
     #region Photon RPC Callers
@@ -132,7 +158,7 @@ public class MatchManager : Photon.MonoBehaviour
     public void RpcPlayerSpawnedHandler(int playerId)
     {
         // Calls the arrow indicator system to add the new player to list
-        NetworkManager.localPlayer.GetComponent<ArrowIndicationSystem>().UpdateArrowList();
+        NetworkManager.instance.GetLocalPlayer().GetComponent<ArrowIndicationSystem>().UpdateArrowList();
     }
 
     [PunRPC]
@@ -170,10 +196,8 @@ public class MatchManager : Photon.MonoBehaviour
     #endregion
 
     #region Local Gameplay
-
     public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
     {
-        lobbyUI.SetActive(false);
         // Loop every number of player necessary to create object
         for (int i = 0; i < numberOfPlayers; ++i)
         {
@@ -184,7 +208,7 @@ public class MatchManager : Photon.MonoBehaviour
             car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
 
             // Spawn camera control object to follow the vehicle
-            GameObject cameraControl = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
+            GameObject cameraControl = Instantiate(playerCameraPrefab, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
 
             // Assign such control with target to follow
             cameraControl.GetComponent<CameraControl>().target = car;
@@ -214,15 +238,12 @@ public class MatchManager : Photon.MonoBehaviour
     }
     #endregion
 
-    public void DestroyPlayerObject()
+    public void DestroyPlayerObject(int playerNum = 0)
     {
-        if (NetworkManager.localPlayer != null && NetworkManager.playerCamera != null)
+        if (NetworkManager.localPlayer[playerNum] != null && NetworkManager.playerCamera[playerNum] != null)
         {
             //PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
-            PhotonNetwork.Destroy(NetworkManager.localPlayer);
-            Destroy(NetworkManager.playerCamera.transform.root.gameObject);
-            NetworkManager.localPlayer = null;
-            NetworkManager.playerCamera = null;
+            NetworkManager.instance.DestroyLocalPlayer(playerNum);
         }
     }
 }

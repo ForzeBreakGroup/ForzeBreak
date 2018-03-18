@@ -2746,6 +2746,12 @@ Prefab:
       propertyPath: instantiationId
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114748373187727316, guid: 5ec7f603e02d22341a78ef77566040fc,
+        type: 2}
+      propertyPath: playerCameraPrefab
+      value: 
+      objectReference: {fileID: 1071636056247922, guid: 2c2675f54f58f924888cb20762cb6730,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ec7f603e02d22341a78ef77566040fc, type: 2}
   m_IsPrefabParent: 0

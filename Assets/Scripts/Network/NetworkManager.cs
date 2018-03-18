@@ -34,12 +34,12 @@ public class NetworkManager : PunBehaviour
     /// <summary>
     /// A static reference to the player game object used by this remote client
     /// </summary>
-    public static GameObject localPlayer;
+    public static GameObject[] localPlayer;
 
     /// <summary>
     /// A static reference to the player camera used by this remote client
     /// </summary>
-    public static Camera playerCamera;
+    public static Camera[] playerCamera;
 
     /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
@@ -75,27 +75,6 @@ public class NetworkManager : PunBehaviour
 
     #region Private Members
     /// <summary>
-    /// Enum defines connection state of the networkmanager
-    /// </summary>
-    private enum ConnectionState
-    {
-        /// <summary>
-        /// NetworkManager IDLE for communication
-        /// </summary>
-        IDLE,
-
-        /// <summary>
-        /// NetworkManager received CREATE room command from user
-        /// </summary>
-        CREATE,
-
-        /// <summary>
-        /// NetworkManager received JOIN room coomand from user
-        /// </summary>
-        JOIN
-    };
-
-    /// <summary>
     /// Internal static reference of NetworkManager for instance usage
     /// </summary>
     private static NetworkManager networkManager;
@@ -121,12 +100,6 @@ public class NetworkManager : PunBehaviour
     [Range(1, 4)]
     [SerializeField]
     private int numberOfLocalPlayers = 1;
-
-    /// <summary>
-    /// Default connection state
-    /// </summary>
-    private static ConnectionState state = ConnectionState.IDLE;
-
 
     [SerializeField]
     Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
@@ -171,6 +144,30 @@ public class NetworkManager : PunBehaviour
             PhotonNetwork.room.IsOpen = enable;
         }
     }
+
+    public GameObject GetLocalPlayer(int playerNum = 0)
+    {
+        return localPlayer[playerNum];
+    }
+
+    public Camera GetPlayerCamera(int playerNum = 0)
+    {
+        return playerCamera[playerNum];
+    }
+
+    public void SetLocalPlayer(GameObject playerGO, Camera playerCam, int playerNum = 0)
+    {
+        localPlayer[playerNum] = playerGO;
+        playerCamera[playerNum] = playerCam;
+    }
+
+    public void DestroyLocalPlayer(int playerNum = 0)
+    {
+        PhotonNetwork.Destroy(localPlayer[playerNum]);
+        Destroy(playerCamera[playerNum].transform.root.gameObject);
+        localPlayer[playerNum] = null;
+        playerCamera[playerNum] = null;
+    }
     #endregion
 
     #region Private Methods
@@ -205,6 +202,8 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void Init()
     {
+        localPlayer = new GameObject[numberOfLocalPlayers];
+        playerCamera = new Camera[numberOfLocalPlayers];
     }
 
     /// <summary>

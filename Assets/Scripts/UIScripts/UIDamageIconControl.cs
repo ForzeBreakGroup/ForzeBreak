@@ -33,6 +33,6 @@ public class UIDamageIconControl : UIControl
     public override void EnableUIControl()
     {
         base.EnableUIControl();
-        damageSystem = NetworkManager.localPlayer.GetComponent<DamageSystem>();
+        damageSystem = NetworkManager.instance.GetLocalPlayer().GetComponent<DamageSystem>();
     }
 }

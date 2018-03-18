@@ -91,6 +91,6 @@ public class LobbyUI : Photon.MonoBehaviour
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
 
-        MatchManager.instance.photonView.RPC("RpcPlayerReadyHandler", PhotonTargets.All, NetworkManager.localPlayer.GetPhotonView());
+        MatchManager.instance.photonView.RPC("RpcPlayerReadyHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView());
     }
 }

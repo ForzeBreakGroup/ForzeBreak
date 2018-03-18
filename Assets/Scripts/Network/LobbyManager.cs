@@ -52,7 +52,6 @@ public class LobbyManager : Photon.MonoBehaviour
     }
     #endregion
 
-
     #region Photon RPC Calls
     [PunRPC]
     public void RpcPlayerReady()

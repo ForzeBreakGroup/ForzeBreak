@@ -23,7 +23,7 @@ public class UIBoostBarControl : UIControl
     public override void EnableUIControl()
     {
         base.EnableUIControl();
-        bc = NetworkManager.localPlayer.GetComponent<BoostControl>();
+        bc = NetworkManager.instance.GetLocalPlayer().GetComponent<BoostControl>();
     }
 
     protected override void UpdateUIControl()

@@ -20,7 +20,6 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
             MatchManager.instance.photonView.RPC("RpcPlayerDeathHandler", PhotonTargets.All, playerId);
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
-
         }
 
     }
