@@ -132,11 +132,11 @@ public class NetworkManager : PunBehaviour
     Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
-    #region Public Methods
+    #region UI OnClick Events
     /// <summary>
-    /// Enters single player mode with predefined number of players in split screen
+    /// Disconnects from Photon Network and start local split screen
     /// </summary>
-    public void SinglePlayerMode()
+    public void OnClickSplitScreen()
     {
         if (PhotonNetwork.connected)
         {
@@ -144,7 +144,10 @@ public class NetworkManager : PunBehaviour
         }
     }
 
-    public void OnlineMode()
+    /// <summary>
+    /// Matchmaking random room to join, explicitly calls OnConnetedToMaster() for single entry point
+    /// </summary>
+    public void OnClickMatchMaking()
     {
         if (!PhotonNetwork.connected)
         {
@@ -152,7 +155,9 @@ public class NetworkManager : PunBehaviour
         }
         OnConnectedToMaster();
     }
+    #endregion
 
+    #region Public Interface Methods
     public Color GetPlayerColor(int index)
     {
         return playerColors[index];
@@ -160,12 +165,6 @@ public class NetworkManager : PunBehaviour
     #endregion
 
     #region Private Methods
-    private void Start()
-    {
-        // Register callback function when scene changes
-        SceneManager.sceneLoaded += this.OnLevelLoaded;
-    }
-
     private void Awake()
     {
         // If NetworkManager has already been initialized on Awake, destroy the most recent one
@@ -254,16 +253,6 @@ public class NetworkManager : PunBehaviour
     }
 
     /// <summary>
-    /// Levelload callback function
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="sceneMode"></param>
-    private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
-    {
-        MatchManager.instance.TransitionToLobby(playerPrefabName, numberOfLocalPlayers);
-    }
-
-    /// <summary>
     /// Method to disconnect from photon server
     /// </summary>
     private void DisconnectFromPhoton()
@@ -297,6 +286,24 @@ public class NetworkManager : PunBehaviour
 
     #region Photon SDK Overrides
     /// <summary>
+    /// Overrides the OnConnectedToMaster event, which is called when not connected to PhotonServer
+    /// </summary>
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("JoinedMaster");
+        base.OnConnectedToMaster();
+
+        if (offlineMode)
+        {
+            PhotonNetwork.CreateRoom("");
+        }
+        else
+        {
+            JoinRandomGameInPhotonServer();
+        }
+    }
+
+    /// <summary>
     /// Overrides OnJoinRoom which is called when client joins a room (including host)
     /// </summary>
     public override void OnJoinedRoom()
@@ -325,11 +332,6 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Left Room");
         base.OnLeftRoom();
-
-        // Raise an event across current in-game players to notify a player has left
-        RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, null, true, evtOptions);
     }
 
     /// <summary>
@@ -341,25 +343,10 @@ public class NetworkManager : PunBehaviour
         base.OnCreatedRoom();
     }
 
-    /// <summary>
-    /// Override OnPhotonJoinRoomFailed, which is called when connection error occurred when attempting to join a room
-    /// </summary>
-    /// <param name="codeAndMsg"></param>
-    public override void OnPhotonJoinRoomFailed(object[] codeAndMsg)
-    {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
-        base.OnPhotonJoinRoomFailed(codeAndMsg);
-    }
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
         base.OnPhotonRandomJoinFailed(codeAndMsg);
         CreateRoomInPhotonServer();
-    }
-
-    public override void OnPhotonCreateRoomFailed(object[] codeAndMsg)
-    {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
-        base.OnPhotonCreateRoomFailed(codeAndMsg);
     }
 
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
@@ -367,9 +354,7 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
 
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, otherPlayer, true, options);
+        //MatchManager.instance.RemovePlayerFromMatchHandler(otherPlayer);
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
@@ -377,12 +362,7 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
 
-        MatchManager.instance.RpcAddPlayerToMatch(newPlayer);
-    }
-
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
+        //MatchManager.instance.AddPlayerToMatchHandler(newPlayer);
     }
 
     public override void OnReceivedRoomListUpdate()
@@ -394,24 +374,6 @@ public class NetworkManager : PunBehaviour
         foreach (RoomInfo info in rooms)
         {
             Debug.Log(info.CustomProperties["InGame"]);
-        }
-    }
-
-    /// <summary>
-    /// Overrides the OnConnectedToMaster event, which is called when not connected to PhotonServer
-    /// </summary>
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("JoinedMaster");
-        base.OnConnectedToMaster();
-
-        if (offlineMode)
-        {
-            PhotonNetwork.CreateRoom("");
-        }
-        else
-        {
-            JoinRandomGameInPhotonServer();
         }
     }
     #endregion

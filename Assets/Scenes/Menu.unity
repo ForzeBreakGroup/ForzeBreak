@@ -738,7 +738,7 @@ Prefab:
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
       propertyPath: onlineSceneName
-      value: Online
+      value: MatchLobby
       objectReference: {fileID: 0}
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
@@ -1362,7 +1362,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
           type: 2}
-        m_MethodName: OnlineMode
+        m_MethodName: OnClickMatchMaking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   - component: {fileID: 1916447096}
   - component: {fileID: 1916447099}
   m_Layer: 5
-  m_Name: ListGame
+  m_Name: LocalGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1639,7 +1639,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
           type: 2}
-        m_MethodName: SinglePlayerMode
+        m_MethodName: OnClickSplitScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,7 +10,6 @@ using UnityEngine;
  */
 public class ArenaOutOfBoundDetection : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
         PhotonView view = other.transform.root.gameObject.GetPhotonView();
@@ -18,10 +17,7 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
         {
             int playerId = view.ownerId;
             MatchManager.instance.DestroyPlayerObject();
-
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.MasterClient;
-            PhotonNetwork.RaiseEvent((int)ENetworkEventCode.OnPlayerDeath, playerId, true, options);
+            MatchManager.instance.photonView.RPC("RpcPlayerDeathHandler", PhotonTargets.All, playerId);
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
 

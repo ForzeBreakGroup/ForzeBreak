@@ -7,12 +7,12 @@ public class MatchManager : Photon.MonoBehaviour
 {
     public GameObject cam;
     private NetworkSpawnPoint[] spawnPoints;
-    private Dictionary<PhotonPlayer, bool> playersStillAlive;
-    private static MatchManager matchManager;
-    private Dictionary<PhotonPlayer, bool> playersReady;
+    private Dictionary<int, bool> playersStillAlive;
     private GameObject lobbyUI;
     private string playerPrefabName = "War_Buggy";
     private int numOfLocalPlayers = 0;
+
+    private static MatchManager matchManager;
     public static MatchManager instance
     {
         get
@@ -41,9 +41,9 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void Awake()
     {
-        playersStillAlive = new Dictionary<PhotonPlayer, bool>();
-        playersReady = new Dictionary<PhotonPlayer, bool>();
+        playersStillAlive = new Dictionary<int, bool>();
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
+
         if (!cam)
         {
             Debug.LogError("Camera Not Attached");
@@ -51,204 +51,75 @@ public class MatchManager : Photon.MonoBehaviour
 
         if (PhotonNetwork.isMasterClient)
         {
-            playersStillAlive.Add(PhotonNetwork.masterClient, true);
-            playersReady.Add(PhotonNetwork.masterClient, false);
+            playersStillAlive.Add(PhotonNetwork.masterClient.ID, true);
         }
+
+        SpawnPlayer();
     }
 
-    private void OnEnable()
+    private void SpawnPlayer()
     {
-        // Network Event listener
-        PhotonNetwork.OnEventCall += EvtPlayerDeathHandler;
-        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall += EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
-        PhotonNetwork.OnEventCall += EvtRoundOverHandler;
+        // Obtain the vehicle selected property
 
-        EventManager.StartListening("OnPlayerReady", EvtPlayerReadyHandler);
+        // Spawn corresponding vehicle
+        int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
+        Vector3 pos = spawnPoints[playerNumber].spawnPoint;
+        Quaternion rot = spawnPoints[playerNumber].spawnRotation;
+
+        FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
+
+        GameObject mainCamera = Instantiate(cam);
+
+        NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
+        ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+        ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+
+        mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
+        NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+
+        photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.localPlayer.GetPhotonView().ownerId);
     }
 
-    private void OnDisable()
-    {
-        // Network Event listener
-        PhotonNetwork.OnEventCall -= EvtPlayerDeathHandler;
-        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall -= EvtSpawnPlayerHandler;
-        PhotonNetwork.OnEventCall -= EvtRoundOverHandler;
-    }
-
-    #region Event Handlers
+    #region Photon RPC Callers
     [PunRPC]
-    public void RpcAddPlayerToMatch(PhotonPlayer newPlayer)
+    public void RpcPlayerSpawnedHandler(int playerId)
     {
-        // MasterClient will be handling the events
+        // All clients will keep a copy of this data
+        playersStillAlive[playerId] = true;
+
+        // Calls individual arrow indicators to find spawned player object and start tracking
+    }
+
+    [PunRPC]
+    public void RpcPlayerDeathHandler(int playerId)
+    {
+        playersStillAlive[playerId] = false;
+
+        // Only master client will execute following logics
         if (PhotonNetwork.isMasterClient)
         {
-            if (!playersStillAlive.ContainsKey(newPlayer))
-            {
-                playersStillAlive.Add(newPlayer, true);
-            }
-        }
-
-        // Remote clients will bypass the command to master client
-        else
-        {
-            photonView.RPC("RpcAddPlayerToMatch", PhotonTargets.MasterClient, newPlayer);
-        }
-    }
-
-    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
-        {
-            PhotonPlayer newPlayer = (PhotonPlayer)content;
-
-            if (!playersStillAlive.ContainsKey(newPlayer))
-            {
-                Debug.Log("Add player:" + newPlayer);
-                playersStillAlive.Add(newPlayer, true);
-            }
-        }
-    }
-
-    private void EvtRemovePlayerFromMatchHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("EvtRemovePlayerEvent");
-            PhotonPlayer otherPlayer = (PhotonPlayer)content;
-
-            if (playersStillAlive.ContainsKey(otherPlayer))
-            {
-                playersStillAlive.Remove(otherPlayer);
-            }
-        }
-    }
-
-    private void EvtPlayerDeathHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
-        {
-            int deathId = (int)content;
-            PhotonPlayer sender = PhotonPlayer.Find(deathId);
-            playersStillAlive[sender] = false;
-
             uint aliveCount = 0;
-            PhotonPlayer survivor = null;
-            foreach(KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
+            foreach (KeyValuePair<int, bool> entry in playersStillAlive)
             {
                 if (entry.Value)
                 {
                     ++aliveCount;
-                    survivor = entry.Key;
                 }
             }
 
             if (aliveCount <= 1)
             {
-                int winner = -1;
-                if (survivor != null)
-                {
-                    winner = survivor.ID;
-                }
-
-                RoundOver(winner);
+                RoundOver(0);
             }
         }
     }
 
     private void RoundOver(int winnerID)
     {
-        List<PhotonPlayer> readyEntry = new List<PhotonPlayer>(playersReady.Keys);
-
-        foreach(PhotonPlayer player in readyEntry)
+        // Load end of match scene
+        if (PhotonNetwork.isMasterClient)
         {
-            playersReady[player] = false;
-        }
-
-        List<PhotonPlayer> aliveEntry = new List<PhotonPlayer>(playersStillAlive.Keys);
-        foreach(PhotonPlayer player in aliveEntry)
-        {
-            playersStillAlive[player] = true;
-        }
-
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, winnerID, true, options);
-    }
-
-    private void EvtPlayerReadyHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerReady && PhotonNetwork.isMasterClient)
-        {
-            PhotonPlayer sender = PhotonPlayer.Find(senderid);
-            playersReady[sender] = (bool)content;
-
-            int numOfReady = 0;
-            foreach (KeyValuePair<PhotonPlayer, bool> entry in playersReady)
-            {
-                if (entry.Value)
-                {
-                    ++numOfReady;
-                }
-            }
-
-            if (numOfReady == PhotonNetwork.playerList.Length && PhotonNetwork.playerList.Length > 1)
-            {
-                RaiseEventOptions options = new RaiseEventOptions();
-                options.Receivers = ReceiverGroup.All;
-                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawning, null, true, options);
-            }
-        }
-    }
-
-    private void EvtPlayerReadyHandler()
-    {
-        SpawnLocalPlayers(playerPrefabName, numOfLocalPlayers); 
-    }
-
-    private void EvtSpawnPlayerHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
-        {
-            lobbyUI.SetActive(false);
-
-            int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
-            Vector3 pos = spawnPoints[playerNumber].spawnPoint;
-            Quaternion rot = spawnPoints[playerNumber].spawnRotation;
-
-            FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
-
-
-            GameObject mainCamera = Instantiate(cam);
-
-            NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
-            ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
-            ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
-
-            FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(true);
-            FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
-            FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(true);
-
-            mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
-            NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
-
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.All;
-            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawnFinished, null, true, options);
-        }
-    }
-
-    private void EvtRoundOverHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte) ENetworkEventCode.OnRoundOver)
-        {
-            int winnerId = (int)content;
-            DestroyPlayerObject();
-            MatchManager.instance.TransitionToLobby(playerPrefabName, numOfLocalPlayers, winnerId);
+            PhotonNetwork.LoadLevel("MatchResult");
         }
     }
     #endregion
@@ -305,11 +176,6 @@ public class MatchManager : Photon.MonoBehaviour
             playerPrefabName = name;
             numOfLocalPlayers = num;
         }
-        lobbyUI.SetActive(true);
-        FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(false);
-        FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(false);
-        FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(false);
-        lobbyUI.GetComponent<LobbyUI>().DisplayWinner(winnerID);
     }
 
     public void DestroyPlayerObject()
