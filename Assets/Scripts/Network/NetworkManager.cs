@@ -168,6 +168,19 @@ public class NetworkManager : PunBehaviour
         localPlayer[playerNum] = null;
         playerCamera[playerNum] = null;
     }
+
+    public bool ValidateOwnership(PhotonView view, int playerNum = 0)
+    {
+        // Offline mode will use the playern
+        if (offlineMode)
+        {
+            return (view.ownerId == playerNum);
+        }
+        else
+        {
+            return view.isMine;
+        }
+    }
     #endregion
 
     #region Private Methods
