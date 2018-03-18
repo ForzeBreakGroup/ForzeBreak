@@ -64,7 +64,7 @@ public class MatchManager : Photon.MonoBehaviour
 
     }
     
-    private void Awake()
+    private void Start()
     {
         // Initialize dictioanry for tracking players still alive in match
         playersStillAlive = new Dictionary<int, bool>();
@@ -89,29 +89,87 @@ public class MatchManager : Photon.MonoBehaviour
         photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBufferedViaServer, PhotonNetwork.player.ID);
     }
 
+    private void AdjustCamera(Camera playerCam, int playerNum)
+    {
+        // For split screen mode
+        if (NetworkManager.instance.numberOfLocalPlayers > 1)
+        {
+            // Calculate the Camera division
+            float marginX = (playerNum > 1) ? (playerNum - 2) * 0.5f : playerNum * 0.5f;
+            float marginY;
+            if (NetworkManager.instance.numberOfLocalPlayers == 2)
+            {
+                marginY = (playerNum > 1) ? 0.5f : 0f;
+            }
+            else
+            {
+                marginY = (playerNum > 1) ? 0f : 0.5f;
+            }
+            playerCam.rect = new Rect(marginX, marginY, 0.5f, (NetworkManager.instance.numberOfLocalPlayers == 2) ? 1f : 0.5f);
+        }
+    }
+
     private void SpawnPlayer()
     {
-        // Obtain the vehicle selected property
+        // Loop condition value, offline mode is the number of local players in game, online mode is always 1
+        int playersInGame = (NetworkManager.offlineMode) ? NetworkManager.instance.numberOfLocalPlayers : 1;
 
-        // Spawn corresponding vehicle
-        int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
-        Vector3 pos = spawnPoints[playerNumber].spawnPoint;
-        Quaternion rot = spawnPoints[playerNumber].spawnRotation;
+        // Loop to create n number of players to game
+        for (int i = 0; i < playersInGame; ++i)
+        {
+            // Obtain the player selected vehicle model
+            string vehicleName = "War_Buggy";
 
+            // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
+            int playerNumber = (NetworkManager.offlineMode) ? i : (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
+
+            // Obtain the spawn position and rotation
+            Vector3 pos = spawnPoints[playerNumber].spawnPoint;
+            Quaternion rot = spawnPoints[playerNumber].spawnRotation;
+
+            // Spawn player camera
+            GameObject mainCamera = Instantiate(playerCameraPrefab);
+
+            // Spawn player gameobject and register the spawn position and rotation for future use
+            GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
+            playerGO.GetComponent<CarUserControl>().playerNum = i + 1;
+            ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+            ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+
+            // Assign the player camera to follow the corresponding player
+            mainCamera.GetComponent<CameraControl>().target = playerGO;
+            Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+
+            // Offline mode requires additional adjustment
+            if (NetworkManager.offlineMode)
+            {
+                // Adjust the camera viewport according to player number
+                AdjustCamera(playerCam, i);
+
+                // Change photonview id
+                playerGO.GetPhotonView().ownerId = i + 1;
+            }
+
+            // Set the local player reference
+            NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, i);
+        }
+
+        // Offline mode will use loop to register to arrow indicator
+        if (NetworkManager.offlineMode)
+        {
+            foreach (GameObject player in NetworkManager.localPlayer)
+            {
+                player.GetComponent<ArrowIndicationSystem>().UpdateArrowList();
+            }
+        }
+        // Online mode will use RPC to register to arrow indicator
+        else
+        {
+            photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView().ownerId);
+        }
+
+        // Switch BGM
         FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
-
-        GameObject mainCamera = Instantiate(playerCameraPrefab);
-
-        GameObject playerGO = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
-        ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
-        ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
-
-        mainCamera.GetComponent<CameraControl>().target = playerGO;
-        Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
-
-        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam);
-
-        photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, playerGO.GetPhotonView().ownerId);
     }
 
     #region Photon RPC Callers
@@ -191,49 +249,6 @@ public class MatchManager : Photon.MonoBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.LoadLevel("MatchResult");
-        }
-    }
-    #endregion
-
-    #region Local Gameplay
-    public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
-    {
-        // Loop every number of player necessary to create object
-        for (int i = 0; i < numberOfPlayers; ++i)
-        {
-            // Spawn the vehicle based on spawnpoint index's position and rotation
-            GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
-
-            // Register the spawn position and rotation for future respawn
-            car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
-
-            // Spawn camera control object to follow the vehicle
-            GameObject cameraControl = Instantiate(playerCameraPrefab, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
-
-            // Assign such control with target to follow
-            cameraControl.GetComponent<CameraControl>().target = car;
-
-            // For split screen mode
-            if (numberOfPlayers > 1)
-            {
-                // Assign seperate control index to the vehicle
-                car.GetComponent<CarUserControl>().playerNum = i + 1;
-
-                // Calculate the Camera division
-                float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;
-                float marginY;
-                if (numberOfPlayers == 2)
-                {
-                    marginY = (i > 1) ? 0.5f : 0f;
-                }
-                else
-                {
-                    marginY = (i > 1) ? 0f : 0.5f;
-                }
-                cameraControl.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, (numberOfPlayers == 2) ? 1f : 0.5f);
-                car.GetComponent<NetworkPlayerData>().localCam = cameraControl.GetComponentInChildren<Camera>();
-            }
-            car.GetComponent<NetworkPlayerVisual>().InitializeVehicleWithPlayerColor();
         }
     }
     #endregion

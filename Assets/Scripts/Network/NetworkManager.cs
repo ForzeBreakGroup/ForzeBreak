@@ -42,6 +42,13 @@ public class NetworkManager : PunBehaviour
     public static Camera[] playerCamera;
 
     /// <summary>
+    /// For local split screen usage, total number of players for split screen
+    /// </summary>
+    [Range(1, 4)]
+    [SerializeField]
+    public int numberOfLocalPlayers = 1;
+
+    /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
     /// </summary>
     public static NetworkManager instance
@@ -93,13 +100,6 @@ public class NetworkManager : PunBehaviour
     /// A list of spawn posisions obtained from scene
     /// </summary>
     private List<NetworkSpawnPoint> spawnPositions;
-
-    /// <summary>
-    /// For local split screen usage, total number of players for split screen
-    /// </summary>
-    [Range(1, 4)]
-    [SerializeField]
-    private int numberOfLocalPlayers = 1;
 
     [SerializeField]
     Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };

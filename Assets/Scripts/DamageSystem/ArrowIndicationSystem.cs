@@ -66,10 +66,11 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
         NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
         foreach (NetworkPlayerData p in playersInGame)
         {
-            Debug.Log(p.gameObject.GetPhotonView().ownerId);
+            Debug.Log(p.photonView.isMine);
             // If the photonView is not myself, means it's other player
             if (!p.photonView.isMine)
             {
+                Debug.Log(p.photonView.ownerId);
                 // If the dictionary record does not have the photonView ID start tracking it
                 if (!arrowList.ContainsKey(p.photonView.ownerId))
                 {

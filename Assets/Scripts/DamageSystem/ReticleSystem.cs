@@ -84,15 +84,7 @@ public class ReticleSystem : MonoBehaviour
             Debug.LogError("Target Cannot be Null");
         }
         this.target = target;
-
-        if (NetworkManager.offlineMode)
-        {
-            cam = target.GetComponent<NetworkPlayerData>().localCam;
-        }
-        else
-        {
-            cam = NetworkManager.instance.GetPlayerCamera();
-        }
+        cam = NetworkManager.instance.GetPlayerCamera();
         objectCollider = target.transform.Find("Colliders").GetComponentInChildren<Collider>();
         reticleEnable = true;
     }
