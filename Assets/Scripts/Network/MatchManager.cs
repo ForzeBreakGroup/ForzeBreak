@@ -131,10 +131,8 @@ public class MatchManager : Photon.MonoBehaviour
     [PunRPC]
     public void RpcPlayerSpawnedHandler(int playerId)
     {
-        // All clients will keep a copy of this data
-        playersStillAlive[playerId] = true;
-
-        // Calls individual arrow indicators to find spawned player object and start tracking
+        // Calls the arrow indicator system to add the new player to list
+        NetworkManager.localPlayer.GetComponent<ArrowIndicationSystem>().UpdateArrowList();
     }
 
     [PunRPC]
@@ -215,15 +213,6 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
     #endregion
-
-    public void TransitionToLobby(string name, int num, int winnerID = -2)
-    {
-        if (NetworkManager.offlineMode)
-        {
-            playerPrefabName = name;
-            numOfLocalPlayers = num;
-        }
-    }
 
     public void DestroyPlayerObject()
     {

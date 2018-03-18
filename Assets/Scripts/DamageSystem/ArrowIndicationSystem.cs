@@ -49,9 +49,7 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-        EventManager.StartListening("AddPlayerToMatch", EvtAddPlayerToMatchHandler);
     }
 
     /// <summary>
@@ -59,61 +57,27 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
         PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-        EventManager.StopListening("AddPlayerToMatch", EvtAddPlayerToMatchHandler);
     }
 
-    /// <summary>
-    /// Photon Event handler for OnPlayerSpawnFinished
-    /// Loop through the scene to find all player objects and start tracking the new player object
-    /// </summary>
-    /// <param name="evtCode"></param>
-    /// <param name="content"></param>
-    /// <param name="senderid"></param>
-    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
+    public void UpdateArrowList()
     {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawnFinished && photonView.isMine)
+        // Loop through all objects in game to make sure all players are included
+        NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
+        foreach (NetworkPlayerData p in playersInGame)
         {
-            // Loop through all objects in game to make sure all players are included
-            NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();
-            foreach (NetworkPlayerData p in playersInGame)
-            {
-                // If the photonView is not myself, means it's other player
-                if (!p.photonView.isMine)
-                {
-                    // If the dictionary record does not have the photonView ID start tracking it
-                    if (!arrowList.ContainsKey(p.photonView.ownerId))
-                    {
-                        // Create an arrow for this specific remote client
-                        GameObject arrow = Instantiate(arrowIndicator, this.transform);
-                        arrow.transform.localScale = new Vector3(1, 1, 1);
-                        arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
-                        arrowList.Add(p.photonView.ownerId, arrow);
-                    }
-                }
-            }
-        }
-    }
-
-    private void EvtAddPlayerToMatchHandler()
-    {
-        CarUserControl[] playersInGame = FindObjectsOfType<CarUserControl>();
-        int myNum = gameObject.GetComponent<CarUserControl>().playerNum;
-        foreach (CarUserControl p in playersInGame)
-        {
-            int playerNum = p.gameObject.GetComponent<CarUserControl>().playerNum;
+            Debug.Log(p.gameObject.GetPhotonView().ownerId);
             // If the photonView is not myself, means it's other player
-            if (playerNum != myNum)
+            if (!p.photonView.isMine)
             {
                 // If the dictionary record does not have the photonView ID start tracking it
-                if (!arrowList.ContainsKey(playerNum))
+                if (!arrowList.ContainsKey(p.photonView.ownerId))
                 {
                     // Create an arrow for this specific remote client
                     GameObject arrow = Instantiate(arrowIndicator, this.transform);
                     arrow.transform.localScale = new Vector3(1, 1, 1);
                     arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
-                    arrowList.Add(playerNum, arrow);
+                    arrowList.Add(p.photonView.ownerId, arrow);
                 }
             }
         }
