@@ -8,6 +8,7 @@ public class InGameHUDManager : MonoBehaviour
     private UIDamageIconControl damageIconControl;
     private UIWeaponIconControl weaponIconControl;
     private UINetworkTimerControl networkTimerControl;
+    private UIReticleControl reticleControl;
 
     private static InGameHUDManager inGameHUDManager;
     public static InGameHUDManager instance
@@ -37,6 +38,7 @@ public class InGameHUDManager : MonoBehaviour
         damageIconControl = FindObjectOfType<UIDamageIconControl>();
         weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
+        reticleControl = FindObjectOfType<UIReticleControl>();
     }
 
     public void EnableInGameHUD()
@@ -46,6 +48,7 @@ public class InGameHUDManager : MonoBehaviour
         damageIconControl.EnableUIControl();
         weaponIconControl.EnableUIControl();
         networkTimerControl.EnableUIControl();
+        reticleControl.EnableUIControl();
 
         // Disable Room waiting UI
     }
@@ -53,5 +56,10 @@ public class InGameHUDManager : MonoBehaviour
     public void UpdateWeaponIcon(string powerUpName)
     {
         weaponIconControl.ChangeIcon(powerUpName);
+    }
+
+    public void ReticleUIDisplay(ReticleUIState state, Vector3 pos)
+    {
+        reticleControl.DisplayReticleUI(state, pos);
     }
 }
