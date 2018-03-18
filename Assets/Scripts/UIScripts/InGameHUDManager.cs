@@ -6,7 +6,7 @@ public class InGameHUDManager : MonoBehaviour
 {
     private UIBoostBarControl boostBarControl;
     private UIDamageIconControl damageIconControl;
-    private UIWeaponIconControl weaponIconContro;
+    private UIWeaponIconControl weaponIconControl;
     private UINetworkTimerControl networkTimerControl;
 
     private static InGameHUDManager inGameHUDManager;
@@ -35,7 +35,7 @@ public class InGameHUDManager : MonoBehaviour
     {
         boostBarControl = FindObjectOfType<UIBoostBarControl>();
         damageIconControl = FindObjectOfType<UIDamageIconControl>();
-        weaponIconContro = FindObjectOfType<UIWeaponIconControl>();
+        weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
     }
 
@@ -44,9 +44,14 @@ public class InGameHUDManager : MonoBehaviour
         // Enable each individual UI control
         boostBarControl.EnableUIControl();
         damageIconControl.EnableUIControl();
-        weaponIconContro.EnableUIControl();
+        weaponIconControl.EnableUIControl();
         networkTimerControl.EnableUIControl();
 
         // Disable Room waiting UI
+    }
+
+    public void UpdateWeaponIcon(string powerUpName)
+    {
+        weaponIconControl.ChangeIcon(powerUpName);
     }
 }

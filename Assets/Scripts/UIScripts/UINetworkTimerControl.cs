@@ -13,9 +13,9 @@ public class UINetworkTimerControl : UIControl
 
     private void Awake()
     {
-        Debug.Log("Timer Awake");
         timerText = GetComponent<Text>();
         timerText.enabled = false;
+        currentTime = time;
     }
 
     private void DisplayTime()
