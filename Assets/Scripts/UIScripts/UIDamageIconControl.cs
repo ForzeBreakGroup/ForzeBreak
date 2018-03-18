@@ -8,11 +8,11 @@ using UnityEngine.UI;
  * Description:
  * Update the damage UI
  */
-public class UIDamageIconControl : MonoBehaviour {
-
-
+public class UIDamageIconControl : UIControl
+{
     [SerializeField]
     private Image displayedIcon;
+
     [SerializeField]
     private Sprite[] resources;
 
@@ -22,13 +22,17 @@ public class UIDamageIconControl : MonoBehaviour {
     private void OnEnable()
     {
         displayedIcon = GetComponent<Image>();
-
-        damageSystem = NetworkManager.localPlayer.GetComponent<DamageSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void UpdateUIControl()
     {
+        base.UpdateUIControl();
         displayedIcon.sprite = resources[(int)damageSystem.GetDamageThreshold()];
+    }
+
+    public override void EnableUIControl()
+    {
+        base.EnableUIControl();
+        damageSystem = NetworkManager.localPlayer.GetComponent<DamageSystem>();
     }
 }

@@ -62,7 +62,7 @@ public class MatchManager : Photon.MonoBehaviour
         }
 
         // Photon RPC call to let everyone know this client has joined the game
-        photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBuffered, PhotonNetwork.player.ID);
+        photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBufferedViaServer, PhotonNetwork.player.ID);
     }
 
     private void SpawnPlayer()
@@ -124,8 +124,8 @@ public class MatchManager : Photon.MonoBehaviour
         // Spawn power ups
         PowerUpSpawnManager.instance.SpawnPowerUp();
 
-        // Start Round timer
-        // 
+        // Enable InGame HUD
+        InGameHUDManager.instance.EnableInGameHUD();
     }
 
     [PunRPC]

@@ -8,22 +8,27 @@ using UnityEngine.UI;
  * Description:
  * Update the boost UI
  */
-public class UIBoostBarControl : MonoBehaviour {
-
+public class UIBoostBarControl : UIControl
+{
     Image progressBar;
     Text percentage;
 
     BoostControl bc;
 
-    void OnEnable()
+    void Awake()
     {
         progressBar = transform.Find("ProgressBar").gameObject.GetComponent<Image>();
+    }
+
+    public override void EnableUIControl()
+    {
+        base.EnableUIControl();
         bc = NetworkManager.localPlayer.GetComponent<BoostControl>();
     }
 
-    void Update()
+    protected override void UpdateUIControl()
     {
-        progressBar.fillAmount = bc.energy/bc.maxEnergy;
-
+        base.UpdateUIControl();
+        progressBar.fillAmount = bc.energy / bc.maxEnergy;
     }
 }

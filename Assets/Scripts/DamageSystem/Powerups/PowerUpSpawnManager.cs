@@ -18,14 +18,17 @@ public class PowerUpSpawnManager : MonoBehaviour
                 {
                     Debug.LogError("PowerUpSpawnManager script must be attached to an active gameobject in scene");
                 }
-
+                else
+                {
+                    powerUpSpawnManager.Init();
+                }
             }
 
             return powerUpSpawnManager;
         }
     }
 
-    private void Awake()
+    private void Init()
     {
         powerUpSpawnPoints = FindObjectsOfType<PowerUpSpawn>();
     }
