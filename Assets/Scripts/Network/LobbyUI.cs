@@ -39,7 +39,7 @@ public class LobbyUI : Photon.MonoBehaviour
         playerConn.text = "";
     }
 
-    private void NetworkDisplay()
+    public void NetworkDisplay()
     {
         playerConn.text = PhotonNetwork.playerList.Length + " / 4";
         if (PhotonNetwork.playerList.Length > 1)
@@ -54,35 +54,10 @@ public class LobbyUI : Photon.MonoBehaviour
 
     private void OnEnable()
     {
-        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-
         isReady = false;
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
         playerConn.text = PhotonNetwork.playerList.Length + " / 4";
-    }
-
-    private void OnDisable()
-    {
-        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-    }
-
-    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch)
-        {
-            NetworkDisplay();
-        }
-    }
-
-    private void EvtRemovePlayerFromMatchHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch)
-        {
-            NetworkDisplay();
-        }
     }
 
     public void DisplayWinner(int winnerID)
@@ -116,15 +91,6 @@ public class LobbyUI : Photon.MonoBehaviour
         readyText.enabled = isReady;
         notReadyText.enabled = !isReady;
 
-        if (NetworkManager.offlineMode)
-        {
-            EventManager.TriggerEvent("OnPlayerReady");
-        }
-        else
-        {
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.MasterClient;
-            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerReady, isReady, true, options);
-        }
+        MatchManager.instance.photonView.RPC("RpcPlayerReadyHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView());
     }
 }

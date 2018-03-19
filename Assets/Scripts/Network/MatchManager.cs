@@ -3,16 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * MatchManager controls a match round's flow, from taking care of correct sequence of spawning to handling player's death across network/local split screen.
+ */
 public class MatchManager : Photon.MonoBehaviour
 {
-    public GameObject cam;
+    /// <summary>
+    /// Player camera prefab that will be instantiated during spawning player
+    /// </summary>
+    [SerializeField]
+    private GameObject playerCameraPrefab;
+
+    /// <summary>
+    /// Player spawn point pre-mapped in scene
+    /// </summary>
     private NetworkSpawnPoint[] spawnPoints;
-    private Dictionary<PhotonPlayer, bool> playersStillAlive;
-    private static MatchManager matchManager;
-    private Dictionary<PhotonPlayer, bool> playersReady;
-    private GameObject lobbyUI;
+
+    /// <summary>
+    /// Dictionary data to keep track of which player is still alive, using player's photon ID / local player num as key
+    /// </summary>
+    private Dictionary<int, bool> playersStillAlive;
+
+    /// <summary>
+    /// Dictionary data to keep track of player across network has finished loading the scene, using player's photon ID as key
+    /// </summary>
+    private Dictionary<int, bool> playersInScene;
+
+    /// <summary>
+    /// Default player vehicle prefab name
+    /// </summary>
     private string playerPrefabName = "War_Buggy";
-    private int numOfLocalPlayers = 0;
+
+    private static MatchManager matchManager;
     public static MatchManager instance
     {
         get
@@ -36,272 +61,204 @@ public class MatchManager : Photon.MonoBehaviour
 
     private void Init()
     {
-        lobbyUI = FindObjectOfType<Canvas>().transform.Find("Lobby").gameObject;
-    }
 
-    private void Awake()
+    }
+    
+    private void Start()
     {
-        playersStillAlive = new Dictionary<PhotonPlayer, bool>();
-        playersReady = new Dictionary<PhotonPlayer, bool>();
+        // Initialize dictioanry for tracking players still alive in match
+        playersStillAlive = new Dictionary<int, bool>();
+        playersInScene = new Dictionary<int, bool>();
+
+        foreach(PhotonPlayer player in PhotonNetwork.playerList)
+        {
+            playersStillAlive.Add(player.ID, true);
+            playersInScene.Add(player.ID, false);
+        }
+
+        // Find the spawn points
         spawnPoints = FindObjectsOfType<NetworkSpawnPoint>();
-        if (!cam)
+
+        // Validate camera object is attached to script
+        if (!playerCameraPrefab)
         {
             Debug.LogError("Camera Not Attached");
         }
 
+        // Photon RPC call to let everyone know this client has joined the game
+        photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBufferedViaServer, PhotonNetwork.player.ID);
+    }
+
+    private void AdjustCamera(Camera playerCam, int playerNum)
+    {
+        // For split screen mode
+        if (NetworkManager.instance.numberOfLocalPlayers > 1)
+        {
+            // Calculate the Camera division
+            float marginX = (playerNum > 1) ? (playerNum - 2) * 0.5f : playerNum * 0.5f;
+            float marginY;
+            if (NetworkManager.instance.numberOfLocalPlayers == 2)
+            {
+                marginY = (playerNum > 1) ? 0.5f : 0f;
+            }
+            else
+            {
+                marginY = (playerNum > 1) ? 0f : 0.5f;
+            }
+            playerCam.rect = new Rect(marginX, marginY, 0.5f, (NetworkManager.instance.numberOfLocalPlayers == 2) ? 1f : 0.5f);
+        }
+    }
+
+    private void SpawnPlayer()
+    {
+        // Loop condition value, offline mode is the number of local players in game, online mode is always 1
+        int playersInGame = (NetworkManager.offlineMode) ? NetworkManager.instance.numberOfLocalPlayers : 1;
+
+        // Loop to create n number of players to game
+        for (int i = 0; i < playersInGame; ++i)
+        {
+            // Obtain the player selected vehicle model
+            string vehicleName = "War_Buggy";
+
+            // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
+            int playerNumber = (NetworkManager.offlineMode) ? i : (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
+
+            // Obtain the spawn position and rotation
+            Vector3 pos = spawnPoints[playerNumber].spawnPoint;
+            Quaternion rot = spawnPoints[playerNumber].spawnRotation;
+
+            // Spawn player camera
+            GameObject mainCamera = Instantiate(playerCameraPrefab);
+
+            // Spawn player gameobject and register the spawn position and rotation for future use
+            GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
+            playerGO.GetComponent<CarUserControl>().playerNum = i + 1;
+            ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+            ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+
+            // Assign the player camera to follow the corresponding player
+            mainCamera.GetComponent<CameraControl>().target = playerGO;
+            Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+
+            // Offline mode requires additional adjustment
+            if (NetworkManager.offlineMode)
+            {
+                // Adjust the camera viewport according to player number
+                AdjustCamera(playerCam, i);
+
+                // Change photonview id
+                playerGO.GetPhotonView().ownerId = i + 1;
+            }
+
+            // Set the local player reference
+            NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, i);
+        }
+
+        // Offline mode will use loop to register to arrow indicator
+        if (NetworkManager.offlineMode)
+        {
+            foreach (GameObject player in NetworkManager.localPlayer)
+            {
+                player.GetComponent<ArrowIndicationSystem>().UpdateArrowList();
+            }
+        }
+        // Online mode will use RPC to register to arrow indicator
+        else
+        {
+            photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView().ownerId);
+        }
+
+        // Switch BGM
+        FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
+    }
+
+    #region Photon RPC Callers
+    [PunRPC]
+    public void RpcPlayerJoinedSceneHandler(int playerId)
+    {
+        playersInScene[playerId] = true;
+
+        // Master client will start the match
         if (PhotonNetwork.isMasterClient)
         {
-            playersStillAlive.Add(PhotonNetwork.masterClient, true);
-            playersReady.Add(PhotonNetwork.masterClient, false);
-        }
-    }
-
-    private void OnEnable()
-    {
-        // Network Event listener
-        PhotonNetwork.OnEventCall += EvtPlayerDeathHandler;
-        PhotonNetwork.OnEventCall += EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall += EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall += EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall += EvtSpawnPlayerHandler;
-        PhotonNetwork.OnEventCall += EvtRoundOverHandler;
-
-        EventManager.StartListening("OnPlayerReady", EvtPlayerReadyHandler);
-    }
-
-    private void OnDisable()
-    {
-        // Network Event listener
-        PhotonNetwork.OnEventCall -= EvtPlayerDeathHandler;
-        PhotonNetwork.OnEventCall -= EvtAddPlayerToMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtRemovePlayerFromMatchHandler;
-        PhotonNetwork.OnEventCall -= EvtPlayerReadyHandler;
-        PhotonNetwork.OnEventCall -= EvtSpawnPlayerHandler;
-        PhotonNetwork.OnEventCall -= EvtRoundOverHandler;
-    }
-
-    #region Event Handlers
-    private void EvtAddPlayerToMatchHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnAddPlayerToMatch && PhotonNetwork.isMasterClient)
-        {
-            PhotonPlayer newPlayer = (PhotonPlayer)content;
-
-            if (!playersStillAlive.ContainsKey(newPlayer))
+            // Loop through all entries to make sure every players are ready
+            foreach(KeyValuePair<int, bool> entry in playersInScene)
             {
-                Debug.Log("Add player:" + newPlayer);
-                playersStillAlive.Add(newPlayer, true);
+                if (!entry.Value)
+                {
+                    goto playerNotReady;
+                }
             }
+
+            // Once all players have joined the scene, start spawning
+            photonView.RPC("RpcRoundStartHandler", PhotonTargets.All);
         }
+
+        // GOTO label if any of the player is not ready
+        playerNotReady:
+        return;
     }
 
-    private void EvtRemovePlayerFromMatchHandler(byte evtCode, object content, int senderid)
+    [PunRPC]
+    public void RpcRoundStartHandler()
     {
-        if (evtCode == (byte)ENetworkEventCode.OnRemovePlayerFromMatch && PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("EvtRemovePlayerEvent");
-            PhotonPlayer otherPlayer = (PhotonPlayer)content;
+        // Spawn players
+        SpawnPlayer();
 
-            if (playersStillAlive.ContainsKey(otherPlayer))
-            {
-                playersStillAlive.Remove(otherPlayer);
-            }
-        }
+        // Spawn power ups
+        PowerUpSpawnManager.instance.SpawnPowerUp();
+
+        // Enable InGame HUD
+        InGameHUDManager.instance.EnableInGameHUD();
     }
 
-    private void EvtPlayerDeathHandler(byte evtCode, object content, int senderid)
+    [PunRPC]
+    public void RpcPlayerSpawnedHandler(int playerId)
     {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerDeath && PhotonNetwork.isMasterClient)
-        {
-            int deathId = (int)content;
-            PhotonPlayer sender = PhotonPlayer.Find(deathId);
-            playersStillAlive[sender] = false;
+        // Calls the arrow indicator system to add the new player to list
+        NetworkManager.instance.GetLocalPlayer().GetComponent<ArrowIndicationSystem>().UpdateArrowList();
+    }
 
+    [PunRPC]
+    public void RpcPlayerDeathHandler(int playerId)
+    {
+        playersStillAlive[playerId] = false;
+
+        // Only master client will execute following logics
+        if (PhotonNetwork.isMasterClient)
+        {
             uint aliveCount = 0;
-            PhotonPlayer survivor = null;
-            foreach(KeyValuePair<PhotonPlayer, bool> entry in playersStillAlive)
+            foreach (KeyValuePair<int, bool> entry in playersStillAlive)
             {
                 if (entry.Value)
                 {
                     ++aliveCount;
-                    survivor = entry.Key;
                 }
             }
 
             if (aliveCount <= 1)
             {
-                int winner = -1;
-                if (survivor != null)
-                {
-                    winner = survivor.ID;
-                }
-
-                RoundOver(winner);
+                RoundOver(0);
             }
         }
     }
 
     private void RoundOver(int winnerID)
     {
-        List<PhotonPlayer> readyEntry = new List<PhotonPlayer>(playersReady.Keys);
-
-        foreach(PhotonPlayer player in readyEntry)
+        // Load end of match scene
+        if (PhotonNetwork.isMasterClient)
         {
-            playersReady[player] = false;
-        }
-
-        List<PhotonPlayer> aliveEntry = new List<PhotonPlayer>(playersStillAlive.Keys);
-        foreach(PhotonPlayer player in aliveEntry)
-        {
-            playersStillAlive[player] = true;
-        }
-
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, winnerID, true, options);
-    }
-
-    private void EvtPlayerReadyHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerReady && PhotonNetwork.isMasterClient)
-        {
-            PhotonPlayer sender = PhotonPlayer.Find(senderid);
-            playersReady[sender] = (bool)content;
-
-            int numOfReady = 0;
-            foreach (KeyValuePair<PhotonPlayer, bool> entry in playersReady)
-            {
-                if (entry.Value)
-                {
-                    ++numOfReady;
-                }
-            }
-
-            if (numOfReady == PhotonNetwork.playerList.Length && PhotonNetwork.playerList.Length > 1)
-            {
-                RaiseEventOptions options = new RaiseEventOptions();
-                options.Receivers = ReceiverGroup.All;
-                PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawning, null, true, options);
-            }
-        }
-    }
-
-    private void EvtPlayerReadyHandler()
-    {
-        SpawnLocalPlayers(playerPrefabName, numOfLocalPlayers); 
-    }
-
-    private void EvtSpawnPlayerHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte)ENetworkEventCode.OnPlayerSpawning)
-        {
-            lobbyUI.SetActive(false);
-
-            int playerNumber = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
-            Vector3 pos = spawnPoints[playerNumber].spawnPoint;
-            Quaternion rot = spawnPoints[playerNumber].spawnRotation;
-
-            FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
-
-
-            GameObject mainCamera = Instantiate(cam);
-
-            NetworkManager.localPlayer = PhotonNetwork.Instantiate("War_Buggy", pos, rot, 0);
-            ((NetworkPlayerData)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
-            ((NetworkPlayerVisual)NetworkManager.localPlayer.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
-
-            FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(true);
-            FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(true);
-            FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(true);
-
-            mainCamera.GetComponent<CameraControl>().target = NetworkManager.localPlayer;
-            NetworkManager.playerCamera = mainCamera.transform.Find("Camera").GetComponent<Camera>();
-
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.All;
-            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnPlayerSpawnFinished, null, true, options);
-        }
-    }
-
-    private void EvtRoundOverHandler(byte evtCode, object content, int senderid)
-    {
-        if (evtCode == (byte) ENetworkEventCode.OnRoundOver)
-        {
-            int winnerId = (int)content;
-            DestroyPlayerObject();
-            MatchManager.instance.TransitionToLobby(playerPrefabName, numOfLocalPlayers, winnerId);
+            PhotonNetwork.LoadLevel("MatchResult");
         }
     }
     #endregion
 
-    #region Local Gameplay
-
-    public void SpawnLocalPlayers(string playerPrefabName, int numberOfPlayers)
+    public void DestroyPlayerObject(int playerNum = 0)
     {
-        lobbyUI.SetActive(false);
-        // Loop every number of player necessary to create object
-        for (int i = 0; i < numberOfPlayers; ++i)
-        {
-            // Spawn the vehicle based on spawnpoint index's position and rotation
-            GameObject car = PhotonNetwork.Instantiate(playerPrefabName, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation, 0);
-
-            // Register the spawn position and rotation for future respawn
-            car.GetComponent<NetworkPlayerData>().RegisterSpawnInformation(spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
-
-            // Spawn camera control object to follow the vehicle
-            GameObject cameraControl = Instantiate(cam, spawnPoints[i].spawnPoint, spawnPoints[i].spawnRotation);
-
-            // Assign such control with target to follow
-            cameraControl.GetComponent<CameraControl>().target = car;
-
-            // For split screen mode
-            if (numberOfPlayers > 1)
-            {
-                // Assign seperate control index to the vehicle
-                car.GetComponent<CarUserControl>().playerNum = i + 1;
-
-                // Calculate the Camera division
-                float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;
-                float marginY;
-                if (numberOfPlayers == 2)
-                {
-                    marginY = (i > 1) ? 0.5f : 0f;
-                }
-                else
-                {
-                    marginY = (i > 1) ? 0f : 0.5f;
-                }
-                cameraControl.GetComponentInChildren<Camera>().rect = new Rect(marginX, marginY, 0.5f, (numberOfPlayers == 2) ? 1f : 0.5f);
-                car.GetComponent<NetworkPlayerData>().localCam = cameraControl.GetComponentInChildren<Camera>();
-            }
-            car.GetComponent<NetworkPlayerVisual>().InitializeVehicleWithPlayerColor();
-        }
-    }
-    #endregion
-
-    public void TransitionToLobby(string name, int num, int winnerID = -2)
-    {
-        if (NetworkManager.offlineMode)
-        {
-            playerPrefabName = name;
-            numOfLocalPlayers = num;
-        }
-        lobbyUI.SetActive(true);
-        FindObjectOfType<Canvas>().transform.Find("BoostBar").gameObject.SetActive(false);
-        FindObjectOfType<Canvas>().transform.Find("WeaponIcon").gameObject.SetActive(false);
-        FindObjectOfType<Canvas>().transform.Find("DamageIcon").gameObject.SetActive(false);
-        lobbyUI.GetComponent<LobbyUI>().DisplayWinner(winnerID);
-    }
-
-    public void DestroyPlayerObject()
-    {
-        if (NetworkManager.localPlayer != null && NetworkManager.playerCamera != null)
+        if (NetworkManager.localPlayer[playerNum] != null && NetworkManager.playerCamera[playerNum] != null)
         {
             //PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
-            PhotonNetwork.Destroy(NetworkManager.localPlayer);
-            Destroy(NetworkManager.playerCamera.transform.root.gameObject);
-            NetworkManager.localPlayer = null;
-            NetworkManager.playerCamera = null;
+            NetworkManager.instance.DestroyLocalPlayer(playerNum);
         }
     }
 }

@@ -8,7 +8,8 @@ using UnityEngine.UI;
  * Description:
  * Update the Weapon UI
  */
-public class UIWeaponIconControl : MonoBehaviour {
+public class UIWeaponIconControl : UIControl
+{
 
     [SerializeField]
     private Image displayedIcon;
@@ -18,15 +19,14 @@ public class UIWeaponIconControl : MonoBehaviour {
     [SerializeField]
     private Sprite[] resources;
 
-
     // Use this for initialization
     private void OnEnable()
     {
         displayedIcon = GetComponent<Image>();
-        changeIcon("");
+        ChangeIcon("");
     }
 
-    public void changeIcon(string name)
+    public void ChangeIcon(string name)
     {
         if(name==StaticData.CANNON_NAME)
         {
@@ -40,12 +40,14 @@ public class UIWeaponIconControl : MonoBehaviour {
         {
             displayedIcon.sprite = resources[3];
         }
-
-
         else if (name == "")
         {
             displayedIcon.sprite = resources[0];
         }
     }
-    
+
+    public override void EnableUIControl()
+    {
+        base.EnableUIControl();
+    }
 }
