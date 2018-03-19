@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 114223068718077450}
   MasterBankRef: {fileID: 114478252389934044}
   StringsBankRef: {fileID: 114623979966087772}
-  stringsBankWriteTime: 636563143145038506
+  stringsBankWriteTime: 636569898623828482
   cacheVersion: 2
 --- !u!114 &114009554472961936
 MonoBehaviour:
@@ -82,6 +82,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114127731172992266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Stage
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114193789485795418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +116,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114775522939327206}
+  - {fileID: 114127731172992266}
   MinDistance: 0
   MaxDistance: 0
   Length: 354500
@@ -161,7 +176,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114625865707349180}
+  - {fileID: 114919362790401778}
   MinDistance: 1
   MaxDistance: 20
   Length: 5000
@@ -395,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:\Projects\Unity3D\ForzeBreak\Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636568987766151816
+  lastModified: 636569898623628174
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -592,7 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636563143145038506
+  lastModified: 636569898623828482
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -863,6 +878,21 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114918975581681812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114919362790401778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

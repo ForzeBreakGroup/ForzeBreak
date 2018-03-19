@@ -10,10 +10,22 @@ using UnityEngine;
  */
 public class MenuUIControl : MonoBehaviour
 {
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     #region OnClick Events
     public void OnClickLocalSplitScreen()
     {
         NetworkManager.instance.StartSplitScreen();
+    }
+
+    public void OnClickOnlineSession()
+    {
+        anim.SetTrigger("OnlineSubMenu");
     }
 
     public void OnClickMatchMaking()
