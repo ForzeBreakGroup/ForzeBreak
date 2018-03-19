@@ -105,22 +105,8 @@ public class NetworkManager : PunBehaviour
     Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
-    #region UI OnClick Events
-    /// <summary>
-    /// Disconnects from Photon Network and start local split screen
-    /// </summary>
-    public void OnClickSplitScreen()
-    {
-        if (PhotonNetwork.connected)
-        {
-            DisconnectFromPhoton();
-        }
-    }
-
-    /// <summary>
-    /// Matchmaking random room to join, explicitly calls OnConnetedToMaster() for single entry point
-    /// </summary>
-    public void OnClickMatchMaking()
+    #region Public Interface Methods
+    public void StartMatchMaking()
     {
         if (!PhotonNetwork.connected)
         {
@@ -128,9 +114,27 @@ public class NetworkManager : PunBehaviour
         }
         OnConnectedToMaster();
     }
-    #endregion
 
-    #region Public Interface Methods
+    public void StartSplitScreen(int numOfPlayer = 4)
+    {
+        this.numberOfLocalPlayers = numOfPlayer;
+
+        if (PhotonNetwork.connected)
+        {
+            DisconnectFromPhoton();
+        }
+    }
+
+    public Room[] RefreshCustomRoomList()
+    {
+        return null;
+    }
+
+    public void JoinRoomByName(string name)
+    {
+
+    }
+
     public Color GetPlayerColor(int index)
     {
         return playerColors[index];
