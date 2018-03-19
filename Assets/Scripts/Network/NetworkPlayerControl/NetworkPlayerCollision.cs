@@ -11,6 +11,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collision))]
 public class NetworkPlayerCollision : NetworkPlayerBase
 {
+    [SerializeField]
+    protected GameObject collisionEffect;
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -27,7 +29,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         Receiver
     };
 
-    /*
+    
     /// <summary>
     /// Unity lifehook event when Collision happens
     /// The server-side has the authority over when the collision happens, as well as the analysis result
@@ -36,19 +38,14 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     private void OnCollisionEnter(Collision collision)
     {
     // Host side collision check
-    if (collision.transform.root.tag == "Player" && PhotonNetwork.isMasterClient)
+    if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
     {
-        Debug.Log("OnCollisionEvent Triggered by Player: " + photonView.viewID);
-
-        float force;
-        Vector3 point;
-        PlayerCollisionResult collisionResult = CollisionEvent(collision, out force, out point);
-
-        // Calling PhotonRPC to individual player
-        photonView.RPC("NetworkCollision", PhotonPlayer.Find(gameObject.GetPhotonView().ownerId), collisionResult, force, point);
+            CameraShake.Shake();
+            Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
     }
 }
-    */
+    
 
     /// <summary>
     /// Callback function that child class must override, this dictates the reaction of collision

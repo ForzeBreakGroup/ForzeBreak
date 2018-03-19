@@ -122,7 +122,7 @@ Material:
     - _Displace: 0
     - _DisplacePatternSize: 1
     - _DissolveDirection: 1
-    - _DissolveDistance: 0.03
+    - _DissolveDistance: 0.167
     - _DissolveGlow: 0.505
     - _DissolvePatternSize: 1
     - _Distort: 0

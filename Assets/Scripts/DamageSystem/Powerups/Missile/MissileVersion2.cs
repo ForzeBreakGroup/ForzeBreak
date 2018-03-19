@@ -14,6 +14,7 @@ public class MissileVersion2 : PowerUpBase
 
     private bool fired = false;
 
+
     private void Awake()
     {
         this.enabled = photonView.isMine;
@@ -36,10 +37,6 @@ public class MissileVersion2 : PowerUpBase
         {
             lockOnSystem.Add(reticleSystem);
         }
-
-        // Move the weapon model to desired places
-        transform.localPosition = componentOffset;
-        transform.localRotation = Quaternion.identity;
     }
 
     protected override void OnPress()
@@ -79,6 +76,7 @@ public class MissileVersion2 : PowerUpBase
         GameObject missile = PhotonNetwork.Instantiate("Missile", launchLocation.position, Quaternion.identity, 0);
         missile.GetComponent<MissileMovement>().target = lockOnTarget;
         missile.GetComponent<MissileMovement>().Fire();
+
         fired = true;
     }
 }

@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * Author: Robin Zhou
+ * 
+ * Description:
+ * Update the damage UI
+ */
 public class UIDamageIconControl : MonoBehaviour {
 
 
@@ -24,24 +29,6 @@ public class UIDamageIconControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(damageSystem.damageAmplifyPercentage<200f)
-        {
-            displayedIcon.sprite = resources[0];
-        }
-        else if(damageSystem.damageAmplifyPercentage < 300f)
-        {
-            displayedIcon.sprite = resources[1];
-
-        }
-        else if (damageSystem.damageAmplifyPercentage < 400f)
-        {
-            displayedIcon.sprite = resources[2];
-
-        }
-        else if (damageSystem.damageAmplifyPercentage < 500f)
-        {
-
-            displayedIcon.sprite = resources[3];
-        }
+        displayedIcon.sprite = resources[(int)damageSystem.GetDamageThreshold()];
     }
 }

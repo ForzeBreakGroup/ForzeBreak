@@ -5,8 +5,11 @@ using Photon;
 
 public class MissileExplosionEffect : Photon.MonoBehaviour
 {
-    [SerializeField] private float ExplosionForce = 2500;
-    [SerializeField] private float ExplosionRadius = 30;
+    [Range(10, 100)]
+    [SerializeField] private float ExplosionForce = 25;
+
+    [Range(0.1f, 10.0f)]
+    [SerializeField] private float ExplosionRadius = 3;
     [SerializeField] private float ExplosionDuration = 0.2f;
 
     private bool stillInEffect = false;
@@ -14,12 +17,11 @@ public class MissileExplosionEffect : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
-        if (other.transform.root.tag == "Player" && !stillInEffect)
+        PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
+        if (other.transform.root.tag == "Player" && !stillInEffect && otherPhotonView.isMine)
         {
             Vector3 impactCenter = transform.position;
-            other.transform.root.GetComponent<DamageSystem>().CreateExplosion(ExplosionForce, transform.position, ExplosionRadius);
-            //otherPhotonView.RPC("CreateExplosion", PhotonPlayer.Find(otherPhotonView.viewID), ExplosionForce, transform.position, ExplosionRadius);
+            other.transform.root.GetComponent<DamageSystem>().ApplyDamageForce(ExplosionForce, transform.position, ExplosionRadius);
         }
     }
 

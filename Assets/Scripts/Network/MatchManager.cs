@@ -201,6 +201,8 @@ public class MatchManager : Photon.MonoBehaviour
             Vector3 pos = spawnPoints[playerNumber].spawnPoint;
             Quaternion rot = spawnPoints[playerNumber].spawnRotation;
 
+            FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
+
 
             GameObject mainCamera = Instantiate(cam);
 
@@ -295,7 +297,8 @@ public class MatchManager : Photon.MonoBehaviour
     {
         if (NetworkManager.localPlayer != null && NetworkManager.playerCamera != null)
         {
-            PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
+            //PhotonNetwork.DestroyPlayerObjects(PhotonPlayer.Find(NetworkManager.localPlayer.GetPhotonView().ownerId));
+            PhotonNetwork.Destroy(NetworkManager.localPlayer);
             Destroy(NetworkManager.playerCamera.transform.root.gameObject);
             NetworkManager.localPlayer = null;
             NetworkManager.playerCamera = null;

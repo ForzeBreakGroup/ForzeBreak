@@ -3,24 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
+/*
+ * Author: Jason Lin
+ * 
+ * Description:
+ * Missile movement after being instantiated in scene
+ */
 public class MissileMovement : NetworkPowerUpMovement
 {
-    public GameObject target;
-
-    [Range(1, 2)]
-    [SerializeField] private float flyupDuration = 1.0f;
-    private Vector3 flyUpDestination;
-
-    [Range(1, 10)]
-    [SerializeField] private float diveSpeed = 10.0f;
-
-    private float elapsedTime = 0.0f;
+    #region Members
+    /// <summary>
+    /// Enum defines 
+    /// </summary>
     private enum MissileMovementState
     {
         FlyUp,
         Diving
     };
+
+    /// <summary>
+    /// The target missile is locked with
+    /// </summary>
+    public GameObject target;
+
+    /// <summary>
+    /// Missile flyup effect duration
+    /// </summary>
+    [Range(1, 2)]
+    [SerializeField]
+    private float flyupDuration = 1.0f;
+
+    /// <summary>
+    /// Missile flyup destination
+    /// </summary>
+    private Vector3 flyUpDestination;
+
+    [Range(1, 10)]
+    [SerializeField]
+    private float diveSpeed = 10.0f;
+
+    private float elapsedTime = 0.0f;
     private MissileMovementState state = MissileMovementState.FlyUp;
+
+    #endregion
 
     protected override void Awake()
     {

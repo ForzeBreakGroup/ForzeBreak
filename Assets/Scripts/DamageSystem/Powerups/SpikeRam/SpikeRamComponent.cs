@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class SpikeRamComponent : PowerUpBase
 {
-    [Range(0, 50000)]
-    [SerializeField] private int damage = 10000;
+    [Range(10, 100)]
+    [SerializeField]
+    private float force = 100;
+
+    [Range(0.1f, 10.0f)]
+    [SerializeField]
+    private float radius = 10.0f;
 
     [Range(1, 4)]
     [SerializeField]
@@ -13,15 +18,17 @@ public class SpikeRamComponent : PowerUpBase
 
     public override void AdjustModel()
     {
-        transform.localPosition = componentOffset;
-        transform.localRotation = Quaternion.identity;
+        base.AdjustModel();
+        //transform.localPosition = componentOffset;
+        //transform.localRotation = Quaternion.identity;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.tag == "Player")
+        PhotonView otherPhotonView = other.transform.root.gameObject.GetPhotonView();
+        if (other.transform.root.tag == "Player" && otherPhotonView.isMine)
         {
-            other.transform.root.GetComponent<DamageSystem>().CreateExplosion((float)damage, transform.position, 30.0f);
+            other.transform.root.GetComponent<DamageSystem>().ApplyDamageForce((float)force, transform.position, radius);
             --capacity;
 
             if (capacity <= 0)

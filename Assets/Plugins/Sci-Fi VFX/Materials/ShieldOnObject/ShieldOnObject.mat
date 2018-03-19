@@ -102,7 +102,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Displace: 0.22
+    - _Displace: 0.47
     - _DisplaceScale: 1
     - _Distortion: 0.05
     - _DistortionPatternSize: 4
@@ -122,7 +122,7 @@ Material:
     - _NoiseSpeed: 50
     - _NoiseStrength: 7.11
     - _Normal: 0
-    - _NormalScale: 1
+    - _NormalScale: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PatternSize: 1
@@ -139,7 +139,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DisplaceSpeedXY: {r: 0, g: 0, b: 0, a: 0}
     - _DistortionSpeed: {r: 0, g: 0.1, b: 0, a: 0}
-    - _EmissionColor: {r: 1.5808823, g: 5, b: 2.3118668, a: 1}
+    - _EmissionColor: {r: 0.97788155, g: 0.88802993, b: 1.6544118, a: 1}
     - _EmissionSpeed: {r: 0.1, g: 0.2, b: 0, a: 0}
     - _MainColor: {r: 0, g: 0.049695764, b: 0.14705884, a: 1}
     - _MainSpee: {r: 0, g: 0.12, b: 0, a: 0}
