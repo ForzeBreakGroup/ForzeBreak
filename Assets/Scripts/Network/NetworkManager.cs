@@ -350,6 +350,8 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Left Room");
         base.OnLeftRoom();
+
+        PhotonNetwork.LoadLevel("Menu");
     }
 
     /// <summary>

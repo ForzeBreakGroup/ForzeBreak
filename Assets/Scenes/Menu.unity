@@ -3664,7 +3664,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1938721624}
-        m_MethodName: OnClickLocalSplitScreen
+        m_MethodName: OnClickMatchMaking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
