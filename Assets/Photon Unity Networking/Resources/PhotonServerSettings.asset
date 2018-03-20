@@ -56,4 +56,6 @@ MonoBehaviour:
   - RpcPlayerJoinedSceneHandler
   - RpcPlayerSpawningHandler
   - RpcRoundStartHandler
+  - LeaveRoom
+  - PlayerReadyForRematch
   DisableAutoOpenWizard: 1
