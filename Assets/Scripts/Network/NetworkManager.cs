@@ -13,6 +13,10 @@ using Photon;
  * 
  * By default, NetworkManager is not connected to the PhotonService. Once the player choose to CREATE or JOIN room
  * then it will start the connection
+ * 
+ * Remarks:
+ * The default code flow of the program.
+ * Online Mode -> Connect to Photon Server -> OnJoinMaster callback -> Join Random Room -> Join Random Room Failed (No room available) -> Create Room
  */
 public class NetworkManager : PunBehaviour
 {
@@ -30,12 +34,19 @@ public class NetworkManager : PunBehaviour
     /// <summary>
     /// A static reference to the player game object used by this remote client
     /// </summary>
-    public static GameObject localPlayer;
+    public static GameObject[] localPlayer;
 
     /// <summary>
     /// A static reference to the player camera used by this remote client
     /// </summary>
-    public static Camera playerCamera;
+    public static Camera[] playerCamera;
+
+    /// <summary>
+    /// For local split screen usage, total number of players for split screen
+    /// </summary>
+    [Range(1, 4)]
+    [SerializeField]
+    public int numberOfLocalPlayers = 1;
 
     /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
@@ -71,27 +82,6 @@ public class NetworkManager : PunBehaviour
 
     #region Private Members
     /// <summary>
-    /// Enum defines connection state of the networkmanager
-    /// </summary>
-    private enum ConnectionState
-    {
-        /// <summary>
-        /// NetworkManager IDLE for communication
-        /// </summary>
-        IDLE,
-
-        /// <summary>
-        /// NetworkManager received CREATE room command from user
-        /// </summary>
-        CREATE,
-
-        /// <summary>
-        /// NetworkManager received JOIN room coomand from user
-        /// </summary>
-        JOIN
-    };
-
-    /// <summary>
     /// Internal static reference of NetworkManager for instance usage
     /// </summary>
     private static NetworkManager networkManager;
@@ -111,70 +101,93 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private List<NetworkSpawnPoint> spawnPositions;
 
-    /// <summary>
-    /// For local split screen usage, total number of players for split screen
-    /// </summary>
-    [Range(1, 4)]
-    [SerializeField]
-    private int numberOfLocalPlayers = 1;
-
-    /// <summary>
-    /// Default connection state
-    /// </summary>
-    private static ConnectionState state = ConnectionState.IDLE;
-
-
     [SerializeField]
     Color[] playerColors = new Color[] { Color.blue, Color.red, Color.green, Color.yellow };
     #endregion
 
-    #region Public Methods
-    /// <summary>
-    /// Enters single player mode with predefined number of players in split screen
-    /// </summary>
-    public void SinglePlayerMode()
+    #region Public Interface Methods
+    public void StartMatchMaking()
     {
-        DisconnectFromPhoton();
-    }
-
-    /// <summary>
-    /// Connects to the PhotonServer and create room with default RoomOptions
-    /// </summary>
-    public void CreateGame()
-    {
-        // Switch the connection state to CREATE, so when callback occur, can easily distinguish which action to take
-        state = ConnectionState.CREATE;
         if (!PhotonNetwork.connected)
         {
             ConnectingToPhotonServer();
         }
+        OnConnectedToMaster();
     }
 
-    /// <summary>
-    /// Connects to the PhotonServer and join exisiting random room
-    /// </summary>
-    public void JoinRoom()
+    public void StartSplitScreen(int numOfPlayer = 4)
     {
-        state = ConnectionState.JOIN;
-        if (!PhotonNetwork.connected)
+        this.numberOfLocalPlayers = numOfPlayer;
+
+        if (PhotonNetwork.connected)
         {
-            ConnectingToPhotonServer();
+            DisconnectFromPhoton();
         }
+    }
+
+    public Room[] RefreshCustomRoomList()
+    {
+        return null;
+    }
+
+    public void JoinRoomByName(string name)
+    {
+
     }
 
     public Color GetPlayerColor(int index)
     {
         return playerColors[index];
     }
+
+    public void EnableTheRoom(bool enable)
+    {
+        if (PhotonNetwork.inRoom && PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.room.IsVisible = enable;
+            PhotonNetwork.room.IsOpen = enable;
+        }
+    }
+
+    public GameObject GetLocalPlayer(int playerNum = 0)
+    {
+        return localPlayer[playerNum];
+    }
+
+    public Camera GetPlayerCamera(int playerNum = 0)
+    {
+        return playerCamera[playerNum];
+    }
+
+    public void SetLocalPlayer(GameObject playerGO, Camera playerCam, int playerNum = 0)
+    {
+        localPlayer[playerNum] = playerGO;
+        playerCamera[playerNum] = playerCam;
+    }
+
+    public void DestroyLocalPlayer(int playerNum = 0)
+    {
+        PhotonNetwork.Destroy(localPlayer[playerNum]);
+        Destroy(playerCamera[playerNum].transform.root.gameObject);
+        localPlayer[playerNum] = null;
+        playerCamera[playerNum] = null;
+    }
+
+    public bool ValidateOwnership(PhotonView view, int playerNum = 0)
+    {
+        // Offline mode will use the playern
+        if (offlineMode)
+        {
+            return (view.ownerId == playerNum);
+        }
+        else
+        {
+            return view.isMine;
+        }
+    }
     #endregion
 
     #region Private Methods
-    private void Start()
-    {
-        // Register callback function when scene changes
-        SceneManager.sceneLoaded += this.OnLevelLoaded;
-    }
-
     private void Awake()
     {
         // If NetworkManager has already been initialized on Awake, destroy the most recent one
@@ -188,6 +201,8 @@ public class NetworkManager : PunBehaviour
         DontDestroyOnLoad(gameObject);
         networkManager = this;
         networkManager.Init();
+
+        ConnectingToPhotonServer();
     }
 
     /// <summary>
@@ -204,6 +219,8 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void Init()
     {
+        localPlayer = new GameObject[numberOfLocalPlayers];
+        playerCamera = new Camera[numberOfLocalPlayers];
     }
 
     /// <summary>
@@ -241,7 +258,6 @@ public class NetworkManager : PunBehaviour
         roomOptions.MaxPlayers = 4;
         roomOptions.PlayerTtl = 7500;
         roomOptions.EmptyRoomTtl = 1000;
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
@@ -251,17 +267,7 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void JoinRandomGameInPhotonServer()
     {
-        PhotonNetwork.JoinRandomRoom();
-    }
-
-    /// <summary>
-    /// Levelload callback function
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="sceneMode"></param>
-    private void OnLevelLoaded(Scene scene, LoadSceneMode sceneMode)
-    {
-        MatchManager.instance.TransitionToLobby(playerPrefabName, numberOfLocalPlayers);
+        PhotonNetwork.JoinRandomRoom(null, 0);
     }
 
     /// <summary>
@@ -298,6 +304,24 @@ public class NetworkManager : PunBehaviour
 
     #region Photon SDK Overrides
     /// <summary>
+    /// Overrides the OnConnectedToMaster event, which is called when not connected to PhotonServer
+    /// </summary>
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("JoinedMaster");
+        base.OnConnectedToMaster();
+
+        if (offlineMode)
+        {
+            PhotonNetwork.CreateRoom("");
+        }
+        else
+        {
+            JoinRandomGameInPhotonServer();
+        }
+    }
+
+    /// <summary>
     /// Overrides OnJoinRoom which is called when client joins a room (including host)
     /// </summary>
     public override void OnJoinedRoom()
@@ -306,7 +330,7 @@ public class NetworkManager : PunBehaviour
         base.OnJoinedRoom();
 
         // Only needed in network mode
-        if (!offlineMode)
+        if (PhotonNetwork.connected)
         {
             SetPlayerCustomProperties();
         }
@@ -327,10 +351,7 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Left Room");
         base.OnLeftRoom();
 
-        // Raise an event across current in-game players to notify a player has left
-        RaiseEventOptions evtOptions = new RaiseEventOptions();
-        evtOptions.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, null, true, evtOptions);
+        PhotonNetwork.LoadLevel("Menu");
     }
 
     /// <summary>
@@ -342,78 +363,29 @@ public class NetworkManager : PunBehaviour
         base.OnCreatedRoom();
     }
 
-    /// <summary>
-    /// Override OnPhotonJoinRoomFailed, which is called when connection error occurred when attempting to join a room
-    /// </summary>
-    /// <param name="codeAndMsg"></param>
-    public override void OnPhotonJoinRoomFailed(object[] codeAndMsg)
-    {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
-        base.OnPhotonJoinRoomFailed(codeAndMsg);
-    }
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
         base.OnPhotonRandomJoinFailed(codeAndMsg);
-    }
-
-    public override void OnPhotonCreateRoomFailed(object[] codeAndMsg)
-    {
-        Debug.LogError("Error Code: " + codeAndMsg[0] + ", " + codeAndMsg[1]);
-        base.OnPhotonCreateRoomFailed(codeAndMsg);
-    }
-
-    /// <summary>
-    /// Overrides the OnJoinedLobby event, which is called when connecting to PhotonServer for the first time
-    /// Using ConnectionState to determine which action to take
-    /// </summary>
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("JoinedLobby");
-        base.OnJoinedLobby();
-
-        if (state == ConnectionState.CREATE)
-        {
-            CreateRoomInPhotonServer();
-        }
-        else if (state == ConnectionState.JOIN)
-        {
-            JoinRandomGameInPhotonServer();
-        }
+        CreateRoomInPhotonServer();
     }
 
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
     {
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
-
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRemovePlayerFromMatch, otherPlayer, true, options);
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
-
-        RaiseEventOptions options = new RaiseEventOptions();
-        options.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnAddPlayerToMatch, newPlayer, true, options);
     }
 
-    /// <summary>
-    /// Overrides the OnConnectedToMaster event, which is called when not connected to PhotonServer
-    /// </summary>
-    public override void OnConnectedToMaster()
+    public override void OnReceivedRoomListUpdate()
     {
-        Debug.Log("JoinedMaster");
-        base.OnConnectedToMaster();
+        base.OnReceivedRoomListUpdate();
 
-        if (offlineMode)
-        {
-            PhotonNetwork.CreateRoom("");
-        }
+        RoomInfo[] rooms = PhotonNetwork.GetRoomList();
     }
     #endregion
 }

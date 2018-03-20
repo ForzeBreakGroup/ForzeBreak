@@ -38,20 +38,9 @@ public class ReticleSystem : MonoBehaviour
     /// The collider to obtain the bound from
     /// </summary>
     private Collider objectCollider;
-
-    /// <summary>
-    /// UI Script reference for reticle image in canvas
-    /// </summary>
-    private ReticleAnimation reticleUI;
     #endregion
 
     #region Private Methods
-
-    private void Awake()
-    {
-        reticleUI = ((Canvas)Object.FindObjectOfType(typeof(Canvas))).transform.Find("Reticle").GetComponent<ReticleAnimation>();
-    }
-
     /// <summary>
     /// Every physics update, this script calcualtes if target's collision bound is within camera's viewport
     /// If it is, it sends a raycast to make sure there's nothing in between
@@ -95,22 +84,14 @@ public class ReticleSystem : MonoBehaviour
             Debug.LogError("Target Cannot be Null");
         }
         this.target = target;
-
-        if (NetworkManager.offlineMode)
-        {
-            cam = target.GetComponent<NetworkPlayerData>().localCam;
-        }
-        else
-        {
-            cam = NetworkManager.playerCamera;
-        }
+        cam = NetworkManager.instance.GetPlayerCamera();
         objectCollider = target.transform.Find("Colliders").GetComponentInChildren<Collider>();
         reticleEnable = true;
     }
 
     public void DisplayReticleUI(bool miss)
     {
-        reticleUI.DisplayReticleUI(((miss)? ReticleUIState.MISS : ReticleUIState.TARGET), cam.WorldToScreenPoint(target.transform.position));
+        InGameHUDManager.instance.ReticleUIDisplay(((miss)? ReticleUIState.MISS : ReticleUIState.TARGET), cam.WorldToScreenPoint(target.transform.position));
     }
     #endregion
 }

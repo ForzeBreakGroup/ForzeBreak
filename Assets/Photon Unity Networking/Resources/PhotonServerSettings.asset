@@ -48,4 +48,12 @@ MonoBehaviour:
   - TaggedPlayer
   - RemovePowerUpComponent
   - OnPowerUpCollected
+  - RpcAddPlayerToMatch
+  - RpcPlayerReadyHandler
+  - RpcPlayerReady
+  - RpcPlayerDeathHandler
+  - RpcPlayerSpawnedHandler
+  - RpcPlayerJoinedSceneHandler
+  - RpcPlayerSpawningHandler
+  - RpcRoundStartHandler
   DisableAutoOpenWizard: 1

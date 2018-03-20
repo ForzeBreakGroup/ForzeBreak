@@ -26,7 +26,7 @@ public enum ReticleUIState
     MISS
 }
 
-public class ReticleAnimation : MonoBehaviour
+public class UIReticleControl : UIControl
 {
     #region Private Members
     /// <summary>

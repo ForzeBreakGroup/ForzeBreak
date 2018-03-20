@@ -9,17 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 4e85b419f4cb4c84086162de57c2d45b
   - enabled: 1
-    path: Assets/Scenes/Arena1.unity
-    guid: 56023a4fe41ba9240815897e398dc5d0
-  - enabled: 1
-    path: Assets/Scenes/End.unity
-    guid: 37b52419e994db34d81d08f9ca79e1ba
-  - enabled: 1
-    path: Assets/Scenes/PhotonNetwork.unity
-    guid: 7028146a13ad9ab4198618ca748ac517
+    path: Assets/Scenes/MatchLobby.unity
+    guid: 9f29f720f4444514683eb83149932c07
   - enabled: 1
     path: Assets/Scenes/Online.unity
     guid: f272d273d7742db4999a5ff855837add
+  - enabled: 1
+    path: Assets/Scenes/MatchResult.unity
+    guid: 664cb1e0c04bf5847a2e059d0fa3202c
   - enabled: 1
     path: Assets/Scenes/Test_Miguel.unity
     guid: 8e0dfee18a948a342961b1b0121feb20

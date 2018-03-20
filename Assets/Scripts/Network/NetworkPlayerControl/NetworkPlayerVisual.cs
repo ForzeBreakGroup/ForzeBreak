@@ -53,7 +53,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
             currentEquipped = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
             currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
             ((PowerUpBase)currentEquipped.GetComponent(typeof(PowerUpBase))).AdjustModel();
-            canvas.Find("WeaponIcon").GetComponent<UIWeaponIconControl>().changeIcon(powerupName);
+            InGameHUDManager.instance.UpdateWeaponIcon(powerupName);
         }
     }
 
@@ -64,7 +64,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         {
             if (currentEquipped != null)
             {
-                canvas.Find("WeaponIcon").GetComponent<UIWeaponIconControl>().changeIcon("");
+                InGameHUDManager.instance.UpdateWeaponIcon("");
 
                 PhotonNetwork.Destroy(currentEquipped);
                 currentEquipped = null;
