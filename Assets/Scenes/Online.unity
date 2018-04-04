@@ -2065,16 +2065,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1398349202617796, guid: 603fd97b9f237f1478775f8b11834c78, type: 2}
-      propertyPath: m_Name
-      value: MatchManager
+    - target: {fileID: 114813381894699302, guid: 603fd97b9f237f1478775f8b11834c78,
+        type: 2}
+      propertyPath: viewIdField
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114955724591072154, guid: 603fd97b9f237f1478775f8b11834c78,
+    - target: {fileID: 114813381894699302, guid: 603fd97b9f237f1478775f8b11834c78,
         type: 2}
-      propertyPath: playerCameraPrefab
-      value: 
-      objectReference: {fileID: 1071636056247922, guid: 2c2675f54f58f924888cb20762cb6730,
-        type: 2}
+      propertyPath: instantiationId
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 603fd97b9f237f1478775f8b11834c78, type: 2}
   m_IsPrefabParent: 0
