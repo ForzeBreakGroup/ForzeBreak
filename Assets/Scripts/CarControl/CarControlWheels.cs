@@ -235,8 +235,5 @@ public class CarControlWheels : NetworkPlayerMovement
             wheelColliders[0].attachedRigidbody.AddForce(-transform.up*downforce*
                                                         wheelColliders[0].attachedRigidbody.velocity.magnitude);
     }
-
-  
-
 }
 
