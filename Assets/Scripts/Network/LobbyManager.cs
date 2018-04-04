@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class LobbyManager : Photon.MonoBehaviour
 {
-    [SerializeField]
-    private int countdownSec = 3;
-
-    private int numOfReady = 0;
+    public Dictionary<string, bool> playerReadyStatus { get; private set; }
 
     private static LobbyManager lobbyManager;
     public static LobbyManager instance
@@ -31,37 +28,79 @@ public class LobbyManager : Photon.MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        EventManager.StartListening("OnPhotonPlayerConnected", OnPhotonPlayerConnectedHandler);
+        EventManager.StartListening("OnPhotonPlayerDisconnected", OnPhotonPlayerDisconnectedHandler);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening("OnPhotonPlayerConnected", OnPhotonPlayerConnectedHandler);
+        EventManager.StopListening("OnPhotonPlayerDisconnected", OnPhotonPlayerDisconnectedHandler);
+    }
+
     private void Awake()
     {
-        // Asyn load match scene for smooth transition
+        playerReadyStatus = new Dictionary<string, bool>();
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            Debug.Log(p.NickName);
+            playerReadyStatus.Add(p.NickName, false);
+        }
+        Debug.Log(PhotonNetwork.player.NickName);
+    }
+
+    private void OnPhotonPlayerConnectedHandler()
+    {
+        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            if (!playerReadyStatus.ContainsKey(p.NickName))
+            {
+                playerReadyStatus.Add(p.NickName, false);
+            }
+        }
+    }
+
+    private void OnPhotonPlayerDisconnectedHandler()
+    {
+        Dictionary<string, bool> newPlayerStatus = new Dictionary<string, bool>();
+
+        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            newPlayerStatus.Add(p.NickName, false);
+        }
+        playerReadyStatus = newPlayerStatus;
     }
 
     private void Init()
     {
-
     }
 
-    #region UI OnClick Events
     public void OnClickReady()
     {
-        photonView.RPC("RpcPlayerReady", PhotonTargets.All);
-
-        // UI change to indicate the selection is locked
-
-        // Disable selection
+        photonView.RPC("RpcTogglePlayerReady", PhotonTargets.All, PhotonNetwork.player.NickName);
     }
-    #endregion
 
     #region Photon RPC Calls
     [PunRPC]
-    public void RpcPlayerReady()
+    public void RpcTogglePlayerReady(string nickname)
     {
-        // All clients will keep an update of current number of ready
-        ++numOfReady;
+        playerReadyStatus[nickname] = !playerReadyStatus[nickname];
 
         // Master client will handle the scene transition when all players are ready
-        if (PhotonNetwork.isMasterClient && numOfReady == PhotonNetwork.playerList.Length)
+        if (PhotonNetwork.isMasterClient)
         {
+            // Loop through dictionary to verify all players are ready
+            foreach(KeyValuePair<string, bool> entry in playerReadyStatus)
+            {
+                // Early return if any value is false
+                if (!entry.Value)
+                {
+                    return;
+                }
+            }
+
             // Close the room to prevent new players to join
             NetworkManager.instance.EnableTheRoom(false);
 
@@ -72,9 +111,15 @@ public class LobbyManager : Photon.MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void RpcStartCountdown()
+    {
+
+    }
+
     IEnumerator LoadSceneAfterDelay()
     {
-        yield return new WaitForSeconds(countdownSec);
+        yield return new WaitForSeconds(0.1f);
         PhotonNetwork.LoadLevel("Online");
     }
     #endregion

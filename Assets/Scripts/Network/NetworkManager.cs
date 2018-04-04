@@ -185,6 +185,11 @@ public class NetworkManager : PunBehaviour
             return view.isMine;
         }
     }
+
+    public void ChangePlayerName(string name)
+    {
+        PhotonNetwork.player.NickName = name;
+    }
     #endregion
 
     #region Private Methods
@@ -221,6 +226,7 @@ public class NetworkManager : PunBehaviour
     {
         localPlayer = new GameObject[numberOfLocalPlayers];
         playerCamera = new Camera[numberOfLocalPlayers];
+        PhotonNetwork.player.NickName = "UltimateWarrior";
     }
 
     /// <summary>
@@ -373,12 +379,14 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
+        EventManager.TriggerEvent("OnPhotonPlayerDisconnected");
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
+        EventManager.TriggerEvent("OnPhotonPlayerConnected");
     }
 
     public override void OnReceivedRoomListUpdate()

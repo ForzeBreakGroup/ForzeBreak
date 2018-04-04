@@ -31,6 +31,11 @@ public class EventManager : MonoBehaviour {
         }
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Init ()
     {
         if (eventDictionary == null)
