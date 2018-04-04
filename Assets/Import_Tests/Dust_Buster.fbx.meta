@@ -1,0 +1,432 @@
+fileFormatVersion: 2
+guid: d13212d927e80144293da3f3336a03c8
+timeCreated: 1522792535
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Back_Engine
+    100002: Back_Engine_PART
+    100004: Back_Engine_Pipe
+    100006: Back_Engine_Pipe1
+    100008: Back_Engine_Pipe2
+    100010: Back_Fence
+    100012: Back_Fence01
+    100014: Back_Fence02
+    100016: Back_Fence03
+    100018: Cargo_Misc
+    100020: Chair_Main
+    100022: Chair_Top
+    100024: //RootNode
+    100026: Left_Back_Wheel
+    100028: Left_Back_Wheel 1
+    100030: Left_Back_Wheel_Cover
+    100032: Left_Back_Wheel_Cover 1
+    100034: Left_Back_Wheel_Support
+    100036: Left_Back_Wheel_Support 1
+    100038: Left_Back_Wheel_Support1
+    100040: Left_Back_Wheel_Support1 1
+    100042: Left_Front_Wheel
+    100044: Left_Front_Wheel 1
+    100046: Left_Front_Wheel_Support
+    100048: Left_Front_Wheel_Support 1
+    100050: Left_Front_Wheel_Support1
+    100052: Left_Front_Wheel_Support1 1
+    100054: Left_Front_Wheel_Support_Pipe
+    100056: Left_Front_Wheel_Support_Pipe 1
+    100058: Left_Main_Support_Pipe
+    100060: Left_Main_Support_Pipe 1
+    100062: Left_Side
+    100064: Left_Side_Detail_Pipe
+    100066: Left_Side_Detail_Pipe 1
+    100068: Left_Side_Detail_Pipe1
+    100070: Left_Side_Detail_Pipe1 1
+    100072: Left_Side_Front_Pipe_Bottom
+    100074: Left_Side_Front_Pipe_Bottom 1
+    100076: Left_Side_Pentagon
+    100078: Left_Side_Pentagon 1
+    100080: Left_Side_Pipe
+    100082: Left_Side_Pipe 1
+    100084: Left_Side_Pipe_Steerer
+    100086: Left_Side_Pipe_Steerer 1
+    100088: Left_Side_Protection
+    100090: Left_Side_Protection 1
+    100092: Left_Side_Support_Pipe_Back
+    100094: Left_Side_Support_Pipe_Back 1
+    100096: Left_Support_Beam
+    100098: Left_Support_Beam 1
+    100100: Left_Support_Beam_Front
+    100102: Left_Support_Beam_Front 1
+    100104: Left_Support_Pipe
+    100106: Left_Support_Pipe 1
+    100108: Left_Support_Pipe_Bottom
+    100110: Left_Support_Pipe_Bottom 1
+    100112: Left_Support_Pipe_Front
+    100114: Left_Support_Pipe_Front 1
+    100116: Left_Support_Pipe_Front1
+    100118: Left_Support_Pipe_Front1 1
+    100120: Left_Support_Pipe_Middle
+    100122: Left_Support_Pipe_Middle 1
+    100124: Left_Support_Pipe_Top
+    100126: Left_Support_Pipe_Top 1
+    100128: Left_Wheel_Support_Front
+    100130: Left_Wheel_Support_Front 1
+    100132: Main_Body
+    100134: Right_Side
+    100136: Side_Detail_Pipe_Front
+    100138: Side_Detail_Pipe_Front 1
+    400000: Back_Engine
+    400002: Back_Engine_PART
+    400004: Back_Engine_Pipe
+    400006: Back_Engine_Pipe1
+    400008: Back_Engine_Pipe2
+    400010: Back_Fence
+    400012: Back_Fence01
+    400014: Back_Fence02
+    400016: Back_Fence03
+    400018: Cargo_Misc
+    400020: Chair_Main
+    400022: Chair_Top
+    400024: //RootNode
+    400026: Left_Back_Wheel
+    400028: Left_Back_Wheel 1
+    400030: Left_Back_Wheel_Cover
+    400032: Left_Back_Wheel_Cover 1
+    400034: Left_Back_Wheel_Support
+    400036: Left_Back_Wheel_Support 1
+    400038: Left_Back_Wheel_Support1
+    400040: Left_Back_Wheel_Support1 1
+    400042: Left_Front_Wheel
+    400044: Left_Front_Wheel 1
+    400046: Left_Front_Wheel_Support
+    400048: Left_Front_Wheel_Support 1
+    400050: Left_Front_Wheel_Support1
+    400052: Left_Front_Wheel_Support1 1
+    400054: Left_Front_Wheel_Support_Pipe
+    400056: Left_Front_Wheel_Support_Pipe 1
+    400058: Left_Main_Support_Pipe
+    400060: Left_Main_Support_Pipe 1
+    400062: Left_Side
+    400064: Left_Side_Detail_Pipe
+    400066: Left_Side_Detail_Pipe 1
+    400068: Left_Side_Detail_Pipe1
+    400070: Left_Side_Detail_Pipe1 1
+    400072: Left_Side_Front_Pipe_Bottom
+    400074: Left_Side_Front_Pipe_Bottom 1
+    400076: Left_Side_Pentagon
+    400078: Left_Side_Pentagon 1
+    400080: Left_Side_Pipe
+    400082: Left_Side_Pipe 1
+    400084: Left_Side_Pipe_Steerer
+    400086: Left_Side_Pipe_Steerer 1
+    400088: Left_Side_Protection
+    400090: Left_Side_Protection 1
+    400092: Left_Side_Support_Pipe_Back
+    400094: Left_Side_Support_Pipe_Back 1
+    400096: Left_Support_Beam
+    400098: Left_Support_Beam 1
+    400100: Left_Support_Beam_Front
+    400102: Left_Support_Beam_Front 1
+    400104: Left_Support_Pipe
+    400106: Left_Support_Pipe 1
+    400108: Left_Support_Pipe_Bottom
+    400110: Left_Support_Pipe_Bottom 1
+    400112: Left_Support_Pipe_Front
+    400114: Left_Support_Pipe_Front 1
+    400116: Left_Support_Pipe_Front1
+    400118: Left_Support_Pipe_Front1 1
+    400120: Left_Support_Pipe_Middle
+    400122: Left_Support_Pipe_Middle 1
+    400124: Left_Support_Pipe_Top
+    400126: Left_Support_Pipe_Top 1
+    400128: Left_Wheel_Support_Front
+    400130: Left_Wheel_Support_Front 1
+    400132: Main_Body
+    400134: Right_Side
+    400136: Side_Detail_Pipe_Front
+    400138: Side_Detail_Pipe_Front 1
+    2100000: lambert2
+    2100002: lambert8
+    2100004: blinn16
+    2300000: Back_Engine
+    2300002: Back_Engine_PART
+    2300004: Back_Engine_Pipe
+    2300006: Back_Engine_Pipe1
+    2300008: Back_Engine_Pipe2
+    2300010: Back_Fence
+    2300012: Back_Fence01
+    2300014: Back_Fence02
+    2300016: Back_Fence03
+    2300018: Cargo_Misc
+    2300020: Chair_Main
+    2300022: Chair_Top
+    2300024: Left_Back_Wheel
+    2300026: Left_Back_Wheel 1
+    2300028: Left_Back_Wheel_Cover
+    2300030: Left_Back_Wheel_Cover 1
+    2300032: Left_Back_Wheel_Support
+    2300034: Left_Back_Wheel_Support 1
+    2300036: Left_Back_Wheel_Support1
+    2300038: Left_Back_Wheel_Support1 1
+    2300040: Left_Front_Wheel
+    2300042: Left_Front_Wheel 1
+    2300044: Left_Front_Wheel_Support
+    2300046: Left_Front_Wheel_Support 1
+    2300048: Left_Front_Wheel_Support1
+    2300050: Left_Front_Wheel_Support1 1
+    2300052: Left_Front_Wheel_Support_Pipe
+    2300054: Left_Front_Wheel_Support_Pipe 1
+    2300056: Left_Main_Support_Pipe
+    2300058: Left_Main_Support_Pipe 1
+    2300060: Left_Side_Detail_Pipe
+    2300062: Left_Side_Detail_Pipe 1
+    2300064: Left_Side_Detail_Pipe1
+    2300066: Left_Side_Detail_Pipe1 1
+    2300068: Left_Side_Front_Pipe_Bottom
+    2300070: Left_Side_Front_Pipe_Bottom 1
+    2300072: Left_Side_Pentagon
+    2300074: Left_Side_Pentagon 1
+    2300076: Left_Side_Pipe
+    2300078: Left_Side_Pipe 1
+    2300080: Left_Side_Pipe_Steerer
+    2300082: Left_Side_Pipe_Steerer 1
+    2300084: Left_Side_Protection
+    2300086: Left_Side_Protection 1
+    2300088: Left_Side_Support_Pipe_Back
+    2300090: Left_Side_Support_Pipe_Back 1
+    2300092: Left_Support_Beam
+    2300094: Left_Support_Beam 1
+    2300096: Left_Support_Beam_Front
+    2300098: Left_Support_Beam_Front 1
+    2300100: Left_Support_Pipe
+    2300102: Left_Support_Pipe 1
+    2300104: Left_Support_Pipe_Bottom
+    2300106: Left_Support_Pipe_Bottom 1
+    2300108: Left_Support_Pipe_Front
+    2300110: Left_Support_Pipe_Front 1
+    2300112: Left_Support_Pipe_Front1
+    2300114: Left_Support_Pipe_Front1 1
+    2300116: Left_Support_Pipe_Middle
+    2300118: Left_Support_Pipe_Middle 1
+    2300120: Left_Support_Pipe_Top
+    2300122: Left_Support_Pipe_Top 1
+    2300124: Left_Wheel_Support_Front
+    2300126: Left_Wheel_Support_Front 1
+    2300128: Main_Body
+    2300130: Side_Detail_Pipe_Front
+    2300132: Side_Detail_Pipe_Front 1
+    3300000: Back_Engine
+    3300002: Back_Engine_PART
+    3300004: Back_Engine_Pipe
+    3300006: Back_Engine_Pipe1
+    3300008: Back_Engine_Pipe2
+    3300010: Back_Fence
+    3300012: Back_Fence01
+    3300014: Back_Fence02
+    3300016: Back_Fence03
+    3300018: Cargo_Misc
+    3300020: Chair_Main
+    3300022: Chair_Top
+    3300024: Left_Back_Wheel
+    3300026: Left_Back_Wheel 1
+    3300028: Left_Back_Wheel_Cover
+    3300030: Left_Back_Wheel_Cover 1
+    3300032: Left_Back_Wheel_Support
+    3300034: Left_Back_Wheel_Support 1
+    3300036: Left_Back_Wheel_Support1
+    3300038: Left_Back_Wheel_Support1 1
+    3300040: Left_Front_Wheel
+    3300042: Left_Front_Wheel 1
+    3300044: Left_Front_Wheel_Support
+    3300046: Left_Front_Wheel_Support 1
+    3300048: Left_Front_Wheel_Support1
+    3300050: Left_Front_Wheel_Support1 1
+    3300052: Left_Front_Wheel_Support_Pipe
+    3300054: Left_Front_Wheel_Support_Pipe 1
+    3300056: Left_Main_Support_Pipe
+    3300058: Left_Main_Support_Pipe 1
+    3300060: Left_Side_Detail_Pipe
+    3300062: Left_Side_Detail_Pipe 1
+    3300064: Left_Side_Detail_Pipe1
+    3300066: Left_Side_Detail_Pipe1 1
+    3300068: Left_Side_Front_Pipe_Bottom
+    3300070: Left_Side_Front_Pipe_Bottom 1
+    3300072: Left_Side_Pentagon
+    3300074: Left_Side_Pentagon 1
+    3300076: Left_Side_Pipe
+    3300078: Left_Side_Pipe 1
+    3300080: Left_Side_Pipe_Steerer
+    3300082: Left_Side_Pipe_Steerer 1
+    3300084: Left_Side_Protection
+    3300086: Left_Side_Protection 1
+    3300088: Left_Side_Support_Pipe_Back
+    3300090: Left_Side_Support_Pipe_Back 1
+    3300092: Left_Support_Beam
+    3300094: Left_Support_Beam 1
+    3300096: Left_Support_Beam_Front
+    3300098: Left_Support_Beam_Front 1
+    3300100: Left_Support_Pipe
+    3300102: Left_Support_Pipe 1
+    3300104: Left_Support_Pipe_Bottom
+    3300106: Left_Support_Pipe_Bottom 1
+    3300108: Left_Support_Pipe_Front
+    3300110: Left_Support_Pipe_Front 1
+    3300112: Left_Support_Pipe_Front1
+    3300114: Left_Support_Pipe_Front1 1
+    3300116: Left_Support_Pipe_Middle
+    3300118: Left_Support_Pipe_Middle 1
+    3300120: Left_Support_Pipe_Top
+    3300122: Left_Support_Pipe_Top 1
+    3300124: Left_Wheel_Support_Front
+    3300126: Left_Wheel_Support_Front 1
+    3300128: Main_Body
+    3300130: Side_Detail_Pipe_Front
+    3300132: Side_Detail_Pipe_Front 1
+    4300000: Main_Body
+    4300002: Left_Side_Pipe
+    4300004: Left_Side_Front_Pipe_Bottom
+    4300006: Side_Detail_Pipe_Front
+    4300008: Left_Side_Pipe_Steerer
+    4300010: Left_Front_Wheel
+    4300012: Left_Back_Wheel
+    4300014: Left_Back_Wheel_Cover
+    4300016: Left_Back_Wheel_Support
+    4300018: Left_Back_Wheel_Support1
+    4300020: Left_Front_Wheel_Support
+    4300022: Left_Front_Wheel_Support1
+    4300024: Left_Front_Wheel_Support_Pipe
+    4300026: Left_Side_Detail_Pipe
+    4300028: Left_Side_Detail_Pipe1
+    4300030: Left_Side_Pentagon
+    4300032: Left_Side_Support_Pipe_Back
+    4300034: Left_Support_Pipe_Front
+    4300036: Left_Support_Pipe_Bottom
+    4300038: Left_Support_Beam_Front
+    4300040: Left_Support_Beam
+    4300042: Left_Support_Pipe_Top
+    4300044: Left_Side_Protection
+    4300046: Left_Support_Pipe
+    4300048: Left_Support_Pipe_Middle
+    4300050: Left_Support_Pipe_Front1
+    4300052: Left_Main_Support_Pipe
+    4300054: Left_Wheel_Support_Front
+    4300056: Chair_Main
+    4300058: Chair_Top
+    4300060: Back_Engine
+    4300062: Back_Engine_PART
+    4300064: Back_Engine_Pipe
+    4300066: Cargo_Misc
+    4300068: Back_Fence
+    4300070: Back_Fence01
+    4300072: Back_Fence02
+    4300074: Back_Fence03
+    4300076: Back_Engine_Pipe1
+    4300078: Back_Engine_Pipe2
+    4300080: Left_Side_Pipe
+    4300082: Left_Side_Front_Pipe_Bottom
+    4300084: Side_Detail_Pipe_Front
+    4300086: Left_Side_Pipe_Steerer
+    4300088: Left_Front_Wheel
+    4300090: Left_Back_Wheel
+    4300092: Left_Back_Wheel_Cover
+    4300094: Left_Back_Wheel_Support
+    4300096: Left_Back_Wheel_Support1
+    4300098: Left_Front_Wheel_Support
+    4300100: Left_Front_Wheel_Support1
+    4300102: Left_Front_Wheel_Support_Pipe
+    4300104: Left_Side_Detail_Pipe
+    4300106: Left_Side_Detail_Pipe1
+    4300108: Left_Side_Pentagon
+    4300110: Left_Side_Support_Pipe_Back
+    4300112: Left_Support_Pipe_Front
+    4300114: Left_Support_Pipe_Bottom
+    4300116: Left_Support_Beam_Front
+    4300118: Left_Support_Beam
+    4300120: Left_Support_Pipe_Top
+    4300122: Left_Side_Protection
+    4300124: Left_Support_Pipe
+    4300126: Left_Support_Pipe_Middle
+    4300128: Left_Support_Pipe_Front1
+    4300130: Left_Main_Support_Pipe
+    4300132: Left_Wheel_Support_Front
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
