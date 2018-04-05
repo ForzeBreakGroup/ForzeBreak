@@ -31,7 +31,7 @@ public class FlipControl : MonoBehaviour {
     [SerializeField] private float sideForce = 1000f;
 
     private bool canFlip = true;
-    private bool carBodyGrounded = false;
+
     private float nextFlip = 0.0f;
 
     //flipsound
@@ -82,7 +82,7 @@ public class FlipControl : MonoBehaviour {
 
             }
             //upside down condition
-            else if (transform.up.y < 0.1f && carBodyGrounded)
+            else if (transform.up.y < 0.1f && carController.IsCarBodyGround)
             {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
@@ -98,18 +98,7 @@ public class FlipControl : MonoBehaviour {
 
     }
 
-    //update the state of carbody.
-
-    private void OnCollisionStay(Collision collision)
-    {
-        carBodyGrounded = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        carBodyGrounded = false;
-    }
-
+    
 
 
     //IEnumerator FlipRotate(float duration, float dir)

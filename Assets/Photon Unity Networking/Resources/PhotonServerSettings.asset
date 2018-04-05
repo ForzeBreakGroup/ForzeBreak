@@ -30,32 +30,27 @@ MonoBehaviour:
   - AddPowerUpComponent
   - Chat
   - ColorRpc
-  - CreateExplosion
   - DestroyRpc
   - DoJump
   - Flash
   - InstantiateRpc
+  - LeaveRoom
   - Marco
   - NetworkCollision
   - PickupItemInit
+  - PlayerReadyForRematch
   - Polo
   - PunPickup
   - PunPickupSimple
   - PunRespawn
+  - RemovePowerUpComponent
   - RequestForPickupItems
   - RequestForPickupTimes
+  - RpcPlayerDeathHandler
+  - RpcPlayerJoinedSceneHandler
+  - RpcPlayerReady
+  - RpcPlayerSpawnedHandler
+  - RpcRoundStartHandler
   - SetParent
   - TaggedPlayer
-  - RemovePowerUpComponent
-  - OnPowerUpCollected
-  - RpcAddPlayerToMatch
-  - RpcPlayerReadyHandler
-  - RpcPlayerReady
-  - RpcPlayerDeathHandler
-  - RpcPlayerSpawnedHandler
-  - RpcPlayerJoinedSceneHandler
-  - RpcPlayerSpawningHandler
-  - RpcRoundStartHandler
-  - LeaveRoom
-  - PlayerReadyForRematch
   DisableAutoOpenWizard: 1
