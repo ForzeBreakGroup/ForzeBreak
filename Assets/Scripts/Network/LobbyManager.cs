@@ -74,7 +74,7 @@ public class LobbyManager : Photon.MonoBehaviour
 
     IEnumerator LoadSceneAfterDelay()
     {
-        yield return new WaitForSeconds(countdownSec);
+        yield return new WaitForSeconds(0.5f);
         PhotonNetwork.LoadLevel("Online");
     }
     #endregion
