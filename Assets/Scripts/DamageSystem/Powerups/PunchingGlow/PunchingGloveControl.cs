@@ -9,7 +9,7 @@ using UnityEngine;
  * Control class of Punching Glow.
  */
 
-public class PunchingGlowControl : PowerUpBase
+public class PunchingGloveControl : PowerUpBase
 {
 
     // Use this for initialization
@@ -25,6 +25,6 @@ public class PunchingGlowControl : PowerUpBase
 
     protected override void OnPress()
     {
-        
+        GetComponent<GloveMovement>().gameObject.SetActive(true);
     }
 }

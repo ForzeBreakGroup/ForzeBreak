@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlowMovement : NetworkPowerUpMovement
+public class GloveMovement : NetworkPowerUpMovement
 {
     public float Velocity = 70f;
     public float ExistingTime = 3f;
