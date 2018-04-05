@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /*
  * Author: Jason Lin
@@ -12,16 +11,10 @@ using UnityEngine.UI;
 public class MenuUIControl : MonoBehaviour
 {
     private Animator anim;
-    private InputField inputField;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        inputField = GetComponentInChildren<InputField>();
-
-        InputField.SubmitEvent submitEvent = new InputField.SubmitEvent();
-        submitEvent.AddListener(NetworkManager.instance.ChangePlayerName);
-        inputField.onEndEdit = submitEvent;
     }
 
     #region OnClick Events
