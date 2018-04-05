@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1436760989969618
 GameObject:
   m_ObjectHideFlags: 1
@@ -2062,7 +2062,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionEffect: {fileID: 1462247261863818, guid: 1c3d63d6c2edd5140a2ea79b14744618,
     type: 2}
-  enableDamageAmplifier: 0
   damageAmplifyPercentage: 100
   healthyThreshold: 150
   lightlyDamageThreshold: 250

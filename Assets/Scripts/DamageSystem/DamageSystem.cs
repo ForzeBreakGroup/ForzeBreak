@@ -33,9 +33,6 @@ public class DamageSystem : NetworkPlayerCollision
     }
 
     #region Private Members
-    [SerializeField]
-    private bool enableDamageAmplifier = true;
-
     /// <summary>
     /// Damage Amplification % that will be applied into calculation of damage, bound by min and max value determined in constant class
     /// </summary>
@@ -99,11 +96,7 @@ public class DamageSystem : NetworkPlayerCollision
     {
         // Calculate the flyoff distance based on received force and damage amplification
         // Amplified flyoff distance = amplify %  * damage received
-        float amplifiedFlyoffDistance = impulse;
-        if (enableDamageAmplifier)
-        {
-            amplifiedFlyoffDistance *= damageAmplifyPercentage / 100.0f;
-        }
+        float amplifiedFlyoffDistance = damageAmplifyPercentage / 100.0f * impulse;
 
         // Calculate the normalized flying direction, and change Y axis to align with upward effect
         Vector3 normalizedPoint = (transform.root.position - collisionPoint).normalized;

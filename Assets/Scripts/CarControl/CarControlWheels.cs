@@ -54,9 +54,8 @@ public class CarControlWheels : NetworkPlayerMovement
     private Rigidbody carRigidbody;
     
     public bool IsBoosting { get; set; }
-    public bool IsWheelsGround;
-    public bool IsAnyWheelGround;
-    public bool IsCarBodyGround;
+    public bool IsWheelsGround { get; set; }
+    public bool IsAnyWheelGround { get; set; }
     public float BrakeInput { get; private set; }
     public float CurrentSteerAngle{ get { return steerAngle; }}
     public float CurrentSpeed{ get { return carRigidbody.velocity.magnitude; }}
@@ -237,17 +236,7 @@ public class CarControlWheels : NetworkPlayerMovement
                                                         wheelColliders[0].attachedRigidbody.velocity.magnitude);
     }
 
-    //update the state of carbody.
-    private void OnCollisionStay(Collision collision)
-    {
-        IsCarBodyGround = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        IsCarBodyGround = false;
-    }
-
+  
 
 }
 
