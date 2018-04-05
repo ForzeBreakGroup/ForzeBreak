@@ -5,7 +5,7 @@ using UnityEngine;
 public class InGameHUDManager : MonoBehaviour
 {
     private UIBoostBarControl boostBarControl;
-    //private UIDamageIconControl damageIconControl;
+    private UIDamageIconControl damageIconControl;
     private UIWeaponIconControl weaponIconControl;
     private UINetworkTimerControl networkTimerControl;
     private UIReticleControl reticleControl;
@@ -35,7 +35,7 @@ public class InGameHUDManager : MonoBehaviour
     private void Init()
     {
         boostBarControl = FindObjectOfType<UIBoostBarControl>();
-        //damageIconControl = FindObjectOfType<UIDamageIconControl>();
+        damageIconControl = FindObjectOfType<UIDamageIconControl>();
         weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
         reticleControl = FindObjectOfType<UIReticleControl>();
@@ -45,7 +45,7 @@ public class InGameHUDManager : MonoBehaviour
     {
         // Enable each individual UI control
         boostBarControl.EnableUIControl();
-        //damageIconControl.EnableUIControl();
+        damageIconControl.EnableUIControl();
         weaponIconControl.EnableUIControl();
         networkTimerControl.EnableUIControl();
         reticleControl.EnableUIControl();
