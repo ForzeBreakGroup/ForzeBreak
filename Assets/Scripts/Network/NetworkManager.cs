@@ -21,6 +21,8 @@ using Photon;
 public class NetworkManager : PunBehaviour
 {
     #region Public Members
+    public string playerName { get; private set; }
+
     /// <summary>
     /// Boolean indicates if the NetworkManager will be started in Offline Mode - Not connected to server, using split screen by default
     /// </summary>
@@ -137,7 +139,7 @@ public class NetworkManager : PunBehaviour
 
     public void ChangePlayerName(string name = "Player")
     {
-        PhotonNetwork.playerName = name;
+        playerName = name;
     }
 
     public Color GetPlayerColor(int index)
@@ -246,7 +248,7 @@ public class NetworkManager : PunBehaviour
             PhotonNetwork.sendRateOnSerialize = 20;
 
             // Default player nickname
-            // ChangePlayerName();
+            ChangePlayerName();
         }
     }
 
@@ -381,12 +383,16 @@ public class NetworkManager : PunBehaviour
     {
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
+
+        EventManager.TriggerEvent("EvtOnPlayerDisconnected");
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
+
+        EventManager.TriggerEvent("EvtOnPlayerConnected");
     }
 
     public override void OnReceivedRoomListUpdate()
