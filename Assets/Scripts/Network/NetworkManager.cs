@@ -135,6 +135,11 @@ public class NetworkManager : PunBehaviour
 
     }
 
+    public void ChangePlayerName(string name = "Player")
+    {
+        PhotonNetwork.playerName = name;
+    }
+
     public Color GetPlayerColor(int index)
     {
         return playerColors[index];
@@ -241,7 +246,7 @@ public class NetworkManager : PunBehaviour
             PhotonNetwork.sendRateOnSerialize = 20;
 
             // Default player nickname
-            PhotonNetwork.player.NickName = "Player";
+            // ChangePlayerName();
         }
     }
 
@@ -270,7 +275,7 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     private void JoinRandomGameInPhotonServer()
     {
-        PhotonNetwork.JoinRandomRoom(null, 0);
+        PhotonNetwork.JoinRandomRoom();
     }
 
     /// <summary>

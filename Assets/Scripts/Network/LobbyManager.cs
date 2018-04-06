@@ -34,6 +34,7 @@ public class LobbyManager : Photon.MonoBehaviour
     private void Awake()
     {
         // Asyn load match scene for smooth transition
+        Debug.Log(PhotonNetwork.playerName);
     }
 
     private void Init()

@@ -17,7 +17,7 @@ public class CustomNameInput : MonoBehaviour
         // Adds custom player nickname
         if (!NetworkManager.offlineMode)
         {
-            PhotonNetwork.player.NickName = ifield.text;
+            //NetworkManager.instance.ChangePlayerName(ifield.text);
         }
     }
 }
