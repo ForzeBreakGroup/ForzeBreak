@@ -239,6 +239,9 @@ public class NetworkManager : PunBehaviour
             PhotonNetwork.automaticallySyncScene = true;
             PhotonNetwork.sendRate = 20;
             PhotonNetwork.sendRateOnSerialize = 20;
+
+            // Default player nickname
+            PhotonNetwork.player.NickName = "Player";
         }
     }
 
