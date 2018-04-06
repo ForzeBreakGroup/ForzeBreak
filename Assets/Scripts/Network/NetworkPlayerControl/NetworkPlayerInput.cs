@@ -18,6 +18,14 @@ public class NetworkPlayerInput : NetworkPlayerBase
         //enabled = photonView.isMine;
     }
 
+    private void Update()
+    {
+        if (photonView.isMine)
+        {
+            PlayerInputUpdate();
+        }
+    }
+
     private void FixedUpdate()
     {
         if (photonView.isMine)
@@ -27,9 +35,17 @@ public class NetworkPlayerInput : NetworkPlayerBase
     }
 
     /// <summary>
-    /// Virtual method to override by child class for input reading
+    /// Virtual method to override by child class for update callback
     /// </summary>
     protected virtual void PlayerInputUpdate()
+    {
+
+    }
+
+    /// <summary>
+    /// Virtual method to override by child class for input reading
+    /// </summary>
+    protected virtual void PlayerInputFixedUpdate()
     {
     }
 }
