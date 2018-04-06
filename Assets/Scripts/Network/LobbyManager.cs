@@ -7,7 +7,7 @@ public class LobbyManager : Photon.MonoBehaviour
     [SerializeField]
     private int countdownSec = 3;
 
-    private int numOfReady = 0;
+    private Dictionary<PhotonPlayer, bool> playerReadyStatus;
 
     private static LobbyManager lobbyManager;
     public static LobbyManager instance
@@ -33,35 +33,78 @@ public class LobbyManager : Photon.MonoBehaviour
 
     private void Awake()
     {
-        // Asyn load match scene for smooth transition
+        playerReadyStatus = new Dictionary<PhotonPlayer, bool>();
+
+        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            playerReadyStatus.Add(p, false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.StartListening("EvtOnPlayerConnected", EvtOnPlayerConnectedHandler);
+        EventManager.StartListening("EvtOnPLayerDisconnected", EvtOnPlayerDisconnectedHandler);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening("EvtOnPlayerConnected", EvtOnPlayerConnectedHandler);
+        EventManager.StopListening("EvtOnPLayerDisconnected", EvtOnPlayerDisconnectedHandler);
     }
 
     private void Init()
     {
+    }
 
+    private void EvtOnPlayerConnectedHandler()
+    {
+        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            if (!playerReadyStatus.ContainsKey(p))
+            {
+                playerReadyStatus.Add(p, false);
+            }
+        }
+    }
+
+    private void EvtOnPlayerDisconnectedHandler()
+    {
+        Dictionary<PhotonPlayer, bool> newPlayerReadyStatus = new Dictionary<PhotonPlayer, bool>();
+
+        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            newPlayerReadyStatus.Add(p, playerReadyStatus[p]);
+        }
+
+        playerReadyStatus = newPlayerReadyStatus;
     }
 
     #region UI OnClick Events
-    public void OnClickReady()
+    public void OnPlayerClickReady()
     {
-        photonView.RPC("RpcPlayerReady", PhotonTargets.All);
-
-        // UI change to indicate the selection is locked
-
-        // Disable selection
+        photonView.RPC("RpcTogglePlayerReady", PhotonTargets.AllBuffered, PhotonNetwork.player);
     }
     #endregion
 
     #region Photon RPC Calls
     [PunRPC]
-    public void RpcPlayerReady()
+    public void RpcTogglePlayerReady(PhotonPlayer player)
     {
-        // All clients will keep an update of current number of ready
-        ++numOfReady;
+        playerReadyStatus[player] = !playerReadyStatus[player];
 
         // Master client will handle the scene transition when all players are ready
-        if (PhotonNetwork.isMasterClient && numOfReady == PhotonNetwork.playerList.Length)
+        if (PhotonNetwork.isMasterClient)
         {
+            // Check every player, if anyone is not ready, exit execution
+            foreach(KeyValuePair<PhotonPlayer, bool> entry in playerReadyStatus)
+            {
+                if (!entry.Value)
+                {
+                    return;
+                }
+            }
+
             // Close the room to prevent new players to join
             NetworkManager.instance.EnableTheRoom(false);
 

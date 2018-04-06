@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1436760989969618
 GameObject:
   m_ObjectHideFlags: 1
@@ -2023,6 +2023,9 @@ MonoBehaviour:
   reverseTorque: 20
   downforce: 100
   topspeed: 15
+  IsWheelsGround: 0
+  IsAnyWheelGround: 0
+  IsCarBodyGround: 0
 --- !u!114 &114588205272943532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2068,6 +2071,7 @@ MonoBehaviour:
   heavilyDamageThreshold: 375
   enableLog: 0
   upwardEffect: 0.45
+  enableAmplifyDamage: 0
 --- !u!114 &114670613848878946
 MonoBehaviour:
   m_ObjectHideFlags: 1

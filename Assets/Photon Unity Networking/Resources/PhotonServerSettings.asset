@@ -58,4 +58,5 @@ MonoBehaviour:
   - RpcRoundStartHandler
   - LeaveRoom
   - PlayerReadyForRematch
+  - RpcTogglePlayerReady
   DisableAutoOpenWizard: 1
