@@ -309,6 +309,8 @@ public class NetworkManager : PunBehaviour
         playerInfo.Add("Color", serializedColor);
         playerInfo.Add("PlayerNumber", (int)(PhotonNetwork.playerList.Length - 1));
         PhotonNetwork.player.SetCustomProperties(playerInfo);
+
+        PhotonNetwork.playerName = playerName;
     }
     #endregion
 
@@ -318,7 +320,6 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     public override void OnConnectedToMaster()
     {
-        Debug.Log("JoinedMaster");
         base.OnConnectedToMaster();
 
         if (offlineMode)
@@ -336,7 +337,6 @@ public class NetworkManager : PunBehaviour
     /// </summary>
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined Room");
         base.OnJoinedRoom();
 
         // Only needed in network mode
@@ -344,6 +344,8 @@ public class NetworkManager : PunBehaviour
         {
             SetPlayerCustomProperties();
         }
+
+        EventManager.TriggerEvent("EvtOnPlayerJoinedRoom");
 
         // The host will call the change scene
         if (PhotonNetwork.isMasterClient)

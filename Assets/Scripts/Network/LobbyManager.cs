@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class LobbyManager : Photon.MonoBehaviour
 {
+    public delegate void LobbyManagerPlayerListUpdateNotify();
+    public static LobbyManagerPlayerListUpdateNotify playerListUpdateCallbackFunc;
+
     [SerializeField]
     private int countdownSec = 3;
 
-    private Dictionary<PhotonPlayer, bool> playerReadyStatus;
+    public Dictionary<PhotonPlayer, bool> playerReadyStatus { get; private set; }
 
     private static LobbyManager lobbyManager;
     public static LobbyManager instance
@@ -31,16 +34,6 @@ public class LobbyManager : Photon.MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        playerReadyStatus = new Dictionary<PhotonPlayer, bool>();
-
-        foreach(PhotonPlayer p in PhotonNetwork.playerList)
-        {
-            playerReadyStatus.Add(p, false);
-        }
-    }
-
     private void OnEnable()
     {
         EventManager.StartListening("EvtOnPlayerConnected", EvtOnPlayerConnectedHandler);
@@ -55,6 +48,12 @@ public class LobbyManager : Photon.MonoBehaviour
 
     private void Init()
     {
+        playerReadyStatus = new Dictionary<PhotonPlayer, bool>();
+
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            playerReadyStatus.Add(p, false);
+        }
     }
 
     private void EvtOnPlayerConnectedHandler()
@@ -66,6 +65,8 @@ public class LobbyManager : Photon.MonoBehaviour
                 playerReadyStatus.Add(p, false);
             }
         }
+
+        playerListUpdateCallbackFunc();
     }
 
     private void EvtOnPlayerDisconnectedHandler()
@@ -78,6 +79,8 @@ public class LobbyManager : Photon.MonoBehaviour
         }
 
         playerReadyStatus = newPlayerReadyStatus;
+
+        playerListUpdateCallbackFunc();
     }
 
     #region UI OnClick Events
@@ -92,6 +95,8 @@ public class LobbyManager : Photon.MonoBehaviour
     public void RpcTogglePlayerReady(PhotonPlayer player)
     {
         playerReadyStatus[player] = !playerReadyStatus[player];
+
+        playerListUpdateCallbackFunc();
 
         // Master client will handle the scene transition when all players are ready
         if (PhotonNetwork.isMasterClient)
