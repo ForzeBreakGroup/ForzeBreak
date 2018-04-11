@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class EndGameLobbyManager : Photon.MonoBehaviour
 {
     private int numberOfPlayerReady = 0;
+    private Dictionary<PhotonPlayer, bool> rematchPlayers;
 
     private static EndGameLobbyManager endGameLobbyManager;
     public static EndGameLobbyManager instance
@@ -29,25 +30,29 @@ public class EndGameLobbyManager : Photon.MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        rematchPlayers = new Dictionary<PhotonPlayer, bool>();
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            rematchPlayers.Add(p, false);
+        }
+    }
 
     private void Init()
     {
-
     }
 
     public void RegisterForRematch(bool isRematching)
     {
-        photonView.RPC("PlayerReadyForRematch", PhotonTargets.AllBuffered, isRematching);
+        photonView.RPC("PlayerReadyForRematch", PhotonTargets.AllBuffered, isRematching, PhotonNetwork.player);
     }
 
     [PunRPC]
-    public void PlayerReadyForRematch(bool isRematching)
+    public void PlayerReadyForRematch(bool isRematching, PhotonPlayer sender)
     {
-        // Register the number of player ready for rematch
-        if (isRematching)
-        {
-            ++numberOfPlayerReady;
-        }
+        // Register player for rematch
+        rematchPlayers[sender] = isRematching;
 
         // Following code will be executed by master client
         if (PhotonNetwork.isMasterClient)
@@ -58,9 +63,13 @@ public class EndGameLobbyManager : Photon.MonoBehaviour
                 photonView.RPC("LeaveRoom", PhotonTargets.AllBuffered);
             }
 
-            // If all players wants to rematch, return to match lobby
-            if (numberOfPlayerReady == PhotonNetwork.playerList.Length)
+            foreach(KeyValuePair<PhotonPlayer, bool> entry in rematchPlayers)
             {
+                if (!entry.Value)
+                {
+                    return;
+                }
+
                 PhotonNetwork.LoadLevel("MatchLobby");
             }
         }
