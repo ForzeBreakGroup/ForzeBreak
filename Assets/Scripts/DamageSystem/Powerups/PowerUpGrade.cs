@@ -27,7 +27,8 @@ public class PowerUpGrade
     {
         StaticData.MISSILE_NAME,
         StaticData.CANNON_NAME,
-        StaticData.SPIKERAM_NAME
+        StaticData.SPIKERAM_NAME,
+        StaticData.PUNCHIN_GLOVE,
     };
 
     /// <summary>
