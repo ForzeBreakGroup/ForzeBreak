@@ -41,3 +41,4 @@ Assets/FMODStudioCache.asset
 Assets/StreamingAssets/*.bank
 Assets/Scripts/Sound/MissileSound.cs
 Assets/Scripts/Sound/MissileSound.cs
+Assets/Resources/Bullet.prefab

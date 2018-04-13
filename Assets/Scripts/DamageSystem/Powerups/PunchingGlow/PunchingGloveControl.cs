@@ -11,20 +11,24 @@ using UnityEngine;
 
 public class PunchingGloveControl : PowerUpBase
 {
-
+    private Transform bulletSpawn;
     // Use this for initialization
     private void Awake()
     {
         this.enabled = photonView.isMine;
+        bulletSpawn = transform.Find("GlovePos");
     }
 
     public override void AdjustModel()
     {
         base.AdjustModel();
     }
-
+     
     protected override void OnPress()
     {
-        GetComponent<GloveMovement>().gameObject.SetActive(true);
+        Debug.Log("trans pos  " + transform.position);
+        Debug.Log("trans rotation  " + transform.rotation);
+        GameObject glove = PhotonNetwork.Instantiate("PunchingGloveOnly", transform.position, transform.rotation, 0);
+        Destroy(gameObject);
     }
 }
