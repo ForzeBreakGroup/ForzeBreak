@@ -29,6 +29,6 @@ public class PunchingGloveControl : PowerUpBase
         Debug.Log("trans pos  " + transform.position);
         Debug.Log("trans rotation  " + transform.rotation);
         GameObject glove = PhotonNetwork.Instantiate("PunchingGloveOnly", transform.position, transform.rotation, 0);
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
