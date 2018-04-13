@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  componentOffset: {x: 0, y: 4, z: 10}
+  componentOffset: {x: 0, y: 2, z: 10}
   componentAngle: {x: 0, y: 0, z: 0}
 --- !u!114 &114902381340300388
 MonoBehaviour:

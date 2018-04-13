@@ -32,7 +32,7 @@ public class GloveMovement : NetworkPowerUpMovement
         if (photonView.isMine)
         {
             Debug.Log("collision name " + collision.gameObject.name);
-            PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("ExplosionGlove", transform.position, Quaternion.identity, 0);
             PhotonNetwork.Destroy(gameObject);
         }
     }

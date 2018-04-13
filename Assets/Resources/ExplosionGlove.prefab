@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionForce: 59.2
-  ExplosionRadius: 1
+  ExplosionRadius: 2
   ExplosionDuration: 0.2
 --- !u!114 &114891638126242562
 MonoBehaviour:
