@@ -15,7 +15,16 @@ public class TrackPlayer : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject objectToTrack;
 
+    [SerializeField] private float minScale = 0.3f;
+    [SerializeField] private float maxScale = 1.0f;
+
     private bool trackingInitialized = false;
+    private GameObject arrow;
+
+    private void Awake()
+    {
+        arrow = transform.Find("Arrow").gameObject;
+    }
 
     /// <summary>
     /// Assign the target to the arrow to follow, the arrow changes it's color accordingly
@@ -39,7 +48,7 @@ public class TrackPlayer : MonoBehaviour
             float[] serializedColor = PhotonPlayer.Find(target.GetPhotonView().ownerId).CustomProperties["Color"] as float[];
             c = new Color(serializedColor[0], serializedColor[1], serializedColor[2], serializedColor[3]);
         }
-        transform.Find("Arrow_Test").GetComponent<Renderer>().material.color = c;
+        transform.Find("Arrow").GetComponent<Renderer>().material.color = c;
 
         objectToTrack = target;
         GetComponentInChildren<ReticleSystem>().EnableReticleSystem(objectToTrack);
@@ -53,6 +62,12 @@ public class TrackPlayer : MonoBehaviour
         if (objectToTrack)
         {
             transform.LookAt(objectToTrack.transform);
+
+            // Clamp the scale
+            float scale = 10.0f / Vector3.Distance(this.transform.position, objectToTrack.transform.position);
+            scale = Mathf.Clamp(scale, minScale, maxScale);
+
+            arrow.transform.localScale = new Vector3(scale, scale, scale);
         }
 
         if (trackingInitialized && !objectToTrack)
