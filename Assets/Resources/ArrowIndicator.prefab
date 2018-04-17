@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 95985676770411714}
   - component: {fileID: 114596520896909968}
   m_Layer: 0
-  m_Name: Arrow_Test
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToTrack: {fileID: 0}
+  minScale: 0.3
+  maxScale: 1
 --- !u!114 &114596520896909968
 MonoBehaviour:
   m_ObjectHideFlags: 1
