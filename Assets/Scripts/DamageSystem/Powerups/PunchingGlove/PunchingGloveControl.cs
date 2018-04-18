@@ -9,7 +9,7 @@ using UnityEngine;
  * Control class of Punching Glow.
  */
 
-public class PunchingGloveControl : PowerUpBase
+public class PunchingGloveControl : PowerUpComponent
 {
     private Transform bulletSpawn;
     // Use this for initialization

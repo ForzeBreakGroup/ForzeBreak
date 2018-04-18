@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpExampleComponent : PowerUpComponent
+public class SpikeRamMovement : PowerUpMovement
 {
 }

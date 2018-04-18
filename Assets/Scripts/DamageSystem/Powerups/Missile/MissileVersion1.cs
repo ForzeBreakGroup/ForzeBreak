@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileVersion1 : PowerUpBase
+public class MissileVersion1 : PowerUpComponent
 {
     [Range(0.1f, 2.0f)]
     [SerializeField] private float missileInterval = 1.5f;

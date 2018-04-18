@@ -7,7 +7,7 @@ using UnityEngine;
  * Description:
  * Control class of the cannon.
  */
-public class CannonControl : PowerUpBase
+public class CannonControl : PowerUpComponent
 {
     /// <summary>
     /// Time duration for next fire

@@ -136,7 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77761c3526e8c0540b199bf6698ccefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkSelf: 1
+  damage: 100
+  damageRadius: 10
+  centerOffset: {x: 0, y: 0, z: 0}
+  checkSelf: 0
   checkPlayer: 1
 --- !u!114 &114591065779213032
 MonoBehaviour:

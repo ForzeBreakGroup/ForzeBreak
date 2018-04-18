@@ -7,6 +7,13 @@ public class SpikeRamCollision : PowerUpCollision
     protected override void CollisionEnter(Collision collision)
     {
         base.CollisionEnter(collision);
-        Debug.Log("Hi");
+
+        ApplyDamage();
+
+        GetComponent<SpikeRamComponent>().DecreaseCapacity();
+    }
+
+    protected override void TriggerEnter(Collider other)
+    {
     }
 }

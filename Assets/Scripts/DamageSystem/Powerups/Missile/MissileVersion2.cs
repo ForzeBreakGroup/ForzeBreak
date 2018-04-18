@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MissileVersion2 : PowerUpBase
+public class MissileVersion2 : PowerUpComponent
 {
     [Range(1, 10)]
     public int missileCapacity = 4;
