@@ -59,4 +59,7 @@ MonoBehaviour:
   - LeaveRoom
   - PlayerReadyForRematch
   - RpcTogglePlayerReady
+  - SetOwnerId
+  - RpcSetComponentParent
+  - RpcSetCollisionOwner
   DisableAutoOpenWizard: 1

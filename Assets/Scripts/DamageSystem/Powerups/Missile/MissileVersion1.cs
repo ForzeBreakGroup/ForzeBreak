@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileVersion1 : PowerUpBase
+public class MissileVersion1 : PowerUpComponent
 {
     [Range(0.1f, 2.0f)]
     [SerializeField] private float missileInterval = 1.5f;
@@ -33,13 +33,6 @@ public class MissileVersion1 : PowerUpBase
         {
             DestroyImmediate(this);
         }
-
-        lockOnSystem = new Dictionary<ReticleSystem, float>();
-        foreach (ReticleSystem reticleSystem in reticleTargets)
-        {
-            lockOnSystem.Add(reticleSystem, 0);
-        }
-
         // Move the weapon model to desired places
         transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.identity;

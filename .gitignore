@@ -41,3 +41,6 @@ Assets/FMODStudioCache.asset
 Assets/StreamingAssets/*.bank
 Assets/Scripts/Sound/MissileSound.cs
 Assets/Scripts/Sound/MissileSound.cs
+Assets/Resources/Bullet.prefab
+Assets/Scripts/Network/NetworkPlayerControl/NetworkPlayerCollision.cs
+Assets/Scripts/Network/NetworkPlayerControl/NetworkPlayerCollision.cs

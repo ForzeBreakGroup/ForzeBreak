@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MorningStarControl : PowerUpBase {
+public class MorningStarControl : PowerUpComponent
+{
 
 
     public override void AdjustModel()
