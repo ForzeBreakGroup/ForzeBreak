@@ -33,13 +33,6 @@ public class MissileVersion1 : PowerUpBase
         {
             DestroyImmediate(this);
         }
-
-        lockOnSystem = new Dictionary<ReticleSystem, float>();
-        foreach (ReticleSystem reticleSystem in reticleTargets)
-        {
-            lockOnSystem.Add(reticleSystem, 0);
-        }
-
         // Move the weapon model to desired places
         transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.identity;

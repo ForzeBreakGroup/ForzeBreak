@@ -12,15 +12,39 @@ using Photon;
  */
 public class PowerUpBase : Photon.MonoBehaviour
 {
+    /// <summary>
+    /// Player number indicated by the vehicle data, used for distinguishing the player controllers in local mode
+    /// </summary>
     public int playerNum = 0;
-    protected ReticleSystem[] reticleTargets;
+
+    /// <summary>
+    /// The component offset relative to the vehicle model
+    /// </summary>
     [SerializeField] protected Vector3 componentOffset;
+
+    /// <summary>
+    /// The component offset angle relative to the vehicle model
+    /// </summary>
     [SerializeField] protected Vector3 componentAngle = Vector3.zero;
+
+    /// <summary>
+    /// The number of times this powerup can spawn, automatically destroy component when the limit reached
+    /// </summary>
+    [SerializeField] protected uint bulletCount = 1;
+
+    /// <summary>
+    /// Owner ID, derived from photon view ID
+    /// </summary>
+    private int ownerID = -1;
+
+    /// <summary>
+    /// Item to be spawned when key pressed
+    /// </summary>
+    [SerializeField] protected GameObject spawnItem;
 
     public virtual void AdjustModel()
     {
         enabled = transform.root.gameObject.GetPhotonView().isMine;
-        reticleTargets = transform.root.gameObject.GetComponentsInChildren<ReticleSystem>();
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
 
         transform.localPosition = componentOffset;
@@ -29,6 +53,7 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     protected virtual void OnPress()
     {
+        --bulletCount;
     }
 
     protected virtual void OnHold()
@@ -37,6 +62,10 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     protected virtual void OnRelease()
     {
+        if (bulletCount <= 0)
+        {
+            UnloadPowerUp();
+        }
     }
 
     protected virtual void Update()
@@ -61,6 +90,9 @@ public class PowerUpBase : Photon.MonoBehaviour
     {
         NetworkPlayerVisual[] players = FindObjectsOfType<NetworkPlayerVisual>();
         GameObject target = null;
+
+        ownerID = parentID;
+
         foreach(NetworkPlayerVisual p in players)
         {
             if (p.transform.root.gameObject.GetPhotonView().viewID == parentID)
@@ -68,6 +100,7 @@ public class PowerUpBase : Photon.MonoBehaviour
                 target = p.transform.root.gameObject;
             }
         }
+
         transform.SetParent(target.transform);
     }
 

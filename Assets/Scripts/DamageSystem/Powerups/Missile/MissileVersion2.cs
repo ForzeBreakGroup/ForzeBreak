@@ -31,12 +31,6 @@ public class MissileVersion2 : PowerUpBase
         {
             DestroyImmediate(this);
         }
-
-        lockOnSystem = new List<ReticleSystem>();
-        foreach (ReticleSystem reticleSystem in reticleTargets)
-        {
-            lockOnSystem.Add(reticleSystem);
-        }
     }
 
     protected override void OnPress()
