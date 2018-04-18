@@ -59,4 +59,5 @@ MonoBehaviour:
   - LeaveRoom
   - PlayerReadyForRematch
   - RpcTogglePlayerReady
+  - SetOwnerId
   DisableAutoOpenWizard: 1

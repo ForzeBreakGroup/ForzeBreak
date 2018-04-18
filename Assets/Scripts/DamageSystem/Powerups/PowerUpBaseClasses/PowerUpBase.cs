@@ -56,6 +56,7 @@ public class PowerUpBase : Photon.MonoBehaviour
         --bulletCount;
 
         GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
+        ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
     }
 
     protected virtual void OnHold()
@@ -97,7 +98,7 @@ public class PowerUpBase : Photon.MonoBehaviour
 
         foreach(NetworkPlayerVisual p in players)
         {
-            if (p.transform.root.gameObject.GetPhotonView().viewID == parentID)
+            if (p.transform.root.gameObject.GetPhotonView().ownerId == parentID)
             {
                 target = p.transform.root.gameObject;
             }

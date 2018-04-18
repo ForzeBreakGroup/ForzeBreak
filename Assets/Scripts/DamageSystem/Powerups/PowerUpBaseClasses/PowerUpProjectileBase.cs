@@ -57,4 +57,23 @@ public class PowerUpProjectileBase : MonoBehaviour
             return powerupCollision;
         }
     }
+
+    private PhotonView photonView;
+    protected PhotonView PhotonView
+    {
+        get
+        {
+            if (!photonView)
+            {
+                photonView = GetComponent(typeof(PhotonView)) as PhotonView;
+                if (!photonView)
+                {
+                    Debug.LogError("PhotonView component is not attached to the GameObject");
+                }
+            }
+
+            return photonView;
+        }
+    }
+
 }

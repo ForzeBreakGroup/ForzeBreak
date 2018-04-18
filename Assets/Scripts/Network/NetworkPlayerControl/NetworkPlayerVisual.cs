@@ -51,7 +51,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         if (photonView.isMine && photonView.viewID == targetID)
         {
             currentEquipped = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
-            currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
+            currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.ownerId);
             ((PowerUpBase)currentEquipped.GetComponent(typeof(PowerUpBase))).AdjustModel();
             InGameHUDManager.instance.UpdateWeaponIcon(powerupName);
         }
