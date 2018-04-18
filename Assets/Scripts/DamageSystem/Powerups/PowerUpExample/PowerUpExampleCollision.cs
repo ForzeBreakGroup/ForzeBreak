@@ -6,12 +6,10 @@ public class PowerUpExampleCollision : PowerUpCollision
 {
     protected override void CollisionEnter(Collision collision)
     {
-        base.CollisionEnter(collision);
+        ApplyDamage();
+    }
 
-        DamageSystem dmgSystem = collision.transform.root.gameObject.GetComponent(typeof(DamageSystem)) as DamageSystem;
-        if (dmgSystem)
-        {
-            dmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius);
-        }
+    protected override void TriggerEnter(Collider other)
+    {
     }
 }

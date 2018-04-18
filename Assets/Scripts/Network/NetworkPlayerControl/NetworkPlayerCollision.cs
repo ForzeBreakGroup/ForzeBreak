@@ -37,15 +37,25 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-    // Host side collision check
-    if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
-    {
+        // Host side collision check
+        if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
+        {
             CameraShake.Shake();
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
+
+            // Find child components that implemented IComponentCollision
+            foreach(ContactPoint cp in collision.contacts)
+            {
+                PowerUpCollision powerupCollision = cp.thisCollider.GetComponent<PowerUpCollision>();
+
+                if (powerupCollision != null)
+                {
+                    powerupCollision.ComponentCollision(collision);
+                }
+            }
+        }
     }
-}
-    
 
     /// <summary>
     /// Callback function that child class must override, this dictates the reaction of collision

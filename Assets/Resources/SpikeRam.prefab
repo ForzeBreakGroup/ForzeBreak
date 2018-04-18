@@ -22,8 +22,11 @@ GameObject:
   - component: {fileID: 33633429892364980}
   - component: {fileID: 23164158816677168}
   - component: {fileID: 65741117195060534}
-  - component: {fileID: 114325659375904834}
   - component: {fileID: 114617171055895212}
+  - component: {fileID: 114550290271012296}
+  - component: {fileID: 114483101576212444}
+  - component: {fileID: 114441472007559282}
+  - component: {fileID: 114325659375904834}
   m_Layer: 0
   m_Name: SpikeRam
   m_TagString: Untagged
@@ -38,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1795249851945872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.57, z: 4.21}
+  m_LocalPosition: {x: 0, y: 1.16, z: 4.21}
   m_LocalScale: {x: 0.15, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,17 +115,56 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 1
+  synchronization: 0
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 4961795538387418}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114441472007559282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795249851945872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042567cb764fcef4999d8758efc7f6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114483101576212444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795249851945872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e966f5f3da71f314b92c43aeb7f7d29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+--- !u!114 &114550290271012296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795249851945872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a063a5d28a13145938874fda4b4f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  damageRadius: 10
+  centerOffset: {x: 0, y: 0, z: 0}
+  checkSelf: 1
+  checkPlayer: 1
 --- !u!114 &114617171055895212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  componentOffset: {x: 0, y: 0.57, z: 4.21}
+  componentOffset: {x: 0, y: 1.16, z: 4.21}
   componentAngle: {x: 0, y: 0, z: 0}
-  force: 100
-  radius: 10
   capacity: 2
+  ownerID: -1
+  spawnItem: {fileID: 0}

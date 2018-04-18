@@ -10,7 +10,7 @@ using Photon;
  * Base class for all powerups, override OnPress, OnHold, OnRelease for handling the specific event you want
  * Awake must override from this class and calls base.Awake() for correctly getting the reticle system results
  */
-public class PowerUpBase : Photon.MonoBehaviour
+public class PowerUpComponent : Photon.MonoBehaviour
 {
     /// <summary>
     /// Player number indicated by the vehicle data, used for distinguishing the player controllers in local mode
@@ -30,7 +30,7 @@ public class PowerUpBase : Photon.MonoBehaviour
     /// <summary>
     /// The number of times this powerup can spawn, automatically destroy component when the limit reached
     /// </summary>
-    [SerializeField] protected uint bulletCount = 1;
+    [SerializeField] protected uint capacity = 1;
 
     /// <summary>
     /// Owner ID, derived from photon view ID
@@ -53,10 +53,12 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     protected virtual void OnPress()
     {
-        --bulletCount;
-
-        GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
-        ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
+        if (spawnItem != null)
+        {
+            --capacity;
+            GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
+            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
+        }
     }
 
     protected virtual void OnHold()
@@ -65,14 +67,17 @@ public class PowerUpBase : Photon.MonoBehaviour
 
     protected virtual void OnRelease()
     {
-        if (bulletCount <= 0)
-        {
-            UnloadPowerUp();
-        }
     }
 
     protected virtual void Update()
     {
+        // Unloads powerup
+        if (capacity <= 0)
+        {
+            UnloadPowerUp();
+            return;
+        }
+
         // Get input from player
         if (Input.GetButtonDown("WeaponFire_Mouse") || Input.GetButtonDown("WeaponFire_Controller" + playerNum))
         {
@@ -88,8 +93,13 @@ public class PowerUpBase : Photon.MonoBehaviour
         }
     }
 
+    public virtual void SetComponentParent(int parentID)
+    {
+        this.gameObject.GetPhotonView().RPC("RpcSetComponentParent", PhotonTargets.All, parentID);
+    }
+
     [PunRPC]
-    protected void SetParent(int parentID)
+    protected void RpcSetComponentParent(int parentID)
     {
         NetworkPlayerVisual[] players = FindObjectsOfType<NetworkPlayerVisual>();
         GameObject target = null;
@@ -112,7 +122,7 @@ public class PowerUpBase : Photon.MonoBehaviour
         PhotonView view = transform.root.gameObject.GetPhotonView();
         if (view.isMine)
         {
-            view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.viewID);
+            view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
         }
     }
 }
