@@ -9,7 +9,7 @@ public class PowerUpCollision : PowerUpProjectileBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (powerupData.ownerId == -1)
+        if (PowerUpData.ownerId == -1)
         {
             Debug.LogError("Owner ID is not set properly");
         }
@@ -22,7 +22,7 @@ public class PowerUpCollision : PowerUpProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (powerupData.ownerId == -1)
+        if (PowerUpData.ownerId == -1)
         {
             Debug.LogError("Owner ID is not set properly");
         }
@@ -35,7 +35,7 @@ public class PowerUpCollision : PowerUpProjectileBase
 
     private bool ValidateColliderEvent(GameObject collider)
     {
-        bool isSelf = (checkSelf) ? collider.GetPhotonView().ownerId != powerupData.ownerId : true;
+        bool isSelf = (checkSelf) ? collider.GetPhotonView().ownerId != PowerUpData.ownerId : true;
         bool isPlayer = (checkPlayer) ? collider.tag == "Player" : true;
 
         return (isSelf && isPlayer);

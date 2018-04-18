@@ -2,19 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PowerUpMovement))]
-[RequireComponent(typeof(PowerUpData))]
-[RequireComponent(typeof(PowerUpCollision))]
 public class PowerUpProjectileBase : MonoBehaviour
 {
-    protected PowerUpMovement powerupMovement;
-    protected PowerUpCollision powerupCollision;
-    protected PowerUpData powerupData;
-
-    private void Awake()
+    private PowerUpData powerupData;
+    protected PowerUpData PowerUpData
     {
-        powerupMovement = GetComponent<PowerUpMovement>();
-        powerupData = GetComponent<PowerUpData>();
-        powerupCollision = GetComponent<PowerUpCollision>();
+        get
+        {
+            if (!powerupData)
+            {
+                powerupData = GetComponent(typeof(PowerUpData)) as PowerUpData;
+                if (!powerupData)
+                {
+                    Debug.LogError("PowerUpData component is not attached to the GameObject");
+                }
+            }
+
+            return powerupData;
+        }
+    }
+
+    private PowerUpMovement powerupMovement;
+    protected PowerUpMovement PowerUpMovement
+    {
+        get
+        {
+            if (!powerupMovement)
+            {
+                powerupMovement = GetComponent(typeof(PowerUpMovement)) as PowerUpMovement;
+                if (!powerupMovement)
+                {
+                    Debug.LogError("PowerUpMovement component is not attached to the GameObject");
+                }
+            }
+
+            return powerupMovement;
+        }
+    }
+
+    private PowerUpCollision powerupCollision;
+    protected PowerUpCollision PowerUpCollision
+    {
+        get
+        {
+            if (!powerupCollision)
+            {
+                powerupCollision = GetComponent(typeof(PowerUpCollision)) as PowerUpCollision;
+                if (!powerupCollision)
+                {
+                    Debug.LogError("PowerUpCollision Component is not attached to the GameObject");
+                }
+            }
+
+            return powerupCollision;
+        }
     }
 }

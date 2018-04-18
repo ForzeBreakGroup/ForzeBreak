@@ -35,7 +35,7 @@ public class PowerUpBase : Photon.MonoBehaviour
     /// <summary>
     /// Owner ID, derived from photon view ID
     /// </summary>
-    private int ownerID = -1;
+    [SerializeField] private int ownerID = -1;
 
     /// <summary>
     /// Item to be spawned when key pressed
@@ -56,7 +56,6 @@ public class PowerUpBase : Photon.MonoBehaviour
         --bulletCount;
 
         GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
-        spawnItem.GetComponent<PowerUpData>().ownerId = this.ownerID;
     }
 
     protected virtual void OnHold()
