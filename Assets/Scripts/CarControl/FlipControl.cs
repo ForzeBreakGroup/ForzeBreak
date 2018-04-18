@@ -64,6 +64,7 @@ public class FlipControl : MonoBehaviour {
 
         if (canFlip)
         {
+            Debug.Log("aaa");
             //grounded condition
             if (carController.IsAnyWheelGround)
             {

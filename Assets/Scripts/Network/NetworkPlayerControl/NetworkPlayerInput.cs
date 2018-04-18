@@ -30,7 +30,7 @@ public class NetworkPlayerInput : NetworkPlayerBase
     {
         if (photonView.isMine)
         {
-            PlayerInputUpdate();
+            PlayerInputFixedUpdate();
         }
     }
 

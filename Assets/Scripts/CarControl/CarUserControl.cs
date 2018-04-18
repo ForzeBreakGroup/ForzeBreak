@@ -37,13 +37,22 @@ public class CarUserControl : NetworkPlayerInput
 
         engine = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleEngine");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine, transform, GetComponent<Rigidbody>());
-        engine.start();
+        //engine.start();
     }
 
     protected override void PlayerInputUpdate()
     {
         base.PlayerInputUpdate();
 
+        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
+        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
+
+    }
+
+    protected override void PlayerInputFixedUpdate()
+    {
+        base.PlayerInputFixedUpdate();
+        
         // keyboard Input
         float h = Input.GetAxis("Horizontal_Keyboard");
         float v = Input.GetAxis("Vertical_Keyboard");
@@ -64,10 +73,11 @@ public class CarUserControl : NetworkPlayerInput
         if (flipControl != null)
             flipControl.Flip(flip, h);
 
-        if(boost)
+        if (boost)
             engine.setParameterValue("Speed", 1f);
         else
             engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
+    
     }
 
     public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)

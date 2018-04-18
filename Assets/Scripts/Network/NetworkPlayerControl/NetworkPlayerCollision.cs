@@ -13,6 +13,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 {
     [SerializeField]
     protected GameObject collisionEffect;
+    [SerializeField]
+    protected GameObject forzebreakEffect;
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -38,9 +40,10 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     private void OnCollisionEnter(Collision collision)
     {
     // Host side collision check
-    if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
+    if (collision.transform.tag != "PowerUp"&&collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
     {
             CameraShake.Shake();
+            Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
     }
