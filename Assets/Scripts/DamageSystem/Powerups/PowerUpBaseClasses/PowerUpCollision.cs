@@ -2,29 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpCollision : MonoBehaviour
+public class PowerUpCollision : PowerUpProjectileBase
 {
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
 
-    int ownerID = -1;
-
-    public void SetOwnerId(int id)
-    {
-        ownerID = id;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (ownerID == -1)
+        if (powerupData.ownerId == -1)
         {
             Debug.LogError("Owner ID is not set properly");
         }
 
-        bool isSelf = (checkSelf) ? collision.transform.root.gameObject.GetPhotonView().ownerId != ownerID : true;
-        bool isPlayer = (checkPlayer) ? collision.transform.root.gameObject.tag == "Player" : true;
-
-        if (isSelf && isPlayer)
+        if (ValidateColliderEvent(collision.transform.root.gameObject))
         {
             CollisionEnter(collision);
         }
@@ -32,15 +22,23 @@ public class PowerUpCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (ownerID == -1)
+        if (powerupData.ownerId == -1)
         {
             Debug.LogError("Owner ID is not set properly");
         }
 
-        if (other.transform.root.gameObject.GetPhotonView().ownerId != ownerID)
+        if (ValidateColliderEvent(other.transform.root.gameObject))
         {
             TriggerEnter(other);
         }
+    }
+
+    private bool ValidateColliderEvent(GameObject collider)
+    {
+        bool isSelf = (checkSelf) ? collider.GetPhotonView().ownerId != powerupData.ownerId : true;
+        bool isPlayer = (checkPlayer) ? collider.tag == "Player" : true;
+
+        return (isSelf && isPlayer);
     }
 
     protected virtual void CollisionEnter(Collision collision)

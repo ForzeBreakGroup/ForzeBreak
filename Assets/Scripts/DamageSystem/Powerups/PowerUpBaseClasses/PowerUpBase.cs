@@ -54,6 +54,9 @@ public class PowerUpBase : Photon.MonoBehaviour
     protected virtual void OnPress()
     {
         --bulletCount;
+
+        GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
+        spawnItem.GetComponent<PowerUpData>().ownerId = this.ownerID;
     }
 
     protected virtual void OnHold()
