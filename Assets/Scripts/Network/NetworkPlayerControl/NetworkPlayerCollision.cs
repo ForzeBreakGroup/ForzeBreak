@@ -46,17 +46,21 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
             Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
+
+            // Look for opponent's power up collider components, then execute those collision scripts
+            Component[] powerupColliders = collision.gameObject.GetComponentsInChildren(typeof(PowerUpCollision));
+            foreach (Component cp in powerupColliders)
+            {
+                PowerUpCollision puc = cp as PowerUpCollision;
+                puc.otherCollider = this.gameObject;
+                puc.otherDmgSystem = puc.otherCollider.GetComponent<DamageSystem>();
+                puc.ComponentCollision(collision);
+            }
         }
 
         // Handles opponent having power up component collision
         else
         {
-            // Look for opponent's power up collider components, then execute those collision scripts
-            Component[] powerupColliders = GetComponentsInChildren(typeof(PowerUpCollision));
-            foreach (Component cp in powerupColliders)
-            {
-                ((PowerUpCollision)cp).ComponentCollision(collision);
-            }
         }
     }
     

@@ -5,15 +5,19 @@ using UnityEngine;
 public class HotPotatoComponent : PowerUpComponent
 {
     public GameObject hotPotato { get; private set; }
+    private bool hasDetonated = false;
+
+    public override void SetComponentParent(int parentID)
+    {
+        base.SetComponentParent(parentID);
+
+        SpawnHotPotato();
+        hotPotato.GetComponent<HotPotatoMovement>().TransferHotPotato(GetComponent<PhotonView>().ownerId);
+    }
 
     protected override void OnPress()
     {
-        if (hotPotato == null)
-        {
-            SpawnHotPotato();
-            hotPotato.GetComponent<HotPotatoMovement>().TransferHotPotato(GetComponent<PhotonView>().ownerId);
-        }
-
+        hasDetonated = true;
         hotPotato.GetComponent<HotPotatoCollision>().Detonate();
         DecreaseCapacity();
     }
@@ -26,9 +30,16 @@ public class HotPotatoComponent : PowerUpComponent
         {
             hotPotato = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
             ((PowerUpData)hotPotato.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
-            Debug.Log(hotPotato);
         }
 
         return hotPotato;
+    }
+
+    private void OnDestroy()
+    {
+        if (!hasDetonated)
+        {
+            hotPotato.GetComponent<HotPotatoCollision>().Detonate();
+        }
     }
 }

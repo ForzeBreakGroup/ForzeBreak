@@ -59,4 +59,5 @@ MonoBehaviour:
   - TaggedPlayer
   - RpcTransferHotPotato
   - RpcDecreaseCapacity
+  - RpcChangeCollisionSetting
   DisableAutoOpenWizard: 1

@@ -11,8 +11,8 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
 
-    protected GameObject otherCollider;
-    protected DamageSystem otherDmgSystem;
+    public GameObject otherCollider;
+    public DamageSystem otherDmgSystem;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,8 +23,12 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
         if (ValidateColliderEvent(collision.transform.root.gameObject))
         {
-            otherCollider = collision.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            // Only triggered if the power up is not part of vehicle
+            if (otherCollider == null)
+            {
+                otherCollider = collision.collider.transform.root.gameObject;
+                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            }
 
             CollisionEnter(collision);
         }
@@ -39,8 +43,12 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
         if (ValidateColliderEvent(other.transform.root.gameObject))
         {
-            otherCollider = other.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            // Only triggered if the power up is not part of vehicle
+            if (otherCollider == null)
+            {
+                otherCollider = other.transform.root.gameObject;
+                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            }
 
             TriggerEnter(other);
         }

@@ -19,10 +19,10 @@ public class HotPotatoCollision : PowerUpCollision
     {
         if (PhotonView.isMine)
         {
-            Debug.Log("Detonating");
-
             // Moving the hot potato under the vehicle center, and apply damage
-            this.transform.position = otherCollider.transform.position;
+            this.transform.position = transform.parent.position;
+            otherCollider = transform.parent.gameObject;
+            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
 
             ApplyDamage();
 
