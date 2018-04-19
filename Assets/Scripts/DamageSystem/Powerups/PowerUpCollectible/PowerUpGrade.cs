@@ -28,6 +28,7 @@ public class PowerUpGrade
         StaticData.MISSILE_NAME,
         StaticData.CANNON_NAME,
         StaticData.SPIKERAM_NAME,
+        StaticData.HOTPOTATO_NAME,
         StaticData.PUNCHIN_GLOVE,
     };
 
