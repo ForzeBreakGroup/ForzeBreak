@@ -40,7 +40,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     private void OnCollisionEnter(Collision collision)
     {
         // Host side collision check
-        if (collision.transform.tag != "PowerUp" && collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
+        if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
         {
             CameraShake.Shake();
             Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
@@ -48,10 +48,10 @@ public class NetworkPlayerCollision : NetworkPlayerBase
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
 
             // Find child components that implemented IComponentCollision
-            PowerUpCollision[] colliders = GetComponentsInChildren<PowerUpCollision>();
-            foreach (PowerUpCollision puc in colliders)
+            Component[] powerupColliders = GetComponentsInChildren(typeof(PowerUpCollision));
+            foreach(Component cp in powerupColliders)
             {
-                puc.ComponentCollision(collision);
+                ((PowerUpCollision)cp).ComponentCollision(collision);
             }
         }
     }

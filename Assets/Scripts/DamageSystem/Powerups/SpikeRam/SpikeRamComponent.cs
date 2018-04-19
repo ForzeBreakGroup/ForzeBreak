@@ -21,9 +21,4 @@ public class SpikeRamComponent : PowerUpComponent
     {
         GetComponent<SpikeRamData>().OwnerID = ownerId;
     }
-
-    public void DecreaseCapacity()
-    {
-        --capacity;
-    }
 }

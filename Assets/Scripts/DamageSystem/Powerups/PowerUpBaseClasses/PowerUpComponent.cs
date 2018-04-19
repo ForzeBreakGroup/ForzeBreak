@@ -55,7 +55,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     {
         if (spawnItem != null)
         {
-            --capacity;
+            DecreaseCapacity();
             GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
             ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
         }
@@ -115,6 +115,17 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
+    }
+
+    public void DecreaseCapacity()
+    {
+        photonView.RPC("RpcDecreaseCapacity", PhotonTargets.All);
+    }
+
+    [PunRPC]
+    public void RpcDecreaseCapacity()
+    {
+        --capacity;
     }
 
     protected virtual void UnloadPowerUp()
