@@ -30,7 +30,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// <summary>
     /// The number of times this powerup can spawn, automatically destroy component when the limit reached
     /// </summary>
-    [SerializeField] protected uint capacity = 1;
+    [SerializeField] protected int capacity = 1;
 
     /// <summary>
     /// Owner ID, derived from photon view ID
@@ -115,11 +115,12 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
+
+        Debug.Log("SetParent");
     }
 
     public void DecreaseCapacity()
     {
-        Debug.Log("RPC Decrease Capacity");
         photonView.RPC("RpcDecreaseCapacity", PhotonTargets.All);
     }
 
@@ -134,7 +135,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
         PhotonView view = transform.root.gameObject.GetPhotonView();
         if (view.isMine)
         {
-            Debug.Log("Unloading Power Up");
             view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
         }
     }

@@ -27,9 +27,9 @@ GameObject:
   - component: {fileID: 114483101576212444}
   - component: {fileID: 114441472007559282}
   - component: {fileID: 114325659375904834}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: SpikeRam
-  m_TagString: Untagged
+  m_TagString: PowerUpComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

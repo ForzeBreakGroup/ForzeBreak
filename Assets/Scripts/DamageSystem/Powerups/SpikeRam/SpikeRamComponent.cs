@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class SpikeRamComponent : PowerUpComponent
 {
-    public override void AdjustModel()
-    {
-        base.AdjustModel();
-        this.gameObject.GetComponent<Collider>().isTrigger = false;
-    }
-
     public override void SetComponentParent(int parentID)
     {
         base.SetComponentParent(parentID);

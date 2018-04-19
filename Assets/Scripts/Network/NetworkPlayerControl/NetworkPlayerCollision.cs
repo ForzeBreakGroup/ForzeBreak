@@ -39,13 +39,13 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        // Handles self collision
-        if (photonView.isMine)
+        // Handles collision effects of self
+        if (photonView.isMine && collision.gameObject.tag == "Player")
         {
-            CameraShake.Shake();
+            PlayCollisionEffect(collision.contacts[0].point);
+
             Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
-            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
         }
 
         // Handles opponent having power up component collision
@@ -95,5 +95,11 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     protected virtual void ResolveCollision(PlayerCollisionResult collisionResult, float force, Vector3 point)
     {
 
+    }
+
+    protected void PlayCollisionEffect(Vector3 location)
+    {
+        CameraShake.Shake();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", location);
     }
 }
