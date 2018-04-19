@@ -39,17 +39,21 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        // Host side collision check
-        if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
+        // Handles self collision
+        if (photonView.isMine)
         {
             CameraShake.Shake();
             Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
+        }
 
-            // Find child components that implemented IComponentCollision
+        // Handles opponent having power up component collision
+        else
+        {
+            // Look for opponent's power up collider components, then execute those collision scripts
             Component[] powerupColliders = GetComponentsInChildren(typeof(PowerUpCollision));
-            foreach(Component cp in powerupColliders)
+            foreach (Component cp in powerupColliders)
             {
                 ((PowerUpCollision)cp).ComponentCollision(collision);
             }

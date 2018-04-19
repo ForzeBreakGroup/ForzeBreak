@@ -119,6 +119,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
 
     public void DecreaseCapacity()
     {
+        Debug.Log("RPC Decrease Capacity");
         photonView.RPC("RpcDecreaseCapacity", PhotonTargets.All);
     }
 
@@ -133,6 +134,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
         PhotonView view = transform.root.gameObject.GetPhotonView();
         if (view.isMine)
         {
+            Debug.Log("Unloading Power Up");
             view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
         }
     }

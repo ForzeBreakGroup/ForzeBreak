@@ -15,6 +15,7 @@ public class HotPotatoComponent : PowerUpComponent
         }
 
         hotPotato.GetComponent<HotPotatoCollision>().Detonate();
+        DecreaseCapacity();
     }
 
     public GameObject SpawnHotPotato()
@@ -25,6 +26,7 @@ public class HotPotatoComponent : PowerUpComponent
         {
             hotPotato = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
             ((PowerUpData)hotPotato.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
+            Debug.Log(hotPotato);
         }
 
         return hotPotato;

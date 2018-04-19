@@ -14,6 +14,9 @@ public class HotPotatoComponentCollision : PowerUpCollision
     public override void ComponentCollision(Collision collision)
     {
         // Spawn a hot potato
+        otherCollider = collision.transform.root.gameObject;
+        otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+
         GameObject hotpotato = hotPotatoComponent.SpawnHotPotato();
         hotpotato.GetComponent<HotPotatoMovement>().TransferHotPotato(otherCollider.GetComponent<PhotonView>().ownerId);
     }

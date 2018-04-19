@@ -5,10 +5,17 @@ using UnityEngine;
 public class HotPotatoMovement : PowerUpMovement
 {
     public int targetId { get; private set; }
+    private Vector3 relativePos;
+
+    private void Awake()
+    {
+        relativePos = this.transform.localPosition;
+    }
 
     public void SetTarget(GameObject target)
     {
         this.transform.SetParent(target.transform);
+        this.transform.localPosition = relativePos;
     }
 
     public void TransferHotPotato(int targetViewId)
