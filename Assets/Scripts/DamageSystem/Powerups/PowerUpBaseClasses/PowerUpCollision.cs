@@ -21,8 +21,9 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        if (ValidateColliderEvent(collision.transform.root.gameObject))
+        if (ValidateColliderEvent(otherCollider))
         {
+            Debug.Log("PowerUpCollision Validated");
             // Only triggered if the power up is not part of vehicle
             if (otherCollider == null)
             {
@@ -41,7 +42,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        if (ValidateColliderEvent(other.transform.root.gameObject))
+        if (ValidateColliderEvent(otherCollider))
         {
             // Only triggered if the power up is not part of vehicle
             if (otherCollider == null)
@@ -88,7 +89,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     {
         foreach(ContactPoint cp in collision.contacts)
         {
-            if (cp.thisCollider == GetComponent<Collider>())
+            if (cp.otherCollider == GetComponent<Collider>())
             {
                 OnCollisionEnter(collision);
                 return;

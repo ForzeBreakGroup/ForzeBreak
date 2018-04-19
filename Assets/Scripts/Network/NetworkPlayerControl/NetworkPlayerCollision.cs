@@ -57,11 +57,6 @@ public class NetworkPlayerCollision : NetworkPlayerBase
                 puc.ComponentCollision(collision);
             }
         }
-
-        // Handles opponent having power up component collision
-        else
-        {
-        }
     }
     
     /// <summary>

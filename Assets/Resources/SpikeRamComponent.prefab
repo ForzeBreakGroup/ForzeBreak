@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114441472007559282}
   - component: {fileID: 114325659375904834}
   m_Layer: 19
-  m_Name: SpikeRam
+  m_Name: SpikeRamComponent
   m_TagString: PowerUpComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
+  otherCollider: {fileID: 0}
+  otherDmgSystem: {fileID: 0}
 --- !u!114 &114617171055895212
 MonoBehaviour:
   m_ObjectHideFlags: 1

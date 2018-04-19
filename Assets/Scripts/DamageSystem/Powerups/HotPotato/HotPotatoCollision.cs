@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HotPotatoCollision : PowerUpCollision
 {
+    // Overriding ComponentCollision due to HotPotato will never be in contact points
     public override void ComponentCollision(Collision collision)
     {
         ((HotPotatoMovement)PowerUpMovement).TransferHotPotato(otherCollider.GetComponent<PhotonView>().ownerId);
