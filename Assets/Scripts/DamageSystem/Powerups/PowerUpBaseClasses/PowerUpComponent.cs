@@ -30,17 +30,22 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// <summary>
     /// The number of times this powerup can spawn, automatically destroy component when the limit reached
     /// </summary>
-    [SerializeField] protected uint capacity = 1;
+    [SerializeField] protected int capacity = 1;
 
     /// <summary>
     /// Owner ID, derived from photon view ID
     /// </summary>
-    [SerializeField] private int ownerID = -1;
+    [SerializeField] protected int ownerID = -1;
 
     /// <summary>
     /// Item to be spawned when key pressed
     /// </summary>
     [SerializeField] protected GameObject spawnItem;
+
+    private void Awake()
+    {
+        enabled = GetComponent<PhotonView>().isMine;
+    }
 
     public virtual void AdjustModel()
     {
@@ -55,7 +60,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     {
         if (spawnItem != null)
         {
-            --capacity;
+            DecreaseCapacity();
             GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
             ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
         }
@@ -115,6 +120,19 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
+
+        Debug.Log("SetParent");
+    }
+
+    public void DecreaseCapacity()
+    {
+        photonView.RPC("RpcDecreaseCapacity", PhotonTargets.All);
+    }
+
+    [PunRPC]
+    public void RpcDecreaseCapacity()
+    {
+        --capacity;
     }
 
     protected virtual void UnloadPowerUp()

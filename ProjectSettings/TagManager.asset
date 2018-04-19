@@ -10,6 +10,7 @@ TagManager:
   - UISoundMaster
   - PowerUp
   - PowerUpSpawn
+  - PowerUpComponent
   layers:
   - Default
   - TransparentFX
@@ -29,8 +30,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Environment
+  - PowerUpComponent
   - 
   - 
   - 

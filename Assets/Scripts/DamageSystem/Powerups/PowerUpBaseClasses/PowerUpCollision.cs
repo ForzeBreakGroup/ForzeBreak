@@ -11,8 +11,8 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
 
-    protected GameObject otherCollider;
-    protected DamageSystem otherDmgSystem;
+    public GameObject otherCollider;
+    public DamageSystem otherDmgSystem;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,10 +21,15 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        if (ValidateColliderEvent(collision.transform.root.gameObject))
+        if (ValidateColliderEvent(otherCollider))
         {
-            otherCollider = collision.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            Debug.Log("PowerUpCollision Validated");
+            // Only triggered if the power up is not part of vehicle
+            if (otherCollider == null)
+            {
+                otherCollider = collision.collider.transform.root.gameObject;
+                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            }
 
             CollisionEnter(collision);
         }
@@ -37,10 +42,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        if (ValidateColliderEvent(other.transform.root.gameObject))
+        if (ValidateColliderEvent(otherCollider))
         {
-            otherCollider = other.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            // Only triggered if the power up is not part of vehicle
+            if (otherCollider == null)
+            {
+                otherCollider = other.transform.root.gameObject;
+                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            }
 
             TriggerEnter(other);
         }
@@ -78,7 +87,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     public virtual void ComponentCollision(Collision collision)
     {
-        OnCollisionEnter(collision);
+        foreach(ContactPoint cp in collision.contacts)
+        {
+            if (cp.otherCollider == GetComponent<Collider>())
+            {
+                OnCollisionEnter(collision);
+                return;
+            }
+        }
     }
 
     public virtual void ComponentTrigger(Collider other)
