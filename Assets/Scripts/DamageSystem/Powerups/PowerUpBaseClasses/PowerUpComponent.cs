@@ -35,7 +35,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// <summary>
     /// Owner ID, derived from photon view ID
     /// </summary>
-    [SerializeField] private int ownerID = -1;
+    [SerializeField] protected int ownerID = -1;
 
     /// <summary>
     /// Item to be spawned when key pressed

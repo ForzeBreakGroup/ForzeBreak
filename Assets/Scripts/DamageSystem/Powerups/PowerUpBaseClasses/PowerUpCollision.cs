@@ -78,7 +78,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     public virtual void ComponentCollision(Collision collision)
     {
-        OnCollisionEnter(collision);
+        foreach (ContactPoint cp in collision.contacts)
+        {
+            if (cp.thisCollider == this.gameObject.GetComponent<Collider>())
+            {
+                OnCollisionEnter(collision);
+                return;
+            }
+        }
     }
 
     public virtual void ComponentTrigger(Collider other)

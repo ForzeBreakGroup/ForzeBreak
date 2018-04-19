@@ -48,14 +48,10 @@ public class NetworkPlayerCollision : NetworkPlayerBase
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
 
             // Find child components that implemented IComponentCollision
-            foreach (ContactPoint cp in collision.contacts)
+            PowerUpCollision[] colliders = GetComponentsInChildren<PowerUpCollision>();
+            foreach (PowerUpCollision puc in colliders)
             {
-                PowerUpCollision powerupCollision = cp.thisCollider.GetComponent<PowerUpCollision>();
-
-                if (powerupCollision != null)
-                {
-                    powerupCollision.ComponentCollision(collision);
-                }
+                puc.ComponentCollision(collision);
             }
         }
     }
