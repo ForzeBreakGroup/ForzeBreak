@@ -52,8 +52,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
             foreach (Component cp in powerupColliders)
             {
                 PowerUpCollision puc = cp as PowerUpCollision;
-                puc.otherCollider = this.gameObject;
-                puc.otherDmgSystem = puc.otherCollider.GetComponent<DamageSystem>();
+                puc.externalCollider = this.gameObject;
                 puc.ComponentCollision(collision);
             }
         }

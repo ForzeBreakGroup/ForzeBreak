@@ -5,8 +5,7 @@ using UnityEngine;
 public class SnowballMovement : PowerUpMovement
 {
     [SerializeField] private float velocity = 500.0f;
-    [SerializeField] private float launchAngle = 45.0f;
-    [SerializeField] private float maxScale;
+    [SerializeField] private float maxScale = 2.0f;
     [SerializeField] private float growthFactor = 1.0f;
 
     private Rigidbody rb;
@@ -15,7 +14,6 @@ public class SnowballMovement : PowerUpMovement
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(transform.forward);
 
         rb.AddForce(transform.forward * velocity);
     }

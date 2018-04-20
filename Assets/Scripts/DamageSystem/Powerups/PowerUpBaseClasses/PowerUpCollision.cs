@@ -11,8 +11,10 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
 
-    public GameObject otherCollider;
-    public DamageSystem otherDmgSystem;
+    public GameObject externalCollider;
+
+    private GameObject target;
+    private DamageSystem targetDmgSystem;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,16 +23,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        // Only triggered if the power up is not part of vehicle
-        if (otherCollider == null)
+        GameObject collidingEntity = externalCollider;
+        if (collidingEntity == null)
         {
-            otherCollider = collision.collider.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            collidingEntity = collision.collider.transform.root.gameObject;
         }
 
-        if (ValidateColliderEvent(otherCollider))
+        if (ValidateColliderEvent(collidingEntity))
         {
-            Debug.Log("Collision Validated");
             CollisionEnter(collision);
         }
     }
@@ -42,14 +42,13 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
-        // Only triggered if the power up is not part of vehicle
-        if (otherCollider == null)
+        GameObject collidingEntity = externalCollider;
+        if (collidingEntity == null)
         {
-            otherCollider = other.transform.root.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            collidingEntity = other.transform.root.gameObject;
         }
 
-        if (ValidateColliderEvent(otherCollider))
+        if (ValidateColliderEvent(collidingEntity))
         {
             Debug.Log("Collision Validated");
             TriggerEnter(other);
@@ -65,27 +64,29 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         }
 
         bool isPlayer = (checkPlayer) ? collider.tag == "Player" : true;
-        if (checkPlayer && !isPlayer)
-        {
-            otherCollider = null;
-            otherDmgSystem = null;
-        }
 
+        if (isSelf && isPlayer)
+        {
+            target = collider;
+            if (checkPlayer)
+            {
+                targetDmgSystem = target.GetComponent<DamageSystem>();
+            }
+        }
 
         return (isSelf && isPlayer);
     }
 
     protected virtual void ApplyDamage()
     {
-        if (otherDmgSystem != null)
+        if (targetDmgSystem != null)
         {
-            otherDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius);
+            targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius);
         }
     }
 
     protected virtual void CollisionEnter(Collision collision)
     {
-        Debug.Log("Collision Enter");
     }
 
     protected virtual void TriggerEnter(Collider other)
