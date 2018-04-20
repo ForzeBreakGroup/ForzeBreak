@@ -50,7 +50,6 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
         if (ValidateColliderEvent(collidingEntity))
         {
-            Debug.Log("Collision Validated");
             TriggerEnter(other);
         }
     }

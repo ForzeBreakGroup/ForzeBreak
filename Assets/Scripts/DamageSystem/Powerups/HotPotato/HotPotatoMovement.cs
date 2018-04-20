@@ -49,8 +49,6 @@ public class HotPotatoMovement : PowerUpMovement
     public void RpcTransferHotPotato(int targetOwnerId)
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("Transfering Hot Potato: ");
-        Debug.Log("Transferring to Player #" + targetOwnerId);
         foreach (GameObject go in gameObjects)
         {
             if (go.GetComponent<PhotonView>().ownerId == targetOwnerId)
