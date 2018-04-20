@@ -63,7 +63,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         {
             isSelf = (checkSelf) ? collider.GetPhotonView().ownerId != PowerUpData.OwnerID : true;
         }
+
         bool isPlayer = (checkPlayer) ? collider.tag == "Player" : true;
+        if (checkPlayer && !isPlayer)
+        {
+            otherCollider = null;
+            otherDmgSystem = null;
+        }
+
 
         return (isSelf && isPlayer);
     }
@@ -78,7 +85,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     protected virtual void CollisionEnter(Collision collision)
     {
-
+        Debug.Log("Collision Enter");
     }
 
     protected virtual void TriggerEnter(Collider other)

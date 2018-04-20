@@ -117,7 +117,7 @@ MonoBehaviour:
   damage: 100
   damageRadius: 10
   centerOffset: {x: 0, y: 0, z: 0}
-  checkSelf: 1
+  checkSelf: 0
   checkPlayer: 1
   otherCollider: {fileID: 0}
   otherDmgSystem: {fileID: 0}
