@@ -75,5 +75,4 @@ public class PowerUpProjectileBase : MonoBehaviour
             return photonView;
         }
     }
-
 }
