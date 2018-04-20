@@ -76,6 +76,12 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         return (isSelf && isPlayer);
     }
 
+    public void TransferTarget(GameObject newTarget)
+    {
+        target = newTarget;
+        targetDmgSystem = target.GetComponent<DamageSystem>();
+    }
+
     protected virtual void ApplyDamage()
     {
         if (targetDmgSystem != null)

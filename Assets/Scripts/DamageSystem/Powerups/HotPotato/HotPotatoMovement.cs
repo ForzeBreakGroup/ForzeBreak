@@ -35,6 +35,8 @@ public class HotPotatoMovement : PowerUpMovement
     {
         this.target = target;
         this.transform.SetParent(target.transform);
+
+        ((HotPotatoCollision)PowerUpCollision).TransferTarget(target);
     }
 
     public void TransferHotPotato(int targetViewId)

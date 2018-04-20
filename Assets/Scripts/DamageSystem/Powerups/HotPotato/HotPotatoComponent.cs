@@ -5,7 +5,6 @@ using UnityEngine;
 public class HotPotatoComponent : PowerUpComponent
 {
     public GameObject hotPotato { get; private set; }
-    private bool hasDetonated = false;
 
     public override void SetComponentParent(int parentID)
     {
@@ -17,7 +16,6 @@ public class HotPotatoComponent : PowerUpComponent
 
     protected override void OnPress()
     {
-        hasDetonated = true;
         hotPotato.GetComponent<HotPotatoCollision>().Detonate();
         DecreaseCapacity();
     }
@@ -37,7 +35,7 @@ public class HotPotatoComponent : PowerUpComponent
 
     private void OnDestroy()
     {
-        if (!hasDetonated)
+        if (hotPotato != null)
         {
             hotPotato.GetComponent<HotPotatoCollision>().Detonate();
         }
