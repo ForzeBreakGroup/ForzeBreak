@@ -15,7 +15,7 @@ public class PowerUpData : PowerUpProjectileBase
 
         set
         {
-            PhotonView.RPC("SetOwnerId", PhotonTargets.All, value);
+            ownerId=value;
         }
     }
 

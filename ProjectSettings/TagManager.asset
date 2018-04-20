@@ -11,6 +11,7 @@ TagManager:
   - PowerUp
   - PowerUpSpawn
   - PowerUpComponent
+  - VehicleCollider
   layers:
   - Default
   - TransparentFX
