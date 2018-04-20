@@ -119,8 +119,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 1
-  otherCollider: {fileID: 0}
-  otherDmgSystem: {fileID: 0}
+  externalCollider: {fileID: 0}
 --- !u!114 &114426766940328688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a138ada0ce8c44daaa24bc5d4e123a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 500
-  launchAngle: 45
-  maxScale: 2
+  initLaunch: 30
+  velocity: 150
+  maxScale: 3
   growthFactor: 1
 --- !u!135 &135020050449238798
 SphereCollider:
