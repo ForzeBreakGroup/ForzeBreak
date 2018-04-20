@@ -21,16 +21,16 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
+        // Only triggered if the power up is not part of vehicle
+        if (otherCollider == null)
+        {
+            otherCollider = collision.collider.transform.root.gameObject;
+            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+        }
+
         if (ValidateColliderEvent(otherCollider))
         {
-            Debug.Log("PowerUpCollision Validated");
-            // Only triggered if the power up is not part of vehicle
-            if (otherCollider == null)
-            {
-                otherCollider = collision.collider.transform.root.gameObject;
-                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
-            }
-
+            Debug.Log("Collision Validated");
             CollisionEnter(collision);
         }
     }
@@ -42,15 +42,16 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
             Debug.LogError("Owner ID is not set properly");
         }
 
+        // Only triggered if the power up is not part of vehicle
+        if (otherCollider == null)
+        {
+            otherCollider = other.transform.root.gameObject;
+            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+        }
+
         if (ValidateColliderEvent(otherCollider))
         {
-            // Only triggered if the power up is not part of vehicle
-            if (otherCollider == null)
-            {
-                otherCollider = other.transform.root.gameObject;
-                otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
-            }
-
+            Debug.Log("Collision Validated");
             TriggerEnter(other);
         }
     }

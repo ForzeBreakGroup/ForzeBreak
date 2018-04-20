@@ -60,4 +60,5 @@ MonoBehaviour:
   - RpcTransferHotPotato
   - RpcDecreaseCapacity
   - RpcChangeCollisionSetting
+  - RpcDestroyPowerUpProjectile
   DisableAutoOpenWizard: 1
