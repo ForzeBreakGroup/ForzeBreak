@@ -7,7 +7,7 @@ public class HotPotatoCollision : PowerUpCollision
     // Overriding ComponentCollision due to HotPotato will never be in contact points
     public override void ComponentCollision(Collision collision)
     {
-        ((HotPotatoMovement)PowerUpMovement).TransferHotPotato(otherCollider.GetComponent<PhotonView>().ownerId);
+        ((HotPotatoMovement)PowerUpMovement).TransferHotPotato(externalCollider.GetComponent<PhotonView>().ownerId);
     }
 
     public void Detonate()
@@ -22,8 +22,7 @@ public class HotPotatoCollision : PowerUpCollision
         {
             // Moving the hot potato under the vehicle center, and apply damage
             this.transform.position = transform.parent.position;
-            otherCollider = transform.parent.gameObject;
-            otherDmgSystem = otherCollider.GetComponent<DamageSystem>();
+            externalCollider = transform.parent.gameObject;
 
             ApplyDamage();
 

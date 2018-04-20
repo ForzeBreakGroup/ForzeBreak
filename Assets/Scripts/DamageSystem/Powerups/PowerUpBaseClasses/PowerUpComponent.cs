@@ -120,8 +120,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
-
-        Debug.Log("SetParent");
     }
 
     public void DecreaseCapacity()
