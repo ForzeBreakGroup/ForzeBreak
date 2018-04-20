@@ -31,7 +31,8 @@ public class PowerUpGrade
         StaticData.HOTPOTATO_COMPONENT,
         StaticData.PUNCHINGGLOVE_COMPONENT,
         StaticData.MORNINGSTAR_COMPONENT,
-        StaticData.SNOWBALL_COMPONENT
+        StaticData.SNOWBALL_COMPONENT,
+		StaticData.BANNANTRAP_COMPONENT,
     };
 
     /// <summary>

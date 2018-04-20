@@ -6,6 +6,7 @@ public class TrapCollisionBase : PowerUpCollision {
 	protected override void CollisionEnter(Collision collision)
 	{
 		if (collision.transform.name == "New_Semi_Flat_arena") {
+			base.checkSelf = false;
 			return;
 		}
 	}
