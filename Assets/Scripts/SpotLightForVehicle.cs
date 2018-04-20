@@ -28,13 +28,13 @@ public class SpotLightForVehicle : MonoBehaviour {
             }
 
             LineRenderer line = lightingPods[i].GetComponent<LineRenderer>();
+
             if (line != null)
             {
                 if (line.enabled == false)
                     line.enabled = true;
                 Vector3[] positions = { lightingPods[i].position, cars[i].transform.position};
                 line.SetPositions(positions);
-
             }
 
         }
