@@ -28,15 +28,15 @@ public class UIWeaponIconControl : UIControl
 
     public void ChangeIcon(string name)
     {
-        if(name==StaticData.CANNON_NAME)
+        if(name == StaticData.CANNON_COMPONENT)
         {
             displayedIcon.sprite = resources[1];
         }
-        else if(name == StaticData.MISSILE_NAME)
+        else if(name == StaticData.MISSILE_COMPONENT)
         {
             displayedIcon.sprite = resources[2];
         }
-        else if (name == StaticData.SPIKERAM_NAME)
+        else if (name == StaticData.SPIKERAM_COMPONENT)
         {
             displayedIcon.sprite = resources[3];
         }

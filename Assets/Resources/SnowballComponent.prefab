@@ -81,6 +81,6 @@ MonoBehaviour:
   playerNum: 0
   componentOffset: {x: 0, y: 2.1, z: 3.56}
   componentAngle: {x: 0, y: 0, z: 0}
-  capacity: 1
+  capacity: 3
   ownerID: -1
   spawnItem: {fileID: 1077537064979696, guid: 4e56839359913074aa814b49805fc1a2, type: 2}

@@ -35,6 +35,8 @@ public class HotPotatoMovement : PowerUpMovement
     {
         this.target = target;
         this.transform.SetParent(target.transform);
+
+        ((HotPotatoCollision)PowerUpCollision).TransferTarget(target);
     }
 
     public void TransferHotPotato(int targetViewId)
@@ -49,8 +51,6 @@ public class HotPotatoMovement : PowerUpMovement
     public void RpcTransferHotPotato(int targetOwnerId)
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("Transfering Hot Potato: ");
-        Debug.Log("Transferring to Player #" + targetOwnerId);
         foreach (GameObject go in gameObjects)
         {
             if (go.GetComponent<PhotonView>().ownerId == targetOwnerId)

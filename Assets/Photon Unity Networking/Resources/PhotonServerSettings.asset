@@ -61,4 +61,7 @@ MonoBehaviour:
   - RpcDecreaseCapacity
   - RpcChangeCollisionSetting
   - RpcDestroyPowerUpProjectile
+  - RpcSetJoint
+  - RpcSetMornigStarOwner
+  - RpcSetOwnerId
   DisableAutoOpenWizard: 1

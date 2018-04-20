@@ -62,7 +62,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
         {
             DecreaseCapacity();
             GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, transform.rotation, 0);
-            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
+            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).SetOwnerId(this.ownerID);
         }
     }
 
@@ -120,8 +120,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
-
-        Debug.Log("SetParent");
     }
 
     public void DecreaseCapacity()

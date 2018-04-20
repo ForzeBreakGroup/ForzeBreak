@@ -101,8 +101,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rim: 9.4
-    - _Scan: 0.14
+    - _Rim: 10
+    - _Scan: 0.13
     - _ScanStep: 0.91
     - _ScanTiling: 70
     - _Smoothness: 1
@@ -119,7 +119,7 @@ Material:
     - _Glitch: {r: -3.73, g: 0, b: 0, a: 0}
     - _GlitchOffset: {r: 0.3, g: -0.2, b: 0, a: 0}
     - _GlowSpeed: {r: 2, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 0.7794118, g: 0.89959437, b: 1, a: 1}
+    - _MainColor: {r: 0.6838235, g: 0.85608524, b: 1, a: 1}
     - _RimColor: {r: 0, g: 0.6835051, b: 1.3576479, a: 1}
     - _ScanSpeed: {r: 2, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}

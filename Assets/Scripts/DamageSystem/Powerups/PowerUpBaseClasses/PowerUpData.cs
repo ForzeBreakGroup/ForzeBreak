@@ -15,13 +15,18 @@ public class PowerUpData : PowerUpProjectileBase
 
         set
         {
-            PhotonView.RPC("SetOwnerId", PhotonTargets.All, value);
+            ownerId = value;
         }
+    }
+
+    public void SetOwnerId(int id)
+    {
+        PhotonView.RPC("RpcSetOwnerId", PhotonTargets.All, id);
     }
 
 
     [PunRPC]
-    public void SetOwnerId(int id)
+    public void RpcSetOwnerId(int id)
     {
         ownerId = id;
     }

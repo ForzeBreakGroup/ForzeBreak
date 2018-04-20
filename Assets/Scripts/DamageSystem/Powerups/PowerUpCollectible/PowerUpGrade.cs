@@ -25,11 +25,13 @@ public class PowerUpGrade
     /// </summary>
     private static string[] commonPowerUp =
     {
-        StaticData.MISSILE_NAME,
-        StaticData.CANNON_NAME,
-        StaticData.SPIKERAM_NAME,
-        StaticData.HOTPOTATO_NAME,
-        StaticData.PUNCHIN_GLOVE,
+        // StaticData.MISSILE_COMPONENT,
+        StaticData.CANNON_COMPONENT,
+        StaticData.SPIKERAM_COMPONENT,
+        StaticData.HOTPOTATO_COMPONENT,
+        StaticData.PUNCHINGGLOVE_COMPONENT,
+        StaticData.MORNINGSTAR_COMPONENT,
+        StaticData.SNOWBALL_COMPONENT
     };
 
     /// <summary>
