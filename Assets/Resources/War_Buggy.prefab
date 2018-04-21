@@ -689,7 +689,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1517994163518996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.513752, y: 0.895337, z: -18.195877}
+  m_LocalPosition: {x: -8.691928, y: 0.2927549, z: -4.0250487}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4012395199353910}
@@ -1833,7 +1833,7 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 35
-  m_Range: 10
+  m_Range: 3.72
   m_SpotAngle: 30.9
   m_CookieSize: 10
   m_Shadows:
@@ -1989,7 +1989,6 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114501710976548662}
-  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -2064,6 +2063,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionEffect: {fileID: 1462247261863818, guid: 1c3d63d6c2edd5140a2ea79b14744618,
+    type: 2}
+  forzebreakEffect: {fileID: 1277828460633722, guid: 37322c18469279d408cabf6b4a35c733,
     type: 2}
   damageAmplifyPercentage: 100
   healthyThreshold: 150

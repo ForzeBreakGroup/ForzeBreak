@@ -233,8 +233,7 @@ public class CarControlWheels : NetworkPlayerMovement
     private void AddDownForce()
     {
         if(IsWheelsGround)
-            wheelColliders[0].attachedRigidbody.AddForce(-transform.up*downforce*
-                                                        wheelColliders[0].attachedRigidbody.velocity.magnitude);
+            carRigidbody.AddForce(-transform.up*downforce*carRigidbody.velocity.magnitude);
     }
 
     //update the state of carbody.

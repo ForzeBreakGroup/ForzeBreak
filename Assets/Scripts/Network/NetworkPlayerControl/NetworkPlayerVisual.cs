@@ -48,11 +48,11 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     [PunRPC]
     protected void AddPowerUpComponent(string powerupName, int targetID)
     {
-        if (photonView.isMine && photonView.viewID == targetID)
+        if (photonView.isMine && photonView.ownerId == targetID)
         {
             currentEquipped = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
-            currentEquipped.GetPhotonView().RPC("SetParent", PhotonTargets.All, photonView.viewID);
-            ((PowerUpBase)currentEquipped.GetComponent(typeof(PowerUpBase))).AdjustModel();
+            ((PowerUpComponent)currentEquipped.GetComponent(typeof(PowerUpComponent))).SetComponentParent(targetID);
+            ((PowerUpComponent)currentEquipped.GetComponent(typeof(PowerUpComponent))).AdjustModel();
             InGameHUDManager.instance.UpdateWeaponIcon(powerupName);
         }
     }
@@ -60,7 +60,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     [PunRPC]
     protected void RemovePowerUpComponent(int targetID)
     {
-        if (photonView.isMine && photonView.viewID == targetID)
+        if (photonView.isMine && photonView.ownerId == targetID)
         {
             if (currentEquipped != null)
             {

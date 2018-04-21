@@ -10,6 +10,8 @@ TagManager:
   - UISoundMaster
   - PowerUp
   - PowerUpSpawn
+  - PowerUpComponent
+  - VehicleCollider
   layers:
   - Default
   - TransparentFX
@@ -29,8 +31,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Environment
+  - PowerUpComponent
   - 
   - 
   - 

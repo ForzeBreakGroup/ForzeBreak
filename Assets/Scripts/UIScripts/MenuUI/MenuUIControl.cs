@@ -20,7 +20,7 @@ public class MenuUIControl : MonoBehaviour
     #region OnClick Events
     public void OnClickLocalSplitScreen()
     {
-        NetworkManager.instance.StartSplitScreen();
+        NetworkManager.instance.StartSplitScreen(NetworkManager.instance.numberOfLocalPlayers);
     }
 
     public void OnClickOnlineSession()

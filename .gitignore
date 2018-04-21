@@ -42,3 +42,6 @@ Assets/StreamingAssets/*.bank
 Assets/Scripts/Sound/MissileSound.cs
 Assets/Scripts/Sound/MissileSound.cs
 Assets/Resources/Bullet.prefab
+Assets/Scripts/Network/NetworkPlayerControl/NetworkPlayerCollision.cs
+Assets/Scripts/Network/NetworkPlayerControl/NetworkPlayerCollision.cs
+Assets/Resources/PowerUp - CommonComponent.prefab

@@ -14,10 +14,14 @@ public class StaticData : MonoBehaviour
     public static string DEATHBOUND = "DeathBound";
     public static string UISOUNDMASTER = "UISoundMaster";
 
-    public static string MISSILE_NAME = "MissileVersion2";
-    public static string CANNON_NAME = "MachineGun";
-    public static string SPIKERAM_NAME = "SpikeRam";
-    public static string PUNCHIN_GLOVE = "PunchingGloveModel";
+    public static string MISSILE_COMPONENT          = "MissileVersion2";
+    public static string CANNON_COMPONENT           = "MachineGun";
+    public static string SPIKERAM_COMPONENT         = "SpikeRamComponent";
+    public static string HOTPOTATO_COMPONENT        = "HotPotatoComponent";
+    public static string MORNINGSTAR_COMPONENT      = "MorningStarComponent";
+	public static string PUNCHINGGLOVE_COMPONENT    = "PunchingGloveModel";
+    public static string SNOWBALL_COMPONENT         = "SnowballComponent";
+	public static string BANNANTRAP_COMPONENT 		= "PunchingGloveModel";
 
     public static string HEALTH = "Health";
     public static string Energy = "Energy";

@@ -13,6 +13,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 {
     [SerializeField]
     protected GameObject collisionEffect;
+    [SerializeField]
+    protected GameObject forzebreakEffect;
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -29,7 +31,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         Receiver
     };
 
-    
+
     /// <summary>
     /// Unity lifehook event when Collision happens
     /// The server-side has the authority over when the collision happens, as well as the analysis result
@@ -37,16 +39,25 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-    // Host side collision check
-    if (collision.transform.root.tag == "Player" && collision.transform.root.gameObject.GetPhotonView().isMine)
-    {
-            CameraShake.Shake();
-            Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
-            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", collision.contacts[0].point);
-    }
-}
-    
+        // Handles collision effects of self
+        if (photonView.isMine && collision.gameObject.tag == "Player")
+        {
+            PlayCollisionEffect(collision.contacts[0].point);
 
+            Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
+            Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
+
+            // Look for opponent's power up collider components, then execute those collision scripts
+            Component[] powerupColliders = collision.gameObject.GetComponentsInChildren(typeof(PowerUpCollision));
+            foreach (Component cp in powerupColliders)
+            {
+                PowerUpCollision puc = cp as PowerUpCollision;
+                puc.externalCollider = this.gameObject;
+                puc.ComponentCollision(collision);
+            }
+        }
+    }
+    
     /// <summary>
     /// Callback function that child class must override, this dictates the reaction of collision
     /// </summary>
@@ -82,5 +93,11 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     protected virtual void ResolveCollision(PlayerCollisionResult collisionResult, float force, Vector3 point)
     {
 
+    }
+
+    protected void PlayCollisionEffect(Vector3 location)
+    {
+        CameraShake.Shake();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", location);
     }
 }
