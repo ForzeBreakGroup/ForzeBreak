@@ -86,7 +86,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     {
         if (targetDmgSystem != null)
         {
-            targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius);
+            targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius, PowerUpData.OwnerID);
         }
     }
 

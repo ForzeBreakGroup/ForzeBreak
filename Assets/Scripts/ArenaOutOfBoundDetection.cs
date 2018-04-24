@@ -16,8 +16,8 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
         if (other.transform.root.tag == "Player" && view.isMine)
         {
             int playerId = view.ownerId;
-            MatchManager.instance.DestroyPlayerObject();
-            MatchManager.instance.photonView.RPC("RpcPlayerDeathHandler", PhotonTargets.All, playerId);
+
+            other.transform.root.gameObject.GetComponent<NetworkPlayerDeathHandler>().OnPlayerDeath();
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
         }
