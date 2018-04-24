@@ -155,7 +155,7 @@ public class DamageSystem : NetworkPlayerCollision
     /// <param name="force"></param>
     /// <param name="explosionCenter"></param>
     /// <param name="radius"></param>
-    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius)
+    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius, int ownerId)
     {
         // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
