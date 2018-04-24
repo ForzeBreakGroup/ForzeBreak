@@ -9,6 +9,7 @@ public class NetworkPlayerDeathHandler : NetworkPlayerBase
 
     public void OnPlayerDeath()
     {
+        Debug.Log("OnPlayerDeath");
         int playerNum = 0;
         // Transfer the player camera to spectator
         if (!NetworkManager.offlineMode)
@@ -20,8 +21,10 @@ public class NetworkPlayerDeathHandler : NetworkPlayerBase
         // Activate respawn timer on spectator camera
 
         // Sends RPC to the killer to increment the kill count
+        photonView.RPC("RpcIncrementKillScore", PhotonTargets.All, lastDamageReceivedFrom, photonView.ownerId);
 
         // Destroy player
+        MatchManager.instance.DestroyPlayerObject();
     }
 
     private void Awake()
@@ -33,15 +36,21 @@ public class NetworkPlayerDeathHandler : NetworkPlayerBase
         spectCam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
+    [PunRPC]
+    private void RpcIncrementKillScore(int killerId, int senderId)
     {
-        if (stream.isWriting)
+        // Suicide does not count
+        if (killerId == senderId)
         {
-
+            return;
         }
-        else if (stream.isReading)
-        {
 
+        if (photonView.ownerId == killerId)
+        {
+            PhotonPlayer player = PhotonPlayer.Find(photonView.ownerId);
+            int updateKillCount = (int)player.CustomProperties["KillCount"] + 1;
+            ExitGames.Client.Photon.Hashtable setKillCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", updateKillCount } };
+            player.SetCustomProperties(setKillCount);
         }
     }
 }
