@@ -64,4 +64,5 @@ MonoBehaviour:
   - RpcSetJoint
   - RpcSetMornigStarOwner
   - RpcSetOwnerId
+  - RpcIncrementKillScore
   DisableAutoOpenWizard: 1

@@ -20,6 +20,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     protected float collisionCooldown = 0.7f;
     private float elapsedTime = 0.0f;
 
+    public int lastReceivedDamageFrom;
+
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -35,6 +37,12 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         /// </summary>
         Receiver
     };
+
+    protected virtual void Awake()
+    {
+        Debug.Log(photonView.ownerId);
+        lastReceivedDamageFrom = photonView.ownerId;
+    }
 
     private void Update()
     {
@@ -53,6 +61,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         // Handles collision effects of self
         if (photonView.isMine && collision.gameObject.tag == "Player")
         {
+            lastReceivedDamageFrom = collision.transform.root.GetComponent<PhotonView>().ownerId;
+
             // Validates the collision timer
             if (elapsedTime <= 0)
             {

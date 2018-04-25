@@ -189,13 +189,26 @@ GameObject:
   - component: {fileID: 86630763}
   - component: {fileID: 86630762}
   - component: {fileID: 86630765}
+  - component: {fileID: 86630761}
   m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
+  m_Name: SpectatorCamera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &86630761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86630760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d38cb6300a93f4aafc253472a06903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnCooldown: 5
 --- !u!124 &86630762
 Behaviour:
   m_ObjectHideFlags: 0
@@ -770,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6217879d90aa71848be2f02ea2a68afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 180
+  time: 30
 --- !u!114 &350637483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1956,6 +1969,7 @@ GameObject:
   - component: {fileID: 1339931136}
   - component: {fileID: 1339931137}
   - component: {fileID: 1339931138}
+  - component: {fileID: 1339931139}
   m_Layer: 0
   m_Name: OutOfBoundary
   m_TagString: DeathBound
@@ -1999,6 +2013,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844d661a22e458544b69bbe4c049678b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1339931139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1339931135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650f30493b813054fabd6c17e9c2f11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spectCam: {fileID: 86630760}
 --- !u!1 &1398961983
 GameObject:
   m_ObjectHideFlags: 0

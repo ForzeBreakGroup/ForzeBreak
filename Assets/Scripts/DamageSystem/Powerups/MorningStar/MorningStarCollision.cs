@@ -6,7 +6,6 @@ public class MorningStarCollision : PowerUpCollision
 {
     protected override void CollisionEnter(Collision collision)
     {
-        Debug.Log("Morning Star Collision");
         base.CollisionEnter(collision);
         ApplyDamage();
         transform.parent.GetComponent<MorningStarComponent>().DecreaseCapacity();

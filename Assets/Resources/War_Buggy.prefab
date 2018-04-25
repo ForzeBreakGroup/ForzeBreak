@@ -375,9 +375,9 @@ GameObject:
   - component: {fileID: 114588205272943532}
   - component: {fileID: 114746530151634126}
   - component: {fileID: 114501710976548662}
-  - component: {fileID: 114527540014986978}
-  - component: {fileID: 114665485917076538}
   - component: {fileID: 114175742806894734}
+  - component: {fileID: 114665485917076538}
+  - component: {fileID: 114527540014986978}
   m_Layer: 0
   m_Name: War_Buggy
   m_TagString: Player
@@ -1967,7 +1967,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localCam: {fileID: 0}
-  playerLife: 3
 --- !u!114 &114527540014986978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2066,6 +2065,7 @@ MonoBehaviour:
     type: 2}
   forzebreakEffect: {fileID: 1277828460633722, guid: 37322c18469279d408cabf6b4a35c733,
     type: 2}
+  collisionCooldown: 0.7
   damageAmplifyPercentage: 100
   healthyThreshold: 150
   lightlyDamageThreshold: 250
