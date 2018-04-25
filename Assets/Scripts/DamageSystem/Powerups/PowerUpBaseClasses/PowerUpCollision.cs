@@ -18,6 +18,12 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Ignores powerup collision
+        if (collision.gameObject.tag == "PowerUp")
+        {
+            return;
+        }
+
         if (PowerUpData.OwnerID == -1)
         {
             Debug.LogError("Owner ID is not set properly");
@@ -37,6 +43,12 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     private void OnTriggerEnter(Collider other)
     {
+        // Ignores powerup collision
+        if (other.gameObject.tag == "PowerUp")
+        {
+            return;
+        }
+
         if (PowerUpData.OwnerID == -1)
         {
             Debug.LogError("Owner ID is not set properly");
