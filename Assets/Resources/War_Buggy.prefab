@@ -2018,7 +2018,7 @@ MonoBehaviour:
   maximumSteerAngle: 30
   steerHelper: 0.7
   fullTorqueOverAllWheels: 30
-  reverseTorque: 20
+  reverseTorque: 35
   downforce: 100
   topspeed: 15
   IsWheelsGround: 0
@@ -2066,6 +2066,7 @@ MonoBehaviour:
   forzebreakEffect: {fileID: 1277828460633722, guid: 37322c18469279d408cabf6b4a35c733,
     type: 2}
   collisionCooldown: 0.7
+  lastReceivedDamageFrom: 0
   damageAmplifyPercentage: 100
   healthyThreshold: 150
   lightlyDamageThreshold: 250

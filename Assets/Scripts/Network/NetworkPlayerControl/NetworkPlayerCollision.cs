@@ -40,7 +40,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
     protected virtual void Awake()
     {
-        Debug.Log(photonView.ownerId);
+        //Debug.Log(photonView.ownerId);
         lastReceivedDamageFrom = photonView.ownerId;
     }
 

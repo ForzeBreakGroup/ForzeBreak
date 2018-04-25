@@ -12,6 +12,7 @@ TagManager:
   - PowerUpSpawn
   - PowerUpComponent
   - VehicleCollider
+  - CameraPoint
   layers:
   - Default
   - TransparentFX
@@ -21,10 +22,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Beam1
+  - Beam2
+  - Beam3
+  - Beam4
   - 
   - 
   - 
