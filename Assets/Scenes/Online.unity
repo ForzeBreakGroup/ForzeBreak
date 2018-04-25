@@ -347,7 +347,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 131832775}
-  - component: {fileID: 131832774}
   m_Layer: 0
   m_Name: SpotLight
   m_TagString: Untagged
@@ -355,17 +354,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &131832774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 131832773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &131832775
 Transform:
   m_ObjectHideFlags: 0
@@ -415,7 +403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.3, y: -14.9}
+  m_AnchoredPosition: {x: 36.2, y: -18.8}
   m_SizeDelta: {x: 77, y: 77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157601073
@@ -646,9 +634,30 @@ Prefab:
       propertyPath: m_Name
       value: LightBeam (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &200488183 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581,
+    type: 2}
+  m_PrefabInternal: {fileID: 200488182}
+--- !u!114 &200488184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 200488183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 2
 --- !u!1 &279383828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,9 +1240,30 @@ Prefab:
       propertyPath: m_Name
       value: LightBeam (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &851345884 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581,
+    type: 2}
+  m_PrefabInternal: {fileID: 851345883}
+--- !u!114 &851345885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851345884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 3
 --- !u!4 &859330636 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4785076609990564, guid: 69b789ae6074aa64bb957e8b7b967581,
@@ -2179,7 +2209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -68, y: 0}
+  m_AnchoredPosition: {x: -47.1, y: 0}
   m_SizeDelta: {x: 50, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523023030
@@ -3545,9 +3575,30 @@ Prefab:
       propertyPath: m_Name
       value: LightBeam (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1796376010 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581,
+    type: 2}
+  m_PrefabInternal: {fileID: 1796376009}
+--- !u!114 &1796376011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1796376010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 4
 --- !u!1001 &1911007988
 Prefab:
   m_ObjectHideFlags: 0
@@ -3751,9 +3802,30 @@ Prefab:
       propertyPath: m_Name
       value: LightBeam (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69b789ae6074aa64bb957e8b7b967581, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2014864835 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1378233820178884, guid: 69b789ae6074aa64bb957e8b7b967581,
+    type: 2}
+  m_PrefabInternal: {fileID: 2014864834}
+--- !u!114 &2014864836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2014864835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 1
 --- !u!1001 &2091371256
 Prefab:
   m_ObjectHideFlags: 0

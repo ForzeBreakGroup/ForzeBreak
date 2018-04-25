@@ -124,6 +124,7 @@ public class MatchManager : Photon.MonoBehaviour
         // Spawn player camera
         GameObject mainCamera = Instantiate(playerCameraPrefab);
 
+
         // Spawn player gameobject and register the spawn position and rotation for future use
         GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
         playerGO.GetComponent<CarUserControl>().playerNum = playerId + 1;
@@ -133,6 +134,7 @@ public class MatchManager : Photon.MonoBehaviour
         // Assign the player camera to follow the corresponding player
         mainCamera.GetComponent<CameraControl>().target = playerGO;
         Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+        playerCam.cullingMask = ~(1 << 8);
 
         // Offline mode requires additional adjustment
         if (NetworkManager.offlineMode)
@@ -142,10 +144,14 @@ public class MatchManager : Photon.MonoBehaviour
 
             // Change photonview id
             playerGO.GetPhotonView().ownerId = playerId + 1;
+
+            playerCam.cullingMask = ~(1 << 8 + playerId);
+
         }
 
         // Set the local player reference
         NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, (NetworkManager.offlineMode) ? playerId : 0);
+        
     }
 
     private void SpawnPlayer()
