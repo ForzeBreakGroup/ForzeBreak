@@ -112,24 +112,6 @@ public class NetworkPlayerBase : Photon.MonoBehaviour
         }
     }
 
-    private NetworkPlayerDeathHandler playerDeathHandler;
-    protected NetworkPlayerDeathHandler NetworkPlayerDeathHandler
-    {
-        get
-        {
-            if (!playerDeathHandler)
-            {
-                playerDeathHandler = GetComponent(typeof(NetworkPlayerDeathHandler)) as NetworkPlayerDeathHandler;
-                if (!playerDeathHandler)
-                {
-                    Debug.LogError("NetworkPlayerDeathHandler Script must be attached to Player object");
-                }
-            }
-            return playerDeathHandler;
-        }
-    }
-
-
     /// <summary>
     /// Virtual method for send/receive photon data
     /// </summary>

@@ -115,7 +115,7 @@ public class MatchManager : Photon.MonoBehaviour
         string vehicleName = "War_Buggy";
 
         // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
-        int playerNumber = (NetworkManager.offlineMode) ? playerId : (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
+        int playerNumber = (NetworkManager.offlineMode) ? playerId : ((int)PhotonNetwork.player.CustomProperties["PlayerNumber"]);
 
         // Obtain the spawn position and rotation
         Vector3 pos = spawnPoints[playerNumber].spawnPoint;
@@ -145,7 +145,7 @@ public class MatchManager : Photon.MonoBehaviour
         }
 
         // Set the local player reference
-        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, playerId);
+        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, (NetworkManager.offlineMode) ? playerId : 0);
     }
 
     private void SpawnPlayer()
