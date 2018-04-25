@@ -135,8 +135,8 @@ MonoBehaviour:
   damage: 700
   damageRadius: 30
   centerOffset: {x: 0, y: 0, z: 0}
-  checkSelf: 0
-  checkPlayer: 0
+  checkSelf: 1
+  checkPlayer: 1
   externalCollider: {fileID: 0}
 --- !u!114 &114450396653181766
 MonoBehaviour:
