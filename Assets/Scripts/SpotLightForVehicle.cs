@@ -20,7 +20,10 @@ public class SpotLightForVehicle : MonoBehaviour {
     void Update () {
         GameObject[] cars =  GameObject.FindGameObjectsWithTag("Player");
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
-        for(int i=0; i<cars.Length; i++)
+
+       
+
+            for (int i=0; i<cars.Length; i++)
         {
             if(i<cameras.Length)
             {
