@@ -87,8 +87,9 @@ public class DamageSystem : NetworkPlayerCollision
     /// <summary>
     /// Using this life-hook method to initialize
     /// </summary>
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -155,11 +156,13 @@ public class DamageSystem : NetworkPlayerCollision
     /// <param name="force"></param>
     /// <param name="explosionCenter"></param>
     /// <param name="radius"></param>
-    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius)
+    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius, int ownerId)
     {
         // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
         {
+            lastReceivedDamageFrom = ownerId;
+
             // Calculates damage received based on the force and explosion radius
             float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
             damage = Mathf.Clamp(damage, 0, Mathf.Infinity);

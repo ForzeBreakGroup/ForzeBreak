@@ -14,11 +14,6 @@ public class NetworkPlayerData : NetworkPlayerBase
 
     #region Private Members
     /// <summary>
-    ///  Player's remaining life synchronized and managed by server/host
-    /// </summary>
-    [SerializeField] private int playerLife = 3;
-
-    /// <summary>
     /// Player's spawning position given by matchmanager from host
     /// </summary>
     private Vector3 spawnPosition;

@@ -308,6 +308,8 @@ public class NetworkManager : PunBehaviour
 
         playerInfo.Add("Color", serializedColor);
         playerInfo.Add("PlayerNumber", (int)(PhotonNetwork.playerList.Length - 1));
+        playerInfo.Add("KillCount", 0);
+
         PhotonNetwork.player.SetCustomProperties(playerInfo);
 
         PhotonNetwork.playerName = playerName;

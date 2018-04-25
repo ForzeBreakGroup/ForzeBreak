@@ -61,8 +61,8 @@ public class PowerUpComponent : Photon.MonoBehaviour
         if (spawnItem != null)
         {
             DecreaseCapacity();
-            GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, Quaternion.identity, 0);
-            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).OwnerID = this.ownerID;
+            GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, transform.rotation, 0);
+            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).SetOwnerId(this.ownerID);
         }
     }
 
@@ -120,8 +120,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
         }
 
         transform.SetParent(target.transform);
-
-        Debug.Log("SetParent");
     }
 
     public void DecreaseCapacity()

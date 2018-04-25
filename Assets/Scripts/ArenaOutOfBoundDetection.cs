@@ -10,18 +10,27 @@ using UnityEngine;
  */
 public class ArenaOutOfBoundDetection : MonoBehaviour
 {
+    PlayerDeathHandler deathHandler;
+
+    private void Awake()
+    {
+        deathHandler = GetComponent<PlayerDeathHandler>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        PhotonView view = other.transform.root.gameObject.GetPhotonView();
-        if (other.transform.root.tag == "Player" && view.isMine)
+        GameObject victim = other.transform.root.gameObject;
+        if (other.transform.root.tag == "Player" && victim.GetComponent<PhotonView>().isMine)
         {
-            int playerId = view.ownerId;
-            MatchManager.instance.DestroyPlayerObject();
-            MatchManager.instance.photonView.RPC("RpcPlayerDeathHandler", PhotonTargets.All, playerId);
+            int victimId = victim.GetComponent<PhotonView>().ownerId;
+
+            int killerId = ((NetworkPlayerCollision)victim.GetComponent(typeof(NetworkPlayerCollision))).lastReceivedDamageFrom;
+
+            Debug.Log("Player #" + victimId + " is killed by Player #" + killerId);
+
+            deathHandler.OnPlayerDeath(killerId, victimId);
 
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
         }
-
     }
-
 }

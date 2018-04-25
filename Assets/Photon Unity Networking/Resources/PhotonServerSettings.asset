@@ -60,4 +60,9 @@ MonoBehaviour:
   - RpcTransferHotPotato
   - RpcDecreaseCapacity
   - RpcChangeCollisionSetting
+  - RpcDestroyPowerUpProjectile
+  - RpcSetJoint
+  - RpcSetMornigStarOwner
+  - RpcSetOwnerId
+  - RpcIncrementKillScore
   DisableAutoOpenWizard: 1

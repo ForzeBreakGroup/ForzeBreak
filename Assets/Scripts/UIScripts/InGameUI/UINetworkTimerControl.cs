@@ -7,7 +7,7 @@ using Photon;
 public class UINetworkTimerControl : UIControl
 {
     private Text timerText;
-    [SerializeField] private float time = 180.0f;
+    [SerializeField] private float time = 10.0f;
     private float currentTime = 0;
     private bool startCounting = false;
 
@@ -40,10 +40,7 @@ public class UINetworkTimerControl : UIControl
 
         if (currentTime <= 0 && PhotonNetwork.isMasterClient)
         {
-            RaiseEventOptions options = new RaiseEventOptions();
-            options.Receivers = ReceiverGroup.All;
-            int drawId = -1;
-            PhotonNetwork.RaiseEvent((byte)ENetworkEventCode.OnRoundOver, drawId, true, options);
+            MatchManager.instance.MatchRoundOver();
         }
     }
 }

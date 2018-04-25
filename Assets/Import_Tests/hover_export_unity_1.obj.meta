@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: b6caf048bb4979a4aaaa6086c8140ebc
+timeCreated: 1524198115
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: hover_Egine2
+    100002: //RootNode
+    100004: hover_flap
+    100006: hover_flap2
+    100008: hover_pCube110
+    100010: hover_pCube111
+    100012: hover_pCube114
+    100014: hover_pCube125
+    100016: hover_pCube126
+    100018: hover_pCube128
+    100020: hover_pCube129
+    100022: hover_pCube130
+    100024: hover_pCube131
+    100026: hover_pCube132
+    100028: hover_pCube133
+    100030: hover_pCube134
+    100032: hover_pCube135
+    100034: hover_pCube36
+    100036: hover_pCube37
+    100038: hover_pCube4
+    100040: hover_pCube40
+    100042: hover_pCube41
+    100044: hover_pCube59
+    100046: hover_pCube63
+    100048: hover_pCube65
+    100050: hover_pCube66
+    100052: hover_pCube75
+    100054: hover_pCube77
+    100056: hover_pCube79
+    100058: hover_pCube8
+    100060: hover_pCylinder103_1
+    100062: hover_pCylinder106
+    100064: hover_pCylinder107
+    100066: hover_pCylinder108
+    100068: hover_pCylinder109
+    100070: hover_pCylinder129
+    100072: hover_pCylinder130
+    100074: hover_pCylinder132
+    100076: hover_pCylinder133
+    100078: hover_pCylinder134
+    100080: hover_pCylinder135
+    100082: hover_pCylinder34_1
+    100084: hover_pCylinder36_1
+    100086: hover_pCylinder37_1
+    100088: hover_pCylinder39_1
+    100090: hover_pCylinder4
+    100092: hover_pCylinder40_1
+    100094: hover_pCylinder40_2
+    100096: hover_pCylinder57
+    100098: hover_pCylinder65_1
+    100100: hover_pCylinder96_1
+    100102: hover_pCylinder97_2
+    100104: hover_pPlane34
+    100106: hover_pPlane35
+    100108: hover_pPlane8
+    100110: hover_pPlane9
+    100112: hover_seat
+    100114: hover_WINDOW_SHIELD
+    100116: hover_WINDOW_SHIELD4
+    100118: pCube127_hover
+    400000: hover_Egine2
+    400002: //RootNode
+    400004: hover_flap
+    400006: hover_flap2
+    400008: hover_pCube110
+    400010: hover_pCube111
+    400012: hover_pCube114
+    400014: hover_pCube125
+    400016: hover_pCube126
+    400018: hover_pCube128
+    400020: hover_pCube129
+    400022: hover_pCube130
+    400024: hover_pCube131
+    400026: hover_pCube132
+    400028: hover_pCube133
+    400030: hover_pCube134
+    400032: hover_pCube135
+    400034: hover_pCube36
+    400036: hover_pCube37
+    400038: hover_pCube4
+    400040: hover_pCube40
+    400042: hover_pCube41
+    400044: hover_pCube59
+    400046: hover_pCube63
+    400048: hover_pCube65
+    400050: hover_pCube66
+    400052: hover_pCube75
+    400054: hover_pCube77
+    400056: hover_pCube79
+    400058: hover_pCube8
+    400060: hover_pCylinder103_1
+    400062: hover_pCylinder106
+    400064: hover_pCylinder107
+    400066: hover_pCylinder108
+    400068: hover_pCylinder109
+    400070: hover_pCylinder129
+    400072: hover_pCylinder130
+    400074: hover_pCylinder132
+    400076: hover_pCylinder133
+    400078: hover_pCylinder134
+    400080: hover_pCylinder135
+    400082: hover_pCylinder34_1
+    400084: hover_pCylinder36_1
+    400086: hover_pCylinder37_1
+    400088: hover_pCylinder39_1
+    400090: hover_pCylinder4
+    400092: hover_pCylinder40_1
+    400094: hover_pCylinder40_2
+    400096: hover_pCylinder57
+    400098: hover_pCylinder65_1
+    400100: hover_pCylinder96_1
+    400102: hover_pCylinder97_2
+    400104: hover_pPlane34
+    400106: hover_pPlane35
+    400108: hover_pPlane8
+    400110: hover_pPlane9
+    400112: hover_seat
+    400114: hover_WINDOW_SHIELD
+    400116: hover_WINDOW_SHIELD4
+    400118: pCube127_hover
+    2300000: hover_Egine2
+    2300002: hover_flap
+    2300004: hover_flap2
+    2300006: hover_pCube110
+    2300008: hover_pCube111
+    2300010: hover_pCube114
+    2300012: hover_pCube125
+    2300014: hover_pCube126
+    2300016: hover_pCube128
+    2300018: hover_pCube129
+    2300020: hover_pCube130
+    2300022: hover_pCube131
+    2300024: hover_pCube132
+    2300026: hover_pCube133
+    2300028: hover_pCube134
+    2300030: hover_pCube135
+    2300032: hover_pCube36
+    2300034: hover_pCube37
+    2300036: hover_pCube4
+    2300038: hover_pCube40
+    2300040: hover_pCube41
+    2300042: hover_pCube59
+    2300044: hover_pCube63
+    2300046: hover_pCube65
+    2300048: hover_pCube66
+    2300050: hover_pCube75
+    2300052: hover_pCube77
+    2300054: hover_pCube79
+    2300056: hover_pCube8
+    2300058: hover_pCylinder103_1
+    2300060: hover_pCylinder106
+    2300062: hover_pCylinder107
+    2300064: hover_pCylinder108
+    2300066: hover_pCylinder109
+    2300068: hover_pCylinder129
+    2300070: hover_pCylinder130
+    2300072: hover_pCylinder132
+    2300074: hover_pCylinder133
+    2300076: hover_pCylinder134
+    2300078: hover_pCylinder135
+    2300080: hover_pCylinder34_1
+    2300082: hover_pCylinder36_1
+    2300084: hover_pCylinder37_1
+    2300086: hover_pCylinder39_1
+    2300088: hover_pCylinder4
+    2300090: hover_pCylinder40_1
+    2300092: hover_pCylinder40_2
+    2300094: hover_pCylinder57
+    2300096: hover_pCylinder65_1
+    2300098: hover_pCylinder96_1
+    2300100: hover_pCylinder97_2
+    2300102: hover_pPlane34
+    2300104: hover_pPlane35
+    2300106: hover_pPlane8
+    2300108: hover_pPlane9
+    2300110: hover_seat
+    2300112: hover_WINDOW_SHIELD
+    2300114: hover_WINDOW_SHIELD4
+    2300116: pCube127_hover
+    3300000: hover_Egine2
+    3300002: hover_flap
+    3300004: hover_flap2
+    3300006: hover_pCube110
+    3300008: hover_pCube111
+    3300010: hover_pCube114
+    3300012: hover_pCube125
+    3300014: hover_pCube126
+    3300016: hover_pCube128
+    3300018: hover_pCube129
+    3300020: hover_pCube130
+    3300022: hover_pCube131
+    3300024: hover_pCube132
+    3300026: hover_pCube133
+    3300028: hover_pCube134
+    3300030: hover_pCube135
+    3300032: hover_pCube36
+    3300034: hover_pCube37
+    3300036: hover_pCube4
+    3300038: hover_pCube40
+    3300040: hover_pCube41
+    3300042: hover_pCube59
+    3300044: hover_pCube63
+    3300046: hover_pCube65
+    3300048: hover_pCube66
+    3300050: hover_pCube75
+    3300052: hover_pCube77
+    3300054: hover_pCube79
+    3300056: hover_pCube8
+    3300058: hover_pCylinder103_1
+    3300060: hover_pCylinder106
+    3300062: hover_pCylinder107
+    3300064: hover_pCylinder108
+    3300066: hover_pCylinder109
+    3300068: hover_pCylinder129
+    3300070: hover_pCylinder130
+    3300072: hover_pCylinder132
+    3300074: hover_pCylinder133
+    3300076: hover_pCylinder134
+    3300078: hover_pCylinder135
+    3300080: hover_pCylinder34_1
+    3300082: hover_pCylinder36_1
+    3300084: hover_pCylinder37_1
+    3300086: hover_pCylinder39_1
+    3300088: hover_pCylinder4
+    3300090: hover_pCylinder40_1
+    3300092: hover_pCylinder40_2
+    3300094: hover_pCylinder57
+    3300096: hover_pCylinder65_1
+    3300098: hover_pCylinder96_1
+    3300100: hover_pCylinder97_2
+    3300102: hover_pPlane34
+    3300104: hover_pPlane35
+    3300106: hover_pPlane8
+    3300108: hover_pPlane9
+    3300110: hover_seat
+    3300112: hover_WINDOW_SHIELD
+    3300114: hover_WINDOW_SHIELD4
+    3300116: pCube127_hover
+    4300000: hover_Egine2
+    4300002: hover_flap
+    4300004: hover_flap2
+    4300006: hover_pCube110
+    4300008: hover_pCube111
+    4300010: hover_pCube114
+    4300012: hover_pCube125
+    4300014: hover_pCube126
+    4300016: hover_pCube128
+    4300018: hover_pCube129
+    4300020: hover_pCube130
+    4300022: hover_pCube131
+    4300024: hover_pCube132
+    4300026: hover_pCube133
+    4300028: hover_pCube134
+    4300030: hover_pCube135
+    4300032: hover_pCube36
+    4300034: hover_pCube37
+    4300036: hover_pCube4
+    4300038: hover_pCube40
+    4300040: hover_pCube41
+    4300042: hover_pCube59
+    4300044: hover_pCube63
+    4300046: hover_pCube65
+    4300048: hover_pCube66
+    4300050: hover_pCube75
+    4300052: hover_pCube77
+    4300054: hover_pCube79
+    4300056: hover_pCube8
+    4300058: hover_pCylinder103_1
+    4300060: hover_pCylinder106
+    4300062: hover_pCylinder107
+    4300064: hover_pCylinder108
+    4300066: hover_pCylinder109
+    4300068: hover_pCylinder129
+    4300070: hover_pCylinder130
+    4300072: hover_pCylinder132
+    4300074: hover_pCylinder133
+    4300076: hover_pCylinder134
+    4300078: hover_pCylinder135
+    4300080: hover_pCylinder34_1
+    4300082: hover_pCylinder36_1
+    4300084: hover_pCylinder37_1
+    4300086: hover_pCylinder39_1
+    4300088: hover_pCylinder4
+    4300090: hover_pCylinder40_1
+    4300092: hover_pCylinder40_2
+    4300094: hover_pCylinder57
+    4300096: hover_pCylinder65_1
+    4300098: hover_pCylinder96_1
+    4300100: hover_pCylinder97_2
+    4300102: hover_pPlane34
+    4300104: hover_pPlane35
+    4300106: hover_pPlane8
+    4300108: hover_pPlane9
+    4300110: hover_seat
+    4300112: hover_WINDOW_SHIELD
+    4300114: hover_WINDOW_SHIELD4
+    4300116: pCube127_hover
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_Egine2Mat
+    second: {fileID: 2100000, guid: 2ba8ffee08810d2469a164437f8e06d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_WINDOW_SHIELD4Mat
+    second: {fileID: 2100000, guid: 216404fc29b1b7744a2467bd18496ee5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_WINDOW_SHIELDMat
+    second: {fileID: 2100000, guid: d2749af3f30945a4e8364d4f4ef725cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_flap2Mat
+    second: {fileID: 2100000, guid: 3a210c95f8db7764a8c48931ff5cd708, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_flapMat
+    second: {fileID: 2100000, guid: 2ab5d38c4bf90a6488d41fc110e8662e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube110Mat
+    second: {fileID: 2100000, guid: 8edf83996b7a5a44db3ab36d7306bb5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube111Mat
+    second: {fileID: 2100000, guid: 18731735e5d997a44aa7d5aec2cf2ce2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube114Mat
+    second: {fileID: 2100000, guid: b2c373cf2884ecd4c8aa2fe78ca8b150, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube125Mat
+    second: {fileID: 2100000, guid: e3fef9491a3a13f4e93caba27d1ae6c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube126Mat
+    second: {fileID: 2100000, guid: 535e7092a59666845847a4d42172be9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube128Mat
+    second: {fileID: 2100000, guid: f2ee6215ad2e8b446bd0390c076c2486, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube129Mat
+    second: {fileID: 2100000, guid: 6888d618ff2f1934f95f40d837ffd1dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube130Mat
+    second: {fileID: 2100000, guid: 70301ae890972244f8dc337f1efdaa5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube131Mat
+    second: {fileID: 2100000, guid: 9c0e8c39208cab344a3b40d4baa240e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube132Mat
+    second: {fileID: 2100000, guid: 2cccf76156379ce40a9e8a9fc1296c8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube133Mat
+    second: {fileID: 2100000, guid: e52ebfde8a3b4fa419c430240eeebacb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube134Mat
+    second: {fileID: 2100000, guid: 75db6fcdc254ec2419d046b959f3a7c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube135Mat
+    second: {fileID: 2100000, guid: 4bf1dd11b9775a847b5db305421c342a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube36Mat
+    second: {fileID: 2100000, guid: 1603a259eb6a1c941965b744f44455e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube37Mat
+    second: {fileID: 2100000, guid: babd48739c9c777468dfd05cccc7ecd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube40Mat
+    second: {fileID: 2100000, guid: 972b0367adaaa8a44916edcdc2975ac9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube41Mat
+    second: {fileID: 2100000, guid: 89a56f7848e32bc45a597e251090d404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube4Mat
+    second: {fileID: 2100000, guid: dce892a3dab28584299ffdc23038fb5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube59Mat
+    second: {fileID: 2100000, guid: 16933cf6dec5eba41a578293ba57ada3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube63Mat
+    second: {fileID: 2100000, guid: 44a79a92e0a36194faf1f0483b14aa80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube65Mat
+    second: {fileID: 2100000, guid: a10292d21d943ca4194e316768b19010, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube66Mat
+    second: {fileID: 2100000, guid: 38151f23b721fc94c8c856ca66e538c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube75Mat
+    second: {fileID: 2100000, guid: 581abe37cd3ddb44387194944b7e625a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube77Mat
+    second: {fileID: 2100000, guid: e9a2bc0c5b78efa4b9adc405bd591168, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube79Mat
+    second: {fileID: 2100000, guid: 0b873ecc3d133f84c9c7d2243fde0f86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCube8Mat
+    second: {fileID: 2100000, guid: 883175b417bccf847abdf49ef00fd536, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder103_1Mat
+    second: {fileID: 2100000, guid: e9681222e394c2849a30af8f5d486343, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder106Mat
+    second: {fileID: 2100000, guid: 4ab32ceef4aba2f41bdefa674fcc8499, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder107Mat
+    second: {fileID: 2100000, guid: 0f7f66ce17073d94aa910d71c4915848, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder108Mat
+    second: {fileID: 2100000, guid: 4d3cad7243e27704790f7ed071b6a324, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder109Mat
+    second: {fileID: 2100000, guid: 342f335ff2cb1014ca513628390fcb75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder129Mat
+    second: {fileID: 2100000, guid: 7a2f9d2f684e9b74091de54dcf8d0d0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder130Mat
+    second: {fileID: 2100000, guid: c0e9a41011d604d48be35e521b3e608a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder132Mat
+    second: {fileID: 2100000, guid: e99a2c6bd00305744a52a8f77cfa81e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder133Mat
+    second: {fileID: 2100000, guid: 6a74c665270d6e849933e588d0d71d65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder134Mat
+    second: {fileID: 2100000, guid: 08808151699cb3e4b91029868ffbbd28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder135Mat
+    second: {fileID: 2100000, guid: e57b855651328fc47b9d15e4301e5afd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder34_1Mat
+    second: {fileID: 2100000, guid: 8bd6026916461ef4cbcb97080bda35f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder36_1Mat
+    second: {fileID: 2100000, guid: 32d15e4f42b1ea34aa63b4d9ab6d880b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder37_1Mat
+    second: {fileID: 2100000, guid: d48da046d5905ce44aab328a4012378f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder39_1Mat
+    second: {fileID: 2100000, guid: 94af64bde0f20db4db63a314fd7da807, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder40_1Mat
+    second: {fileID: 2100000, guid: 69c0c6bdf74db27469722ad7d91c12fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder40_2Mat
+    second: {fileID: 2100000, guid: 22cacf50df1c9a549972d6b5a2ebf74c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder4Mat
+    second: {fileID: 2100000, guid: 80d70cf6dfae86047932562b41ae272c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder57Mat
+    second: {fileID: 2100000, guid: a7fe3b65e0141a249aa1480b6ef71e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder65_1Mat
+    second: {fileID: 2100000, guid: a0bf7a77b6498e5448d085d7359f8a21, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder96_1Mat
+    second: {fileID: 2100000, guid: df349c629c8fb7b4195296edb28eb6bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pCylinder97_2Mat
+    second: {fileID: 2100000, guid: 333b041cd9680c74a9dcc9dd61c3c1cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pPlane34Mat
+    second: {fileID: 2100000, guid: 093ed64ce6763ac409b0f699f10e5ef3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pPlane35Mat
+    second: {fileID: 2100000, guid: 6f0f07cc148391743b3498169ae7ff5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pPlane8Mat
+    second: {fileID: 2100000, guid: 5c080ad234b7ede42bf4447f9b47c7a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_pPlane9Mat
+    second: {fileID: 2100000, guid: 92f463daef359fd478b6c9a6a733c079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hover_seatMat
+    second: {fileID: 2100000, guid: 9a65350df60b6d64a99363cde95033ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCube127_hoverMat
+    second: {fileID: 2100000, guid: f58b723b36e8fb24b8205e8b76821e3a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

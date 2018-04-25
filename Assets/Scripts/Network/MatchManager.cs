@@ -109,6 +109,45 @@ public class MatchManager : Photon.MonoBehaviour
         }
     }
 
+    public void SpawnPlayer(int playerId)
+    {
+        // Obtain the player selected vehicle model
+        string vehicleName = "War_Buggy";
+
+        // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
+        int playerNumber = (NetworkManager.offlineMode) ? playerId : ((int)PhotonNetwork.player.CustomProperties["PlayerNumber"]);
+
+        // Obtain the spawn position and rotation
+        Vector3 pos = spawnPoints[playerNumber].spawnPoint;
+        Quaternion rot = spawnPoints[playerNumber].spawnRotation;
+
+        // Spawn player camera
+        GameObject mainCamera = Instantiate(playerCameraPrefab);
+
+        // Spawn player gameobject and register the spawn position and rotation for future use
+        GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
+        playerGO.GetComponent<CarUserControl>().playerNum = playerId + 1;
+        ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
+        ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
+
+        // Assign the player camera to follow the corresponding player
+        mainCamera.GetComponent<CameraControl>().target = playerGO;
+        Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
+
+        // Offline mode requires additional adjustment
+        if (NetworkManager.offlineMode)
+        {
+            // Adjust the camera viewport according to player number
+            AdjustCamera(playerCam, playerId);
+
+            // Change photonview id
+            playerGO.GetPhotonView().ownerId = playerId + 1;
+        }
+
+        // Set the local player reference
+        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, (NetworkManager.offlineMode) ? playerId : 0);
+    }
+
     private void SpawnPlayer()
     {
         // Loop condition value, offline mode is the number of local players in game, online mode is always 1
@@ -117,41 +156,7 @@ public class MatchManager : Photon.MonoBehaviour
         // Loop to create n number of players to game
         for (int i = 0; i < playersInGame; ++i)
         {
-            // Obtain the player selected vehicle model
-            string vehicleName = "War_Buggy";
-
-            // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
-            int playerNumber = (NetworkManager.offlineMode) ? i : (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
-
-            // Obtain the spawn position and rotation
-            Vector3 pos = spawnPoints[playerNumber].spawnPoint;
-            Quaternion rot = spawnPoints[playerNumber].spawnRotation;
-
-            // Spawn player camera
-            GameObject mainCamera = Instantiate(playerCameraPrefab);
-
-            // Spawn player gameobject and register the spawn position and rotation for future use
-            GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
-            playerGO.GetComponent<CarUserControl>().playerNum = i + 1;
-            ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
-            ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
-
-            // Assign the player camera to follow the corresponding player
-            mainCamera.GetComponent<CameraControl>().target = playerGO;
-            Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
-
-            // Offline mode requires additional adjustment
-            if (NetworkManager.offlineMode)
-            {
-                // Adjust the camera viewport according to player number
-                AdjustCamera(playerCam, i);
-
-                // Change photonview id
-                playerGO.GetPhotonView().ownerId = i + 1;
-            }
-
-            // Set the local player reference
-            NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, i);
+            SpawnPlayer(i);
         }
 
         // Offline mode will use loop to register to arrow indicator
@@ -238,12 +243,12 @@ public class MatchManager : Photon.MonoBehaviour
 
             if (aliveCount <= 1)
             {
-                RoundOver(0);
+                MatchRoundOver();
             }
         }
     }
 
-    private void RoundOver(int winnerID)
+    public void MatchRoundOver()
     {
         // Load end of match scene
         if (PhotonNetwork.isMasterClient)
