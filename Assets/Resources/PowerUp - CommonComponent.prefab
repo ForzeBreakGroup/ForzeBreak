@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e71b4db20a3c24599edb2298bb79c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupName: 
+  powerupName: MachineGun
   powerUpCollected: 0
-  randomMode: 1
+  randomMode: 0
   powerUpTier: 2
 --- !u!114 &114510050334468594
 MonoBehaviour:

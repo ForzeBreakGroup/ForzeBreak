@@ -9,7 +9,7 @@ using UnityEngine;
  * Bullet moving class, bind to a single bullet.
  * 
  */
-public class BulletMovement : NetworkPowerUpMovement
+public class BulletMovement : PowerUpMovement
 {
     /// <summary>
     /// Bullet moving speed
@@ -21,28 +21,19 @@ public class BulletMovement : NetworkPowerUpMovement
     public float ExistingTime = 3f;
 
     private float spawnTime = 0f;
-    protected override void Awake()
+
+    Rigidbody rb;
+    private void Awake()
     {
-        base.Awake();
+        rb = GetComponent<Rigidbody>();
         rb.velocity = Velocity * transform.forward;
         spawnTime = Time.time;
     }
-    
-    protected override void Move()
-    {
-        base.Move();
 
-        if(Time.time>spawnTime+ExistingTime)
-        {
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (photonView.isMine)
+        if (Time.time > spawnTime + ExistingTime)
         {
-            PhotonNetwork.Instantiate("Explosion1", transform.position, Quaternion.identity, 0);
             PhotonNetwork.Destroy(gameObject);
         }
     }
