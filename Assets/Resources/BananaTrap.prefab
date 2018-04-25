@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114046926820408796}
   - component: {fileID: 114817502617730628}
   m_Layer: 0
-  m_Name: BananaTrapOnly
+  m_Name: BananaTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,8 +143,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
-  otherCollider: {fileID: 0}
-  otherDmgSystem: {fileID: 0}
+  externalCollider: {fileID: 0}
 --- !u!114 &114752361473582638
 MonoBehaviour:
   m_ObjectHideFlags: 1

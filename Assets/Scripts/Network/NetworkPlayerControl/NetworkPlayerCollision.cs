@@ -15,6 +15,11 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     protected GameObject collisionEffect;
     [SerializeField]
     protected GameObject forzebreakEffect;
+
+    [SerializeField]
+    protected float collisionCooldown = 0.7f;
+    private float elapsedTime = 0.0f;
+
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -31,6 +36,12 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         Receiver
     };
 
+    private void Update()
+    {
+        elapsedTime -= Time.deltaTime;
+        elapsedTime = Mathf.Clamp(elapsedTime, 0, collisionCooldown);
+    }
+
 
     /// <summary>
     /// Unity lifehook event when Collision happens
@@ -42,6 +53,16 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         // Handles collision effects of self
         if (photonView.isMine && collision.gameObject.tag == "Player")
         {
+            // Validates the collision timer
+            if (elapsedTime <= 0)
+            {
+                elapsedTime = collisionCooldown;
+            }
+            else
+            {
+                return;
+            }
+
             PlayCollisionEffect(collision.contacts[0].point);
 
             Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
