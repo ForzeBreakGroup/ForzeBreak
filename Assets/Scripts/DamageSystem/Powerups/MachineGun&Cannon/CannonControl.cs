@@ -13,10 +13,7 @@ public class CannonControl : PowerUpComponent
     /// Time duration for next fire
     /// </summary>
     public float FireCD = 0.5f;
-    /// <summary>
-    /// Total Ammo, run out then destroy cannon
-    /// </summary>
-    public int Ammo = 10;
+
     /// <summary>
     /// Bullet spawn point.
     /// </summary>
@@ -26,11 +23,10 @@ public class CannonControl : PowerUpComponent
     private float nextFire = 0.0f;
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        this.enabled = photonView.isMine;
+        base.Awake();
         bulletSpawn = transform.Find("BulletSpawn");
-
     }
 
     public override void AdjustModel()
@@ -46,23 +42,12 @@ public class CannonControl : PowerUpComponent
 
     }
 
-    protected override void OnHold() 
+    protected override void OnPress() 
     {
-        if(Time.time>nextFire)
+        if (Time.time > nextFire)
         {
             nextFire = Time.time + FireCD;
-            GameObject bullet = PhotonNetwork.Instantiate("Bullet", bulletSpawn.position, bulletSpawn.rotation,0);
-
-            Ammo--;
-
-            if (Ammo<0)
-            {
-                UnloadPowerUp();
-            }
+            base.OnPress();
         }
     }
-
-
-
-
 }

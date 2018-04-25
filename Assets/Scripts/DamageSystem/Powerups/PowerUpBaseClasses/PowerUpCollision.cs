@@ -75,7 +75,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         }
 
         bool isPlayer = (checkPlayer) ? collider.tag == "Player" : true;
-
+        
         if (isSelf && isPlayer)
         {
             target = collider;
