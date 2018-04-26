@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BananaCollision : TrapCollisionBase {
+public class BananaCollision : PowerUpCollision
+{
 	protected override void CollisionEnter(Collision collision)
 	{
 		base.CollisionEnter (collision);
 		ApplyDamage();
-		PhotonNetwork.Destroy(gameObject);
+        PowerUpMovement.DestroyPowerUpProjectile();
 	}
 }
