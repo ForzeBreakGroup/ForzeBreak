@@ -42,7 +42,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// </summary>
     [SerializeField] protected GameObject spawnItem;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         enabled = GetComponent<PhotonView>().isMine;
     }

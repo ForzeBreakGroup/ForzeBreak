@@ -1925,5 +1925,7 @@ MonoBehaviour:
   playerNum: 0
   componentOffset: {x: 0, y: 0.8, z: 1.264}
   componentAngle: {x: 0, y: 0, z: 0}
-  fireRate: 0.5
-  ammo: 10
+  capacity: 10
+  ownerID: -1
+  spawnItem: {fileID: 1261805292484670, guid: 48b168effc5a78243889b7453466811f, type: 2}
+  FireCD: 0.5

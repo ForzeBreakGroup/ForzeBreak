@@ -149,8 +149,8 @@ public class CarControlWheels : NetworkPlayerMovement
         //if moving backward, apply 1/4 speed
         if(Vector3.Angle(transform.forward, carRigidbody.velocity) > 150f)
         {
-            if (speed > MaxSpeed / 4)
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, MaxSpeed / 4 * carRigidbody.velocity.normalized,0.6f);
+            if (speed > MaxSpeed/1.5f)
+                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, MaxSpeed / 1.5f * carRigidbody.velocity.normalized,0.6f);
         }
         else
         {
