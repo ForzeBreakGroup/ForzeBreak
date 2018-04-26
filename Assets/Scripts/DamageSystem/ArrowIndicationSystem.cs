@@ -73,14 +73,28 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
                 // If the dictionary record does not have the photonView ID start tracking it
                 if (!arrowList.ContainsKey(p.photonView.ownerId))
                 {
-                    // Create an arrow for this specific remote client
-                    GameObject arrow = Instantiate(arrowIndicator, this.transform);
-                    arrow.transform.localScale = new Vector3(1, 1, 1);
-                    arrow.GetComponent<TrackPlayer>().AssignTarget(p.gameObject);
+                    GameObject arrow = SpawnArrowToTrackPlayer(p.gameObject);
                     arrowList.Add(p.photonView.ownerId, arrow);
+                }
+
+                // If the dictionary record contains the ID and the arrow does not exist, means the player just respawned
+                else if (arrowList[p.photonView.ownerId] == null)
+                {
+                    GameObject arrow = SpawnArrowToTrackPlayer(p.gameObject);
+                    arrowList[p.photonView.ownerId] = arrow;
                 }
             }
         }
+    }
+
+    private GameObject SpawnArrowToTrackPlayer(GameObject target)
+    {
+        // Create an arrow for this specific remote client
+        GameObject arrow = Instantiate(arrowIndicator, this.transform);
+        arrow.transform.localScale = new Vector3(1, 1, 1);
+        arrow.GetComponent<TrackPlayer>().AssignTarget(target);
+
+        return arrow;
     }
 
     /// <summary>
