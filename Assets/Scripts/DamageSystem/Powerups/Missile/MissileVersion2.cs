@@ -15,10 +15,22 @@ public class MissileVersion2 : PowerUpComponent
     private bool fired = false;
 
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        this.enabled = photonView.isMine;
         launchLocation = transform.Find("MissileLaunchPoint");
+    }
+
+    public override void AdjustModel()
+    {
+        base.AdjustModel();
+
+        // Handling picking up same powerup
+        MissileVersion1[] missileVersion1 = GetComponents<MissileVersion1>();
+        if (missileVersion1.Length > 1)
+        {
+            DestroyImmediate(this);
+        }
     }
 
     protected override void OnPress()

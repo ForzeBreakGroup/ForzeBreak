@@ -79,10 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  m_componentOffset:
-  - vehicleName: War_Buggy
-    positionOffset: {x: 0, y: 2.1, z: 3.56}
-    angleOffset: {x: 0, y: 0, z: 0}
   componentOffset: {x: 0, y: 2.1, z: 3.56}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 3
