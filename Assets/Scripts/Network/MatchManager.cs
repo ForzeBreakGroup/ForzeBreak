@@ -127,7 +127,7 @@ public class MatchManager : Photon.MonoBehaviour
 
         // Spawn player gameobject and register the spawn position and rotation for future use
         GameObject playerGO = PhotonNetwork.Instantiate(vehicleName, pos, rot, 0);
-        playerGO.GetComponent<CarUserControl>().playerNum = playerId + 1;
+        playerGO.GetComponent<CarUserControl>().controllerNum = (NetworkManager.offlineMode) ? playerId + 1 : 0;
         ((NetworkPlayerData)playerGO.GetComponent(typeof(NetworkPlayerData))).RegisterSpawnInformation(pos, rot);
         ((NetworkPlayerVisual)playerGO.GetComponent(typeof(NetworkPlayerVisual))).InitializeVehicleWithPlayerColor();
 

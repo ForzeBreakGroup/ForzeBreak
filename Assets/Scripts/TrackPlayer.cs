@@ -41,7 +41,7 @@ public class TrackPlayer : MonoBehaviour
         Color c;
         if (NetworkManager.offlineMode)
         {
-            c = NetworkManager.instance.GetPlayerColor(target.GetComponent<CarUserControl>().playerNum - 1);
+            c = NetworkManager.instance.GetPlayerColor(target.GetComponent<CarUserControl>().controllerNum - 1);
         }
         else
         {

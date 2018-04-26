@@ -31,7 +31,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         Color c;
         if (NetworkManager.offlineMode)
         {
-            c = NetworkManager.instance.GetPlayerColor(GetComponent<CarUserControl>().playerNum - 1);
+            c = NetworkManager.instance.GetPlayerColor(GetComponent<CarUserControl>().controllerNum - 1);
         }
         else
         {

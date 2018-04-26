@@ -39,7 +39,7 @@ public class LocalGameMaster : MonoBehaviour
                     spawnPoint = transform.Find("SpawnPoints").GetChild(i);
                     Debug.Log(spawnPoint.name);
                     GameObject car = Instantiate(carPrefeb, spawnPoint.position, spawnPoint.rotation);
-                    car.GetComponent<CarUserControl>().playerNum = i+1;
+                    car.GetComponent<CarUserControl>().controllerNum = i+1;
                     GameObject cam = Instantiate(camPrefeb, spawnPoint.position, spawnPoint.rotation);
                     cam.GetComponent<CameraControl>().target = car;
                     float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;
@@ -54,7 +54,7 @@ public class LocalGameMaster : MonoBehaviour
                 {
                     spawnPoint = transform.Find("SpawnPoints").GetChild(i);
                     GameObject car = Instantiate(carPrefeb, spawnPoint.position, spawnPoint.rotation);
-                    car.GetComponent<CarUserControl>().playerNum = i + 1;
+                    car.GetComponent<CarUserControl>().controllerNum = i + 1;
                     GameObject cam = Instantiate(camPrefeb, spawnPoint.position, spawnPoint.rotation);
                     cam.GetComponent<CameraControl>().target = car;
                     float marginX = (i > 1) ? (i - 2) * 0.5f : i * 0.5f;

@@ -61,7 +61,7 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
 
     public void UpdateArrowList()
     {
-        int playerNum = GetComponent<CarUserControl>().playerNum;
+        int playerNum = GetComponent<CarUserControl>().controllerNum;
 
         // Loop through all objects in game to make sure all players are included
         NetworkPlayerData[] playersInGame = FindObjectsOfType<NetworkPlayerData>();

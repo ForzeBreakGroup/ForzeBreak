@@ -50,7 +50,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     public virtual void AdjustModel()
     {
         enabled = transform.root.gameObject.GetPhotonView().isMine;
-        playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
+        playerNum = transform.root.gameObject.GetComponent<CarUserControl>().controllerNum;
 
         transform.localPosition = componentOffset;
         transform.localRotation = Quaternion.Euler(componentAngle);
