@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrapplingHookControl : PowerUpComponent
+public class HooktData : PowerUpData
 {
-
 }

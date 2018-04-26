@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -8,6 +9,7 @@ using UnityEngine;
  * Car Control Class, handle car moving related stuff.
  * 
  */
+
 public class CarControlWheels : NetworkPlayerMovement
 {
     /// <summary>
@@ -149,8 +151,8 @@ public class CarControlWheels : NetworkPlayerMovement
         //if moving backward, apply 1/4 speed
         if(Vector3.Angle(transform.forward, carRigidbody.velocity) > 150f)
         {
-            if (speed > MaxSpeed/1.5f)
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, MaxSpeed / 1.5f * carRigidbody.velocity.normalized,0.6f);
+            if (speed > MaxSpeed/2f)
+                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, MaxSpeed / 2f * carRigidbody.velocity.normalized,0.6f);
         }
         else
         {

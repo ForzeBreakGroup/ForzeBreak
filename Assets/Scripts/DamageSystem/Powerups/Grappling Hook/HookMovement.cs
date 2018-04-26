@@ -9,7 +9,7 @@ using UnityEngine;
  * Bullet moving class, bind to a single bullet.
  * 
  */
-public class BulletMovement : PowerUpMovement
+public class HookMovement : PowerUpMovement
 {
     /// <summary>
     /// Bullet moving speed
@@ -29,5 +29,12 @@ public class BulletMovement : PowerUpMovement
         rb.velocity = Velocity * transform.forward;
         spawnTime = Time.time;
     }
-    
+
+    private void Update()
+    {
+        if (Time.time > spawnTime + ExistingTime)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
 }

@@ -2418,7 +2418,7 @@ Transform:
   m_GameObject: {fileID: 1624328325537688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.112, y: 1.3079998, z: 1.808}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4877212239532404}
   m_Father: {fileID: 0}
@@ -7559,8 +7559,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
-  componentOffset: {x: 0.112, y: 1.308, z: 1.808}
+  componentOffset: {x: 0, y: 1.308, z: 1.808}
   componentAngle: {x: 0, y: 0, z: 0}
+  capacity: 1
+  ownerID: -1
+  spawnItem: {fileID: 1551509244256120, guid: 6b159dd0a5fcfe348b3cc6e246d3dd55, type: 2}
 --- !u!114 &114781390372517416
 MonoBehaviour:
   m_ObjectHideFlags: 1

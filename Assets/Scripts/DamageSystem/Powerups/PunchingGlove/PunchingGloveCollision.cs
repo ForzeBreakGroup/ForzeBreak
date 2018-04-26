@@ -6,6 +6,5 @@ public class PunchingGloveCollision : PowerUpCollision {
 	protected override void CollisionEnter(Collision collision)
 	{
 		ApplyDamage();
-		PhotonNetwork.Destroy(gameObject);
 	}
 }

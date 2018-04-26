@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4813800585180988}
   - component: {fileID: 120057522061799946}
-  m_Layer: 0
+  - component: {fileID: 114073702521699578}
+  m_Layer: 11
   m_Name: LightBeam (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +36,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4301812198544706}
-  - component: {fileID: 114558143345416268}
   m_Layer: 0
   m_Name: SpotLight
   m_TagString: Untagged
@@ -52,7 +52,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4734107691149940}
   - component: {fileID: 120240534444752640}
-  m_Layer: 0
+  - component: {fileID: 114159638888952632}
+  m_Layer: 10
   m_Name: LightBeam (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +69,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4912437827170804}
   - component: {fileID: 120731334435386578}
-  m_Layer: 0
+  - component: {fileID: 114701093737833502}
+  m_Layer: 8
   m_Name: LightBeam (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +86,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4089184801050650}
   - component: {fileID: 120029671094829766}
-  m_Layer: 0
+  - component: {fileID: 114280133773299054}
+  m_Layer: 9
   m_Name: LightBeam (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,17 +163,54 @@ Transform:
   m_Father: {fileID: 4301812198544706}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114558143345416268
+--- !u!114 &114073702521699578
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1131997834727114}
+  m_GameObject: {fileID: 1055176813724546}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 4
+--- !u!114 &114159638888952632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228671806855456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 3
+--- !u!114 &114280133773299054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560452551495916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 2
+--- !u!114 &114701093737833502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431519534977380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9728e73c3e170a4d8b34c0516d52512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 1
 --- !u!120 &120029671094829766
 LineRenderer:
   m_ObjectHideFlags: 1

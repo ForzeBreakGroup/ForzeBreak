@@ -134,7 +134,7 @@ public class MatchManager : Photon.MonoBehaviour
         // Assign the player camera to follow the corresponding player
         mainCamera.GetComponent<CameraControl>().target = playerGO;
         Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
-        playerCam.cullingMask = ~(1 << 8);
+        playerCam.cullingMask = ~(1 << 8+playerNumber);
 
         // Offline mode requires additional adjustment
         if (NetworkManager.offlineMode)
