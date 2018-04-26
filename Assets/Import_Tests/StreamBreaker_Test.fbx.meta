@@ -1,0 +1,554 @@
+fileFormatVersion: 2
+guid: a8b8f95fe5212374981a6097e1ebe9bc
+timeCreated: 1524699828
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: APC_Side_Deatil2
+    100002: APC_Side_Deatil2 1
+    100004: APC_Side_Deatil3
+    100006: APC_Side_Deatil3 1
+    100008: APC_Side_Deatil4
+    100010: APC_Side_Deatil4 1
+    100012: APC_Side_Detail
+    100014: APC_Side_Detail 1
+    100016: Base_Thruster2
+    100018: Base_Thruster2 1
+    100020: BlisterBack_Main_Body
+    100022: BlisterBack_Main_Body1
+    100024: BlisterBack_Main_Body2
+    100026: Front_Grill_Vent_Piece
+    100028: Front_Grill_Vent_Piece1
+    100030: Front_Grill_Vent_Piece10
+    100032: Front_Grill_Vent_Piece11
+    100034: Front_Grill_Vent_Piece12
+    100036: Front_Grill_Vent_Piece13
+    100038: Front_Grill_Vent_Piece14
+    100040: Front_Grill_Vent_Piece15
+    100042: Front_Grill_Vent_Piece16
+    100044: Front_Grill_Vent_Piece17
+    100046: Front_Grill_Vent_Piece2
+    100048: Front_Grill_Vent_Piece3
+    100050: Front_Grill_Vent_Piece4
+    100052: Front_Grill_Vent_Piece5
+    100054: Front_Grill_Vent_Piece6
+    100056: Front_Grill_Vent_Piece7
+    100058: Front_Grill_Vent_Piece8
+    100060: Front_Grill_Vent_Piece9
+    100062: Front_Grill_Vents
+    100064: Front_Light1
+    100066: Front_Light2
+    100068: Front_Lights
+    100070: Fuel_Box5
+    100072: Fuel_Box5 1
+    100074: Fuel_Box6
+    100076: Fuel_Box6 1
+    100078: Fuel_Box7
+    100080: Fuel_Box7 1
+    100082: group1
+    100084: group2
+    100086: Left_Back_Armor
+    100088: Left_Back_Armor 1
+    100090: Left_Back_Armor1
+    100092: Left_Back_Armor1 1
+    100094: Left_Back_Top_Thruster
+    100096: Left_Front_Thruster_Cover1
+    100098: Left_Front_Thruster_Cover1 1
+    100100: Left_Front_Wheel1
+    100102: Left_Front_Wheel1 1
+    100104: Left_Front_Wheel2
+    100106: Left_Front_Wheel2 1
+    100108: Left_Front_Wheel3
+    100110: Left_Front_Wheel3 1
+    100112: Left_Fuel_Boxes
+    100114: Left_Grill_Grill_Conect_Fence1
+    100116: Left_Side_Amor_Plates
+    100118: Left_Side_Box_Details
+    100120: Left_Side_Wheels
+    100122: Left_Thurster_Vents
+    100124: Right_Back_Top_Thruster
+    100126: Right_Fuel_Boxes
+    100128: Right_Side_Box_Details
+    100130: Right_Side_Wheels
+    100132: Right_Sie_Armor_Plates
+    100134: Right_Thurster_Vents
+    100136: Side_Plate_Armor
+    100138: Side_Plate_Armor 1
+    100140: //RootNode
+    100142: Suspension_Back
+    100144: Suspension_Base5
+    100146: Suspension_Base5 1
+    100148: Suspension_Base5 2
+    100150: Suspension_Base6
+    100152: Suspension_Base7
+    100154: Suspension_Base8
+    100156: Suspension_Base_Middle7
+    100158: Suspension_Base_Middle7 1
+    100160: Suspension_Base_Middle7 2
+    100162: Suspension_Front
+    100164: Suspension_Middle
+    100166: Top_Power_Engine_Left
+    100168: Top_Power_Engine_Right
+    100170: Top_Power_Engines
+    100172: Top_Spare_Wheel
+    100174: Vent_Front_Thruster
+    100176: Vent_Front_Thruster 1
+    100178: Vent_Front_Thruster1
+    100180: Vent_Front_Thruster1 1
+    100182: Vent_Front_Thruster10
+    100184: Vent_Front_Thruster10 1
+    100186: Vent_Front_Thruster11
+    100188: Vent_Front_Thruster11 1
+    100190: Vent_Front_Thruster8
+    100192: Vent_Front_Thruster8 1
+    100194: Vent_Front_Thruster9
+    100196: Vent_Front_Thruster9 1
+    100198: Wheel_Connector
+    100200: Wheel_Connector 1
+    100202: Wheel_Connector 2
+    100204: Wheel_Connector 3
+    100206: Wheel_Connector 4
+    100208: Wheel_Connector 5
+    400000: APC_Side_Deatil2
+    400002: APC_Side_Deatil2 1
+    400004: APC_Side_Deatil3
+    400006: APC_Side_Deatil3 1
+    400008: APC_Side_Deatil4
+    400010: APC_Side_Deatil4 1
+    400012: APC_Side_Detail
+    400014: APC_Side_Detail 1
+    400016: Base_Thruster2
+    400018: Base_Thruster2 1
+    400020: BlisterBack_Main_Body
+    400022: BlisterBack_Main_Body1
+    400024: BlisterBack_Main_Body2
+    400026: Front_Grill_Vent_Piece
+    400028: Front_Grill_Vent_Piece1
+    400030: Front_Grill_Vent_Piece10
+    400032: Front_Grill_Vent_Piece11
+    400034: Front_Grill_Vent_Piece12
+    400036: Front_Grill_Vent_Piece13
+    400038: Front_Grill_Vent_Piece14
+    400040: Front_Grill_Vent_Piece15
+    400042: Front_Grill_Vent_Piece16
+    400044: Front_Grill_Vent_Piece17
+    400046: Front_Grill_Vent_Piece2
+    400048: Front_Grill_Vent_Piece3
+    400050: Front_Grill_Vent_Piece4
+    400052: Front_Grill_Vent_Piece5
+    400054: Front_Grill_Vent_Piece6
+    400056: Front_Grill_Vent_Piece7
+    400058: Front_Grill_Vent_Piece8
+    400060: Front_Grill_Vent_Piece9
+    400062: Front_Grill_Vents
+    400064: Front_Light1
+    400066: Front_Light2
+    400068: Front_Lights
+    400070: Fuel_Box5
+    400072: Fuel_Box5 1
+    400074: Fuel_Box6
+    400076: Fuel_Box6 1
+    400078: Fuel_Box7
+    400080: Fuel_Box7 1
+    400082: group1
+    400084: group2
+    400086: Left_Back_Armor
+    400088: Left_Back_Armor 1
+    400090: Left_Back_Armor1
+    400092: Left_Back_Armor1 1
+    400094: Left_Back_Top_Thruster
+    400096: Left_Front_Thruster_Cover1
+    400098: Left_Front_Thruster_Cover1 1
+    400100: Left_Front_Wheel1
+    400102: Left_Front_Wheel1 1
+    400104: Left_Front_Wheel2
+    400106: Left_Front_Wheel2 1
+    400108: Left_Front_Wheel3
+    400110: Left_Front_Wheel3 1
+    400112: Left_Fuel_Boxes
+    400114: Left_Grill_Grill_Conect_Fence1
+    400116: Left_Side_Amor_Plates
+    400118: Left_Side_Box_Details
+    400120: Left_Side_Wheels
+    400122: Left_Thurster_Vents
+    400124: Right_Back_Top_Thruster
+    400126: Right_Fuel_Boxes
+    400128: Right_Side_Box_Details
+    400130: Right_Side_Wheels
+    400132: Right_Sie_Armor_Plates
+    400134: Right_Thurster_Vents
+    400136: Side_Plate_Armor
+    400138: Side_Plate_Armor 1
+    400140: //RootNode
+    400142: Suspension_Back
+    400144: Suspension_Base5
+    400146: Suspension_Base5 1
+    400148: Suspension_Base5 2
+    400150: Suspension_Base6
+    400152: Suspension_Base7
+    400154: Suspension_Base8
+    400156: Suspension_Base_Middle7
+    400158: Suspension_Base_Middle7 1
+    400160: Suspension_Base_Middle7 2
+    400162: Suspension_Front
+    400164: Suspension_Middle
+    400166: Top_Power_Engine_Left
+    400168: Top_Power_Engine_Right
+    400170: Top_Power_Engines
+    400172: Top_Spare_Wheel
+    400174: Vent_Front_Thruster
+    400176: Vent_Front_Thruster 1
+    400178: Vent_Front_Thruster1
+    400180: Vent_Front_Thruster1 1
+    400182: Vent_Front_Thruster10
+    400184: Vent_Front_Thruster10 1
+    400186: Vent_Front_Thruster11
+    400188: Vent_Front_Thruster11 1
+    400190: Vent_Front_Thruster8
+    400192: Vent_Front_Thruster8 1
+    400194: Vent_Front_Thruster9
+    400196: Vent_Front_Thruster9 1
+    400198: Wheel_Connector
+    400200: Wheel_Connector 1
+    400202: Wheel_Connector 2
+    400204: Wheel_Connector 3
+    400206: Wheel_Connector 4
+    400208: Wheel_Connector 5
+    2100000: lambert11
+    2100002: lambert8
+    2100004: blinn16
+    2100006: Windows
+    2300000: APC_Side_Deatil2
+    2300002: APC_Side_Deatil2 1
+    2300004: APC_Side_Deatil3
+    2300006: APC_Side_Deatil3 1
+    2300008: APC_Side_Deatil4
+    2300010: APC_Side_Deatil4 1
+    2300012: APC_Side_Detail
+    2300014: APC_Side_Detail 1
+    2300016: Base_Thruster2
+    2300018: Base_Thruster2 1
+    2300020: BlisterBack_Main_Body
+    2300022: BlisterBack_Main_Body1
+    2300024: BlisterBack_Main_Body2
+    2300026: Front_Grill_Vent_Piece
+    2300028: Front_Grill_Vent_Piece1
+    2300030: Front_Grill_Vent_Piece10
+    2300032: Front_Grill_Vent_Piece11
+    2300034: Front_Grill_Vent_Piece12
+    2300036: Front_Grill_Vent_Piece13
+    2300038: Front_Grill_Vent_Piece14
+    2300040: Front_Grill_Vent_Piece15
+    2300042: Front_Grill_Vent_Piece16
+    2300044: Front_Grill_Vent_Piece17
+    2300046: Front_Grill_Vent_Piece2
+    2300048: Front_Grill_Vent_Piece3
+    2300050: Front_Grill_Vent_Piece4
+    2300052: Front_Grill_Vent_Piece5
+    2300054: Front_Grill_Vent_Piece6
+    2300056: Front_Grill_Vent_Piece7
+    2300058: Front_Grill_Vent_Piece8
+    2300060: Front_Grill_Vent_Piece9
+    2300062: Front_Light1
+    2300064: Front_Light2
+    2300066: Fuel_Box5
+    2300068: Fuel_Box5 1
+    2300070: Fuel_Box6
+    2300072: Fuel_Box6 1
+    2300074: Fuel_Box7
+    2300076: Fuel_Box7 1
+    2300078: Left_Back_Armor
+    2300080: Left_Back_Armor 1
+    2300082: Left_Back_Armor1
+    2300084: Left_Back_Armor1 1
+    2300086: Left_Front_Thruster_Cover1
+    2300088: Left_Front_Thruster_Cover1 1
+    2300090: Left_Front_Wheel1
+    2300092: Left_Front_Wheel1 1
+    2300094: Left_Front_Wheel2
+    2300096: Left_Front_Wheel2 1
+    2300098: Left_Front_Wheel3
+    2300100: Left_Front_Wheel3 1
+    2300102: Left_Grill_Grill_Conect_Fence1
+    2300104: Side_Plate_Armor
+    2300106: Side_Plate_Armor 1
+    2300108: Suspension_Base5
+    2300110: Suspension_Base5 1
+    2300112: Suspension_Base5 2
+    2300114: Suspension_Base6
+    2300116: Suspension_Base7
+    2300118: Suspension_Base8
+    2300120: Suspension_Base_Middle7
+    2300122: Suspension_Base_Middle7 1
+    2300124: Suspension_Base_Middle7 2
+    2300126: Top_Power_Engine_Left
+    2300128: Top_Power_Engine_Right
+    2300130: Top_Spare_Wheel
+    2300132: Vent_Front_Thruster
+    2300134: Vent_Front_Thruster 1
+    2300136: Vent_Front_Thruster1
+    2300138: Vent_Front_Thruster1 1
+    2300140: Vent_Front_Thruster10
+    2300142: Vent_Front_Thruster10 1
+    2300144: Vent_Front_Thruster11
+    2300146: Vent_Front_Thruster11 1
+    2300148: Vent_Front_Thruster8
+    2300150: Vent_Front_Thruster8 1
+    2300152: Vent_Front_Thruster9
+    2300154: Vent_Front_Thruster9 1
+    2300156: Wheel_Connector
+    2300158: Wheel_Connector 1
+    2300160: Wheel_Connector 2
+    2300162: Wheel_Connector 3
+    2300164: Wheel_Connector 4
+    2300166: Wheel_Connector 5
+    3300000: APC_Side_Deatil2
+    3300002: APC_Side_Deatil2 1
+    3300004: APC_Side_Deatil3
+    3300006: APC_Side_Deatil3 1
+    3300008: APC_Side_Deatil4
+    3300010: APC_Side_Deatil4 1
+    3300012: APC_Side_Detail
+    3300014: APC_Side_Detail 1
+    3300016: Base_Thruster2
+    3300018: Base_Thruster2 1
+    3300020: BlisterBack_Main_Body
+    3300022: BlisterBack_Main_Body1
+    3300024: BlisterBack_Main_Body2
+    3300026: Front_Grill_Vent_Piece
+    3300028: Front_Grill_Vent_Piece1
+    3300030: Front_Grill_Vent_Piece10
+    3300032: Front_Grill_Vent_Piece11
+    3300034: Front_Grill_Vent_Piece12
+    3300036: Front_Grill_Vent_Piece13
+    3300038: Front_Grill_Vent_Piece14
+    3300040: Front_Grill_Vent_Piece15
+    3300042: Front_Grill_Vent_Piece16
+    3300044: Front_Grill_Vent_Piece17
+    3300046: Front_Grill_Vent_Piece2
+    3300048: Front_Grill_Vent_Piece3
+    3300050: Front_Grill_Vent_Piece4
+    3300052: Front_Grill_Vent_Piece5
+    3300054: Front_Grill_Vent_Piece6
+    3300056: Front_Grill_Vent_Piece7
+    3300058: Front_Grill_Vent_Piece8
+    3300060: Front_Grill_Vent_Piece9
+    3300062: Front_Light1
+    3300064: Front_Light2
+    3300066: Fuel_Box5
+    3300068: Fuel_Box5 1
+    3300070: Fuel_Box6
+    3300072: Fuel_Box6 1
+    3300074: Fuel_Box7
+    3300076: Fuel_Box7 1
+    3300078: Left_Back_Armor
+    3300080: Left_Back_Armor 1
+    3300082: Left_Back_Armor1
+    3300084: Left_Back_Armor1 1
+    3300086: Left_Front_Thruster_Cover1
+    3300088: Left_Front_Thruster_Cover1 1
+    3300090: Left_Front_Wheel1
+    3300092: Left_Front_Wheel1 1
+    3300094: Left_Front_Wheel2
+    3300096: Left_Front_Wheel2 1
+    3300098: Left_Front_Wheel3
+    3300100: Left_Front_Wheel3 1
+    3300102: Left_Grill_Grill_Conect_Fence1
+    3300104: Side_Plate_Armor
+    3300106: Side_Plate_Armor 1
+    3300108: Suspension_Base5
+    3300110: Suspension_Base5 1
+    3300112: Suspension_Base5 2
+    3300114: Suspension_Base6
+    3300116: Suspension_Base7
+    3300118: Suspension_Base8
+    3300120: Suspension_Base_Middle7
+    3300122: Suspension_Base_Middle7 1
+    3300124: Suspension_Base_Middle7 2
+    3300126: Top_Power_Engine_Left
+    3300128: Top_Power_Engine_Right
+    3300130: Top_Spare_Wheel
+    3300132: Vent_Front_Thruster
+    3300134: Vent_Front_Thruster 1
+    3300136: Vent_Front_Thruster1
+    3300138: Vent_Front_Thruster1 1
+    3300140: Vent_Front_Thruster10
+    3300142: Vent_Front_Thruster10 1
+    3300144: Vent_Front_Thruster11
+    3300146: Vent_Front_Thruster11 1
+    3300148: Vent_Front_Thruster8
+    3300150: Vent_Front_Thruster8 1
+    3300152: Vent_Front_Thruster9
+    3300154: Vent_Front_Thruster9 1
+    3300156: Wheel_Connector
+    3300158: Wheel_Connector 1
+    3300160: Wheel_Connector 2
+    3300162: Wheel_Connector 3
+    3300164: Wheel_Connector 4
+    3300166: Wheel_Connector 5
+    4300000: BlisterBack_Main_Body
+    4300002: Top_Spare_Wheel
+    4300004: Vent_Front_Thruster8
+    4300006: Vent_Front_Thruster9
+    4300008: Vent_Front_Thruster10
+    4300010: Vent_Front_Thruster11
+    4300012: Vent_Front_Thruster8
+    4300014: Vent_Front_Thruster9
+    4300016: Vent_Front_Thruster10
+    4300018: Vent_Front_Thruster11
+    4300020: Left_Front_Wheel2
+    4300022: Left_Front_Wheel1
+    4300024: Left_Front_Wheel3
+    4300026: Left_Front_Wheel2
+    4300028: Left_Front_Wheel1
+    4300030: Left_Front_Wheel3
+    4300032: Suspension_Base5
+    4300034: Wheel_Connector
+    4300036: Suspension_Base_Middle7
+    4300038: Suspension_Base8
+    4300040: Wheel_Connector
+    4300042: Suspension_Base_Middle7
+    4300044: Suspension_Base5
+    4300046: Wheel_Connector
+    4300048: Suspension_Base7
+    4300050: Wheel_Connector
+    4300052: Suspension_Base5
+    4300054: Wheel_Connector
+    4300056: Suspension_Base_Middle7
+    4300058: Suspension_Base6
+    4300060: Wheel_Connector
+    4300062: Vent_Front_Thruster1
+    4300064: Left_Front_Thruster_Cover1
+    4300066: Vent_Front_Thruster
+    4300068: Base_Thruster2
+    4300070: Vent_Front_Thruster1
+    4300072: Left_Front_Thruster_Cover1
+    4300074: Vent_Front_Thruster
+    4300076: Base_Thruster2
+    4300078: Side_Plate_Armor
+    4300080: Left_Back_Armor
+    4300082: Left_Back_Armor1
+    4300084: Left_Back_Armor1
+    4300086: Left_Back_Armor
+    4300088: Side_Plate_Armor
+    4300090: Fuel_Box5
+    4300092: Fuel_Box7
+    4300094: Fuel_Box6
+    4300096: Fuel_Box6
+    4300098: Fuel_Box7
+    4300100: Fuel_Box5
+    4300102: APC_Side_Detail
+    4300104: APC_Side_Deatil2
+    4300106: APC_Side_Deatil3
+    4300108: APC_Side_Deatil4
+    4300110: APC_Side_Detail
+    4300112: APC_Side_Deatil2
+    4300114: APC_Side_Deatil3
+    4300116: APC_Side_Deatil4
+    4300118: Front_Light1
+    4300120: Front_Light2
+    4300122: Top_Power_Engine_Left
+    4300124: Top_Power_Engine_Right
+    4300126: BlisterBack_Main_Body1
+    4300128: Front_Grill_Vent_Piece
+    4300130: Front_Grill_Vent_Piece1
+    4300132: Front_Grill_Vent_Piece2
+    4300134: Front_Grill_Vent_Piece3
+    4300136: Front_Grill_Vent_Piece4
+    4300138: Front_Grill_Vent_Piece5
+    4300140: Front_Grill_Vent_Piece6
+    4300142: Front_Grill_Vent_Piece7
+    4300144: Front_Grill_Vent_Piece8
+    4300146: Front_Grill_Vent_Piece9
+    4300148: Front_Grill_Vent_Piece10
+    4300150: Front_Grill_Vent_Piece11
+    4300152: Front_Grill_Vent_Piece12
+    4300154: Front_Grill_Vent_Piece13
+    4300156: Front_Grill_Vent_Piece14
+    4300158: Front_Grill_Vent_Piece15
+    4300160: Front_Grill_Vent_Piece16
+    4300162: Front_Grill_Vent_Piece17
+    4300164: Left_Grill_Grill_Conect_Fence1
+    4300166: BlisterBack_Main_Body2
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
