@@ -15,6 +15,8 @@ public class StaticData : MonoBehaviour
     public static string UISOUNDMASTER = "UISoundMaster";
 
     public static string MISSILE_COMPONENT          = "MissileVersion2";
+
+
     public static string CANNON_COMPONENT           = "MachineGun";
     public static string SPIKERAM_COMPONENT         = "SpikeRamComponent";
     public static string HOTPOTATO_COMPONENT        = "HotPotatoComponent";
