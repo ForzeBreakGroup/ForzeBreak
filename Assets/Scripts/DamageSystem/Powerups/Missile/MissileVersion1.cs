@@ -17,25 +17,10 @@ public class MissileVersion1 : PowerUpComponent
 
     private Transform launchLocation;
 
-    private void Awake()
+    protected override void Awake()
     {
-        this.enabled = photonView.isMine;
+        base.Awake();
         launchLocation = transform.Find("MissileLaunchPoint");
-    }
-
-    public override void AdjustModel()
-    {
-        base.AdjustModel();
-
-        // Handling picking up same powerup
-        MissileVersion1[] missileVersion1 = GetComponents<MissileVersion1>();
-        if (missileVersion1.Length > 1)
-        {
-            DestroyImmediate(this);
-        }
-        // Move the weapon model to desired places
-        transform.localPosition = componentOffset;
-        transform.localRotation = Quaternion.identity;
     }
 
     protected override void OnPress()

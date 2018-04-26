@@ -165,8 +165,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
-  otherCollider: {fileID: 0}
-  otherDmgSystem: {fileID: 0}
+  externalCollider: {fileID: 0}
 --- !u!114 &114617171055895212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,6 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  m_componentOffset:
+  - vehicleName: War_Buggy
+    positionOffset: {x: 0, y: 1.16, z: 4.21}
+    angleOffset: {x: 0, y: 0, z: 0}
   componentOffset: {x: 0, y: 1.16, z: 4.21}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 2

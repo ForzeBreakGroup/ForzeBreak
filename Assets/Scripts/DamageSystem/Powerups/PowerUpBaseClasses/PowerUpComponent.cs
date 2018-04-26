@@ -10,6 +10,14 @@ using Photon;
  * Base class for all powerups, override OnPress, OnHold, OnRelease for handling the specific event you want
  * Awake must override from this class and calls base.Awake() for correctly getting the reticle system results
  */
+[System.Serializable]
+public struct ComponentOffset
+{
+    public string vehicleName;
+    public Vector3 positionOffset;
+    public Vector3 angleOffset;
+};
+
 public class PowerUpComponent : Photon.MonoBehaviour
 {
     /// <summary>
@@ -17,15 +25,8 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// </summary>
     public int playerNum = 0;
 
-    /// <summary>
-    /// The component offset relative to the vehicle model
-    /// </summary>
-    [SerializeField] protected Vector3 componentOffset;
-
-    /// <summary>
-    /// The component offset angle relative to the vehicle model
-    /// </summary>
-    [SerializeField] protected Vector3 componentAngle = Vector3.zero;
+    [SerializeField]
+    private ComponentOffset[] m_componentOffset;
 
     /// <summary>
     /// The number of times this powerup can spawn, automatically destroy component when the limit reached
@@ -47,13 +48,25 @@ public class PowerUpComponent : Photon.MonoBehaviour
         enabled = GetComponent<PhotonView>().isMine;
     }
 
-    public virtual void AdjustModel()
+    public virtual string AdjustModel()
     {
+        string vehicleModel = transform.root.name.Replace("(Clone)", "");
         enabled = transform.root.gameObject.GetPhotonView().isMine;
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().playerNum;
 
-        transform.localPosition = componentOffset;
-        transform.localRotation = Quaternion.Euler(componentAngle);
+        foreach(ComponentOffset cmp in m_componentOffset)
+        {
+            if (cmp.vehicleName == vehicleModel)
+            {
+                transform.localPosition = cmp.positionOffset;
+                transform.localRotation = Quaternion.Euler(cmp.angleOffset);
+            }
+        }
+
+        //transform.localPosition = componentOffset;
+        // localRotation = Quaternion.Euler(componentAngle);
+
+        return vehicleModel;
     }
 
     protected virtual void OnPress()

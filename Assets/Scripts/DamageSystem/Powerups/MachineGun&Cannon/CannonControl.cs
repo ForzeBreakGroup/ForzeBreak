@@ -29,19 +29,6 @@ public class CannonControl : PowerUpComponent
         bulletSpawn = transform.Find("BulletSpawn");
     }
 
-    public override void AdjustModel()
-    {
-        base.AdjustModel();
-
-        // Handling picking up same powerup
-        CannonControl[] cannonControls = GetComponents<CannonControl>();
-        if (cannonControls.Length > 1)
-        {
-            DestroyImmediate(this);
-        }
-
-    }
-
     protected override void OnPress() 
     {
         if (Time.time > nextFire)

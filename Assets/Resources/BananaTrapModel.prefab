@@ -96,7 +96,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+<<<<<<< HEAD
   componentOffset: {x: 0, y: 8, z: -5}
+=======
+  m_componentOffset:
+  - vehicleName: War_Buggy
+    positionOffset: {x: 0, y: 5, z: -5}
+    angleOffset: {x: 0, y: 0, z: 0}
+  componentOffset: {x: 0, y: 5, z: -5}
+>>>>>>> c01095b0ce3c0190bf92d97f95d4f62f2c40cd0c
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 1
   ownerID: -1
