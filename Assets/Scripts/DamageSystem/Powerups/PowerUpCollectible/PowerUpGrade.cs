@@ -33,7 +33,7 @@ public class PowerUpGrade
         StaticData.MORNINGSTAR_COMPONENT,
         StaticData.SNOWBALL_COMPONENT,
 		StaticData.BANNANTRAP_COMPONENT,
-		StaticData.SPRINGTRAP_COMPONENT,
+		//StaticData.SPRINGTRAP_COMPONENT,
     };
 
     /// <summary>
