@@ -61,7 +61,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8d034628a1766f64bb892b8e4aea38ae, type: 2}
+  - {fileID: 2100000, guid: 99398d43da6ed9e4cb95cbe91e8b7b5a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  damageRadius: 10
+  damageRadius: 30
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 1

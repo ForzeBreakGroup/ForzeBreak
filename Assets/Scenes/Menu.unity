@@ -3447,7 +3447,7 @@ Prefab:
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
       propertyPath: numberOfLocalPlayers
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
