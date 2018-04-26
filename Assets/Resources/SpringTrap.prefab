@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initVelocity: -10
   angle: 45
-  ExistingTime: 10
+  ExistingTime: 30
 --- !u!114 &114338613081333100
 MonoBehaviour:
   m_ObjectHideFlags: 1
