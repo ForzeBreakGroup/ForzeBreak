@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class PlayerNameDisplay : MonoBehaviour
 {
     TextMesh playerName;
-    Camera cam;
 
     private void Awake()
     {
         playerName = GetComponent<TextMesh>();
-        cam = NetworkManager.instance.GetPlayerCamera();
         PhotonView view = transform.root.gameObject.GetPhotonView();
         PhotonPlayer p = PhotonPlayer.Find(view.ownerId);
 
@@ -23,9 +21,14 @@ public class PlayerNameDisplay : MonoBehaviour
 
     private void Update()
     {
-        Vector3 v = cam.transform.position - transform.position;
-        v.x = v.z = 0.0f;
-        transform.LookAt(cam.transform.position - v);
-        transform.Rotate(0, 180.0f, 0);
+        Camera cam = NetworkManager.instance.GetPlayerCamera();
+
+        if (cam != null)
+        {
+            Vector3 v = cam.transform.position - transform.position;
+            v.x = v.z = 0.0f;
+            transform.LookAt(cam.transform.position - v);
+            transform.Rotate(0, 180.0f, 0);
+        }
     }
 }
