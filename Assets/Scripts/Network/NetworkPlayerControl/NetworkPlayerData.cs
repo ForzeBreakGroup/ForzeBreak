@@ -10,8 +10,6 @@ using UnityEngine;
  */
 public class NetworkPlayerData : NetworkPlayerBase
 {
-    public Camera localCam;
-
     #region Private Members
     /// <summary>
     /// Player's spawning position given by matchmanager from host
@@ -29,6 +27,15 @@ public class NetworkPlayerData : NetworkPlayerBase
     {
         spawnPosition = Vector3.zero;
         spawnRotation = Quaternion.identity;
+    }
+
+    private void Awake()
+    {
+        if (photonView.isMine)
+        {
+            GameObject playerName = transform.Find("PlayerName").gameObject;
+            playerName.SetActive(false);
+        }
     }
 
     /// <summary>
