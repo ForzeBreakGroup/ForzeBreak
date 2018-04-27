@@ -136,6 +136,9 @@ public class MatchManager : Photon.MonoBehaviour
         Camera playerCam = mainCamera.transform.Find("Camera").GetComponent<Camera>();
         playerCam.cullingMask = ~(1 << 8+playerNumber);
 
+        // Set the local player reference
+        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, (NetworkManager.offlineMode) ? playerId : 0);
+
         // Offline mode requires additional adjustment
         if (NetworkManager.offlineMode)
         {
@@ -146,12 +149,12 @@ public class MatchManager : Photon.MonoBehaviour
             playerGO.GetPhotonView().ownerId = playerId + 1;
 
             playerCam.cullingMask = ~(1 << 8 + playerId);
-
+        }
+        else
+        {
+            photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView().ownerId);
         }
 
-        // Set the local player reference
-        NetworkManager.instance.SetLocalPlayer(playerGO, playerCam, (NetworkManager.offlineMode) ? playerId : 0);
-        
     }
 
     private void SpawnPlayer()
@@ -172,11 +175,6 @@ public class MatchManager : Photon.MonoBehaviour
             {
                 player.GetComponent<ArrowIndicationSystem>().UpdateArrowList();
             }
-        }
-        // Online mode will use RPC to register to arrow indicator
-        else
-        {
-            photonView.RPC("RpcPlayerSpawnedHandler", PhotonTargets.All, NetworkManager.instance.GetLocalPlayer().GetPhotonView().ownerId);
         }
 
         // Switch BGM

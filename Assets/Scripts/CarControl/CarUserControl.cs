@@ -66,9 +66,6 @@ public class CarUserControl : NetworkPlayerInput
         v = (v == 0) ? -controllerTrigger : v;
         carControlWheels.Move(h, v, v);
 
-        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + controllerNum);
-        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + controllerNum);
-
         //flip
         if (flipControl != null)
             flipControl.Flip(flip, h);
