@@ -1042,6 +1042,8 @@ MonoBehaviour:
   checkSelf: 0
   checkPlayer: 1
   externalCollider: {fileID: 0}
+  explosionVFX: {fileID: 1988872494310812, guid: ab8097982a41dac4c9241694fca9473a,
+    type: 2}
 --- !u!114 &114042892430298710
 MonoBehaviour:
   m_ObjectHideFlags: 1

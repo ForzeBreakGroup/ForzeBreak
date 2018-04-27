@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HotPotatoCollision : PowerUpCollision
 {
+
+    public GameObject explosionVFX;
     // Overriding ComponentCollision due to HotPotato will never be in contact points
     public override void ComponentCollision(Collision collision)
     {
@@ -23,11 +25,12 @@ public class HotPotatoCollision : PowerUpCollision
             // Moving the hot potato under the vehicle center, and apply damage
             this.transform.position = transform.parent.position;
             externalCollider = transform.parent.gameObject;
-
             ApplyDamage();
 
             // Destroy self
             PhotonNetwork.Destroy(this.gameObject);
         }
+
+        Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
     }
 }
