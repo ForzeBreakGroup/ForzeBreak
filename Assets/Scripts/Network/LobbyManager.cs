@@ -46,6 +46,15 @@ public class LobbyManager : Photon.MonoBehaviour
         EventManager.StopListening("EvtOnPLayerDisconnected", EvtOnPlayerDisconnectedHandler);
     }
 
+    private void Awake()
+    {
+        foreach (PhotonPlayer p in  PhotonNetwork.playerList)
+        {
+            ExitGames.Client.Photon.Hashtable killCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", 0 } };
+            p.SetCustomProperties(killCount);
+        }
+    }
+
     private void Init()
     {
         playerReadyStatus = new Dictionary<PhotonPlayer, bool>();
