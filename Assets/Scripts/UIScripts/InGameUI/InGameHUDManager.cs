@@ -48,7 +48,7 @@ public class InGameHUDManager : MonoBehaviour
         //damageIconControl.EnableUIControl();
         weaponIconControl.EnableUIControl();
         networkTimerControl.EnableUIControl();
-        reticleControl.EnableUIControl();
+
 
         // Disable Room waiting UI
     }
