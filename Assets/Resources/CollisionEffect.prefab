@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b50fc27aab0b47b12268cde806e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 5
 --- !u!198 &198045036406747854
 ParticleSystem:
   m_ObjectHideFlags: 1

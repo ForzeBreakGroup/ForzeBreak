@@ -40,8 +40,8 @@ public class BoostControl : MonoBehaviour {
         {
             Recover();
         }
-
-        InGameHUDManager.instance.UpdateBoostBar(energy / maxEnergy);
+        if(GetComponent<PhotonView>().isMine)
+            InGameHUDManager.instance.UpdateBoostBar(energy / maxEnergy);
     }
 
     public void Boost()
