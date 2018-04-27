@@ -40,7 +40,7 @@ public class PlayerDeathHandler : NetworkPlayerBase
                 ExitGames.Client.Photon.Hashtable setKillCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", updateKillCount } };
                 killer.SetCustomProperties(setKillCount);
 
-                Debug.Log("Player #" + killer + " increased kill count to: " + killer.CustomProperties["KillCount"]);
+                Debug.Log("Player #" + killer.ID + " increased kill count to: " + killer.CustomProperties["KillCount"]);
             }
         }
 
