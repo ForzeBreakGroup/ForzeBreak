@@ -12,7 +12,7 @@ public class CarUserControl : NetworkPlayerInput
     /// <summary>
     /// for local game, indicate the player
     /// </summary>
-    public int playerNum;
+    public int controllerNum;
 
     private CarControlWheels carControlWheels;
     private BoostControl boostControl;
@@ -32,7 +32,7 @@ public class CarUserControl : NetworkPlayerInput
         carControlWheels = GetComponent<CarControlWheels>();
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
-        playerNum = 0;
+        controllerNum = 0;
 
 
         engine = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleEngine");
@@ -44,8 +44,8 @@ public class CarUserControl : NetworkPlayerInput
     {
         base.PlayerInputUpdate();
 
-        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + playerNum);
-        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + playerNum);
+        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + controllerNum);
+        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + controllerNum);
 
     }
 
@@ -58,8 +58,8 @@ public class CarUserControl : NetworkPlayerInput
         float v = Input.GetAxis("Vertical_Keyboard");
 
         // controller Input
-        float controllerX = Input.GetAxis("Horizontal_Controller" + playerNum);
-        float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + playerNum);
+        float controllerX = Input.GetAxis("Horizontal_Controller" + controllerNum);
+        float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + controllerNum);
 
         //if keyboard input is none, apply controller input
         h = (h == 0) ? controllerX : h;
