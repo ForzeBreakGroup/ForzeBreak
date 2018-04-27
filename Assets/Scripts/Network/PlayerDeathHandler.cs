@@ -14,6 +14,8 @@ public class PlayerDeathHandler : NetworkPlayerBase
             return;
         }
 
+        InGameHUDManager.instance.UpdateWeaponIcon("");
+
         // Transfer the camera to spectator camera
         NetworkManager.instance.GetPlayerCamera().enabled = false;
         Debug.Log("Transferring the player camera to spectator camera");

@@ -79,6 +79,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
         // Unloads powerup
         if (capacity <= 0)
         {
+            InGameHUDManager.instance.UpdateWeaponIcon("");
             UnloadPowerUp();
             return;
         }

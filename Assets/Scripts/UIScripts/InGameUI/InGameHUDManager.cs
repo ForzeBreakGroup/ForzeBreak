@@ -58,6 +58,11 @@ public class InGameHUDManager : MonoBehaviour
         weaponIconControl.ChangeIcon(powerUpName);
     }
 
+    public void UpdateBoostBar(float progress)
+    {
+        boostBarControl.updateProgressBar(progress);
+    }
+
     public void ReticleUIDisplay(ReticleUIState state, Vector3 pos)
     {
         reticleControl.DisplayReticleUI(state, pos);

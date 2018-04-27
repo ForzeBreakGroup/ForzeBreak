@@ -13,22 +13,16 @@ public class UIBoostBarControl : UIControl
     Image progressBar;
     Text percentage;
 
-    BoostControl bc;
 
     void Awake()
     {
         progressBar = transform.Find("ProgressBar").gameObject.GetComponent<Image>();
     }
 
-    public override void EnableUIControl()
-    {
-        base.EnableUIControl();
-        bc = NetworkManager.instance.GetLocalPlayer().GetComponent<BoostControl>();
-    }
 
-    protected override void UpdateUIControl()
+    public void updateProgressBar(float progress)
     {
         base.UpdateUIControl();
-        progressBar.fillAmount = bc.energy / bc.maxEnergy;
+        progressBar.fillAmount = progress;
     }
 }
