@@ -41,7 +41,8 @@ public class NetworkPlayerVisual : NetworkPlayerBase
 
         foreach(Renderer r in rend)
         {
-            r.material.color = c;
+            r.material.SetColor("_Color", c);
+            //r.material.color = c;
         }
     }
 

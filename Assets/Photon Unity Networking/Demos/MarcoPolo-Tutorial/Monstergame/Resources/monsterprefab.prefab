@@ -1792,7 +1792,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100068}
-  m_LocalRotation: {x: 0.18885891, y: 7.547974e-17, z: 9.8540604e-17, w: 0.9820043}
+  m_LocalRotation: {x: 0.1888589, y: 7.5479735e-17, z: 9.85406e-17, w: 0.9820042}
   m_LocalPosition: {x: -0.12418199, y: 0.012481298, z: -0.4030289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1810,7 +1810,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
-  m_LocalRotation: {x: -0.08342079, y: 0.14244011, z: 0.015560745, w: 0.9861591}
+  m_LocalRotation: {x: -0.08342078, y: 0.1424401, z: 0.015560744, w: 0.986159}
   m_LocalPosition: {x: 0.10805979, y: 0.01617931, z: -0.37325832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2114,7 +2114,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100106}
-  m_LocalRotation: {x: -0.53971946, y: 0.70675445, z: 0.45673946, w: -0.024295844}
+  m_LocalRotation: {x: -0.5397194, y: 0.7067544, z: 0.45673943, w: -0.024295842}
   m_LocalPosition: {x: 0.52807194, y: 0.5730525, z: 0.14485188}
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children: []
@@ -2194,7 +2194,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
-  m_LocalRotation: {x: 1.9935494e-10, y: 0.999642, z: 0.026756927, w: -0.0000000074479134}
+  m_LocalRotation: {x: 1.9935492e-10, y: 0.99964195, z: 0.026756926, w: -0.000000007447913}
   m_LocalPosition: {x: -0.0035972502, y: 0.042419102, z: 0.0698664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2210,7 +2210,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100118}
-  m_LocalRotation: {x: 1.9935495e-10, y: 0.999642, z: 0.02675693, w: -0.0000000074479134}
+  m_LocalRotation: {x: 1.9935494e-10, y: 0.99964195, z: 0.026756927, w: -0.000000007447913}
   m_LocalPosition: {x: -0.0035972523, y: 0.035012063, z: 0.20813121}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2261,7 +2261,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100124}
-  m_LocalRotation: {x: 1.993547e-10, y: 0.999642, z: 0.026756942, w: -0.0000000074479134}
+  m_LocalRotation: {x: 1.9935469e-10, y: 0.99964195, z: 0.02675694, w: -0.000000007447913}
   m_LocalPosition: {x: 0.0000000010669444, y: 0.042419102, z: 0.06553891}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2277,7 +2277,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100126}
-  m_LocalRotation: {x: 1.993547e-10, y: 0.999642, z: 0.026756942, w: -0.0000000074479134}
+  m_LocalRotation: {x: 1.9935469e-10, y: 0.99964195, z: 0.02675694, w: -0.000000007447913}
   m_LocalPosition: {x: 0.0000000031272505, y: 0.035012063, z: 0.20380372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2351,54 +2351,69 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - serializedVersion: 2
+    - serializedVersion: 3
       time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - serializedVersion: 2
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - serializedVersion: 2
+    - serializedVersion: 3
       time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - serializedVersion: 2
+    - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - serializedVersion: 2
+    - serializedVersion: 3
       time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -2489,8 +2504,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerId: 0
   group: 0
-  OwnerShipWasTransfered: 0
   prefixBackup: -1
+  observed: {fileID: 0}
   synchronization: 2
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
@@ -2500,7 +2515,6 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
-  currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &11400006
 MonoBehaviour:
@@ -2539,6 +2553,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 98292beaa99b528409314e373d4bf6c8, type: 2}
   m_StaticBatchInfo:
@@ -2590,6 +2605,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 98292beaa99b528409314e373d4bf6c8, type: 2}
   m_StaticBatchInfo:
@@ -2641,6 +2657,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 7de122b788971734d91036434995bdb4, type: 2}
   m_StaticBatchInfo:
@@ -2725,6 +2742,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 4237e8c77361e6b43bdc3c785b6aa272, type: 2}
   m_StaticBatchInfo:
@@ -2775,6 +2793,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 4237e8c77361e6b43bdc3c785b6aa272, type: 2}
   m_StaticBatchInfo:
