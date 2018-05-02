@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleCollision : PowerUpComponent
+public class BlackHoleCollision : PowerUpCollision
 {
 
 }
