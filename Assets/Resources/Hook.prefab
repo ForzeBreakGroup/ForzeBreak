@@ -7534,7 +7534,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 2
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!65 &65497324860205376
 BoxCollider:
@@ -7561,6 +7561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Velocity: 100
   ExistingTime: 20
+  forceOnRope: 10000
   source: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &114440261512266066
@@ -7607,12 +7608,12 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 0
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 4570352198389152}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

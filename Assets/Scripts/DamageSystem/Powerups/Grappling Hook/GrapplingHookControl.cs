@@ -10,7 +10,6 @@ public class GrapplingHookControl : PowerUpComponent
         {
             GameObject hook = PhotonNetwork.Instantiate(spawnItem.name, transform.position, transform.rotation, 0);
             ((PowerUpData)hook.GetComponent(typeof(PowerUpData))).SetOwnerId(this.ownerID);
-            hook.GetComponent<HookMovement>().source = transform.root.gameObject;
             DecreaseCapacity();
         }
     }
