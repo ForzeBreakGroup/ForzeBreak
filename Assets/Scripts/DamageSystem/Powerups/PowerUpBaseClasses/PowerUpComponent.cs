@@ -42,9 +42,12 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// </summary>
     [SerializeField] protected GameObject spawnItem;
 
+    private Transform launchPoint;
+
     protected virtual void Awake()
     {
         enabled = GetComponent<PhotonView>().isMine;
+        launchPoint = transform.Find("LaunchPoint");
     }
 
     public virtual void AdjustModel()
@@ -58,6 +61,14 @@ public class PowerUpComponent : Photon.MonoBehaviour
 
     protected virtual void OnPress()
     {
+        Transform t = (launchPoint == null) ? transform : launchPoint;
+
+        if (spawnItem != null)
+        {
+            DecreaseCapacity();
+            GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, t.position, t.rotation, 0);
+            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).SetOwnerId(this.ownerID);
+        }
     }
 
     protected virtual void OnHold()
