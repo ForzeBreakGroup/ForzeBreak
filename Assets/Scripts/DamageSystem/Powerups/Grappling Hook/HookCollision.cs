@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class HookCollision : PowerUpCollision
 {
-    
-
-    protected override void CollisionEnter(Collision collision)
+    protected override void TriggerEnter(Collider other)
     {
-        if(collision.transform.root.GetComponent<PhotonView>().isMine)
+        if (other.transform.root.GetComponent<PhotonView>().isMine)
         {
 
             Rigidbody r = GetComponent<Rigidbody>();
@@ -16,7 +14,10 @@ public class HookCollision : PowerUpCollision
             r.velocity = Vector3.zero;
 
             GetComponent<BoxCollider>().enabled = false;
-            ((HookMovement)PowerUpMovement).SetHookTarget(collision.transform.root.GetComponent<PhotonView>().ownerId);
+            ((HookMovement)PowerUpMovement).SetHookTarget(other.transform.root.GetComponent<PhotonView>().ownerId);
         }
+
+
     }
+
 }
