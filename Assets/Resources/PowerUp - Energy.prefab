@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4188804907432386}
   - component: {fileID: 33654479467384518}
   - component: {fileID: 65133131544437586}
-  - component: {fileID: 23449024968984550}
   - component: {fileID: 114510050334468594}
   - component: {fileID: 114817294856311818}
+  - component: {fileID: 23555654871265202}
   m_Layer: 0
   m_Name: PowerUp - Energy
   m_TagString: Untagged
@@ -44,7 +44,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23449024968984550
+--- !u!23 &23555654871265202
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -57,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: dd2311cb64af69f4fb9f486734533fdd, type: 2}
   m_StaticBatchInfo:
@@ -66,7 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0

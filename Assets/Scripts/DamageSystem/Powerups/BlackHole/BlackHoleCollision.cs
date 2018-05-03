@@ -13,6 +13,8 @@ public class BlackHoleCollision : PowerUpCollision
     Collider blackHoleCollider;
     Rigidbody rb;
 
+    private bool isInEffect = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,21 +30,31 @@ public class BlackHoleCollision : PowerUpCollision
         // Change the collider to trigger
         blackHoleCollider.isTrigger = true;
         ((SphereCollider)blackHoleCollider).radius = blackHoleRadius;
+
+        ((BlackHoleMovement)PowerUpMovement).EnableBlackHole();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Blackhole ignores environment objects
-        if (other.tag != "Environment")
+        if (isInEffect)
         {
-            Rigidbody otherRb = other.transform.root.GetComponent<Rigidbody>();
-            // Apply constant pull force base on the distance between blackhole and gameobject
-            if (otherRb != null)
+            // Blackhole ignores environment objects
+            if (other.tag != "Environment")
             {
-                // Calculate Distance
-                float forceRatio = 1 - Vector3.Distance(transform.position, other.transform.position) / blackHoleRadius;
-                otherRb.AddForce((transform.position - otherRb.position).normalized * blackHoleMaxPull * forceRatio, ForceMode.Acceleration);
+                Rigidbody otherRb = other.transform.root.GetComponent<Rigidbody>();
+                // Apply constant pull force base on the distance between blackhole and gameobject
+                if (otherRb != null)
+                {
+                    // Calculate Distance
+                    float forceRatio = 1 - Vector3.Distance(transform.position, other.transform.position) / blackHoleRadius;
+                    otherRb.AddForce((transform.position - otherRb.position).normalized * blackHoleMaxPull * forceRatio, ForceMode.Acceleration);
+                }
             }
         }
+    }
+
+    public void DisableBlackHoleEffect()
+    {
+        isInEffect = false;
     }
 }

@@ -58,12 +58,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
 
     protected virtual void OnPress()
     {
-        if (spawnItem != null)
-        {
-            DecreaseCapacity();
-            GameObject spawnedItem = PhotonNetwork.Instantiate(spawnItem.name, transform.position, transform.rotation, 0);
-            ((PowerUpData)spawnedItem.GetComponent(typeof(PowerUpData))).SetOwnerId(this.ownerID);
-        }
     }
 
     protected virtual void OnHold()
