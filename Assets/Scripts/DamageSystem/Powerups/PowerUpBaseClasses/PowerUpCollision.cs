@@ -11,6 +11,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
 
+    [HideInInspector]
     public GameObject externalCollider;
 
     private GameObject target;
