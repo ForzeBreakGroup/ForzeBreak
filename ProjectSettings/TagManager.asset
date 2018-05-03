@@ -13,6 +13,7 @@ TagManager:
   - PowerUpComponent
   - VehicleCollider
   - CameraPoint
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - 
   - Environment
   - PowerUpComponent
-  - 
+  - PowerUp
   - 
   - 
   - 
