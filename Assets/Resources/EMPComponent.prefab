@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 4673626712832374}
   - component: {fileID: 114617369589060732}
   - component: {fileID: 120300108489951080}
-  - component: {fileID: 114743291303003422}
   - component: {fileID: 114127295794476066}
+  - component: {fileID: 114668372890357006}
   m_Layer: 0
   m_Name: EMPComponent
   m_TagString: Untagged
@@ -115,7 +115,7 @@ MonoBehaviour:
   capacity: 1
   ownerID: -1
   spawnItem: {fileID: 1235744793905798, guid: 3e0b02fcd474fba45961211e19fce88f, type: 2}
---- !u!114 &114743291303003422
+--- !u!114 &114668372890357006
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,12 +123,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1843076896082648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcf8d2d2f39dfb4ebce7f175eaaefeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7efc659ad4ec21549bc3e4bcf1a96765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 100
-  velocity: 15
-  angle: 20
+  angle: 35
+  velocity: 20
 --- !u!120 &120300108489951080
 LineRenderer:
   m_ObjectHideFlags: 1

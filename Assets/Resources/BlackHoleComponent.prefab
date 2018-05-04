@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4636629992668212}
   - component: {fileID: 114534883904852044}
+  - component: {fileID: 114704905508174542}
   - component: {fileID: 120912419548793522}
   - component: {fileID: 114426336330058232}
   m_Layer: 0
@@ -114,8 +115,20 @@ MonoBehaviour:
   capacity: 1
   ownerID: -1
   spawnItem: {fileID: 1246711710995508, guid: 17fad761fc8c12249870851d8a5b7796, type: 2}
+--- !u!114 &114704905508174542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555486857356012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efc659ad4ec21549bc3e4bcf1a96765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   resolution: 100
-  velocity: 15
+  angle: 45
+  velocity: 20
 --- !u!120 &120912419548793522
 LineRenderer:
   m_ObjectHideFlags: 1
