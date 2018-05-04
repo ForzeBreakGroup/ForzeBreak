@@ -18,7 +18,9 @@ public class HookMovement : PowerUpMovement
     /// <summary>
     /// Bullet existing time duration
     /// </summary>
-    public float ExistingTime = 20f;
+    public float ExistingTime = 3f;
+
+    public float ExistingTimeHooked = 15f;
 
     public float forceOnRope = 20000f;
 
@@ -106,11 +108,11 @@ public class HookMovement : PowerUpMovement
             {
                 PhotonView.TransferOwnership(targetID);
 
+                ExistingTime += ExistingTimeHooked;
+
                 Rigidbody r = GetComponent<Rigidbody>();
                 r.isKinematic = true;
                 r.velocity = Vector3.zero;
-
-                GetComponent<BoxCollider>().enabled = false;
 
                 transform.SetParent(go.transform);
                 target = go;

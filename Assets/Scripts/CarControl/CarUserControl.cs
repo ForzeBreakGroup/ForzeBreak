@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 /*
  * Author: Robin
@@ -20,6 +21,8 @@ public class CarUserControl : NetworkPlayerInput
 
     public bool boost = false;
     private bool flip = false;
+
+    private bool isDisabled = false;
 
 
     private FMOD.Studio.EventInstance engine;
@@ -44,26 +47,42 @@ public class CarUserControl : NetworkPlayerInput
     {
         base.PlayerInputUpdate();
 
-        boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + controllerNum);
-        flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + controllerNum);
+        if (!isDisabled)
+        {
+            boost = Input.GetButton("Boost_Mouse") || Input.GetButton("Boost_Controller" + controllerNum);
+            flip = Input.GetButtonDown("Flip_Keyboard") || Input.GetButtonDown("Flip_Controller" + controllerNum);
+        }
+        else
+        {
+            boost = false;
+            flip = false;
+        }
 
     }
 
     protected override void PlayerInputFixedUpdate()
     {
         base.PlayerInputFixedUpdate();
-        
-        // keyboard Input
-        float h = Input.GetAxis("Horizontal_Keyboard");
-        float v = Input.GetAxis("Vertical_Keyboard");
 
-        // controller Input
-        float controllerX = Input.GetAxis("Horizontal_Controller" + controllerNum);
-        float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + controllerNum);
+        float h = 0f;
+        float v = 0f;
 
-        //if keyboard input is none, apply controller input
-        h = (h == 0) ? controllerX : h;
-        v = (v == 0) ? -controllerTrigger : v;
+        if (!isDisabled)
+        {
+            // keyboard Input
+            h = Input.GetAxis("Horizontal_Keyboard");
+            v = Input.GetAxis("Vertical_Keyboard");
+
+            // controller Input
+            float controllerX = Input.GetAxis("Horizontal_Controller" + controllerNum);
+            float controllerTrigger = Input.GetAxis("Trigger_Axis_Controller" + controllerNum);
+
+            //if keyboard input is none, apply controller input
+            h = (h == 0) ? controllerX : h;
+            v = (v == 0) ? -controllerTrigger : v;
+        }
+
+
         carControlWheels.Move(h, v, v);
 
         //flip
@@ -74,7 +93,6 @@ public class CarUserControl : NetworkPlayerInput
             engine.setParameterValue("Speed", 1f);
         else
             engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
-    
     }
 
     public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -89,6 +107,18 @@ public class CarUserControl : NetworkPlayerInput
         {
             boost = (bool)stream.ReceiveNext();
         }
+    }
+
+    public void DisableCarControl(float duration)
+    {
+        StartCoroutine(EnableAfterDelay(duration));
+    }
+
+    IEnumerator EnableAfterDelay(float duration)
+    {
+        isDisabled = true;
+        yield return new WaitForSeconds(duration);
+        isDisabled = false;
     }
 }
 

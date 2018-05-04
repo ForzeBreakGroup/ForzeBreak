@@ -31,6 +31,6 @@ public class BlackHoleMovement : PowerUpMovement
     IEnumerator DestroyBlackHole()
     {
         yield return new WaitForSeconds(5);
-        Destroy(this.gameObject);
+        DestroyPowerUpProjectile();
     }
 }

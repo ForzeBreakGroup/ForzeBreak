@@ -25,6 +25,8 @@ public class StaticData : MonoBehaviour
     public static string SNOWBALL_COMPONENT         = "SnowballComponent";
 	public static string BANNANTRAP_COMPONENT 		= "BananaTrapModel";
 	public static string SPRINGTRAP_COMPONENT 		= "SpringTrapModel";
+    public static string BLACKHOLE_COMPONENT        = "BlackHoleComponent";
+    public static string EMP_COMPONENT              = "EMPComponent";
 
     public static string HEALTH = "Health";
     public static string Energy = "Energy";

@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleComponent : PowerUpComponent
+public class EMPData : PowerUpData
 {
 }
