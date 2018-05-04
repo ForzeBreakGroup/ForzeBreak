@@ -34,7 +34,7 @@ public class UIKOControl : MonoBehaviour {
 			}
 
 			if (Time.time > activeTime + scaleTime && Time.time <= activeTime + lastTime) {
-				transform.localPosition = 30 * Random.insideUnitCircle * (activeTime + lastTime - Time.time) / (lastTime - scaleTime);
+				transform.localPosition = 50 * Random.insideUnitCircle * (activeTime + lastTime - Time.time) / (lastTime - scaleTime);
 			}
 
 			if (Time.time > activeTime + lastTime) {
