@@ -18,7 +18,7 @@ public class PowerUpForceMove : PowerUpMovement {
 	public float angle = 0.0f;
     public float ExistingTime = 3f;
 
-    private float spawnTime = 0f;
+	public float spawnTime = 0f;
 
     protected virtual void Awake()
 	{

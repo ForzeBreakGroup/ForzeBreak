@@ -10,6 +10,8 @@ public class InGameHUDManager : MonoBehaviour
     private UINetworkTimerControl networkTimerControl;
     private UIReticleControl reticleControl;
 
+	private UIKOControl koControl;
+
     private static InGameHUDManager inGameHUDManager;
     public static InGameHUDManager instance
     {
@@ -39,6 +41,7 @@ public class InGameHUDManager : MonoBehaviour
         weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
         reticleControl = FindObjectOfType<UIReticleControl>();
+		koControl = FindObjectOfType<UIKOControl> ();
     }
 
     public void EnableInGameHUD()
@@ -67,4 +70,9 @@ public class InGameHUDManager : MonoBehaviour
     {
         reticleControl.DisplayReticleUI(state, pos);
     }
+
+	public void ShowKOUI()
+	{
+		koControl.setUIActive ();
+	}
 }
