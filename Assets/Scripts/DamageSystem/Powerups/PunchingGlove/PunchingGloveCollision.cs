@@ -8,7 +8,6 @@ public class PunchingGloveCollision : PowerUpCollision {
 	protected override void CollisionEnter(Collision collision)
 	{
 		InGameHUDManager.instance.ShowKOUI ();
-		Debug.Log ("collison,,"+collision.transform.name);
 		ApplyDamage();
 	}
 }
