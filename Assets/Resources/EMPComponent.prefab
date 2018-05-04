@@ -35,9 +35,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4673626712832374}
   - component: {fileID: 114617369589060732}
+  - component: {fileID: 114668372890357006}
   - component: {fileID: 120300108489951080}
   - component: {fileID: 114127295794476066}
-  - component: {fileID: 114668372890357006}
   m_Layer: 0
   m_Name: EMPComponent
   m_TagString: Untagged
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 100
-  angle: 35
-  velocity: 20
+  angle: 20
+  velocity: 15
 --- !u!120 &120300108489951080
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ public class LaunchArcRenderer : MonoBehaviour
 
     private void Awake()
     {
+        lineRenderer = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics.gravity.y);
         RenderArc();
     }

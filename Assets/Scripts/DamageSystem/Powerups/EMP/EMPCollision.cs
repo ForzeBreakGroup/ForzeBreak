@@ -37,6 +37,7 @@ public class EMPCollision : PowerUpCollision
         Transform otherRoot = other.transform.root;
         if (otherRoot.tag == "Player" && otherRoot.gameObject.GetPhotonView().isMine)
         {
+            ApplyDamage();
             otherRoot.GetComponent<CarUserControl>().DisableCarControl(disableDuration);
         }
     }

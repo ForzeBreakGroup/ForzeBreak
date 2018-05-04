@@ -163,14 +163,17 @@ public class DamageSystem : NetworkPlayerCollision
         {
             lastReceivedDamageFrom = ownerId;
 
-            // Calculates damage received based on the force and explosion radius
-            float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
-            damage = Mathf.Clamp(damage, 0, Mathf.Infinity);
+            if (force > 0)
+            {
+                // Calculates damage received based on the force and explosion radius
+                float damage = force * (radius - Mathf.Abs(Vector3.Distance(transform.root.position, explosionCenter))) / radius;
+                damage = Mathf.Clamp(damage, 0, Mathf.Infinity);
 
-            IncreaseDamage(damage);
-            TrajectoryCollision(damage, explosionCenter);
+                IncreaseDamage(damage);
+                TrajectoryCollision(damage, explosionCenter);
 
-            PlayCollisionEffect(this.transform.position);
+                PlayCollisionEffect(this.transform.position);
+            }
         }
     }
 
