@@ -10,14 +10,14 @@ public class HotPotatoComponent : PowerUpComponent
     {
         base.SetComponentParent(parentID);
 
+        // Spawn the hot potato
         SpawnHotPotato();
-        hotPotato.GetComponent<HotPotatoMovement>().TransferHotPotato(GetComponent<PhotonView>().ownerId);
-    }
 
-    protected override void OnPress()
-    {
-        hotPotato.GetComponent<HotPotatoCollision>().Detonate();
-        DecreaseCapacity();
+        // Transfer the ownership to the owner
+        hotPotato.GetComponent<HotPotatoMovement>().TransferHotPotato(GetComponent<PhotonView>().ownerId);
+
+        // Destroy the component
+        UnloadPowerUp();
     }
 
     public GameObject SpawnHotPotato()
@@ -31,13 +31,5 @@ public class HotPotatoComponent : PowerUpComponent
         }
 
         return hotPotato;
-    }
-
-    private void OnDestroy()
-    {
-        if (hotPotato != null)
-        {
-            hotPotato.GetComponent<HotPotatoCollision>().Detonate();
-        }
     }
 }
