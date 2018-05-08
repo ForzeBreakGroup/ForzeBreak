@@ -15,10 +15,13 @@ public class BlackHoleCollision : PowerUpCollision
 
     private bool isInEffect = true;
 
+    List<DamageSystem> playerInEffect; 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         blackHoleCollider = GetComponent(typeof(Collider)) as Collider;
+        playerInEffect = new List<DamageSystem>();
     }
 
     protected override void CollisionEnter(Collision collision)
@@ -32,6 +35,24 @@ public class BlackHoleCollision : PowerUpCollision
         ((SphereCollider)blackHoleCollider).radius = blackHoleRadius;
 
         ((BlackHoleMovement)PowerUpMovement).EnableBlackHole();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DamageSystem dmgSystem = other.transform.root.GetComponent<DamageSystem>();
+        if (dmgSystem != null && !playerInEffect.Contains(dmgSystem))
+        {
+            playerInEffect.Add(dmgSystem);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        DamageSystem dmgSystem = other.transform.root.GetComponent<DamageSystem>();
+        if (dmgSystem != null && playerInEffect.Contains(dmgSystem))
+        {
+            playerInEffect.Remove(dmgSystem);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -56,5 +77,15 @@ public class BlackHoleCollision : PowerUpCollision
     public void DisableBlackHoleEffect()
     {
         isInEffect = false;
+        ApplyExplosionDamage();
+    }
+
+    private void ApplyExplosionDamage()
+    {
+        foreach(DamageSystem dmgSystem in playerInEffect)
+        {
+            Debug.Log(dmgSystem.gameObject.name);
+            dmgSystem.ApplyDamageForce(damage, transform.position, blackHoleRadius, PowerUpData.OwnerID);
+        }
     }
 }
