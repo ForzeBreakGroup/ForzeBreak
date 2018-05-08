@@ -41,7 +41,7 @@ public class InGameHUDManager : MonoBehaviour
         weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
         reticleControl = FindObjectOfType<UIReticleControl>();
-		koControl = FindObjectOfType<UIKOControl> ();
+        //koControl = FindObjectOfType<UIKOControl> ();
     }
 
     public void EnableInGameHUD()
