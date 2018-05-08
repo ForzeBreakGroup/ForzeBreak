@@ -12,7 +12,7 @@ public class BlackHoleMovement : PowerUpMovement
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 15, ForceMode.Impulse);
+        rb.AddForce(transform.forward * 12, ForceMode.Impulse);
     }
 
     public void EnableBlackHole()
@@ -33,4 +33,6 @@ public class BlackHoleMovement : PowerUpMovement
         yield return new WaitForSeconds(5);
         DestroyPowerUpProjectile();
     }
+
+
 }

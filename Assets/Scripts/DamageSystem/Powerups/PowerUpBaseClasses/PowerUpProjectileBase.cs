@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpProjectileBase : MonoBehaviour
+public class PowerUpProjectileBase : Photon.MonoBehaviour
 {
     private PowerUpData powerupData;
     protected PowerUpData PowerUpData
