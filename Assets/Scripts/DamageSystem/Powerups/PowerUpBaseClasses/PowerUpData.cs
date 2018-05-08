@@ -6,6 +6,10 @@ public class PowerUpData : PowerUpProjectileBase
 {
     [SerializeField]
     protected int ownerId;
+
+    [SerializeField]
+    public string announcerText;
+
     public int OwnerID
     {
         get

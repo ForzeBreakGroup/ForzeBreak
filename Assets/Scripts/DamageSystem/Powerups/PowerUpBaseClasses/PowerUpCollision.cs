@@ -100,6 +100,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         if (targetDmgSystem != null)
         {
             Debug.Log("Player #" + PowerUpData.OwnerID + " Applying Damage (" + damage + ") to Player #" + targetDmgSystem.gameObject.GetPhotonView().ownerId);
+            UIAnnouncerManager.instance.Announce(PowerUpData.announcerText, null, PowerUpData.OwnerID);
             targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius, PowerUpData.OwnerID);
         }
     }

@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: -1
+  announcerText: K.O.
 --- !u!114 &114693619429212696
 MonoBehaviour:
   m_ObjectHideFlags: 1
