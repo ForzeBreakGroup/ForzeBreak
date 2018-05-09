@@ -33,6 +33,11 @@ public class PowerUpComponent : Photon.MonoBehaviour
     [SerializeField] protected int capacity = 1;
 
     /// <summary>
+    /// PowerUp UI Icon sprite prefab
+    /// </summary>
+    [SerializeField] public Sprite icon { get; protected set; }
+
+    /// <summary>
     /// Owner ID, derived from photon view ID
     /// </summary>
     [SerializeField] protected int ownerID = -1;
@@ -84,7 +89,6 @@ public class PowerUpComponent : Photon.MonoBehaviour
         // Unloads powerup
         if (capacity <= 0)
         {
-            InGameHUDManager.instance.UpdateWeaponIcon("");
             UnloadPowerUp();
             return;
         }
@@ -146,5 +150,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
         {
             view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
         }
+
+        UIPowerUpIconManager.instance.ChangeIcon();
     }
 }

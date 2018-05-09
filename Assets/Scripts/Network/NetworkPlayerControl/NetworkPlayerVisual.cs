@@ -51,10 +51,16 @@ public class NetworkPlayerVisual : NetworkPlayerBase
     {
         if (photonView.isMine && photonView.ownerId == targetID)
         {
+            // Instantiate powerup prefab
             currentEquipped = PhotonNetwork.Instantiate(powerupName, transform.position, Quaternion.identity, 0);
-            ((PowerUpComponent)currentEquipped.GetComponent(typeof(PowerUpComponent))).SetComponentParent(targetID);
-            ((PowerUpComponent)currentEquipped.GetComponent(typeof(PowerUpComponent))).AdjustModel();
-            InGameHUDManager.instance.UpdateWeaponIcon(powerupName);
+
+            // Obtain the PowerUpComponent base class and adjust the model parent and position
+            PowerUpComponent comp = currentEquipped.GetComponent(typeof(PowerUpComponent)) as PowerUpComponent;
+            comp.SetComponentParent(targetID);
+            comp.AdjustModel();
+
+            // Update UI Icon
+            UIPowerUpIconManager.instance.ChangeIcon(comp.icon);
         }
     }
 
@@ -65,7 +71,7 @@ public class NetworkPlayerVisual : NetworkPlayerBase
         {
             if (currentEquipped != null)
             {
-                InGameHUDManager.instance.UpdateWeaponIcon("");
+                UIPowerUpIconManager.instance.ChangeIcon();
 
                 PhotonNetwork.Destroy(currentEquipped);
                 currentEquipped = null;

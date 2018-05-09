@@ -5,8 +5,6 @@ using UnityEngine;
 public class InGameHUDManager : MonoBehaviour
 {
     private UIBoostBarControl boostBarControl;
-    //private UIDamageIconControl damageIconControl;
-    private UIWeaponIconControl weaponIconControl;
     private UINetworkTimerControl networkTimerControl;
     private UIReticleControl reticleControl;
 
@@ -38,10 +36,8 @@ public class InGameHUDManager : MonoBehaviour
     {
         boostBarControl = FindObjectOfType<UIBoostBarControl>();
         //damageIconControl = FindObjectOfType<UIDamageIconControl>();
-        weaponIconControl = FindObjectOfType<UIWeaponIconControl>();
         networkTimerControl = FindObjectOfType<UINetworkTimerControl>();
         reticleControl = FindObjectOfType<UIReticleControl>();
-        //koControl = FindObjectOfType<UIKOControl> ();
     }
 
     public void EnableInGameHUD()
@@ -49,16 +45,10 @@ public class InGameHUDManager : MonoBehaviour
         // Enable each individual UI control
         boostBarControl.EnableUIControl();
         //damageIconControl.EnableUIControl();
-        weaponIconControl.EnableUIControl();
         networkTimerControl.EnableUIControl();
 
 
         // Disable Room waiting UI
-    }
-
-    public void UpdateWeaponIcon(string powerUpName)
-    {
-        weaponIconControl.ChangeIcon(powerUpName);
     }
 
     public void UpdateBoostBar(float progress)
