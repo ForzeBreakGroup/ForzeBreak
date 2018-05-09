@@ -37,7 +37,7 @@ public class UIAnnouncerManager : MonoBehaviour
         announcerAnim = GetComponent<Animator>();
         announcerText = GetComponent<Text>();
         announcerText.enabled = false;
-        // announcerAudio = GetComponent<AudioSource>();
+        announcerAudio = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -63,6 +63,8 @@ public class UIAnnouncerManager : MonoBehaviour
         {
             announcerText.text = announceText;
             announcerAnim.SetTrigger("PlayAnnouncer");
+            announcerAudio.clip = announceClip;
+            announcerAudio.Play();
         }
     }
 }

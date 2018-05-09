@@ -10,6 +10,9 @@ public class PowerUpData : PowerUpProjectileBase
     [SerializeField]
     public string announcerText;
 
+    [SerializeField]
+    public AudioClip announcerClip;
+
     public int OwnerID
     {
         get
