@@ -112,7 +112,7 @@ public class MatchManager : Photon.MonoBehaviour
     public void SpawnPlayer(int playerId)
     {
         // Obtain the player selected vehicle model
-        string vehicleName = "War_Buggy";
+        string vehicleName = NetworkManager.instance.selectedVehicleName;
 
         // Player's number is indicated by the loop counter in offline mode or the custom property in online mode
         int playerNumber = (NetworkManager.offlineMode) ? playerId : ((int)PhotonNetwork.player.CustomProperties["PlayerNumber"]);

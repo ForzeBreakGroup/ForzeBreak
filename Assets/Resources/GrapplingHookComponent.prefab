@@ -1053,7 +1053,7 @@ GameObject:
   - component: {fileID: 114452575693010386}
   - component: {fileID: 114781390372517416}
   m_Layer: 0
-  m_Name: GrapplingHook
+  m_Name: GrapplingHookComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7662,6 +7662,7 @@ MonoBehaviour:
   componentOffset: {x: 0, y: 1.308, z: 1.808}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 1
+  icon: {fileID: 21300000, guid: 36a7d0d060c60954b90778906f4b5bf4, type: 3}
   ownerID: -1
   spawnItem: {fileID: 1551509244256120, guid: 6b159dd0a5fcfe348b3cc6e246d3dd55, type: 2}
 --- !u!114 &114781390372517416

@@ -14,7 +14,8 @@ public class PlayerDeathHandler : NetworkPlayerBase
             return;
         }
 
-        InGameHUDManager.instance.UpdateWeaponIcon("");
+        // Clear the power up icon
+        UIPowerUpIconManager.instance.ChangeIcon();
 
         // Transfer the camera to spectator camera
         NetworkManager.instance.GetPlayerCamera().enabled = false;

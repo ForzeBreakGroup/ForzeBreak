@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114825852367773410}
   - component: {fileID: 114775874176426094}
   m_Layer: 0
-  m_Name: BananaTrapModel
+  m_Name: BananaTrapComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 99398d43da6ed9e4cb95cbe91e8b7b5a, type: 2}
   m_StaticBatchInfo:
@@ -99,6 +100,7 @@ MonoBehaviour:
   componentOffset: {x: 0, y: 8, z: -5}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 1
+  icon: {fileID: 21300000, guid: 46f66e46ad17f91459a61af841e6a753, type: 3}
   ownerID: -1
   spawnItem: {fileID: 1191859872988502, guid: 89e10445a53b914499a429b950a59d23, type: 2}
 --- !u!114 &114825852367773410

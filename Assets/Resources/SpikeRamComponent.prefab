@@ -60,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b649d998326877247a54b7082c96b8d0, type: 2}
   m_StaticBatchInfo:
@@ -149,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: 0
+  announcerText: 
+  announcerClip: {fileID: 0}
 --- !u!114 &114550290271012296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,8 +168,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
-  otherCollider: {fileID: 0}
-  otherDmgSystem: {fileID: 0}
+  externalCollider: {fileID: 0}
 --- !u!114 &114617171055895212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,5 +184,6 @@ MonoBehaviour:
   componentOffset: {x: 0, y: 1.16, z: 4.21}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 2
+  icon: {fileID: 21300000, guid: 5be46e2b71181864bb6243741dbd5a08, type: 3}
   ownerID: -1
   spawnItem: {fileID: 0}
