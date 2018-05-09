@@ -51,6 +51,11 @@ public class NetworkManager : PunBehaviour
     public int numberOfLocalPlayers = 1;
 
     /// <summary>
+    /// For dynamically spawning vehicle using string name, must be exactly the same as in resources folder
+    /// </summary>
+    public string selectedVehicleName = "War_Buggy";
+
+    /// <summary>
     /// A static global reference to NetworkManager, creating an instance for singleton access pattern
     /// </summary>
     public static NetworkManager instance
