@@ -35,7 +35,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
     /// <summary>
     /// PowerUp UI Icon sprite prefab
     /// </summary>
-    [SerializeField] public Sprite icon { get; protected set; }
+    [SerializeField] public Sprite icon;
 
     /// <summary>
     /// Owner ID, derived from photon view ID

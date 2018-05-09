@@ -113,6 +113,7 @@ MonoBehaviour:
   componentOffset: {x: 0, y: 0, z: 0}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 1
+  icon: {fileID: 21300000, guid: c14eb2743c1b784448448103bedfa064, type: 3}
   ownerID: -1
   spawnItem: {fileID: 1246711710995508, guid: 17fad761fc8c12249870851d8a5b7796, type: 2}
 --- !u!114 &114704905508174542

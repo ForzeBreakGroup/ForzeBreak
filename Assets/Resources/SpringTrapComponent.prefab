@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114444587954350056}
   - component: {fileID: 114747556418260832}
   m_Layer: 0
-  m_Name: SpringTrapModel
+  m_Name: SpringTrapComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +87,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b649d998326877247a54b7082c96b8d0, type: 2}
   m_StaticBatchInfo:
@@ -121,6 +122,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1e3cca90b48cb441a8780465688c34a, type: 2}
   m_StaticBatchInfo:
@@ -197,5 +199,6 @@ MonoBehaviour:
   componentOffset: {x: 0, y: 5, z: -5}
   componentAngle: {x: 0, y: 0, z: 0}
   capacity: 1
+  icon: {fileID: 21300000, guid: 27d99578257a3a242900f99439595900, type: 3}
   ownerID: -1
   spawnItem: {fileID: 1521531376321712, guid: ae5daa1a6506dff4fafa3b463f5954a8, type: 2}

@@ -1850,8 +1850,9 @@ GameObject:
   - component: {fileID: 1278470251}
   - component: {fileID: 1278470250}
   - component: {fileID: 1278470249}
+  - component: {fileID: 1278470252}
   m_Layer: 5
-  m_Name: WeaponIcon
+  m_Name: PowerUpIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1883,20 +1884,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1278470247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a584659fb75be1140a6ef89e60eee650, type: 3}
+  m_Script: {fileID: 11500000, guid: 7495da534f32d6b4782de831f4462c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayedIcon: {fileID: 0}
-  resources:
-  - {fileID: 21300000, guid: 57036923c63a7f241b6ba45f5bdaa2d7, type: 3}
-  - {fileID: 21300000, guid: 91b1f7bddc2750d4590b4a1cc0c80896, type: 3}
-  - {fileID: 21300000, guid: 5be46e2b71181864bb6243741dbd5a08, type: 3}
-  - {fileID: 21300000, guid: 4e54ef839d227c748ad7fd81301e3504, type: 3}
-  - {fileID: 21300000, guid: 71f92535e57ba984098d73f944182c1b, type: 3}
-  - {fileID: 21300000, guid: e8f4203e0c3ca5544924b324d9c0bcbc, type: 3}
-  - {fileID: 21300000, guid: 76b3310f3d91b8c4ebd7f5cdb5634470, type: 3}
-  - {fileID: 21300000, guid: 46f66e46ad17f91459a61af841e6a753, type: 3}
-  - {fileID: 21300000, guid: 27d99578257a3a242900f99439595900, type: 3}
+  defaultIconImage: {fileID: 21300000, guid: 57036923c63a7f241b6ba45f5bdaa2d7, type: 3}
 --- !u!114 &1278470250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1930,6 +1921,24 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1278470247}
+--- !u!95 &1278470252
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1278470247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 813e8af3c06fe724b93264b77ddae194, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1316563338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,50 +2387,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1398349202617796, guid: 603fd97b9f237f1478775f8b11834c78, type: 2}
-      propertyPath: m_Name
-      value: MatchManager
+    - target: {fileID: 114614599394335134, guid: 603fd97b9f237f1478775f8b11834c78,
+        type: 2}
+      propertyPath: viewIdField
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114955724591072154, guid: 603fd97b9f237f1478775f8b11834c78,
+    - target: {fileID: 114614599394335134, guid: 603fd97b9f237f1478775f8b11834c78,
         type: 2}
-      propertyPath: playerCameraPrefab
-      value: 
-      objectReference: {fileID: 1071636056247922, guid: 2c2675f54f58f924888cb20762cb6730,
-        type: 2}
+      propertyPath: instantiationId
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 603fd97b9f237f1478775f8b11834c78, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1527577781 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1398349202617796, guid: 603fd97b9f237f1478775f8b11834c78,
-    type: 2}
-  m_PrefabInternal: {fileID: 1527577780}
---- !u!114 &1527577782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1527577781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 9
-  instantiationId: 9
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &1558636471
 Prefab:
   m_ObjectHideFlags: 0

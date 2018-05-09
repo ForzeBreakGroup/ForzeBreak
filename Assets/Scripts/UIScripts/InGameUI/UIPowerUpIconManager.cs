@@ -10,6 +10,7 @@ using UnityEngine.UI;
  */
 public class UIPowerUpIconManager : UIControl
 {
+    private Animator iconAnim;
     private Image displayedIcon;
 
     [SerializeField]
@@ -40,6 +41,7 @@ public class UIPowerUpIconManager : UIControl
     private void Init()
     {
         displayedIcon = GetComponent<Image>();
+        iconAnim = GetComponent<Animator>();
     }
 
     public void ChangeIcon(Sprite img = null)
@@ -50,7 +52,9 @@ public class UIPowerUpIconManager : UIControl
         }
         else
         {
+            Debug.Log(img.name);
             displayedIcon.sprite = img;
+            iconAnim.SetTrigger("PlayIconAnim");
         }
     }
 
