@@ -52,7 +52,6 @@ public class UIPowerUpIconManager : UIControl
         }
         else
         {
-            Debug.Log(img.name);
             displayedIcon.sprite = img;
             iconAnim.SetTrigger("PlayIconAnim");
         }
