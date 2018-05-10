@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class ParticleSystemAutoDestroy : MonoBehaviour
 {
-    ParticleSystem[] particleSystems;
+    ParticleSystem ps;
+
     private void Awake()
     {
-        float longestPSDuration = 0.0f;
-        particleSystems = GetComponentsInChildren<ParticleSystem>();
-        foreach(ParticleSystem ps in particleSystems)
-        {
-            float duration = ps.main.startLifetime.constantMax + ps.main.duration;
-            if (duration > longestPSDuration)
-            {
-                longestPSDuration = duration;
-            }
-        }
+        ps = GetComponent<ParticleSystem>();
     }
 
     private void Update()
     {
-        Debug.Log(GetComponent<ParticleSystem>().IsAlive(true));
+        if (!ps.IsAlive(true))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

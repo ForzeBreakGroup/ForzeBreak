@@ -34,6 +34,7 @@ public class UIPowerUpIconManager : UIControl
                 }
             }
 
+
             return powerUpIconManager;
         }
     }
