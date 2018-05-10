@@ -5,7 +5,7 @@ using UnityEngine;
 public class HotPotatoCollision : PowerUpCollision
 {
 
-    public GameObject explosionVFX;
+    // public GameObject explosionVFX;
     // Overriding ComponentCollision due to HotPotato will never be in contact points
     public override void ComponentCollision(Collision collision)
     {
@@ -15,6 +15,7 @@ public class HotPotatoCollision : PowerUpCollision
     public void Detonate()
     {
         PhotonView.RPC("RpcDetonatePotato", PhotonTargets.AllViaServer);
+        PlayVFX();
     }
 
     [PunRPC]
@@ -31,6 +32,6 @@ public class HotPotatoCollision : PowerUpCollision
             PhotonNetwork.Destroy(this.gameObject);
         }
 
-        Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
+        //Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
     }
 }
