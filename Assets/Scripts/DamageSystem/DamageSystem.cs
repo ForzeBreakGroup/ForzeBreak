@@ -50,6 +50,7 @@ public class DamageSystem : NetworkPlayerCollision
 
         // Calculate the normalized flying direction, and change Y axis to align with upward effect
         Vector3 normalizedPoint = (transform.root.position - collisionPoint).normalized;
+        normalizedPoint.y = 0.45f;
 
         // Using trajectory formula d = v^2/g sin 2 theta to predict the velocity needed to hit the desire location
         // Assuming the launching leviation is on flat surface, and theta is 45 degree, this will remove sin 2theta to 1
