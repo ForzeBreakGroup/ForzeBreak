@@ -17,7 +17,7 @@ public class HotPotatoComponent : PowerUpComponent
         hotPotato.GetComponent<HotPotatoMovement>().TransferHotPotato(GetComponent<PhotonView>().ownerId);
 
         // Destroy the component
-        UnloadPowerUp();
+        DecreaseCapacity();
     }
 
     public GameObject SpawnHotPotato()

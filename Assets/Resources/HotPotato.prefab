@@ -1054,9 +1054,8 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 1
+  VFX: {fileID: 1988872494310812, guid: ab8097982a41dac4c9241694fca9473a, type: 2}
   externalCollider: {fileID: 0}
-  explosionVFX: {fileID: 1988872494310812, guid: ab8097982a41dac4c9241694fca9473a,
-    type: 2}
 --- !u!114 &114042892430298710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1096,6 +1095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: 0
+  announcerText: 
+  announcerClip: {fileID: 0}
   detonateTimer: 20
 --- !u!114 &114975337125102826
 MonoBehaviour:
