@@ -47,6 +47,7 @@ public class UIPowerUpIconManager : MonoBehaviour
         anim = GetComponent<Animator>();
         rectTransform = GetComponent<RectTransform>();
         pos = rectTransform.anchoredPosition;
+        StartCoroutine(AnimateIconPosition());
     }
 
     public void ChangeIcon(Sprite img = null)
@@ -63,8 +64,13 @@ public class UIPowerUpIconManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    IEnumerator AnimateIconPosition()
     {
-        rectTransform.anchoredPosition = Vector3.Lerp(rectTransform.anchoredPosition, pos, 0.05f);
+        while(true)
+        {
+            yield return null;
+
+            rectTransform.anchoredPosition = Vector3.Lerp(rectTransform.anchoredPosition, pos, 0.05f);
+        }
     }
 }
