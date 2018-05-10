@@ -1,0 +1,33 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EMPParalysisEffect : MonoBehaviour
+{
+    private PSMeshRendererUpdater meshRendererUpdater;
+
+    private void Awake()
+    {
+        if (transform.root.tag == "Player")
+        {
+            // Find the main mesh of the vehicle
+            Transform mainBody = transform.root.Find("Model").Find("Body").Find("Main");
+
+            // Apply the paralysis effect on the material
+            meshRendererUpdater = GetComponent<PSMeshRendererUpdater>();
+            meshRendererUpdater.MeshObject = mainBody.gameObject;
+            meshRendererUpdater.UpdateMeshEffect();
+        }
+    }
+
+    public void DestroyAfterDuration(float duration)
+    {
+        StartCoroutine(DestroyAfterDelayTimer(duration));
+    }
+
+    IEnumerator DestroyAfterDelayTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(this.gameObject);
+    }
+}

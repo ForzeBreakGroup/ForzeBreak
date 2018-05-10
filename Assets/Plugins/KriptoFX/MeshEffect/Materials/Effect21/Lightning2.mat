@@ -45,4 +45,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DistortSpeed: {r: 2, g: -0.4, b: 5, a: 0.25}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 3, g: 0.90441173, b: 1.4680531, a: 1}
+    - _TintColor: {r: 0.0064519076, g: 0, b: 1.7759063, a: 1}

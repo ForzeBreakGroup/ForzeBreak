@@ -171,6 +171,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 0
+  VFX: {fileID: 1367286079832732, guid: 239d105b5454fc1469df6c8f4cbe2520, type: 2}
   externalCollider: {fileID: 0}
   activationDelay: 0.5
   disableDuration: 5
@@ -186,6 +187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: 0
+  announcerText: 
+  announcerClip: {fileID: 0}
 --- !u!135 &135457086583248902
 SphereCollider:
   m_ObjectHideFlags: 1
