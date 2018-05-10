@@ -146,7 +146,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 1
-  VFX: {fileID: 1145415042257692, guid: b906405a9284e564fb50dae4787bf22f, type: 2}
+  VFX: {fileID: 1989572304975000, guid: d518050bdc555e64c9a54d5861dbd00d, type: 2}
   externalCollider: {fileID: 0}
 --- !u!114 &114752361473582638
 MonoBehaviour:
