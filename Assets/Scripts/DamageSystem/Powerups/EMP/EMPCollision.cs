@@ -39,6 +39,7 @@ public class EMPCollision : PowerUpCollision
         {
             ApplyDamage();
             otherRoot.GetComponent<CarUserControl>().DisableCarControl(disableDuration);
+            Instantiate(VFX, otherRoot).GetComponent<EMPParalysisEffect>().DestroyAfterDuration(disableDuration);
         }
     }
 
