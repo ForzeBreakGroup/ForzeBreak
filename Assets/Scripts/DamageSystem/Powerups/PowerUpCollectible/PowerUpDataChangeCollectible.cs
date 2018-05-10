@@ -19,7 +19,7 @@ public class PowerUpDataChangeCollectible : PowerUpCollectible
             case "PowerUp - Health":
                 
                 DamageSystem ds = NetworkManager.instance.GetLocalPlayer().GetComponent<DamageSystem>();
-                ds.damageAmplifyPercentage = DamageSystem.DamageSystemConstants.baseDamagePercentage;
+                // ds.damageAmplifyPercentage = DamageSystem.DamageSystemConstants.baseDamagePercentage;
                 break;
 
             case "PowerUp - Energy":

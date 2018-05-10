@@ -27,7 +27,7 @@ public class UIDamageIconControl : UIControl
     protected override void UpdateUIControl()
     {
         base.UpdateUIControl();
-        displayedIcon.sprite = resources[(int)damageSystem.GetDamageThreshold()];
+        // displayedIcon.sprite = resources[(int)damageSystem.GetDamageThreshold()];
     }
 
     public override void EnableUIControl()
