@@ -6,7 +6,7 @@ public class UIControl : MonoBehaviour
 {
     protected bool controlEnabled = false;
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (controlEnabled)
         {
