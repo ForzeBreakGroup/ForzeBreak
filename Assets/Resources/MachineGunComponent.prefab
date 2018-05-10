@@ -1946,6 +1946,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559cf678cb44bc941aff3c347806a05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  componentAdjustment:
+  - VehicleName: War_Buggy
+    positionOffset: {x: 0, y: 0.8, z: 1.264}
+    angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 0.8, z: 1.264}
   componentAngle: {x: 0, y: 0, z: 0}

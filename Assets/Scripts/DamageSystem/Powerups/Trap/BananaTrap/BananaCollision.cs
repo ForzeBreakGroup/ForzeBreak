@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BananaCollision : PowerUpCollision
 {
-	protected override void CollisionEnter(Collision collision)
-	{
-		base.CollisionEnter (collision);
-		ApplyDamage();
+    protected override void CollisionEnter(Collision collision)
+    {
+        base.CollisionEnter (collision);
+        ApplyDamage();
         PowerUpMovement.DestroyPowerUpProjectile();
-	}
+        PlayVFX();
+    }
 }

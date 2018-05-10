@@ -12,6 +12,22 @@ using Photon;
  */
 public class PowerUpComponent : Photon.MonoBehaviour
 {
+    [System.Serializable]
+    private struct ComponentAdjustment
+    {
+        [SerializeField]
+        public string VehicleName;
+
+        [SerializeField]
+        public Vector3 positionOffset;
+
+        [SerializeField]
+        public Vector3 angleOffset;
+    };
+
+    [SerializeField]
+    ComponentAdjustment [] componentAdjustment;
+
     /// <summary>
     /// Player number indicated by the vehicle data, used for distinguishing the player controllers in local mode
     /// </summary>
@@ -59,9 +75,15 @@ public class PowerUpComponent : Photon.MonoBehaviour
     {
         enabled = transform.root.gameObject.GetPhotonView().isMine;
         playerNum = transform.root.gameObject.GetComponent<CarUserControl>().controllerNum;
-
-        transform.localPosition = componentOffset;
-        transform.localRotation = Quaternion.Euler(componentAngle);
+        foreach(ComponentAdjustment comp in componentAdjustment)
+        {
+            if (comp.VehicleName + "(Clone)" == transform.root.gameObject.name)
+            {
+                transform.localPosition = comp.positionOffset;
+                transform.localRotation = Quaternion.Euler(comp.angleOffset);
+                break;
+            }
+        }
     }
 
     protected virtual void OnPress()

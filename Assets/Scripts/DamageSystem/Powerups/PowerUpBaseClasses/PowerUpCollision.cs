@@ -10,6 +10,7 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
 
     [SerializeField] protected bool checkSelf = true;
     [SerializeField] protected bool checkPlayer = true;
+    [SerializeField] protected GameObject VFX;
 
     [HideInInspector]
     public GameObject externalCollider;
@@ -112,6 +113,14 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
     protected virtual void TriggerEnter(Collider other)
     {
 
+    }
+
+    protected virtual void PlayVFX()
+    {
+        if (VFX != null)
+        {
+            Instantiate(VFX, transform.position, Quaternion.identity);
+        }
     }
 
     public virtual void ComponentCollision(Collision collision)

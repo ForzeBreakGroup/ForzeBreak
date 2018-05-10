@@ -8,10 +8,12 @@ using UnityEngine.UI;
  * Description:
  * Update the Weapon UI
  */
-public class UIPowerUpIconManager : UIControl
+public class UIPowerUpIconManager : MonoBehaviour
 {
-    private Animator iconAnim;
+    private Animator anim;
     private Image displayedIcon;
+    private Vector3 pos;
+    private RectTransform rectTransform;
 
     [SerializeField]
     private Sprite defaultIconImage;
@@ -34,6 +36,7 @@ public class UIPowerUpIconManager : UIControl
                 }
             }
 
+
             return powerUpIconManager;
         }
     }
@@ -41,7 +44,10 @@ public class UIPowerUpIconManager : UIControl
     private void Init()
     {
         displayedIcon = GetComponent<Image>();
-        iconAnim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        rectTransform = GetComponent<RectTransform>();
+        pos = rectTransform.anchoredPosition;
+        StartCoroutine(AnimateIconPosition());
     }
 
     public void ChangeIcon(Sprite img = null)
@@ -53,12 +59,18 @@ public class UIPowerUpIconManager : UIControl
         else
         {
             displayedIcon.sprite = img;
-            iconAnim.SetTrigger("PlayIconAnim");
+            anim.SetTrigger("PlayIconAnim");
+            rectTransform.anchoredPosition = new Vector3(-Screen.width / 2, Screen.height / 2, 0);
         }
     }
 
-    public override void EnableUIControl()
+    IEnumerator AnimateIconPosition()
     {
-        base.EnableUIControl();
+        while(true)
+        {
+            yield return null;
+
+            rectTransform.anchoredPosition = Vector3.Lerp(rectTransform.anchoredPosition, pos, 0.05f);
+        }
     }
 }

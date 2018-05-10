@@ -168,6 +168,7 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
+  VFX: {fileID: 0}
   externalCollider: {fileID: 0}
 --- !u!114 &114617171055895212
 MonoBehaviour:
@@ -180,6 +181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb22f7fa87332e4aa41939cc0416d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  componentAdjustment:
+  - VehicleName: War_Buggy
+    positionOffset: {x: 0, y: 1.16, z: 4.21}
+    angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 1.16, z: 4.21}
   componentAngle: {x: 0, y: 0, z: 0}

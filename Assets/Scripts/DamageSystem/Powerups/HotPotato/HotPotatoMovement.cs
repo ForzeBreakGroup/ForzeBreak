@@ -15,7 +15,7 @@ public class HotPotatoMovement : PowerUpMovement
         // Lerp the target
         if (target != null)
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, target.transform.position + posOffset, Time.deltaTime * 10);
+            this.transform.position = Vector3.Lerp(this.transform.position, target.transform.position + posOffset.y * target.transform.up, 0.05f);
         }
     }
 
