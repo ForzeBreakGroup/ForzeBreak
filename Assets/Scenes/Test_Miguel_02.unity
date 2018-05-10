@@ -1193,6 +1193,60 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 537994012}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &624767710
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 11.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675047722089780, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 198724480985298798, guid: f92b92544c26c6d4dae5d7d228bc6f45,
+        type: 2}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 108877091281966436, guid: dd4388a95ca3fcd4daefebc85847fb69,
+        type: 2}
+    - target: {fileID: 198683948995161822, guid: f92b92544c26c6d4dae5d7d228bc6f45,
+        type: 2}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 108877091281966436, guid: dd4388a95ca3fcd4daefebc85847fb69,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f92b92544c26c6d4dae5d7d228bc6f45, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &693656283
 GameObject:
   m_ObjectHideFlags: 0
