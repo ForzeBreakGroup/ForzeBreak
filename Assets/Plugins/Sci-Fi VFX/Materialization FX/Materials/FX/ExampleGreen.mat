@@ -129,8 +129,8 @@ Material:
     - _BurnDistribution: 0.612
     - _Cutoff: 0
     - _DetailNormalMapScale: 1
-    - _Dissolve: 0
-    - _DissolveDistance: 0.184
+    - _Dissolve: 0.05
+    - _DissolveDistance: 0
     - _Distance: 0.187
     - _DistanceInWorld: 0
     - _Distribution: 0.1

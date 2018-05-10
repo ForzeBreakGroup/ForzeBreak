@@ -26,8 +26,7 @@ public class SpotLightForVehicle : MonoBehaviour {
                     Vector3[] positions = { transform.position, cars[i].transform.position };
                     line.SetPositions(positions);
                 }
-
-
+                
             }
         }
 	}

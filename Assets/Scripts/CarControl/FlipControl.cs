@@ -58,6 +58,8 @@ public class FlipControl : MonoBehaviour {
             canFlip = true;
         }
 
+
+
         //return
         if (flipInput == false)
             return;
@@ -72,13 +74,15 @@ public class FlipControl : MonoBehaviour {
 
                 FMODUnity.RuntimeManager.AttachInstanceToGameObject(flipSound, transform, GetComponent<Rigidbody>());
                 flipSound.start();
-
-                //StartCoroutine(FlipRotate(2,dir));
-                carRigidbody.AddForce(transform.up * upForce_wheelsGrounded, ForceMode.VelocityChange);
+                StartCoroutine(SelfRotationControl());
+                carRigidbody.AddForce(transform.up * (upForce_wheelsGrounded + 100f * carRigidbody.velocity.magnitude), ForceMode.Impulse);
+                
                 if (dir > 0)
-                    carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(-Vector3.forward * 1000f, ForceMode.Acceleration);
                 else
-                    carRigidbody.AddRelativeTorque(Vector3.forward * sideForce, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(Vector3.forward * 1000f, ForceMode.Acceleration);
+
+                carRigidbody.angularVelocity = new Vector3(carRigidbody.angularVelocity.x, 0, carRigidbody.angularVelocity.z);
 
             }
             //upside down condition
@@ -89,16 +93,43 @@ public class FlipControl : MonoBehaviour {
 
 
                 carRigidbody.AddForce(Vector3.up * upForce_overturned, ForceMode.VelocityChange);
-                if (dir > 0)
-                    carRigidbody.AddRelativeTorque(-Vector3.forward * 1000f, ForceMode.Acceleration);
-                else
-                    carRigidbody.AddRelativeTorque(Vector3.forward * 1000f, ForceMode.Acceleration);
+                StartCoroutine(SelfRotationControl());
+
             }
         }
 
     }
 
-    
+    IEnumerator SelfRotationControl()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        while(true)
+        {
+
+            yield return null;
+
+            if (!carController.IsAnyWheelGround)
+            {
+                RaycastHit hit;
+                Physics.Raycast(transform.position, Vector3.down, out hit, 3f, 1 << 18);
+                //transform.Rotate(-Vector3.Cross(hit.normal, transform.up), Vector3.Angle(hit.normal, transform.up), Space.Self);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quater)
+
+                //transform.Rotate(transform.worldToLocalMatrix * transform.forward, Vector3.Angle(Vector3.Cross(hit.normal, transform.forward), transform.right));
+                carRigidbody.angularVelocity = Vector3.zero;
+                //transform.Rotate(transform.worldToLocalMatrix * transform.forward, (Vector3.Angle(transform.right, hit.normal) - 90f)*0.3f, Space.Self);
+                //transform.Rotate(transform.worldToLocalMatrix * -transform.right, (Vector3.Angle(transform.forward, hit.normal) - 90f)*0.3f, Space.Self);
+                transform.Rotate(transform.worldToLocalMatrix * Vector3.Cross(transform.up, hit.normal), Vector3.Angle(transform.up, hit.normal)*0.3f, Space.Self);
+            }
+            else
+            {
+                break;
+            }
+
+        }
+
+    }
 
 
     //IEnumerator FlipRotate(float duration, float dir)

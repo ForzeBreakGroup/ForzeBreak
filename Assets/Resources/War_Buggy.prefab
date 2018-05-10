@@ -2213,7 +2213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipCD: 0.2
-  upForce_wheelsGrounded: 6
+  upForce_wheelsGrounded: 6000
   upForce_overturned: 3
   sideForce: 500
 --- !u!114 &114665485917076538
