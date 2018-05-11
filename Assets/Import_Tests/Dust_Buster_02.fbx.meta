@@ -4,36 +4,45 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Left_Back_Wheel
-    100004: Left_Back_Wheel1
-    100006: Left_Front_Wheel
-    100008: Left_Front_Wheel1
-    100010: Left_Side_Left_Wheel_Support_Front
+    100002: Dust_Buster_ExtraBody
+    100004: Dust_Buster_Main_Body
+    100006: Left_Back_Wheel
+    100008: Left_Back_Wheel1
+    100010: Left_Front_Wheel
+    100012: Left_Front_Wheel1
     400000: //RootNode
-    400002: Left_Back_Wheel
-    400004: Left_Back_Wheel1
-    400006: Left_Front_Wheel
-    400008: Left_Front_Wheel1
-    400010: Left_Side_Left_Wheel_Support_Front
-    2100000: lambert8
-    2100002: blinn16
-    2100004: lambert2
-    2100006: lambert1
-    2300000: Left_Back_Wheel
-    2300002: Left_Back_Wheel1
-    2300004: Left_Front_Wheel
-    2300006: Left_Front_Wheel1
-    2300008: Left_Side_Left_Wheel_Support_Front
-    3300000: Left_Back_Wheel
-    3300002: Left_Back_Wheel1
-    3300004: Left_Front_Wheel
-    3300006: Left_Front_Wheel1
-    3300008: Left_Side_Left_Wheel_Support_Front
-    4300000: Left_Back_Wheel
+    400002: Dust_Buster_ExtraBody
+    400004: Dust_Buster_Main_Body
+    400006: Left_Back_Wheel
+    400008: Left_Back_Wheel1
+    400010: Left_Front_Wheel
+    400012: Left_Front_Wheel1
+    2100000: Pipes
+    2100002: Main_Body1
+    2100004: Pipes1
+    2100006: Misc_Back_Stuff
+    2100008: Seats
+    2100010: Boosters
+    2100012: lambert8
+    2100014: blinn16
+    2300000: Dust_Buster_ExtraBody
+    2300002: Dust_Buster_Main_Body
+    2300004: Left_Back_Wheel
+    2300006: Left_Back_Wheel1
+    2300008: Left_Front_Wheel
+    2300010: Left_Front_Wheel1
+    3300000: Dust_Buster_ExtraBody
+    3300002: Dust_Buster_Main_Body
+    3300004: Left_Back_Wheel
+    3300006: Left_Back_Wheel1
+    3300008: Left_Front_Wheel
+    3300010: Left_Front_Wheel1
+    4300000: Dust_Buster_Main_Body
     4300002: Left_Front_Wheel
     4300004: Left_Front_Wheel1
-    4300006: Left_Back_Wheel1
-    4300008: Left_Side_Left_Wheel_Support_Front
+    4300006: Left_Back_Wheel
+    4300008: Left_Back_Wheel1
+    4300010: Dust_Buster_ExtraBody
   externalObjects: {}
   materials:
     importMaterials: 1
