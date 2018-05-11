@@ -90,8 +90,9 @@ public class ArrowIndicationSystem : Photon.MonoBehaviour
     private GameObject SpawnArrowToTrackPlayer(GameObject target)
     {
         // Create an arrow for this specific remote client
-        GameObject arrow = Instantiate(arrowIndicator, this.transform);
-        arrow.transform.localScale = new Vector3(1, 1, 1);
+        GameObject arrow = Instantiate(arrowIndicator, transform.position, Quaternion.identity);
+        arrow.transform.SetParent(transform);
+        //arrow.transform.localScale = new Vector3(1, 1, 1);
         arrow.GetComponent<TrackPlayer>().AssignTarget(target);
 
         return arrow;
