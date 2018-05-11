@@ -41,10 +41,6 @@ public class PlayerDeathHandler : NetworkPlayerBase
 
                 ExitGames.Client.Photon.Hashtable setKillCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", updateKillCount } };
                 killer.SetCustomProperties(setKillCount);
-				
-				if (killerId == (int)PhotonNetwork.player.ID) {
-					UIKillCountControl.instance.UpdateCount ();
-				}
 
                 Debug.Log("Player #" + killer.ID + " increased kill count to: " + killer.CustomProperties["KillCount"]);
             }

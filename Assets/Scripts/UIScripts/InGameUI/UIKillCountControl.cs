@@ -16,37 +16,49 @@ public class UIKillCountControl : MonoBehaviour
 
 	private bool needUpdate = false;
 
-	private static UIKillCountControl uiKillController;
-	public static UIKillCountControl instance
-	{
-		get
-		{
-			if (!uiKillController)
-			{
-				uiKillController = FindObjectOfType(typeof(UIKillCountControl)) as UIKillCountControl;
-				if (!uiKillController)
-				{
-					Debug.LogError("UIKillCountControl script must be attached to an active GameObject in scene");
-				}
-				else
-				{
-					uiKillController.Init();
-				}
-			}
+	private int initKillNum;
 
+//	private static UIKillCountControl uiKillController;
+//	public static UIKillCountControl instance
+//	{
+//		get
+//		{
+//			if (!uiKillController)
+//			{
+//				uiKillController = FindObjectOfType(typeof(UIKillCountControl)) as UIKillCountControl;
+//				if (!uiKillController)
+//				{
+//					Debug.LogError("UIKillCountControl script must be attached to an active GameObject in scene");
+//				}
+//				else
+//				{
+//					uiKillController.Init();
+//				}
+//			}
+//
+//
+//			return uiKillController;
+//		}
+//	}
 
-			return uiKillController;
-		}
-	}
-
-	private void Init()
+	private void Awake()
     {
         killCount = GetComponent<Text>();
 		oriPos = transform.position;
+		initKillNum = 0;
     }
 
 	private void Update()
 	{
+		if ((int)PhotonNetwork.player.CustomProperties ["KillCount"] != initKillNum) {
+			killCount.text = ((int)PhotonNetwork.player.CustomProperties ["KillCount"]).ToString ();
+			transform.localScale = new Vector3 (0.0f,0.0f,0.0f);
+			transform.position = new Vector3 (Screen.width*0.5f,Screen.height*0.5f,transform.position.z);
+			runBeginTime = Time.time;
+			needUpdate = true;
+			initKillNum = (int)PhotonNetwork.player.CustomProperties ["KillCount"];
+		}
+
 		if (needUpdate) {
 			if (Time.time <= runBeginTime + scale_1_time) {
 				float curScale = finalScale * (Time.time - runBeginTime) / scale_1_time;
@@ -62,12 +74,12 @@ public class UIKillCountControl : MonoBehaviour
 		}
 	}
 
-	public void UpdateCount()
-    {
-		killCount.text = ((int)PhotonNetwork.player.CustomProperties ["KillCount"]).ToString ();
-		transform.localScale = new Vector3 (0.0f,0.0f,0.0f);
-		transform.position = new Vector3 (Screen.width*0.5f,Screen.height*0.5f,transform.position.z);
-		runBeginTime = Time.time;
-		needUpdate = true;
-    }
+//	public void UpdateCount()
+//    {
+//		killCount.text = ((int)PhotonNetwork.player.CustomProperties ["KillCount"]).ToString ();
+//		transform.localScale = new Vector3 (0.0f,0.0f,0.0f);
+//		transform.position = new Vector3 (Screen.width*0.5f,Screen.height*0.5f,transform.position.z);
+//		runBeginTime = Time.time;
+//		needUpdate = true;
+//    }
 }
