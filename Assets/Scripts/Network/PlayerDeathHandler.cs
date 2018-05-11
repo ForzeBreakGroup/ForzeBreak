@@ -26,7 +26,7 @@ public class PlayerDeathHandler : NetworkPlayerBase
 
         // Suicide does not count
         if (killerId != victimId)
-        {
+		{
             // Different method of tracking kill score in online and offline mode
             if (NetworkManager.offlineMode)
             {
@@ -38,8 +38,13 @@ public class PlayerDeathHandler : NetworkPlayerBase
                 PhotonPlayer killer = PhotonPlayer.Find(killerId);
 
                 int updateKillCount = (int)killer.CustomProperties["KillCount"] + 1;
+
                 ExitGames.Client.Photon.Hashtable setKillCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", updateKillCount } };
                 killer.SetCustomProperties(setKillCount);
+				
+				if (killerId == (int)PhotonNetwork.player.ID) {
+					UIKillCountControl.instance.UpdateCount ();
+				}
 
                 Debug.Log("Player #" + killer.ID + " increased kill count to: " + killer.CustomProperties["KillCount"]);
             }
