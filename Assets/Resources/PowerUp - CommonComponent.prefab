@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: SpringTrapComponent
   powerUpCollected: 0
-  randomMode: 0
+  randomMode: 1
   powerUpTier: 2
 --- !u!114 &114510050334468594
 MonoBehaviour:
