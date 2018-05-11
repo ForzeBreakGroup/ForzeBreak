@@ -14,14 +14,16 @@ public class HotPotatoCollision : PowerUpCollision
 
     public void Detonate()
     {
-        PhotonView.RPC("RpcDetonatePotato", PhotonTargets.AllViaServer);
+        PhotonView.RPC("RpcDetonatePotato", PhotonTargets.All);
         PlayVFX();
     }
 
     [PunRPC]
     public void RpcDetonatePotato()
     {
-        if (PhotonView.isMine)
+        PhotonView rootPhotonView = transform.root.gameObject.GetPhotonView();
+
+        if (rootPhotonView.isMine)
         {
             // Moving the hot potato under the vehicle center, and apply damage
             this.transform.position = transform.parent.position;
@@ -29,7 +31,7 @@ public class HotPotatoCollision : PowerUpCollision
             ApplyDamage();
 
             // Destroy self
-            PhotonNetwork.Destroy(this.gameObject);
+            PowerUpMovement.DestroyPowerUpProjectile();
         }
 
         //Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
