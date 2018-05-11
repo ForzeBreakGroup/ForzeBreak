@@ -5,12 +5,14 @@ using UnityEngine;
 public class EMPParalysisEffect : MonoBehaviour
 {
     private PSMeshRendererUpdater meshRendererUpdater;
+    private GameObject playerInEffect;
 
     private void Awake()
     {
         if (transform.root.tag == "Player")
         {
             // Find the main mesh of the vehicle
+            playerInEffect = transform.root.gameObject;
             Transform mainBody = transform.root.Find("Model").Find("Body").Find("Main");
 
             // Apply the paralysis effect on the material
@@ -23,6 +25,12 @@ public class EMPParalysisEffect : MonoBehaviour
     public void DestroyAfterDuration(float duration)
     {
         StartCoroutine(DestroyAfterDelayTimer(duration));
+
+        // Disable the player control during the duration
+        if (playerInEffect != null)
+        {
+            playerInEffect.GetComponent<CarUserControl>().DisableCarControl(duration);
+        }
     }
 
     IEnumerator DestroyAfterDelayTimer(float duration)

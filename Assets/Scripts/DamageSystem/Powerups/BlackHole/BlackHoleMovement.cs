@@ -33,6 +33,4 @@ public class BlackHoleMovement : PowerUpMovement
         yield return new WaitForSeconds(5);
         DestroyPowerUpProjectile();
     }
-
-
 }
