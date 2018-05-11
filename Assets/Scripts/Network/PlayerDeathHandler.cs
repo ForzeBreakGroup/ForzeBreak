@@ -24,8 +24,6 @@ public class PlayerDeathHandler : NetworkPlayerBase
         // Activate respawn timer on spectator camera
         spectCam.GetComponent<RespawnControl>().StartRespawnTimer(victimId);
 
-		Debug.Log ("killer id " + killerId);
-		Debug.Log ("player id " + PhotonNetwork.player.ID);
         // Suicide does not count
         if (killerId != victimId)
 		{
