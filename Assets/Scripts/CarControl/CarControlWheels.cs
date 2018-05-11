@@ -48,6 +48,10 @@ public class CarControlWheels : NetworkPlayerMovement
     /// </summary>
     [SerializeField] private float topspeed = 15;
 
+    [SerializeField] private float driveDamper = 0.05f;
+    [SerializeField] private float noInputDamper = 0.01f;
+    [SerializeField] private bool wheelDrive = true;
+
 
     private Quaternion[] wheelMeshLocalRotations;
     private float steerAngle;
@@ -71,11 +75,6 @@ public class CarControlWheels : NetworkPlayerMovement
     {
         base.Awake();
 
-        wheelMeshLocalRotations = new Quaternion[4];
-        for (int i = 0; i < 4; i++)
-        {
-            wheelMeshLocalRotations[i] = wheelMeshes[i].transform.localRotation;
-        }
         wheelColliders[0].attachedRigidbody.centerOfMass = centreOfMassOffset;
         
 
@@ -101,14 +100,19 @@ public class CarControlWheels : NetworkPlayerMovement
         IsWheelsGround = true;
         IsAnyWheelGround = false;
         //apply new position and rotation for wheel models. and update two wheel ground parameters.
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < wheelColliders.Length; i++)
         {
             Quaternion quat;
             Vector3 position;
             wheelColliders[i].GetWorldPose(out position, out quat);
-            wheelMeshes[i].transform.position = position;
-            wheelMeshes[i].transform.rotation = quat;
-
+            if(i<wheelMeshes.Length)
+            {
+                if(wheelMeshes[i] != null)
+                {
+                    wheelMeshes[i].transform.position = position;
+                    wheelMeshes[i].transform.rotation = quat;
+                }
+            }
             WheelHit wheelhit;
             wheelColliders[i].GetGroundHit(out wheelhit);
             if (wheelhit.normal == Vector3.zero)
@@ -117,6 +121,11 @@ public class CarControlWheels : NetworkPlayerMovement
                 IsAnyWheelGround = true;
         }
 
+
+        if(!IsAnyWheelGround && !wheelDrive)
+        {
+            carRigidbody.AddTorque(transform.up * steering*3f, ForceMode.Acceleration);
+        }
 
         //clamp input values
         steering = Mathf.Clamp(steering, -1, 1);
@@ -143,7 +152,7 @@ public class CarControlWheels : NetworkPlayerMovement
     private void CapSpeed()
     {
         if (!IsBoosting && MaxSpeed > topspeed)
-            MaxSpeed = Mathf.Lerp(MaxSpeed, topspeed, 0.2f);
+            MaxSpeed = Mathf.Lerp(MaxSpeed, topspeed, 0.05f);
 
 
 
@@ -172,43 +181,108 @@ public class CarControlWheels : NetworkPlayerMovement
         //if no input, stop the car gradually
         if(accel<0.01f&&footbrake<0.01f&&accel>-0.01f&&footbrake>-0.01f&&IsWheelsGround)
         {
-            carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, 0.01f);
+            carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, noInputDamper);
         }
 
         //if moving backward, stop first by lerp then apply forward force
         if (CurrentSpeed > 0.1f && Vector3.Angle(transform.forward, carRigidbody.velocity) > 170f)
         {
-            if (IsWheelsGround)
+            if(!wheelDrive)
             {
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * 0.1f);
-                carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+                if (IsWheelsGround)
+                {
+                    carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * driveDamper);
+                    carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+                }
+                else
+                {
+                    carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * driveDamper);
+                    carRigidbody.AddForce(new Vector3(transform.forward.x, 0f, transform.forward.z) * accel * currentTorque, ForceMode.Acceleration);
+                }
+
+            }
+            else
+            {
+                if (IsWheelsGround)
+                {
+                    carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, accel * driveDamper);
+                    carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+                }
 
             }
         }
         else
         {
-            wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
-            wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = accel;
-            if (IsWheelsGround)
-                carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+            for(int i=0;i<wheelColliders.Length;i++)
+            {
+                wheelColliders[i].brakeTorque  = 0f;
+                wheelColliders[i].motorTorque  = accel;
+            }
+            if (!wheelDrive)
+            {
+                if (IsWheelsGround)
+                {
+                    carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+                }
+                else
+                {
+                    carRigidbody.AddForce(new Vector3(transform.forward.x, 0f, transform.forward.z) * accel * currentTorque, ForceMode.Acceleration);
+                }
+            }
+            else
+            {
+                if (IsWheelsGround)
+                {
+                    carRigidbody.AddForce(transform.forward * accel * currentTorque, ForceMode.Acceleration);
+                }
+
+            }
+
         }
 
         //if moving forward, stop first by lerp then apply backward force
         if (CurrentSpeed > 0.1f && Vector3.Angle(transform.forward, carRigidbody.velocity) < 50f)
         {
-            if (IsWheelsGround)
+            if (!wheelDrive)
             {
-                carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * 0.05f);
-                carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
-
+                if (IsWheelsGround)
+                {
+                    carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * driveDamper);
+                    carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+                }
+                else
+                {
+                    carRigidbody.AddForce(-new Vector3(transform.forward.x, 0f, transform.forward.z) * reverseTorque * footbrake, ForceMode.Acceleration);
+                }
+            }
+            else
+            {
+                if (IsWheelsGround)
+                {
+                    carRigidbody.velocity = Vector3.Lerp(carRigidbody.velocity, Vector3.zero, footbrake * driveDamper);
+                    carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+                }
             }
         }
         else if (footbrake > 0)
         {
-            wheelColliders[0].brakeTorque = wheelColliders[1].brakeTorque = wheelColliders[2].brakeTorque = wheelColliders[3].brakeTorque = 0f;
-            wheelColliders[0].motorTorque = wheelColliders[1].motorTorque = wheelColliders[2].motorTorque = wheelColliders[3].motorTorque = footbrake;
-            if (IsWheelsGround)
-                carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+            for (int i = 0; i < wheelColliders.Length; i++)
+            {
+                wheelColliders[i].brakeTorque = 0f;
+                wheelColliders[i].motorTorque = -footbrake;
+            }
+            if (!wheelDrive)
+            {
+                if(IsWheelsGround)
+                    carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+                else
+                    carRigidbody.AddForce(-new Vector3(transform.forward.x, 0f, transform.forward.z) * reverseTorque * footbrake, ForceMode.Acceleration);
+            }
+            else
+            {
+                if (IsWheelsGround)
+                    carRigidbody.AddForce(-transform.forward * reverseTorque * footbrake, ForceMode.Acceleration);
+            }
         }
 
     }

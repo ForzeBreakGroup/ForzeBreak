@@ -9,6 +9,9 @@ using UnityEngine;
  */
 public class BoostControl : MonoBehaviour {
 
+    enum BoostType { Up, Forward };
+
+    [SerializeField] private BoostType boostType = BoostType.Forward;
     public float boostPower = 30.0f;
     public float energy = 100.0f;
     public float boostMaxSpeed = 25.0f;
@@ -17,7 +20,7 @@ public class BoostControl : MonoBehaviour {
     public float maxEnergy = 100.0f;
 
 
-    private BoostEffectControl boostEffect;
+    private BoostEffectControl[] boostEffects;
     private Rigidbody carRigidbody;
     private CarControlWheels carController;
     private CarUserControl carControlInput;
@@ -26,8 +29,9 @@ public class BoostControl : MonoBehaviour {
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();
-        boostEffect = GetComponentInChildren<BoostEffectControl>();
         carControlInput = GetComponent<CarUserControl>();
+
+        boostEffects = transform.GetComponentsInChildren<BoostEffectControl>();
     }
 
     private void LateUpdate()
@@ -51,12 +55,22 @@ public class BoostControl : MonoBehaviour {
             carController.ApplyDrive(1,0);
             carController.IsBoosting = true;
             carController.MaxSpeed = boostMaxSpeed;
-            carRigidbody.AddForce(transform.forward * boostPower, ForceMode.Acceleration);
+            if(boostType==BoostType.Forward)
+                carRigidbody.AddForce(transform.forward * boostPower, ForceMode.Acceleration);
+            else if(boostType == BoostType.Up)
+            {
+                carRigidbody.AddForce(transform.up * boostPower, ForceMode.Acceleration);
+                carRigidbody.AddTorque(Vector3.Cross(transform.up, Vector3.up) * (Vector3.Angle(transform.up, Vector3.up)), ForceMode.Acceleration);
+            }
+
             energy = energy < 0 ? 0 : energy - energyDecay;
 
-            if (boostEffect != null)
+            if (boostEffects.Length != 0)
             {
-                boostEffect.UpdateColorBySpeed(true);
+                foreach(BoostEffectControl bec in boostEffects)
+                {
+                    bec.UpdateColorBySpeed(true);
+                }
             }
         }
         else
@@ -72,9 +86,12 @@ public class BoostControl : MonoBehaviour {
         if (energy < maxEnergy)
             energy += energyRecover;
 
-        if (boostEffect != null)
+        if (boostEffects.Length != 0)
         {
-            boostEffect.UpdateColorBySpeed(false);
+            foreach (BoostEffectControl bec in boostEffects)
+            {
+                bec.UpdateColorBySpeed(false);
+            }
         }
     }
 

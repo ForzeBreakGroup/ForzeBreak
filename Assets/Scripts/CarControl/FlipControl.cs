@@ -30,6 +30,10 @@ public class FlipControl : MonoBehaviour {
     /// </summary>
     [SerializeField] private float sideForce = 1000f;
 
+    [SerializeField] private bool selfAdjust = true;
+
+    [SerializeField] private float selfAdjustDelay = 0.5f;
+    [SerializeField] private float selfAdjustDetectDistance = 2f;
     private bool canFlip = true;
 
     private float nextFlip = 0.0f;
@@ -74,13 +78,15 @@ public class FlipControl : MonoBehaviour {
 
                 FMODUnity.RuntimeManager.AttachInstanceToGameObject(flipSound, transform, GetComponent<Rigidbody>());
                 flipSound.start();
-                StartCoroutine(SelfRotationControl());
+
+                if(selfAdjust)
+                    StartCoroutine(SelfRotationControl());
                 carRigidbody.AddForce(transform.up * (upForce_wheelsGrounded + 100f * carRigidbody.velocity.magnitude), ForceMode.Impulse);
                 
                 if (dir > 0)
-                    carRigidbody.AddRelativeTorque(-Vector3.forward * 1000f, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(-Vector3.forward * sideForce, ForceMode.Acceleration);
                 else
-                    carRigidbody.AddRelativeTorque(Vector3.forward * 1000f, ForceMode.Acceleration);
+                    carRigidbody.AddRelativeTorque(Vector3.forward * sideForce, ForceMode.Acceleration);
 
                 carRigidbody.angularVelocity = new Vector3(carRigidbody.angularVelocity.x, 0, carRigidbody.angularVelocity.z);
 
@@ -102,25 +108,30 @@ public class FlipControl : MonoBehaviour {
 
     IEnumerator SelfRotationControl()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(selfAdjustDelay);
 
         while(true)
         {
-
             yield return null;
 
             if (!carController.IsAnyWheelGround)
             {
                 RaycastHit hit;
-                Physics.Raycast(transform.position, Vector3.down, out hit, 3f, 1 << 18);
-                //transform.Rotate(-Vector3.Cross(hit.normal, transform.up), Vector3.Angle(hit.normal, transform.up), Space.Self);
-                //transform.rotation = Quaternion.Lerp(transform.rotation, Quater)
+                Physics.Raycast(transform.position, Vector3.down, out hit, selfAdjustDetectDistance, 1 << 18);
 
-                //transform.Rotate(transform.worldToLocalMatrix * transform.forward, Vector3.Angle(Vector3.Cross(hit.normal, transform.forward), transform.right));
-                carRigidbody.angularVelocity = Vector3.zero;
-                //transform.Rotate(transform.worldToLocalMatrix * transform.forward, (Vector3.Angle(transform.right, hit.normal) - 90f)*0.3f, Space.Self);
-                //transform.Rotate(transform.worldToLocalMatrix * -transform.right, (Vector3.Angle(transform.forward, hit.normal) - 90f)*0.3f, Space.Self);
-                transform.Rotate(transform.worldToLocalMatrix * Vector3.Cross(transform.up, hit.normal), Vector3.Angle(transform.up, hit.normal)*0.3f, Space.Self);
+                if(hit.transform != null)
+                {
+                    //transform.Rotate(-Vector3.Cross(hit.normal, transform.up), Vector3.Angle(hit.normal, transform.up), Space.Self);
+                    //transform.rotation = Quaternion.Lerp(transform.rotation, Quater)
+
+                    //transform.Rotate(transform.worldToLocalMatrix * transform.forward, Vector3.Angle(Vector3.Cross(hit.normal, transform.forward), transform.right));
+                    //carRigidbody.angularVelocity = Vector3.zero;
+                    //transform.Rotate(transform.worldToLocalMatrix * transform.forward, (Vector3.Angle(transform.right, hit.normal) - 90f)*0.3f, Space.Self);
+                    //transform.Rotate(transform.worldToLocalMatrix * -transform.right, (Vector3.Angle(transform.forward, hit.normal) - 90f)*0.3f, Space.Self);
+                    //transform.Rotate(transform.worldToLocalMatrix * Vector3.Cross(transform.up, hit.normal), Vector3.Angle(transform.up, hit.normal) * 0.2f, Space.Self);
+
+                    carRigidbody.AddTorque(Vector3.Cross(transform.up, Vector3.up) * (Vector3.Angle(transform.up, Vector3.up))*10f, ForceMode.Acceleration);
+                }
             }
             else
             {

@@ -113,6 +113,18 @@ MonoBehaviour:
   - VehicleName: War_Buggy
     positionOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Dust_Buster
+    positionOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Hover_Car
+    positionOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Stream_Breaker
+    positionOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Prototype_Tank
+    positionOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 0, z: 0}
   componentAngle: {x: 0, y: 0, z: 0}

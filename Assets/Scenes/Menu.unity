@@ -208,7 +208,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &157286367
 MonoBehaviour:
@@ -355,7 +355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &220375540
 GameObject:
@@ -1626,7 +1626,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &770032798
 MonoBehaviour:
@@ -3442,7 +3442,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4779005729031822, guid: f06ce1498daa68f4bac88c448296c823, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
         type: 2}
@@ -3528,6 +3528,11 @@ Prefab:
         type: 2}
       propertyPath: gameVersion
       value: 0.1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638900475326966, guid: f06ce1498daa68f4bac88c448296c823,
+        type: 2}
+      propertyPath: selectedVehicleName
+      value: Tank_Wheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f06ce1498daa68f4bac88c448296c823, type: 2}
@@ -5078,7 +5083,7 @@ Transform:
   m_Children:
   - {fileID: 1037355269}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1810860818
 MonoBehaviour:
@@ -5228,7 +5233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 69.499, y: -133.289, z: -140.36801}
 --- !u!1 &1907259222
 GameObject:
@@ -5606,7 +5611,7 @@ RectTransform:
   - {fileID: 1717442693}
   - {fileID: 822342385}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

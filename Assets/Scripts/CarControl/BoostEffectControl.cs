@@ -8,7 +8,7 @@ using UnityEngine.PostProcessing;
  * Description:
  * Control the physical boosting effect.
  */
-class BoostEffectControl : Photon.MonoBehaviour
+public class BoostEffectControl : Photon.MonoBehaviour
 {
     public ParticleSystem[] EngineParticleSystems;
     public float[] MaxParticleSystemsAlpha;

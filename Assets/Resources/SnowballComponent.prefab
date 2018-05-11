@@ -95,8 +95,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1876102304804648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.912193, y: -2.5119514, z: -22.931456}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalPosition: {x: 6.79, y: 0.93, z: 0.96}
+  m_LocalScale: {x: 0.24999997, y: 0.24999997, z: 0.24999997}
   m_Children:
   - {fileID: 4455073630576744}
   - {fileID: 4947160072055216}
@@ -143,6 +143,18 @@ MonoBehaviour:
   componentAdjustment:
   - VehicleName: War_Buggy
     positionOffset: {x: 0, y: 2.1, z: 3.56}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Dust_Buster
+    positionOffset: {x: 0, y: 0.31, z: 1.36}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Hover_Car
+    positionOffset: {x: 0, y: 0.53, z: 1.88}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Stream_Breaker
+    positionOffset: {x: 0, y: 0.61, z: 1.42}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Prototype_Tank
+    positionOffset: {x: 0, y: 0.15, z: 0.32}
     angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 2.1, z: 3.56}

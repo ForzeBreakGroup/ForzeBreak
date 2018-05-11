@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4834689960546766}
   - component: {fileID: 33356686190222926}
   - component: {fileID: 23299457496581714}
-  - component: {fileID: 95611831123877076}
   - component: {fileID: 114471740487680310}
   - component: {fileID: 114661561252943162}
   m_Layer: 0
@@ -37,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745141785633812}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.020399, y: 0.36, z: 6.057}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.79, y: 1.08, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,24 +85,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745141785633812}
   m_Mesh: {fileID: 4300000, guid: 64859103bb52fe048952258af590519b, type: 3}
---- !u!95 &95611831123877076
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1745141785633812}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 64859103bb52fe048952258af590519b, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114471740487680310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +124,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentAdjustment:
   - VehicleName: War_Buggy
-    positionOffset: {x: 0, y: 3, z: 5}
+    positionOffset: {x: 0, y: 2.2, z: 4}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Dust_Buster
+    positionOffset: {x: 0, y: 0.4, z: 1.28}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Hover_Car
+    positionOffset: {x: 0, y: 0.73, z: 1.82}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Stream_Breaker
+    positionOffset: {x: 0, y: 0.4, z: 1.6}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Prototype_Tank
+    positionOffset: {x: 0, y: 0.2, z: 0.33}
     angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 3, z: 5}

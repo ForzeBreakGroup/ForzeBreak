@@ -55,6 +55,7 @@ public class LobbyUIControl : MonoBehaviour
     public void OnClickPlayerReady()
     {
         LobbyManager.instance.OnPlayerClickReady();
+        NetworkManager.instance.selectedVehicleName = VehicleSelectionControl.instance.GetSelectVehicle();
     }
     #endregion
 }

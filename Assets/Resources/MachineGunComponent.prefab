@@ -879,8 +879,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1409448748699910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.408, z: 1.264}
-  m_LocalScale: {x: 2.5, y: 2, z: 2}
+  m_LocalPosition: {x: 6.79, y: 0.972, z: 0.57}
+  m_LocalScale: {x: 2.4999998, y: 2, z: 2}
   m_Children:
   - {fileID: 4281280063214944}
   - {fileID: 4427388616417850}
@@ -1950,10 +1950,22 @@ MonoBehaviour:
   - VehicleName: War_Buggy
     positionOffset: {x: 0, y: 0.8, z: 1.264}
     angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Dust_Buster
+    positionOffset: {x: 0, y: 0.2, z: 0.88}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Hover_Car
+    positionOffset: {x: 0, y: 0.65, z: 0.95}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Stream_Breaker
+    positionOffset: {x: 0, y: 0.48, z: 1}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - VehicleName: Prototype_Tank
+    positionOffset: {x: 0, y: 0.164, z: 0.19}
+    angleOffset: {x: 0, y: 0, z: 0}
   playerNum: 0
   componentOffset: {x: 0, y: 0.8, z: 1.264}
   componentAngle: {x: 0, y: 0, z: 0}
-  capacity: 10
+  capacity: 5
   icon: {fileID: 21300000, guid: 91b1f7bddc2750d4590b4a1cc0c80896, type: 3}
   ownerID: -1
   spawnItem: {fileID: 1261805292484670, guid: 48b168effc5a78243889b7453466811f, type: 2}

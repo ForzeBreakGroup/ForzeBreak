@@ -7602,9 +7602,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: 100
-  ExistingTime: 3
+  ExistingTime: 2
   ExistingTimeHooked: 15
-  forceOnRope: 10000
+  forceOnRope: 6000
   source: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &114440261512266066
@@ -7619,6 +7619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: 0
+  announcerText: 
+  announcerClip: {fileID: 0}
 --- !u!114 &114888806615463124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7630,11 +7632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b91d420ea211245baa82f908ad4edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 200
+  damage: 0
   damageRadius: 10
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 1
+  VFX: {fileID: 0}
   externalCollider: {fileID: 0}
 --- !u!114 &114918948604927160
 MonoBehaviour:

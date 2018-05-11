@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114623979966087772}
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   EditorEvents:
   - {fileID: 114950606984772834}
   - {fileID: 114537147692586186}
@@ -26,9 +26,9 @@ MonoBehaviour:
   - {fileID: 114234708622598766}
   - {fileID: 114788048995954412}
   - {fileID: 114223068718077450}
-  MasterBankRef: {fileID: 114024232837839924}
+  MasterBankRef: {fileID: 114346328156974866}
   StringsBankRef: {fileID: 114623979966087772}
-  stringsBankWriteTime: 636602646326415854
+  stringsBankWriteTime: 636602651531759324
   cacheVersion: 2
 --- !u!114 &114003303477134806
 MonoBehaviour:
@@ -74,7 +74,7 @@ MonoBehaviour:
   Path: event:/SFX_NonDiegetic/SFX_SelectConfirm
   guid: c93c3c3e50c6064fa87d300e017b1ad3
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 4997376
-  Exists: 1
+  Exists: 0
 --- !u!114 &114032236928433230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +300,21 @@ MonoBehaviour:
   - Name: 
     Value: 4937280
   Exists: 1
+--- !u!114 &114122113071043486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114123058280658086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,12 +519,12 @@ MonoBehaviour:
   Path: event:/BGM/BGM
   guid: cf9921af7153f94cb38f1380c26a6206
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114668413049146696}
+  - {fileID: 114281948478957756}
   MinDistance: 0
   MaxDistance: 0
   Length: 354500
@@ -557,7 +572,7 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_Explosion
   guid: 607a81ba9a84504aa11e0eef82bbe17f
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -632,12 +647,12 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_VehicleEngine
   guid: e35c0203058d8642bf92adcf9fefacc3
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114505730262348424}
+  - {fileID: 114122113071043486}
   MinDistance: 1
   MaxDistance: 20
   Length: 5000
@@ -668,6 +683,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114281948478957756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Stage
   Min: 0
   Max: 1
   Default: 0
@@ -794,6 +824,25 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 4937280
+  Exists: 1
+--- !u!114 &114346328156974866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: G:\Unity\Project\ForzeBreak\Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636602651531729238
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 4997376
   Exists: 1
 --- !u!114 &114350681775033838
 MonoBehaviour:
@@ -997,7 +1046,7 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_Cannon
   guid: c92599351273424f8adb625172ed332d
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1019,7 +1068,7 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_MissileLaunch
   guid: 329749426ed4ad4da7e36ca86667945f
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1361,7 +1410,7 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_VehicleFlip
   guid: 242d745959d8c447863b2293ec453669
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1451,7 +1500,7 @@ MonoBehaviour:
   Path: event:/SFX_Diegetic/SFX_PowerupPickup
   guid: 4208b4f62ab48c4b81bc5d0eb8bb775f
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1595,7 +1644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636602646326415854
+  lastModified: 636602651531759324
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -1683,7 +1732,7 @@ MonoBehaviour:
   Path: event:/SFX_NonDiegetic/SFX_GameOver
   guid: 2c5fd6e4fc2fa34c93f0e11c52a9783d
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2005,7 +2054,7 @@ MonoBehaviour:
   Path: snapshot:/Mute
   guid: 6f79bfb9ed120d44b8ffea3d8d717dda
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -2397,7 +2446,7 @@ MonoBehaviour:
   Path: event:/SFX_NonDiegetic/SFX_SwitchHover
   guid: 08b0bd6c8b419f4dafbef089313a63ab
   Banks:
-  - {fileID: 114024232837839924}
+  - {fileID: 114346328156974866}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

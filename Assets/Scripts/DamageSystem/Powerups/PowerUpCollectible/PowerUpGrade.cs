@@ -36,6 +36,7 @@ public class PowerUpGrade
 		StaticData.SPRINGTRAP_COMPONENT,
         StaticData.BLACKHOLE_COMPONENT,
         StaticData.EMP_COMPONENT,
+        StaticData.GRAPPLINGHOOK_COMPONENT
     };
 
     /// <summary>
