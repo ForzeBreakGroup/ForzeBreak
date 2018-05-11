@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 33993460289846090}
   - component: {fileID: 23347197060286672}
   m_Layer: 0
-  m_Name: Buggy_2
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2140,13 +2140,7 @@ MonoBehaviour:
     type: 2}
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
-  damageAmplifyPercentage: 100
-  healthyThreshold: 150
-  lightlyDamageThreshold: 250
-  heavilyDamageThreshold: 375
   enableLog: 0
-  upwardEffect: 0.45
-  enableAmplifyDamage: 0
 --- !u!114 &114746530151634126
 MonoBehaviour:
   m_ObjectHideFlags: 1

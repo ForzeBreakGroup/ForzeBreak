@@ -33,8 +33,9 @@ public class BlackHoleCollision : PowerUpCollision
         // Change the collider to trigger
         blackHoleCollider.isTrigger = true;
         ((SphereCollider)blackHoleCollider).radius = blackHoleRadius;
-
         ((BlackHoleMovement)PowerUpMovement).EnableBlackHole();
+        transform.Find("BlackHoleCoreEffect").gameObject.SetActive(false);
+        PlayVFX();
     }
 
     private void OnTriggerEnter(Collider other)

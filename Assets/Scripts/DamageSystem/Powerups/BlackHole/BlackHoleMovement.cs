@@ -6,9 +6,6 @@ public class BlackHoleMovement : PowerUpMovement
 {
     private Rigidbody rb;
 
-    [SerializeField]
-    private GameObject blackHoleEffect;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,7 +14,6 @@ public class BlackHoleMovement : PowerUpMovement
 
     public void EnableBlackHole()
     {
-        Instantiate(blackHoleEffect, transform);
         StartCoroutine(DisableBlackHole());
     }
 
@@ -33,6 +29,4 @@ public class BlackHoleMovement : PowerUpMovement
         yield return new WaitForSeconds(5);
         DestroyPowerUpProjectile();
     }
-
-
 }

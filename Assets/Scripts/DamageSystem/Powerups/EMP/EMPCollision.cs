@@ -5,48 +5,47 @@ using UnityEngine;
 public class EMPCollision : PowerUpCollision
 {
     [SerializeField]
-    private float activationDelay = 0.5f;
+    private float EMPRadius = 20;
+
+    Collider empCollider;
+    Rigidbody rb;
 
     [SerializeField]
-    private float disableDuration = 5f;
+    private GameObject EMPParalysisVFX;
 
-    private SphereCollider triggerRange;
-    private BoxCollider landingCollider;
+    [SerializeField]
+    private float paralysisDuration = 1.0f;
+
+    private bool isInEffect = true;
 
     private void Awake()
     {
-        triggerRange = GetComponent<SphereCollider>();
-        landingCollider = GetComponent<BoxCollider>();
-
-        // Disable trigger range collider until it lands
-        triggerRange.enabled = false;
+        rb = GetComponent<Rigidbody>();
+        empCollider = GetComponent(typeof(Collider)) as Collider;
     }
 
     protected override void CollisionEnter(Collision collision)
     {
-        base.CollisionEnter(collision);
-        GetComponent<Rigidbody>().isKinematic = true;
+        // Make the black hole as kinetic
+        rb.useGravity = false;
+        rb.isKinematic = true;
 
-        StartCoroutine(ActivateEMP());
+        // Change the collider to trigger
+        empCollider.isTrigger = true;
+        ((SphereCollider)empCollider).radius = EMPRadius;
+        PlayVFX();
     }
 
-    protected override void TriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        base.TriggerEnter(other);
-
-        Transform otherRoot = other.transform.root;
-        if (otherRoot.tag == "Player" && otherRoot.gameObject.GetPhotonView().isMine)
+        if (other.transform.root.tag == "Player")
         {
-            ApplyDamage();
-            otherRoot.GetComponent<CarUserControl>().DisableCarControl(disableDuration);
-        }
-    }
+            // Remove the powerup holding
+            PhotonView view = other.transform.root.gameObject.GetPhotonView();
+            view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
 
-    IEnumerator ActivateEMP()
-    {
-        landingCollider.enabled = false;
-        checkPlayer = true;
-        yield return new WaitForSeconds(activationDelay);
-        triggerRange.enabled = true;
+            // Apply paralysis effect
+            Instantiate(EMPParalysisVFX, other.transform).GetComponent<EMPParalysisEffect>().DestroyAfterDuration(paralysisDuration);
+        }
     }
 }
