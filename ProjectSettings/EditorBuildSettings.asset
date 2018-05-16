@@ -17,12 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatchResult.unity
     guid: 664cb1e0c04bf5847a2e059d0fa3202c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test_Miguel.unity
     guid: 8e0dfee18a948a342961b1b0121feb20
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test_Ring2.unity
     guid: 13964776d6b8a804c9ef10530ab865af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test_Miguel_02.unity
     guid: 754e86a82aef1ec4abb1862837e0dbaf
+  m_configObjects: {}

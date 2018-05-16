@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 33960925696626212}
   - component: {fileID: 23318304282720602}
   m_Layer: 0
-  m_Name: TankBody
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1574,6 +1574,7 @@ MonoBehaviour:
     type: 2}
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
+  receivedDamageItem: null
   enableLog: 1
 --- !u!114 &114218841663492954
 MonoBehaviour:
@@ -1728,6 +1729,8 @@ MonoBehaviour:
   upForce_overturned: 5
   sideForce: 1000
   selfAdjust: 1
+  selfAdjustDelay: 0.5
+  selfAdjustDetectDistance: 2
 --- !u!146 &146398393384786838
 WheelCollider:
   m_ObjectHideFlags: 1

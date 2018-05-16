@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 33636566004320522}
   - component: {fileID: 23134692201787140}
   m_Layer: 0
-  m_Name: hover_Egine2
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5698,6 +5698,7 @@ MonoBehaviour:
     type: 2}
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
+  receivedDamageItem: null
   enableLog: 0
 --- !u!114 &114944702929291922
 MonoBehaviour:
