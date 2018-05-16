@@ -26,7 +26,7 @@ public class PlayerDeathHandler : NetworkPlayerBase
 
         // Suicide does not count
         if (killerId != victimId)
-		{
+        {
             // Different method of tracking kill score in online and offline mode
             if (NetworkManager.offlineMode)
             {

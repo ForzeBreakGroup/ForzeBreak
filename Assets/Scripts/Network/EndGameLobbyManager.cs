@@ -42,6 +42,10 @@ public class EndGameLobbyManager : Photon.MonoBehaviour
         {
             Debug.Log(p.CustomProperties["KillCount"]);
         }
+
+        // Write the analytic data to file
+        AnalyticManager.Write();
+        AnalyticManager.Clear();
     }
 
     private void Init()
