@@ -87,6 +87,9 @@ public class MatchManager : Photon.MonoBehaviour
 
         // Photon RPC call to let everyone know this client has joined the game
         photonView.RPC("RpcPlayerJoinedSceneHandler", PhotonTargets.AllBufferedViaServer, PhotonNetwork.player.ID);
+
+        // Calls telemetry manager for recording analytic data
+        AnalyticManager.Init();
     }
 
     private void AdjustCamera(Camera playerCam, int playerNum)

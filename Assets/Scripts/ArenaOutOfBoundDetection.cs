@@ -26,6 +26,9 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 
             int killerId = ((NetworkPlayerCollision)victim.GetComponent(typeof(NetworkPlayerCollision))).lastReceivedDamageFrom;
 
+            AnalyticManager.Insert("OnPlayerDeath", other.transform.position);
+            AnalyticManager.Insert("IsSuicide", (victimId == killerId));
+
             Debug.Log("Player #" + victimId + " is killed by Player #" + killerId);
 
             deathHandler.OnPlayerDeath(killerId, victimId);
