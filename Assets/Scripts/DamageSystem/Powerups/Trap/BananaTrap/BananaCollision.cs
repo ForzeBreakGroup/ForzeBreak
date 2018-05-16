@@ -7,7 +7,7 @@ public class BananaCollision : PowerUpCollision
     protected override void CollisionEnter(Collision collision)
     {
         base.CollisionEnter (collision);
-        ApplyDamage();
+        ApplyDamage("FakePowerUp");
         PowerUpMovement.DestroyPowerUpProjectile();
         PlayVFX();
     }

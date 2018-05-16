@@ -10,7 +10,7 @@ public class SpringCollision : PowerUpCollision
 		float rangeFloatRight = Random.Range(-2.0f,2.0f);
 		float rangeFloatForward = Random.Range (-2.0f,2.0f);
 		this.transform.position = collision.transform.position + collision.transform.right * rangeFloatRight + collision.transform.forward*rangeFloatForward;
-		ApplyDamage();
+		ApplyDamage("SpringTrap");
         PowerUpMovement.DestroyPowerUpProjectile();
 	}
 }

@@ -21,6 +21,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     private float elapsedTime = 0.0f;
 
     public int lastReceivedDamageFrom;
+    public string receivedDamageItem = "null";
 
     /// <summary>
     /// Enum defines player object collision result
@@ -62,6 +63,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         if (photonView.isMine && collision.gameObject.tag == "Player")
         {
             lastReceivedDamageFrom = collision.transform.root.GetComponent<PhotonView>().ownerId;
+            receivedDamageItem = "vehicle";
 
             // Validates the collision timer
             if (elapsedTime <= 0)

@@ -96,13 +96,13 @@ public class PowerUpCollision : PowerUpProjectileBase, IComponentCollision
         targetDmgSystem = target.GetComponent<DamageSystem>();
     }
 
-    protected virtual void ApplyDamage()
+    protected virtual void ApplyDamage(string powerupname)
     {
         if (targetDmgSystem != null)
         {
             Debug.Log("Player #" + PowerUpData.OwnerID + " Applying Damage (" + damage + ") to Player #" + targetDmgSystem.gameObject.GetPhotonView().ownerId);
             UIAnnouncerManager.instance.Announce(PowerUpData.announcerText, PowerUpData.announcerClip, PowerUpData.OwnerID);
-            targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius, PowerUpData.OwnerID);
+            targetDmgSystem.ApplyDamageForce(damage, this.transform.position + centerOffset, damageRadius, PowerUpData.OwnerID, powerupname);
         }
     }
 

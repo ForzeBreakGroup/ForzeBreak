@@ -6,7 +6,7 @@ public class PowerUpExampleCollision : PowerUpCollision
 {
     protected override void CollisionEnter(Collision collision)
     {
-        ApplyDamage();
+        ApplyDamage("Example");
     }
 
     protected override void TriggerEnter(Collider other)

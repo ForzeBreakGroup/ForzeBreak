@@ -21,7 +21,7 @@ public class MissileExplosionEffect : Photon.MonoBehaviour
         if (other.transform.root.tag == "Player" && !stillInEffect && otherPhotonView.isMine)
         {
             Vector3 impactCenter = transform.position;
-            other.transform.root.GetComponent<DamageSystem>().ApplyDamageForce(ExplosionForce, transform.position, ExplosionRadius, 0);
+            other.transform.root.GetComponent<DamageSystem>().ApplyDamageForce(ExplosionForce, transform.position, ExplosionRadius, 0, "Missile");
         }
     }
 

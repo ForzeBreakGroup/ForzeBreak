@@ -73,12 +73,15 @@ public class DamageSystem : NetworkPlayerCollision
     /// <param name="force"></param>
     /// <param name="explosionCenter"></param>
     /// <param name="radius"></param>
-    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius, int ownerId)
+    public void ApplyDamageForce(float force, Vector3 explosionCenter, float radius, int ownerId, string powerUpName)
     {
         // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
         {
             lastReceivedDamageFrom = ownerId;
+            receivedDamageItem = powerUpName;
+
+            AnalyticManager.Insert(powerUpName, explosionCenter, force, ownerId);
 
             if (force > 0)
             {

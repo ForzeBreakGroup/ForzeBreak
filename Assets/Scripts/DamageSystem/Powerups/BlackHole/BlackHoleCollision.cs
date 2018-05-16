@@ -86,7 +86,7 @@ public class BlackHoleCollision : PowerUpCollision
         foreach(DamageSystem dmgSystem in playerInEffect)
         {
             Debug.Log(dmgSystem.gameObject.name);
-            dmgSystem.ApplyDamageForce(damage, transform.position, blackHoleRadius, PowerUpData.OwnerID);
+            dmgSystem.ApplyDamageForce(damage, transform.position, blackHoleRadius, PowerUpData.OwnerID, "BlackHole");
         }
     }
 }

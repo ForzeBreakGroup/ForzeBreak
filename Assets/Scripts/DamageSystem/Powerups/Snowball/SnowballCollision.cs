@@ -25,7 +25,7 @@ public class SnowballCollision : PowerUpCollision
             // The damage is potential maximum damage snowball can deal
             damage = CurrentDamage();
 
-            ApplyDamage();
+            ApplyDamage("Snowball");
         }
     }
 

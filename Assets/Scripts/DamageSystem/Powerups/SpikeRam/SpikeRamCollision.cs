@@ -8,7 +8,7 @@ public class SpikeRamCollision : PowerUpCollision
     {
         Debug.Log("Spike Ram Collision");
         base.CollisionEnter(collision);
-        ApplyDamage();
+        ApplyDamage("SpikeRam");
         GetComponent<SpikeRamComponent>().DecreaseCapacity();
     }
 

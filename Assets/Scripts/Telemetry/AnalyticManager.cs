@@ -24,7 +24,7 @@ public class AnalyticManager : MonoBehaviour
 
         public override string ToString()
         {
-            return string.Join(",", entry.ToArray());
+            return string.Join("|", entry.ToArray());
         }
     }
 
@@ -71,6 +71,7 @@ public class AnalyticManager : MonoBehaviour
         Insert("ArenaName", SceneManager.GetActiveScene().name);
         Insert("GameTime", DateTime.Now.ToString());
         Insert("NumberOfPlayers", PhotonNetwork.playerList.Length);
+        Insert("VehicleSelected", NetworkManager.instance.selectedVehicleName);
     }
 
     public static void Write()
@@ -103,22 +104,7 @@ public class AnalyticManager : MonoBehaviour
         instance.entryLogs.Clear();
     }
 
-    public static void Insert(string key, Vector3 pos)
-    {
-        Insert(key, pos.ToString());
-    }
-
-    public static void Insert(string key, bool condition)
-    {
-        Insert(key, (condition) ? "true" : "false");
-    }
-
-    public static void Insert(string key, int count)
-    {
-        Insert(key, count.ToString());
-    }
-
-    public static void Insert(string key, string value)
+    public static void Insert(string key, params object[] objs)
     {
         if (!instance.entryLogs.ContainsKey(key))
         {
@@ -126,8 +112,13 @@ public class AnalyticManager : MonoBehaviour
             instance.entryLogs.Add(key, entry);
         }
 
-        instance.entryLogs[key].Insert(value);
-        Debug.Log("Logging Information: " + key + " value: " + value);
+        List<String> objInString = new List<string>();
+        foreach(object obj in objs)
+        {
+            objInString.Add(obj.ToString());
+        }
+
+        instance.entryLogs[key].Insert(string.Join("_", objInString.ToArray()));
     }
 
     private string ToJson()

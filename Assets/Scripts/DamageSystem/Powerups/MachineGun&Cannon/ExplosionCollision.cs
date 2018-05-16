@@ -8,6 +8,6 @@ public class ExplosionCollision : PowerUpCollision
     {
         base.TriggerEnter(other);
 
-        ApplyDamage();
+        ApplyDamage("Cannon");
     }
 }
