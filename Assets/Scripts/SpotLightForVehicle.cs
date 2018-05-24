@@ -7,6 +7,8 @@ public class SpotLightForVehicle : MonoBehaviour {
     public int playerID = 0;
     LineRenderer line;
 
+
+
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
@@ -14,20 +16,34 @@ public class SpotLightForVehicle : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        GameObject[] cars = GameObject.FindGameObjectsWithTag("Player");
-        for (int i=0; i< cars.Length; i++)
+        if (line != null)
         {
-            if(cars[i].GetComponent<PhotonView>().ownerId == playerID)
+
+            GameObject target = getTarget(playerID);
+            if (target!=null)
             {
-                if (line != null)
-                {
-                    if (line.enabled == false)
-                        line.enabled = true;
-                    Vector3[] positions = { transform.position, cars[i].transform.position };
-                    line.SetPositions(positions);
-                }
-                
+                if (line.enabled == false)
+                    line.enabled = true;
+                Vector3[] positions = { transform.position, target.transform.position};
+                line.SetPositions(positions);
+            }
+            else
+            {
+                line.enabled = false;
             }
         }
-	}
+    }
+
+    GameObject getTarget(int ID)
+    {
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < cars.Length; i++)
+        {
+            if (cars[i].GetComponent<PhotonView>().ownerId == playerID)
+            {
+                return cars[i];
+            }
+        }
+        return null;
+    }
 }
