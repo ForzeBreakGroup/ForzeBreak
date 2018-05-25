@@ -23,6 +23,9 @@ public class DamageSystem : NetworkPlayerCollision
     /// </summary>
     private Rigidbody rb;
 
+	private bool appliedDamage;
+	private float wheelOnGroundTime;
+
     #endregion
 
     #region Private Methods
@@ -34,6 +37,8 @@ public class DamageSystem : NetworkPlayerCollision
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
+		appliedDamage = false;
+		wheelOnGroundTime = 0.0f;
     }
 
     /// <summary>
@@ -64,6 +69,19 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
+	private void Update()
+	{
+		CarControlWheels controlWheel = GetComponent<CarControlWheels> ();
+		if (appliedDamage && controlWheel.IsWheelsGround) {
+			wheelOnGroundTime += Time.deltaTime;
+			if (wheelOnGroundTime >= 0.5f) {
+				lastReceivedDamageFrom = photonView.ownerId;
+				appliedDamage = false;
+				wheelOnGroundTime = 0.0f;
+			}
+		}
+	}
+
     #endregion
 
     #region Public Methods
@@ -92,6 +110,9 @@ public class DamageSystem : NetworkPlayerCollision
                 TrajectoryCollision(damage, explosionCenter);
 
                 PlayCollisionEffect(this.transform.position);
+
+				if (receivedDamageItem == "vehicle")
+					appliedDamage = true;
             }
         }
     }
