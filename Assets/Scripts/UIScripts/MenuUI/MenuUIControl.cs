@@ -12,6 +12,9 @@ public class MenuUIControl : MonoBehaviour
 {
     private Animator anim;
 
+    [SerializeField]
+    private Animator settingAnim;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -46,6 +49,12 @@ public class MenuUIControl : MonoBehaviour
     public void OnClickJoinCustomRoomOption(string name)
     {
         NetworkManager.instance.JoinRoomByName(name);
+    }
+
+    public void OnClickSetting()
+    {
+        anim.SetTrigger("Hide");
+        settingAnim.SetTrigger("Show");
     }
 
     public void OnClickQuitApplication()
