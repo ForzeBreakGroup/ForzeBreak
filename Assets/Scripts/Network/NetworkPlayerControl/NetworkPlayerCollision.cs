@@ -47,7 +47,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 		appliedDamage = false;
     }
 
-    private void Update()
+	protected virtual void Update()
     {
         elapsedTime -= Time.deltaTime;
         elapsedTime = Mathf.Clamp(elapsedTime, 0, collisionCooldown);
