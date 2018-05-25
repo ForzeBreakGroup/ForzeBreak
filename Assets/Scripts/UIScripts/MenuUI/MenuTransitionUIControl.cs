@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class MenuTransitionUIControl : MonoBehaviour
 {
-    private enum MenuStates
-    {
-        Intro,
-        Main,
-        Setting
-    };
-    private MenuStates states = MenuStates.Intro;
-    private Animator anim;
-
-    private void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
+    [SerializeField]
+    private Animator menuAnim;
 
     private void Update()
     {
-        if (states == MenuStates.Intro && Input.anyKey)
+        if (Input.anyKey)
         {
-            anim.SetTrigger("HideIntro");
+            menuAnim.SetTrigger("Show");
+            gameObject.SetActive(false);
         }
     }
 }
