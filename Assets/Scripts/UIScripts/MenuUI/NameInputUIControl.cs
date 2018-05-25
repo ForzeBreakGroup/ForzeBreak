@@ -24,6 +24,6 @@ public class NameInputUIControl : MonoBehaviour
 
     public void OnCancelNameChange()
     {
-        anim.SetTrigger("Show");
+        anim.SetTrigger("Hide");
     }
 }
