@@ -22,8 +22,6 @@ public class DamageSystem : NetworkPlayerCollision
     /// Internal reference to player object's rigidbody
     /// </summary>
     private Rigidbody rb;
-
-	private bool appliedDamage;
 	private float wheelOnGroundTime;
 
     #endregion
@@ -37,7 +35,6 @@ public class DamageSystem : NetworkPlayerCollision
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
-		appliedDamage = false;
 		wheelOnGroundTime = 0.0f;
     }
 
@@ -69,15 +66,17 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
-	private void Update()
+	protected override void Update()
 	{
 		CarControlWheels controlWheel = GetComponent<CarControlWheels> ();
-		if (appliedDamage && controlWheel.IsWheelsGround) {
-			wheelOnGroundTime += Time.deltaTime;
-			if (wheelOnGroundTime >= 0.5f) {
-				lastReceivedDamageFrom = photonView.ownerId;
-				appliedDamage = false;
-				wheelOnGroundTime = 0.0f;
+		if (appliedDamage) {
+			if (controlWheel.IsWheelsGround) {
+				wheelOnGroundTime += Time.deltaTime;
+				if (wheelOnGroundTime >= 0.5f) {
+					lastReceivedDamageFrom = photonView.ownerId;
+					appliedDamage = false;
+					wheelOnGroundTime = 0.0f;
+				}
 			}
 		}
 	}
@@ -110,9 +109,6 @@ public class DamageSystem : NetworkPlayerCollision
                 TrajectoryCollision(damage, explosionCenter);
 
                 PlayCollisionEffect(this.transform.position);
-
-				if (receivedDamageItem == "vehicle")
-					appliedDamage = true;
             }
         }
     }

@@ -22,6 +22,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
     public int lastReceivedDamageFrom;
     public string receivedDamageItem = "null";
+	public bool appliedDamage;
 
     /// <summary>
     /// Enum defines player object collision result
@@ -43,6 +44,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     {
         //Debug.Log(photonView.ownerId);
         lastReceivedDamageFrom = photonView.ownerId;
+		appliedDamage = false;
     }
 
     private void Update()
@@ -64,6 +66,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
         {
             lastReceivedDamageFrom = collision.transform.root.GetComponent<PhotonView>().ownerId;
             receivedDamageItem = "vehicle";
+
+			appliedDamage = true;
 
             // Validates the collision timer
             if (elapsedTime <= 0)
