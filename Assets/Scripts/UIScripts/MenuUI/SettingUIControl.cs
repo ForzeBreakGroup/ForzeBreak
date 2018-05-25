@@ -12,4 +12,12 @@ public class SettingUIControl : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Hide");
         menuAnim.SetTrigger("Show");
     }
+
+    private void Update()
+    {
+        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("SettingMenuShow") && Input.GetButtonDown("Cancel"))
+        {
+            OnClickReturn();
+        }
+    }
 }
