@@ -15,7 +15,7 @@ public class MenuAnimationControl : MonoBehaviour
 
     public void OnEventComplete()
     {
-        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MainMenuShow"))
+        if(EventSystem.current.currentSelectedGameObject == null && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MainMenuShow"))
         {
             EventSystem.current.firstSelectedGameObject = firstSelectedInMenu;
             EventSystem.current.SetSelectedGameObject(firstSelectedInMenu);
