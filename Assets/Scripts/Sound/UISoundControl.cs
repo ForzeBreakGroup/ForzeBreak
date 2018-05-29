@@ -20,6 +20,20 @@ public class UISoundControl : MonoBehaviour
     [SerializeField]
     private string confirmSound;
 
+    public static UISoundControl instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     public void onHover()
     {

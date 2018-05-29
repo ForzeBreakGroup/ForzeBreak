@@ -6,7 +6,7 @@ public class SoundMaster : MonoBehaviour {
 
     [FMODUnity.EventRef]
     [SerializeField]
-    private string BGMref;
+    private string BGMRef;
 
     private FMOD.Studio.EventInstance BGM;
 
@@ -42,7 +42,7 @@ public class SoundMaster : MonoBehaviour {
         diegeticGroup = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX_Diegetic");
         nonDiegeticGroup = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX_Non Diegetic");
 
-        BGM = FMODUnity.RuntimeManager.CreateInstance(BGMref);
+        BGM = FMODUnity.RuntimeManager.CreateInstance(BGMRef);
         BGM.start();
     }
 

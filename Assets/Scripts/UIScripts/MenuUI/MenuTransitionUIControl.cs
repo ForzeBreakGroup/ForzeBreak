@@ -11,6 +11,7 @@ public class MenuTransitionUIControl : MonoBehaviour
     {
         if (Input.anyKey)
         {
+            UISoundControl.instance.onConfirm();
             menuAnim.SetTrigger("Show");
             gameObject.SetActive(false);
         }

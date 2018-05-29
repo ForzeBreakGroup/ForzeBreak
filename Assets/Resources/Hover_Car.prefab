@@ -5631,7 +5631,7 @@ MonoBehaviour:
   boostType: 0
   boostPower: 60
   energy: 100
-  boostMaxSpeed: 15
+  boostMaxSpeed: 20
   energyDecay: 2
   energyRecover: 0.01
   maxEnergy: 100
@@ -5714,6 +5714,7 @@ MonoBehaviour:
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
   receivedDamageItem: null
+  appliedDamage: 0
   explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 0
 --- !u!114 &114944702929291922
