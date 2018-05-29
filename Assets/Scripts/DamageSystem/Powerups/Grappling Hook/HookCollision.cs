@@ -15,6 +15,7 @@ public class HookCollision : PowerUpCollision
 
             GetComponent<BoxCollider>().enabled = false;
             ((HookMovement)PowerUpMovement).SetHookTarget(other.transform.root.GetComponent<PhotonView>().ownerId);
+
         }
 
 

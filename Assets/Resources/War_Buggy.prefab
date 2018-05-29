@@ -371,12 +371,12 @@ GameObject:
   - component: {fileID: 114182506026662142}
   - component: {fileID: 114621299955240402}
   - component: {fileID: 114117468940118094}
-  - component: {fileID: 114588205272943532}
   - component: {fileID: 114746530151634126}
   - component: {fileID: 114501710976548662}
   - component: {fileID: 114175742806894734}
   - component: {fileID: 114665485917076538}
   - component: {fileID: 114527540014986978}
+  - component: {fileID: 114555764871559898}
   m_Layer: 0
   m_Name: War_Buggy
   m_TagString: Player
@@ -2067,6 +2067,20 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114555764871559898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1517994163518996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundref: event:/SFX_Diegetic/SFX_WarBuggyEngine
+  flipSoundref: event:/SFX_Diegetic/SFX_VehicleFlip
+  boostSoundref: event:/SFX_Diegetic/SFX_BoostSound
 --- !u!114 &114558748432122960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2101,17 +2115,6 @@ MonoBehaviour:
   IsWheelsGround: 0
   IsAnyWheelGround: 0
   IsCarBodyGround: 0
---- !u!114 &114588205272943532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1517994163518996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114621299955240402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2147,6 +2150,8 @@ MonoBehaviour:
     type: 2}
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
+  receivedDamageItem: null
+  explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 0
 --- !u!114 &114746530151634126
 MonoBehaviour:

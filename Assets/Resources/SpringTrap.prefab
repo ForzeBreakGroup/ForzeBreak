@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114733940405205248}
   - component: {fileID: 114912730673876742}
   - component: {fileID: 65937370780958560}
+  - component: {fileID: 114126311762324104}
   m_Layer: 0
   m_Name: SpringTrap
   m_TagString: Untagged
@@ -91,6 +92,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b649d998326877247a54b7082c96b8d0, type: 2}
   m_StaticBatchInfo:
@@ -125,6 +127,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a1e3cca90b48cb441a8780465688c34a, type: 2}
   m_StaticBatchInfo:
@@ -201,6 +204,23 @@ MonoBehaviour:
   initVelocity: -10
   angle: 45
   ExistingTime: 30
+  spawnTime: 0
+--- !u!114 &114126311762324104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521531376321712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_TrapLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList: []
 --- !u!114 &114338613081333100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: -1
+  announcerText: 
+  announcerClip: {fileID: 0}
 --- !u!114 &114912730673876742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,4 +277,5 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 0
   checkPlayer: 1
+  VFX: {fileID: 0}
   externalCollider: {fileID: 0}

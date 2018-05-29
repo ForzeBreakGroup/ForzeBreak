@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 114839049827001624}
   - component: {fileID: 114001446367332036}
   - component: {fileID: 114680835574422382}
+  - component: {fileID: 114652615051535566}
   m_Layer: 0
   m_Name: Stream_Breaker
   m_TagString: Player
@@ -7942,6 +7943,7 @@ MonoBehaviour:
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
   receivedDamageItem: null
+  explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 0
 --- !u!114 &114040668913954600
 MonoBehaviour:
@@ -8072,6 +8074,20 @@ MonoBehaviour:
   energyDecay: 0.5
   energyRecover: 0.01
   maxEnergy: 100
+--- !u!114 &114652615051535566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1097558091071476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundref: event:/SFX_Diegetic/SFX_StreamBreakerEngine
+  flipSoundref: event:/SFX_Diegetic/SFX_VehicleFlip
+  boostSoundref: event:/SFX_Diegetic/SFX_BoostSound
 --- !u!114 &114680835574422382
 MonoBehaviour:
   m_ObjectHideFlags: 1

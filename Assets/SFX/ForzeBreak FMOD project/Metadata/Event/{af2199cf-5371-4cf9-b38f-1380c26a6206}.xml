@@ -111,6 +111,9 @@
     </object>
     <object class="MixerBusPanner" id="{1fdddc62-5fcd-4d77-bda9-8d5c8bfd424d}"/>
     <object class="SingleSound" id="{426d408a-7d25-41b9-b8a7-fa8003aaf718}">
+        <property name="isAsync">
+            <value>true</value>
+        </property>
         <property name="length">
             <value>136.05600000000001</value>
         </property>
@@ -125,9 +128,6 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{1831fccc-b341-41cd-b435-05baad4de801}">
-        <property name="volume">
-            <value>-6.5</value>
-        </property>
         <property name="name">
             <value>Mune BGM</value>
         </property>
@@ -142,11 +142,17 @@
         </relationship>
     </object>
     <object class="SingleSound" id="{140203dd-8a01-48b8-91bb-f85becffe4d3}">
+        <property name="isAsync">
+            <value>true</value>
+        </property>
         <property name="start">
-            <value>155</value>
+            <value>136.05600000000001</value>
         </property>
         <property name="length">
             <value>199.49999999999997</value>
+        </property>
+        <property name="looping">
+            <value>true</value>
         </property>
         <relationship name="modulators">
             <destination>{ac121d89-09ec-45da-9bc2-f952668acb03}</destination>
@@ -156,9 +162,6 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{98534d03-9690-44d8-8088-284397a6cb21}">
-        <property name="volume">
-            <value>-6.5</value>
-        </property>
         <property name="name">
             <value>Fighting BGM</value>
         </property>
@@ -188,7 +191,7 @@
     </object>
     <object class="LoopRegion" id="{da31d3c0-ac50-4bf3-834f-e5971347111c}">
         <property name="position">
-            <value>155</value>
+            <value>136.05600000000001</value>
         </property>
         <property name="length">
             <value>199.5</value>
@@ -250,7 +253,7 @@
     </object>
     <object class="TransitionRegion" id="{cbfde6f7-5b87-4107-bca0-2d8454f113c2}">
         <property name="position">
-            <value>155</value>
+            <value>136.05600000000001</value>
         </property>
         <property name="length">
             <value>199.5</value>
@@ -295,6 +298,18 @@
         </property>
         <property name="initialValue">
             <value>-80</value>
+        </property>
+        <property name="attackShape">
+            <value>0.325004309</value>
+        </property>
+        <property name="holdTime">
+            <value>6653.8457</value>
+        </property>
+        <property name="releaseTime">
+            <value>839.743591</value>
+        </property>
+        <property name="releaseShape">
+            <value>-0.215306789</value>
         </property>
     </object>
     <object class="MixerBusEffectChain" id="{b559252f-2789-4ece-b07a-1176729b62e9}">

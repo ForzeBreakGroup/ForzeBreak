@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="AudioFile" id="{d9c31bb8-d338-4ab9-8ce6-a7780e8420cf}">
         <property name="assetPath">
-            <value>SFX_NonDiegetic/SFX_GameOver_v01.wav</value>
+            <value>SFX_NonDiegetic/SFX_NonDiegetic_GameOver_v01.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

@@ -24,9 +24,6 @@ public class CarUserControl : NetworkPlayerInput
 
     private bool isDisabled = false;
 
-
-    private FMOD.Studio.EventInstance engine;
-
     protected override void Awake()
     {
         base.Awake();
@@ -36,11 +33,6 @@ public class CarUserControl : NetworkPlayerInput
         boostControl = GetComponent<BoostControl>();
         flipControl = GetComponent<FlipControl>();
         controllerNum = 0;
-
-
-        engine = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleEngine");
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine, transform, GetComponent<Rigidbody>());
-        //engine.start();
     }
 
     protected override void PlayerInputUpdate()
@@ -89,10 +81,6 @@ public class CarUserControl : NetworkPlayerInput
         if (flipControl != null)
             flipControl.Flip(flip, h);
 
-        if (boost)
-            engine.setParameterValue("Speed", 1f);
-        else
-            engine.setParameterValue("Speed", GetComponent<Rigidbody>().velocity.magnitude / 20);
     }
 
     public override void SerializeView(PhotonStream stream, PhotonMessageInfo info)

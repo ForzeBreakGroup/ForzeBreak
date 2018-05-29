@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 114275701068457508}
   - component: {fileID: 114953231134812018}
   - component: {fileID: 114535797162481564}
+  - component: {fileID: 114224816684418826}
   m_Layer: 0
   m_Name: Prototype_Tank
   m_TagString: Player
@@ -1575,6 +1576,7 @@ MonoBehaviour:
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
   receivedDamageItem: null
+  explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 1
 --- !u!114 &114218841663492954
 MonoBehaviour:
@@ -1587,6 +1589,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ef4981644fe704598ae1f69e659c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114224816684418826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166974032228314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundref: event:/SFX_Diegetic/SFX_PrototypeEngine
+  flipSoundref: event:/SFX_Diegetic/SFX_VehicleFlip
+  boostSoundref: event:/SFX_Diegetic/SFX_BoostSound
 --- !u!114 &114268222230338510
 MonoBehaviour:
   m_ObjectHideFlags: 1

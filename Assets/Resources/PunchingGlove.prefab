@@ -21,13 +21,13 @@ GameObject:
   - component: {fileID: 4928486664076624}
   - component: {fileID: 33096502164692072}
   - component: {fileID: 23727627689057856}
-  - component: {fileID: 95287202241670628}
   - component: {fileID: 114860311405077530}
   - component: {fileID: 54129189915689252}
   - component: {fileID: 135367016246761724}
   - component: {fileID: 114239325104737718}
   - component: {fileID: 114450396653181766}
   - component: {fileID: 114693619429212696}
+  - component: {fileID: 114590391396910492}
   m_Layer: 0
   m_Name: PunchingGlove
   m_TagString: Untagged
@@ -105,24 +105,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &95287202241670628
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258447181761364}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 64859103bb52fe048952258af590519b, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114239325104737718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +137,25 @@ MonoBehaviour:
   ownerId: -1
   announcerText: K.O.
   announcerClip: {fileID: 0}
+--- !u!114 &114590391396910492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258447181761364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_PunchingGloveLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: PunchingGloveHit
+    Soundref: event:/SFX_Diegetic/SFX_PunchingGloveHit
+    Attached: 0
 --- !u!114 &114693619429212696
 MonoBehaviour:
   m_ObjectHideFlags: 1

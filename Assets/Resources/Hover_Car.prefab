@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 114740693748758494}
   - component: {fileID: 114913136480673806}
   - component: {fileID: 114543681418236616}
+  - component: {fileID: 114211055052885608}
   m_Layer: 0
   m_Name: Hover_Car
   m_TagString: Player
@@ -5532,6 +5533,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerNum: 0
   boost: 0
+--- !u!114 &114211055052885608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147382765104580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundref: event:/SFX_Diegetic/SFX_HoverEngine
+  flipSoundref: event:/SFX_Diegetic/SFX_VehicleFlip
+  boostSoundref: event:/SFX_Diegetic/SFX_BoostSound
 --- !u!114 &114298821376971876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5699,6 +5714,7 @@ MonoBehaviour:
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
   receivedDamageItem: null
+  explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 0
 --- !u!114 &114944702929291922
 MonoBehaviour:

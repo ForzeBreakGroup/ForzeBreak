@@ -180,8 +180,7 @@ public class MatchManager : Photon.MonoBehaviour
             }
         }
 
-        // Switch BGM
-        FindObjectOfType<UISoundControl>().BGM.setParameterValue("Stage", 1.0f);
+        SoundMaster.instance.ChangeBGMStage(1);
     }
 
     #region Photon RPC Callers

@@ -38,15 +38,11 @@ public class FlipControl : MonoBehaviour {
 
     private float nextFlip = 0.0f;
 
-    //flipsound
-    private FMOD.Studio.EventInstance flipSound;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody>();
         carController = GetComponent<CarControlWheels>();
-
-        flipSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_VehicleFlip");
     }
 
     /// <summary>
@@ -76,8 +72,9 @@ public class FlipControl : MonoBehaviour {
                 canFlip = false;
                 nextFlip = Time.time + flipCD;
 
-                FMODUnity.RuntimeManager.AttachInstanceToGameObject(flipSound, transform, GetComponent<Rigidbody>());
-                flipSound.start();
+                VehicleSound vs = GetComponent<VehicleSound>();
+                if (vs != null)
+                    FMODUnity.RuntimeManager.PlayOneShot(vs.flipSoundref, transform.position);
 
                 if(selfAdjust)
                     StartCoroutine(SelfRotationControl());

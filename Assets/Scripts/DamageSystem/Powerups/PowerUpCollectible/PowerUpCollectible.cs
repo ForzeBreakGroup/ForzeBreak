@@ -43,7 +43,9 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     /// <summary>
     /// FMOD sound effect instance
     /// </summary>
-    private FMOD.Studio.EventInstance pickupSound;
+    [FMODUnity.EventRef]
+    [SerializeField]
+    private string pickupSoundref = "event:/SFX_Diegetic/SFX_PowerupPickup";
 
     #endregion
 
@@ -51,7 +53,6 @@ public class PowerUpCollectible : Photon.MonoBehaviour
     protected void Awake()
     {
         powerUpGrade = new PowerUpGrade();
-        pickupSound = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_Diegetic/SFX_PowerupPickup");
     }
 
     /// <summary>
@@ -68,8 +69,7 @@ public class PowerUpCollectible : Photon.MonoBehaviour
             if (view.isMine)
             {
                 // Play sound effect
-                FMODUnity.RuntimeManager.AttachInstanceToGameObject(pickupSound, transform, GetComponent<Rigidbody>());
-                pickupSound.start();
+                FMODUnity.RuntimeManager.PlayOneShot(pickupSoundref, transform.position);
 
                 // Hide in remote client side to create illusion of powerup has been collected immediately, otherwise, it will have delay to wait for masterclient to destroy the object
                 // Since the network delay is never perfectly zero, hiding the object will reduce the effect of delayed powerup collect

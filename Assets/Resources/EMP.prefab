@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114894155116614490}
   - component: {fileID: 114449295808138442}
   - component: {fileID: 114054434980282364}
+  - component: {fileID: 114596764068981990}
   m_Layer: 0
   m_Name: EMP
   m_TagString: Untagged
@@ -528,6 +529,25 @@ MonoBehaviour:
   EMPParalysisVFX: {fileID: 1367286079832732, guid: 239d105b5454fc1469df6c8f4cbe2520,
     type: 2}
   paralysisDuration: 2
+--- !u!114 &114596764068981990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1235744793905798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_EMPLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: 
+    Soundref: event:/SFX_Diegetic/SFX_EMP
+    Attached: 0
 --- !u!114 &114894155116614490
 MonoBehaviour:
   m_ObjectHideFlags: 1

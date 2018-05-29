@@ -8,5 +8,6 @@ public class PunchingGloveCollision : PowerUpCollision {
 	protected override void CollisionEnter(Collision collision)
 	{
 		ApplyDamage("PunchingGlove");
+        GetComponent<PowerupSound>().PlaySound(0);
 	}
 }

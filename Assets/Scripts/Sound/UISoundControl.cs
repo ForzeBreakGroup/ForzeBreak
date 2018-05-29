@@ -11,29 +11,23 @@ using System.Collections;
  */
 public class UISoundControl : MonoBehaviour
 {
-    public FMOD.Studio.EventInstance BGM;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-        BGM = FMODUnity.RuntimeManager.CreateInstance("event:/BGM/BGM");
-        BGM.start();
-    }
+    [FMODUnity.EventRef]
+    [SerializeField]
+    private string hoverSound;
+
+    [FMODUnity.EventRef]
+    [SerializeField]
+    private string confirmSound;
+
 
     public void onHover()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_SwitchHover");
+        FMODUnity.RuntimeManager.PlayOneShot(hoverSound);
     }
 
     public void onConfirm()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_SelectConfirm");
-
-    }
-
-    private void OnDestroy()
-    {
-        BGM.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        BGM.release();
+        FMODUnity.RuntimeManager.PlayOneShot(confirmSound);
     }
 }

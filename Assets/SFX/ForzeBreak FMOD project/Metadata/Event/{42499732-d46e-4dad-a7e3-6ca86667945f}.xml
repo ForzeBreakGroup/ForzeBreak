@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{42499732-d46e-4dad-a7e3-6ca86667945f}">
         <property name="name">
-            <value>SFX_MissileLaunch</value>
+            <value>SFX_BlackHoleLaunch</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
@@ -60,7 +60,7 @@
     <object class="MarkerTrack" id="{7f53402c-b083-4f4f-abb8-53f04339cf98}"/>
     <object class="GroupTrack" id="{9840129a-84de-4664-80b7-0f13e01d83cc}">
         <relationship name="modules">
-            <destination>{95327420-60f2-40fd-9d4a-f189dad8e6eb}</destination>
+            <destination>{52c7695c-c65c-4896-8e58-7a68e22aebd5}</destination>
         </relationship>
         <relationship name="mixerGroup">
             <destination>{d98ffa39-2ae2-4568-a652-77e31d198055}</destination>
@@ -68,7 +68,7 @@
     </object>
     <object class="Timeline" id="{24e0a794-a743-44f5-b9eb-deccb4538c1d}">
         <relationship name="modules">
-            <destination>{95327420-60f2-40fd-9d4a-f189dad8e6eb}</destination>
+            <destination>{52c7695c-c65c-4896-8e58-7a68e22aebd5}</destination>
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{37568457-afe9-4ad9-994f-3c468f9281f7}">
@@ -88,12 +88,12 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{0b11a1a6-f948-4d1b-ba66-75cc7be54b47}"/>
-    <object class="SingleSound" id="{95327420-60f2-40fd-9d4a-f189dad8e6eb}">
+    <object class="SingleSound" id="{52c7695c-c65c-4896-8e58-7a68e22aebd5}">
         <property name="length">
-            <value>2.9968707482993198</value>
+            <value>1.1842083333333333</value>
         </property>
         <relationship name="audioFile">
-            <destination>{556e4518-d33e-4cf1-bdaf-1ca9e1f93988}</destination>
+            <destination>{2a7c35ff-e390-4fea-ad09-cdd1d53bcc16}</destination>
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{d98ffa39-2ae2-4568-a652-77e31d198055}">

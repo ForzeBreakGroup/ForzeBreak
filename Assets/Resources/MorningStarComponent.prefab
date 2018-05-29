@@ -782,6 +782,7 @@ GameObject:
   - component: {fileID: 114482350877341024}
   - component: {fileID: 114142974054574880}
   - component: {fileID: 114144351701962328}
+  - component: {fileID: 114927912209735190}
   m_Layer: 0
   m_Name: morningstar
   m_TagString: PowerUp
@@ -3045,6 +3046,28 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114927912209735190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990416884120292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: 
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: MorningStarChain
+    Soundref: event:/SFX_Diegetic/SFX_MorningStarChain
+    Attached: 0
+  - SoundName: MorningStarImpact
+    Soundref: event:/SFX_Diegetic/SFX_MorningStarImpact
+    Attached: 0
 --- !u!135 &135902767486236634
 SphereCollider:
   m_ObjectHideFlags: 1
