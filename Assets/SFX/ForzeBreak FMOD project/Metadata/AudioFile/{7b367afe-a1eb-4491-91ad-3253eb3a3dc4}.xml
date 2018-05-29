@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{7b367afe-a1eb-4491-91ad-3253eb3a3dc4}">
+        <property name="assetPath">
+            <value>SFX_Diegetic/SFX_HoverEngine.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>3.9676458333333335</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{7d3bcca8-8b26-43da-a32d-b98db5c43f26}</destination>
+        </relationship>
+    </object>
+</objects>

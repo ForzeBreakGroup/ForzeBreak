@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114586780203672200}
   - component: {fileID: 114046926820408796}
   - component: {fileID: 114817502617730628}
+  - component: {fileID: 114169160354075256}
   m_Layer: 0
   m_Name: BananaTrap
   m_TagString: Untagged
@@ -130,6 +131,22 @@ MonoBehaviour:
   ownerId: -1
   announcerText: 
   announcerClip: {fileID: 0}
+--- !u!114 &114169160354075256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191859872988502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_TrapLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList: []
 --- !u!114 &114586780203672200
 MonoBehaviour:
   m_ObjectHideFlags: 1

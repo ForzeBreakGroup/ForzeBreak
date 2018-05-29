@@ -19,6 +19,10 @@ public class BoostControl : MonoBehaviour {
     public float energyRecover = 0.01f;
     public float maxEnergy = 100.0f;
 
+    private float soundCD = 1f;
+    private float nextplayTime = 0f;
+    private bool canPlaySound = true;
+
 
     private BoostEffectControl[] boostEffects;
     private Rigidbody carRigidbody;
@@ -62,7 +66,6 @@ public class BoostControl : MonoBehaviour {
                 carRigidbody.AddForce(transform.up * boostPower, ForceMode.Acceleration);
                 carRigidbody.AddTorque(Vector3.Cross(transform.up, Vector3.up) * (Vector3.Angle(transform.up, Vector3.up)), ForceMode.Acceleration);
             }
-
             energy = energy < 0 ? 0 : energy - energyDecay;
 
             if (boostEffects.Length != 0)
@@ -72,6 +75,13 @@ public class BoostControl : MonoBehaviour {
                     bec.UpdateColorBySpeed(true);
                 }
             }
+            if (canPlaySound && Time.time > nextplayTime)
+            {
+                nextplayTime = Time.time + soundCD;
+                canPlaySound = false;
+                FMODUnity.RuntimeManager.PlayOneShotAttached(GetComponent<VehicleSound>().boostSoundref, gameObject);
+            }
+
         }
         else
         {
@@ -82,9 +92,10 @@ public class BoostControl : MonoBehaviour {
     public void Recover()
     {
         carController.IsBoosting = false;
-
         if (energy < maxEnergy)
             energy += energyRecover;
+
+        canPlaySound = true;
 
         if (boostEffects.Length != 0)
         {

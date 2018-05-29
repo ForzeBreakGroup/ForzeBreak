@@ -24,6 +24,10 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     public string receivedDamageItem = "null";
 	public bool appliedDamage;
 
+    [FMODUnity.EventRef]
+    [SerializeField]
+    private string explosionSoundref;
+
     /// <summary>
     /// Enum defines player object collision result
     /// </summary>
@@ -81,9 +85,6 @@ public class NetworkPlayerCollision : NetworkPlayerBase
 
             PlayCollisionEffect(collision.contacts[0].point);
 
-            Instantiate(forzebreakEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
-            Instantiate(collisionEffect, collision.contacts[0].point, Quaternion.Euler(collision.contacts[0].normal));
-
             // Look for opponent's power up collider components, then execute those collision scripts
             Component[] powerupColliders = collision.gameObject.GetComponentsInChildren(typeof(PowerUpCollision));
             foreach (Component cp in powerupColliders)
@@ -135,6 +136,9 @@ public class NetworkPlayerCollision : NetworkPlayerBase
     protected void PlayCollisionEffect(Vector3 location)
     {
         CameraShake.Shake();
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_Diegetic/SFX_Explosion", location);
+
+        Instantiate(forzebreakEffect, location, Quaternion.identity);
+        Instantiate(collisionEffect, location, Quaternion.identity);
+        FMODUnity.RuntimeManager.PlayOneShot(explosionSoundref, location);
     }
 }

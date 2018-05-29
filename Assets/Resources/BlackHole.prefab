@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114660750759272150}
   - component: {fileID: 114846886452014144}
   - component: {fileID: 114763292458874648}
+  - component: {fileID: 114435868651741672}
   m_Layer: 0
   m_Name: BlackHole
   m_TagString: Untagged
@@ -324,6 +325,28 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114435868651741672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246711710995508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_BlackHoleLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: SFX_BlackHoleAttarcting
+    Soundref: event:/SFX_Diegetic/SFX_BlackHoleAttarcting
+    Attached: 1
+  - SoundName: SFX_BlackHoleExplosion
+    Soundref: event:/SFX_Diegetic/SFX_BlackHoleExplosion
+    Attached: 1
 --- !u!114 &114482390904041596
 MonoBehaviour:
   m_ObjectHideFlags: 1

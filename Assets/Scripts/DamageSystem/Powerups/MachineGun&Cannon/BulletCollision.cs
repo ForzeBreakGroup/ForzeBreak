@@ -19,6 +19,7 @@ public class BulletCollision : PowerUpCollision
     {
         base.CollisionEnter(collision);
 
+        GetComponent<PowerupSound>().PlaySound(0);
         GameObject go = PhotonNetwork.Instantiate(explosion.name, transform.position, Quaternion.identity, 0);
         ((PowerUpData)go.GetComponent(typeof(PowerUpData))).SetOwnerId(PowerUpData.OwnerID);
         PowerUpMovement.DestroyPowerUpProjectile();

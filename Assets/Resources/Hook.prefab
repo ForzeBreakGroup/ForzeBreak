@@ -1036,6 +1036,7 @@ GameObject:
   - component: {fileID: 114440261512266066}
   - component: {fileID: 114197228716678112}
   - component: {fileID: 114888806615463124}
+  - component: {fileID: 114317336629167594}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -7603,10 +7604,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Velocity: 100
   ExistingTime: 2
-  ExistingTimeHooked: 15
+  ExistingTimeHooked: 8
   forceOnRope: 6000
   source: {fileID: 0}
   target: {fileID: 0}
+--- !u!114 &114317336629167594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1551509244256120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_Grapple Launch
+  launchSoundAttached: 0
+  followSoundref: event:/SFX_Diegetic/SFX_Grapple Reel
+  followSoundAttached: 1
+  collisionSoundref: event:/SFX_Diegetic/SFX_Grapple Hook Attach
+  collisionSoundAttached: 0
 --- !u!114 &114440261512266066
 MonoBehaviour:
   m_ObjectHideFlags: 1

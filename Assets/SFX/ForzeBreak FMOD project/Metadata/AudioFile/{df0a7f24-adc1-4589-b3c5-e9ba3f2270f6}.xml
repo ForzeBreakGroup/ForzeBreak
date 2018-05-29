@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="AudioFile" id="{df0a7f24-adc1-4589-b3c5-e9ba3f2270f6}">
         <property name="assetPath">
-            <value>SFX_NonDiegetic/SFX_CancelBack.wav</value>
+            <value>SFX_NonDiegetic/SFX_NonDiegetic_CancelBack.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

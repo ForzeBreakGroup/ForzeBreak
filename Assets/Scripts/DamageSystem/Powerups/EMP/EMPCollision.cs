@@ -34,6 +34,7 @@ public class EMPCollision : PowerUpCollision
         empCollider.isTrigger = true;
         ((SphereCollider)empCollider).radius = EMPRadius;
         PlayVFX();
+        GetComponent<PowerupSound>().PlaySound(0);
     }
 
     private void OnTriggerEnter(Collider other)

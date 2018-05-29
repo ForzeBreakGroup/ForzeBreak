@@ -19,7 +19,14 @@ public class BlackHoleMovement : PowerUpMovement
 
     IEnumerator DisableBlackHole()
     {
+        PowerupSound ps = GetComponent<PowerupSound>();
+        FMOD.Studio.EventInstance attractingSound = FMODUnity.RuntimeManager.CreateInstance(ps.soundList[0].Soundref);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(attractingSound, transform, rb);
+        attractingSound.start();
         yield return new WaitForSeconds(5);
+        attractingSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        attractingSound.release();
+        ps.PlaySound(1);
         ((BlackHoleCollision)PowerUpCollision).DisableBlackHoleEffect();
         StartCoroutine(DestroyBlackHole());
     }

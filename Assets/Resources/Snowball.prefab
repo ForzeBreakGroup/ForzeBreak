@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114857158456250848}
   - component: {fileID: 114426766940328688}
   - component: {fileID: 114585373630655732}
+  - component: {fileID: 114279102549706540}
   m_Layer: 0
   m_Name: Snowball
   m_TagString: Untagged
@@ -321,6 +322,25 @@ MonoBehaviour:
   VFX: {fileID: 0}
   externalCollider: {fileID: 0}
   damageRatioThreshold: 0.3
+--- !u!114 &114279102549706540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1077537064979696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_SnowBallLaunch
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: SnowBallRolling
+    Soundref: event:/SFX_Diegetic/SFX_SnowBallRolling
+    Attached: 1
 --- !u!114 &114285384069112838
 MonoBehaviour:
   m_ObjectHideFlags: 1

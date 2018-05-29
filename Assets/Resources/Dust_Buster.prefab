@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 114760996673422104}
   - component: {fileID: 114274383305704510}
   - component: {fileID: 114645859304732884}
+  - component: {fileID: 114600944834990956}
   m_Layer: 0
   m_Name: Dust_Buster
   m_TagString: Player
@@ -6015,6 +6016,8 @@ MonoBehaviour:
     type: 2}
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
+  receivedDamageItem: null
+  explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 0
 --- !u!114 &114357914413665312
 MonoBehaviour:
@@ -6086,6 +6089,22 @@ MonoBehaviour:
   upForce_overturned: 5
   sideForce: 1500
   selfAdjust: 1
+  selfAdjustDelay: 0.5
+  selfAdjustDetectDistance: 2
+--- !u!114 &114600944834990956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318642001664922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebc1e19523365b4bb1e2a977d8e765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundref: event:/SFX_Diegetic/SFX_DustBusterEngine
+  flipSoundref: event:/SFX_Diegetic/SFX_VehicleFlip
+  boostSoundref: event:/SFX_Diegetic/SFX_BoostSound
 --- !u!114 &114610196959797994
 MonoBehaviour:
   m_ObjectHideFlags: 1

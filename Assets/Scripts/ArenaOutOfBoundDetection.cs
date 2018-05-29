@@ -14,6 +14,10 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
     int deathCount = 0;
     int suicideCount = 0;
 
+    [FMODUnity.EventRef]
+    [SerializeField]
+    private string outSoundref;
+
     private void Awake()
     {
         deathHandler = GetComponent<PlayerDeathHandler>();
@@ -35,7 +39,7 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 
             deathHandler.OnPlayerDeath(killerId, victimId);
 
-            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX_NonDiegetic/SFX_GameOver");
+            FMODUnity.RuntimeManager.PlayOneShot(outSoundref);
 
             ++deathCount;
             suicideCount = suicideCount + ((victimId == killerId) ? 1 : 0);

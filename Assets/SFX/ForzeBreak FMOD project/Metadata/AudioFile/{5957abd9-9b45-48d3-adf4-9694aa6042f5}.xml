@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="AudioFile" id="{5957abd9-9b45-48d3-adf4-9694aa6042f5}">
         <property name="assetPath">
-            <value>SFX_NonDiegetic/ForzeBreak_Powerup_Pickup.wav</value>
+            <value>SFX_NonDiegetic/SFX_NonDiegetic_Powerup_Pickup.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

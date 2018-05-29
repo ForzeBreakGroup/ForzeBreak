@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 114359071012977078}
   - component: {fileID: 114917946905009786}
   - component: {fileID: 114459175417540040}
-  - component: {fileID: 114614982699324000}
   - component: {fileID: 96078916638059704}
   - component: {fileID: 114698701937817786}
+  - component: {fileID: 114978043695417308}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -43,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1261805292484670}
   m_LocalRotation: {x: -0.097653106, y: 0.004761205, z: -0.0004670977, w: -0.99520904}
-  m_LocalPosition: {x: 144.29074, y: 1.625324, z: 145.43777}
+  m_LocalPosition: {x: -12.268, y: 13.871, z: -31.975}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,6 +62,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: aba489725b3d3a44798a1ce893449943, type: 2}
   m_StaticBatchInfo:
@@ -131,6 +132,7 @@ TrailRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 74067a9ed253f934aa487d89767b5cc2, type: 2}
   m_StaticBatchInfo:
@@ -159,12 +161,15 @@ TrailRenderer:
     widthCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -200,10 +205,10 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
 --- !u!114 &114359071012977078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,17 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: 0
---- !u!114 &114614982699324000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1261805292484670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5e2e804ef80db48b64c26b8d3a1636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  announcerText: 
+  announcerClip: {fileID: 0}
 --- !u!114 &114698701937817786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,5 +278,25 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 0, z: 0}
   checkSelf: 1
   checkPlayer: 0
+  VFX: {fileID: 0}
   externalCollider: {fileID: 0}
   explosion: {fileID: 1474330313771582, guid: 7f39dc37c6e4b9946a1e2e804d79669b, type: 2}
+--- !u!114 &114978043695417308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1261805292484670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7916aaebc3d6418d50c61ebb9a937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchSoundref: event:/SFX_Diegetic/SFX_CannonExplosion
+  launchSoundAttached: 0
+  followSoundref: 
+  followSoundAttached: 0
+  soundList:
+  - SoundName: CannonExplosion
+    Soundref: event:/SFX_Diegetic/SFX_CannonExplosion
+    Attached: 0

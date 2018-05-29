@@ -139,3 +139,4 @@ MonoBehaviour:
   powerUpCollected: 0
   randomMode: 0
   powerUpTier: 2
+  pickupSoundref: event:/SFX_Diegetic/SFX_PowerupPickup

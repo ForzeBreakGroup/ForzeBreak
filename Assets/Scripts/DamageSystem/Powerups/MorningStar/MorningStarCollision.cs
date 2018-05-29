@@ -7,6 +7,7 @@ public class MorningStarCollision : PowerUpCollision
     protected override void CollisionEnter(Collision collision)
     {
         base.CollisionEnter(collision);
+        GetComponent<PowerupSound>().PlaySound(1);
         ApplyDamage("MorningStar");
         transform.parent.GetComponent<MorningStarComponent>().DecreaseCapacity();
     }
