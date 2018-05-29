@@ -49,6 +49,9 @@ public class AnalyticManager : MonoBehaviour
     [SerializeField]
     private string baseLogFileName = "Build";
 
+    [SerializeField]
+    private bool enableTelemetry = false;
+
     private Dictionary<string, AnalyticEntry> entryLogs;
 
     private void Awake()
@@ -67,6 +70,11 @@ public class AnalyticManager : MonoBehaviour
             instance.entryLogs.Clear();
         }
 
+        if (!instance.enableTelemetry)
+        {
+            return;
+        }
+
         // Log GamePlay information
         Insert("ArenaName", SceneManager.GetActiveScene().name);
         Insert("GameTime", DateTime.Now.ToString());
@@ -76,6 +84,11 @@ public class AnalyticManager : MonoBehaviour
 
     public static void Write()
     {
+        if (!instance.enableTelemetry)
+        {
+            return;
+        }
+
         // Write the structure to text file
         string filename = string.Join("-", new string[] { instance.baseLogFileName, DateTime.Now.Year.ToString(), DateTime.Now.Month.ToString(), DateTime.Now.Day.ToString(), PhotonNetwork.gameVersion });
         string path = Application.dataPath +"/" + filename;
@@ -106,6 +119,11 @@ public class AnalyticManager : MonoBehaviour
 
     public static void Insert(string key, params object[] objs)
     {
+        if (!instance.enableTelemetry)
+        {
+            return;
+        }
+
         if (!instance.entryLogs.ContainsKey(key))
         {
             AnalyticEntry entry = new AnalyticEntry();
