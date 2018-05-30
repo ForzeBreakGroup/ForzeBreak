@@ -5,49 +5,40 @@ using UnityEngine.UI;
 
 public class LobbyUIControl : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject playerStatusEntry;
-
     private Transform playerStatusPanel;
+
+    PlayerStatusEntry [] entries;
 
     private void Awake()
     {
-        LobbyManager.playerListUpdateCallbackFunc = UpdatePlayerList;
+        LobbyManager.LobbyManagerPlayerJoinLobbyCallbackFunc = EvtOnPlayerJoinedRoomHandler;
+        LobbyManager.LobbyManagerPlayerLeftLobbyCallbackFunc = EvtOnPlayerLeftRoomHandler;
+
+        entries = transform.GetComponentsInChildren<PlayerStatusEntry>();
         playerStatusPanel = transform.Find("PlayerStatus");
+    }
 
-        if (PhotonNetwork.isMasterClient)
+    private void EvtOnPlayerJoinedRoomHandler(PhotonPlayer player)
+    {
+        foreach (PlayerStatusEntry entry in entries)
         {
-            EvtOnPlayerJoinedRoomHandler();
+            if (entry.p == null)
+            {
+                entry.EnableEntry(player);
+                break;
+            }
         }
     }
 
-    private void OnEnable()
+    private void EvtOnPlayerLeftRoomHandler(PhotonPlayer player)
     {
-        EventManager.StartListening("EvtOnPlayerJoinedRoom", EvtOnPlayerJoinedRoomHandler);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.StopListening("EvtOnPLayerJoinedRoom", EvtOnPlayerJoinedRoomHandler);
-    }
-
-    private void EvtOnPlayerJoinedRoomHandler()
-    {
-        UpdatePlayerList();
-    }
-
-    private void UpdatePlayerList()
-    {
-        // Remove all player status
-        foreach(Transform t in playerStatusPanel)
+        foreach(PlayerStatusEntry entry in entries)
         {
-            DestroyObject(t.gameObject);
-        }
-
-        foreach(KeyValuePair<PhotonPlayer, bool> entry in LobbyManager.instance.playerReadyStatus)
-        {
-            GameObject e = Instantiate(playerStatusEntry, playerStatusPanel);
-            e.GetComponent<PlayerStatusEntry>().UpdateStatus(entry.Key.NickName, entry.Value);
+            if (entry.p == player)
+            {
+                entry.DisableEntry();
+                break;
+            }
         }
     }
 
@@ -56,6 +47,11 @@ public class LobbyUIControl : MonoBehaviour
     {
         LobbyManager.instance.OnPlayerClickReady();
         NetworkManager.instance.selectedVehicleName = VehicleSelectionControl.instance.GetSelectVehicle();
+    }
+
+    public void OnClickQuitLobby()
+    {
+        PhotonNetwork.LeaveRoom();
     }
     #endregion
 }

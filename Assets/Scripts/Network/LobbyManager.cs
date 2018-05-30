@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class LobbyManager : Photon.MonoBehaviour
 {
-    public delegate void LobbyManagerPlayerListUpdateNotify();
-    public static LobbyManagerPlayerListUpdateNotify playerListUpdateCallbackFunc;
-
     [SerializeField]
     private int countdownSec = 3;
 
     public Dictionary<PhotonPlayer, bool> playerReadyStatus { get; private set; }
+
+    public delegate void LobbyManagerPlayerJoinLobby(PhotonPlayer player);
+    public static LobbyManagerPlayerJoinLobby LobbyManagerPlayerJoinLobbyCallbackFunc;
+
+    public delegate void LobbyManagerPlayerLeftLobby(PhotonPlayer player);
+    public static LobbyManagerPlayerLeftLobby LobbyManagerPlayerLeftLobbyCallbackFunc;
 
     private static LobbyManager lobbyManager;
     public static LobbyManager instance
@@ -36,14 +39,8 @@ public class LobbyManager : Photon.MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening("EvtOnPlayerConnected", EvtOnPlayerConnectedHandler);
-        EventManager.StartListening("EvtOnPLayerDisconnected", EvtOnPlayerDisconnectedHandler);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.StopListening("EvtOnPlayerConnected", EvtOnPlayerConnectedHandler);
-        EventManager.StopListening("EvtOnPLayerDisconnected", EvtOnPlayerDisconnectedHandler);
+        NetworkManager.NetworkManagerPlayerConnectGameCallbackFunc = EvtOnPlayerConnectedToGame;
+        NetworkManager.NetworkManagerPlayerDisconnectGameCallbackFunc = EvtOnPlayerDisconnectFromGame;
     }
 
     private void Awake()
@@ -53,43 +50,36 @@ public class LobbyManager : Photon.MonoBehaviour
             ExitGames.Client.Photon.Hashtable killCount = new ExitGames.Client.Photon.Hashtable() { { "KillCount", 0 } };
             p.SetCustomProperties(killCount);
         }
-    }
 
-    private void Init()
-    {
         playerReadyStatus = new Dictionary<PhotonPlayer, bool>();
 
         foreach (PhotonPlayer p in PhotonNetwork.playerList)
         {
+            EvtOnPlayerConnectedToGame(p);
+        }
+    }
+
+
+    private void Init()
+    {
+    }
+
+    private void EvtOnPlayerConnectedToGame(PhotonPlayer p)
+    {
+        if (!playerReadyStatus.ContainsKey(p))
+        {
             playerReadyStatus.Add(p, false);
+            LobbyManagerPlayerJoinLobbyCallbackFunc(p);
         }
     }
 
-    private void EvtOnPlayerConnectedHandler()
+    private void EvtOnPlayerDisconnectFromGame(PhotonPlayer p)
     {
-        foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        if (playerReadyStatus.ContainsKey(p))
         {
-            if (!playerReadyStatus.ContainsKey(p))
-            {
-                playerReadyStatus.Add(p, false);
-            }
+            playerReadyStatus.Remove(p);
+            LobbyManagerPlayerLeftLobbyCallbackFunc(p);
         }
-
-        playerListUpdateCallbackFunc();
-    }
-
-    private void EvtOnPlayerDisconnectedHandler()
-    {
-        Dictionary<PhotonPlayer, bool> newPlayerReadyStatus = new Dictionary<PhotonPlayer, bool>();
-
-        foreach(PhotonPlayer p in PhotonNetwork.playerList)
-        {
-            newPlayerReadyStatus.Add(p, playerReadyStatus[p]);
-        }
-
-        playerReadyStatus = newPlayerReadyStatus;
-
-        playerListUpdateCallbackFunc();
     }
 
     #region UI OnClick Events
@@ -104,8 +94,6 @@ public class LobbyManager : Photon.MonoBehaviour
     public void RpcTogglePlayerReady(PhotonPlayer player)
     {
         playerReadyStatus[player] = !playerReadyStatus[player];
-
-        playerListUpdateCallbackFunc();
 
         // Master client will handle the scene transition when all players are ready
         if (PhotonNetwork.isMasterClient)

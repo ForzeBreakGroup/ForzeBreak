@@ -85,6 +85,12 @@ public class NetworkManager : PunBehaviour
             return networkManager;
         }
     }
+
+    public delegate void NetworkManagerPlayerConnectGame(PhotonPlayer player);
+    public static NetworkManagerPlayerConnectGame NetworkManagerPlayerConnectGameCallbackFunc;
+
+    public delegate void NetworkManagerPlayerDisconnectGame(PhotonPlayer player);
+    public static NetworkManagerPlayerDisconnectGame NetworkManagerPlayerDisconnectGameCallbackFunc;
     #endregion
 
     #region Private Members
@@ -393,7 +399,7 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Player Disconnected: " + otherPlayer.ID);
         base.OnPhotonPlayerDisconnected(otherPlayer);
 
-        EventManager.TriggerEvent("EvtOnPlayerDisconnected");
+        NetworkManagerPlayerDisconnectGameCallbackFunc(otherPlayer);
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
@@ -401,7 +407,7 @@ public class NetworkManager : PunBehaviour
         Debug.Log("Player Joined: " + newPlayer.ID);
         base.OnPhotonPlayerConnected(newPlayer);
 
-        EventManager.TriggerEvent("EvtOnPlayerConnected");
+        NetworkManagerPlayerConnectGameCallbackFunc(newPlayer);
     }
 
     public override void OnReceivedRoomListUpdate()

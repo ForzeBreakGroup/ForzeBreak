@@ -8,16 +8,51 @@ public class PlayerStatusEntry : MonoBehaviour
     Text playerName;
     Text status;
 
-    private void Awake()
+    GameObject active;
+    GameObject waiting;
+
+    public PhotonPlayer p;
+
+    [SerializeField]
+    private Color readyColor = Color.green;
+
+    [SerializeField]
+    private Color notReadyColor = Color.red;
+
+    private void Update()
     {
-        playerName = transform.Find("Name").GetComponent<Text>();
-        status = transform.Find("Ready").GetComponent<Text>();
+        if (p != null)
+        {
+            playerName.text = p.NickName;
+            this.status.text = (LobbyManager.instance.playerReadyStatus[p]) ? "Ready" : "Not Ready";
+            this.status.color = (LobbyManager.instance.playerReadyStatus[p]) ? readyColor : notReadyColor;
+        }
     }
 
-    public void UpdateStatus(string name, bool status)
+    private void Awake()
     {
-        playerName.text = name;
-        this.status.text = (status) ? "Ready" : "Waiting";
-        this.status.color = (status) ? Color.green : Color.red;
+        active = transform.Find("Active").gameObject;
+        waiting = transform.Find("Waiting").gameObject;
+        playerName = transform.Find("Active").Find("Name").GetComponent<Text>();
+        status = transform.Find("Active").Find("Ready").GetComponent<Text>();
+
+        DisableEntry();
+    }
+
+    public void DisableEntry()
+    {
+        active.SetActive(false);
+        waiting.SetActive(true);
+
+        p = null;
+    }
+
+    public void EnableEntry(PhotonPlayer player)
+    {
+        Debug.Log("Enabling player entry with player name: " + player.NickName);
+        active.SetActive(true);
+        waiting.SetActive(false);
+
+        p = player;
     }
 }
