@@ -1204,7 +1204,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Setting
+  m_Text: Settings
 --- !u!222 &242772972
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7443,7 +7443,7 @@ GameObject:
   - component: {fileID: 1782336925}
   - component: {fileID: 1782336929}
   m_Layer: 5
-  m_Name: Credit
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8666,7 +8666,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Credit
+  m_Text: Credits
 --- !u!222 &2040264041
 CanvasRenderer:
   m_ObjectHideFlags: 0
