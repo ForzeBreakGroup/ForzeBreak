@@ -48,7 +48,7 @@ public class ArenaOutOfBoundDetection : MonoBehaviour
 
     private void OnDestroy()
     {
-        AnalyticManager.Insert("PlayerDeathCount", deathCount);
-        AnalyticManager.Insert("PlayerSuicideCount", suicideCount);
+        // AnalyticManager.Insert("PlayerDeathCount", deathCount);
+        // AnalyticManager.Insert("PlayerSuicideCount", suicideCount);
     }
 }
