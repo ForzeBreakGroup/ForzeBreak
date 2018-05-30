@@ -66,20 +66,24 @@ public class DamageSystem : NetworkPlayerCollision
         }
     }
 
-	protected override void Update()
-	{
-		CarControlWheels controlWheel = GetComponent<CarControlWheels> ();
-		if (appliedDamage) {
-			if (controlWheel.IsWheelsGround) {
-				wheelOnGroundTime += Time.deltaTime;
-				if (wheelOnGroundTime >= 0.5f) {
-					lastReceivedDamageFrom = photonView.ownerId;
-					appliedDamage = false;
-					wheelOnGroundTime = 0.0f;
-				}
-			}
-		}
-	}
+    protected override void Update()
+    {
+        base.Update();
+        CarControlWheels controlWheel = GetComponent<CarControlWheels> ();
+        if (appliedDamage)
+        {
+            if (controlWheel.IsWheelsGround)
+            {
+                wheelOnGroundTime += Time.deltaTime;
+                if (wheelOnGroundTime >= 0.5f)
+                {
+                    lastReceivedDamageFrom = photonView.ownerId;
+                    appliedDamage = false;
+                    wheelOnGroundTime = 0.0f;
+                }
+            }
+        }
+    }
 
     #endregion
 
