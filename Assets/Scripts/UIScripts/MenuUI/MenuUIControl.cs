@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * Author: Jason Lin
@@ -55,6 +56,11 @@ public class MenuUIControl : MonoBehaviour
     {
         anim.SetTrigger("Hide");
         settingAnim.SetTrigger("Show");
+    }
+
+    public void OnClickCredits()
+    {
+        SceneManager.LoadScene("Credit");
     }
 
     public void OnClickQuitApplication()
