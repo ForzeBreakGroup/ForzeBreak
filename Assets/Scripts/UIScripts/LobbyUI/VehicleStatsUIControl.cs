@@ -34,6 +34,15 @@ public class VehicleStatsUIControl : MonoBehaviour
     private void Update()
     {
         // Detect holding option in controller
+        if (Input.GetButtonDown("Option"))
+        {
+            OnHoverEnter();
+        }
+
+        if (Input.GetButtonUp("Option"))
+        {
+            OnHoverExit();
+        }
     }
 
     public void OnAnimationCompleteEvent()
