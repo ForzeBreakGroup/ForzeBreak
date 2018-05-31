@@ -4,7 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VehicleSelectionControl : MonoBehaviour {
+public class VehicleSelectionControl : MonoBehaviour
+{
+    [System.Serializable]
+    public struct VehicleStats
+    {
+        [Range(1, 5)]
+        [SerializeField]
+        public int VehicleSpeed;
+
+        [Range(1, 5)]
+        [SerializeField]
+        public int VehicleWeight;
+
+        [Range(1, 5)]
+        [SerializeField]
+        public int VehicleControl;
+
+        [Range(1, 5)]
+        [SerializeField]
+        public int VehicleEnergy;
+
+        [SerializeField]
+        public string VehicleDescription;
+    }
+
 
     [System.Serializable]
     private struct VehicleSet
@@ -15,6 +39,9 @@ public class VehicleSelectionControl : MonoBehaviour {
         public string VehicleDisplayDame;
         [SerializeField]
         public GameObject VehicleModel;
+
+        [SerializeField]
+        public VehicleStats VehicleStats;
     }
 
     private int currentIndex = 0;
@@ -78,6 +105,11 @@ public class VehicleSelectionControl : MonoBehaviour {
     {
         activeForSelection = false;
         return VehicleList[currentIndex].VehicleName;
+    }
+
+    public VehicleStats GetSelectVehicleStats()
+    {
+        return VehicleList[currentIndex].VehicleStats;
     }
 
 }
