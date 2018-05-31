@@ -51,6 +51,14 @@ public class LobbyUIControl : MonoBehaviour
 
     public void OnClickQuitLobby()
     {
+        foreach(PlayerStatusEntry entry in entries)
+        {
+            if (entry.p == PhotonNetwork.player)
+            {
+                entry.DisableEntry();
+                break;
+            }
+        }
         PhotonNetwork.LeaveRoom();
     }
     #endregion
