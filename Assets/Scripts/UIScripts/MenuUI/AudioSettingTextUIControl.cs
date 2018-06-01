@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class AudioSettingTextUIControl : MonoBehaviour
 {
-    Text txt;
-    Slider slider;
+    [SerializeField]
+    private Text txt;
+
+    [SerializeField]
+    private Slider slider;
+
     SoundMaster soundMaster;
 
     private enum AudioSettingsCategory
@@ -22,12 +26,11 @@ public class AudioSettingTextUIControl : MonoBehaviour
 
     private void Awake()
     {
-        slider = GetComponent<Slider>();
-        txt = transform.GetComponentInChildren<Text>();
+        txt.text = slider.value.ToString();
         soundMaster = FindObjectOfType<SoundMaster>();
     }
 
-    private void Update()
+    public void OnSliderValueChangeHandler()
     {
         txt.text = slider.value.ToString();
         ApplySoundVolume(slider.value);
