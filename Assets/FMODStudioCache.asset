@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 114533760039807842}
   MasterBankRef: {fileID: 114377103521206048}
   StringsBankRef: {fileID: 114623979966087772}
-  stringsBankWriteTime: 636632011415797256
+  stringsBankWriteTime: 636632863514161333
   cacheVersion: 2
 --- !u!114 &114003303477134806
 MonoBehaviour:
@@ -324,6 +324,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114040639870674236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114045404255933160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +381,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114050951929312122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Stage
   Min: 0
   Max: 1
   Default: 0
@@ -1053,7 +1083,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114983853835872752}
+  - {fileID: 114050951929312122}
   MinDistance: 0
   MaxDistance: 0
   Length: 335556
@@ -1147,6 +1177,21 @@ MonoBehaviour:
   MaxDistance: 20
   Length: 921
 --- !u!114 &114211049352867946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114212825809721588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1366,7 +1411,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114754013426160312}
+  - {fileID: 114040639870674236}
   MinDistance: 1
   MaxDistance: 20
   Length: 2500
@@ -1419,7 +1464,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114423589813270438}
+  - {fileID: 114988565624073010}
   MinDistance: 1
   MaxDistance: 20
   Length: 3967
@@ -1472,7 +1517,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114768177024551706}
+  - {fileID: 114212825809721588}
   MinDistance: 1
   MaxDistance: 20
   Length: 6078
@@ -1786,7 +1831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: G:\Unity\Project\ForzeBreak\Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636632011415747117
+  lastModified: 636632863514151308
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -2588,7 +2633,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114975791971728248}
+  - {fileID: 114659307545470946}
   MinDistance: 1
   MaxDistance: 20
   Length: 3360
@@ -2820,7 +2865,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114065443251725806}
+  - {fileID: 114659730197835732}
   MinDistance: 1
   MaxDistance: 20
   Length: 2620
@@ -3005,7 +3050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\SFX\ForzeBreak FMOD project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636632011415797256
+  lastModified: 636632863514161333
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -3192,6 +3237,36 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114656894399033792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114659307545470946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114659730197835732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4655,6 +4730,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stage
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114988565624073010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Speed
   Min: 0
   Max: 1
   Default: 0
