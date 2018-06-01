@@ -6567,6 +6567,7 @@ GameObject:
   - component: {fileID: 1433230776}
   - component: {fileID: 1433230778}
   - component: {fileID: 1433230779}
+  - component: {fileID: 1433230780}
   m_Layer: 5
   m_Name: NameInput
   m_TagString: Untagged
@@ -6655,6 +6656,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19c5eb4c7d301948b46967c5e4b8eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1433230780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1433230774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323aab960ee11eb4680704ae6d333f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingDataKey: PlayerNamePref
 --- !u!1 &1444689677
 GameObject:
   m_ObjectHideFlags: 0
