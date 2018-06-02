@@ -99,6 +99,9 @@ public class DamageSystem : NetworkPlayerCollision
         // Only apply damage force if the vehicle is controlled by self
         if (gameObject.GetPhotonView().isMine)
         {
+
+            ScreenCapturer.instance.ScreenCap();
+
             lastReceivedDamageFrom = ownerId;
             receivedDamageItem = powerUpName;
 

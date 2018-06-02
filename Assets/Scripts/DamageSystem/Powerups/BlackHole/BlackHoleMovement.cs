@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlackHoleMovement : PowerUpMovement
 {
     private Rigidbody rb;
+    FMOD.Studio.EventInstance attractingSound;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class BlackHoleMovement : PowerUpMovement
     IEnumerator DisableBlackHole()
     {
         PowerupSound ps = GetComponent<PowerupSound>();
-        FMOD.Studio.EventInstance attractingSound = FMODUnity.RuntimeManager.CreateInstance(ps.soundList[0].Soundref);
+        attractingSound = FMODUnity.RuntimeManager.CreateInstance(ps.soundList[0].Soundref);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(attractingSound, transform, rb);
         attractingSound.start();
         yield return new WaitForSeconds(5);
@@ -35,5 +36,12 @@ public class BlackHoleMovement : PowerUpMovement
     {
         yield return new WaitForSeconds(5);
         DestroyPowerUpProjectile();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        attractingSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        attractingSound.release();
     }
 }
