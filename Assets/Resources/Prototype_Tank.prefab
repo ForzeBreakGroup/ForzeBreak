@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 23684940087326312}
   - component: {fileID: 102653921039221012}
   - component: {fileID: 114218841663492954}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,6 +1576,7 @@ MonoBehaviour:
   collisionCooldown: 0.7
   lastReceivedDamageFrom: 0
   receivedDamageItem: null
+  appliedDamage: 0
   explosionSoundref: event:/SFX_Diegetic/SFX_Crash
   enableLog: 1
 --- !u!114 &114218841663492954

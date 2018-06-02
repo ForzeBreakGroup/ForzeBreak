@@ -71,6 +71,7 @@ public class NetworkPlayerCollision : NetworkPlayerBase
             lastReceivedDamageFrom = collision.transform.root.GetComponent<PhotonView>().ownerId;
             receivedDamageItem = "vehicle";
 
+
             appliedDamage = true;
 
             // Validates the collision timer
@@ -82,6 +83,8 @@ public class NetworkPlayerCollision : NetworkPlayerBase
             {
                 return;
             }
+
+            ScreenCapturer.instance.ScreenCap();
 
             PlayCollisionEffect(collision.contacts[0].point);
 
