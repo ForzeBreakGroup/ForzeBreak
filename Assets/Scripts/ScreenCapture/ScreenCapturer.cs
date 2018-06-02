@@ -8,6 +8,7 @@ public class ScreenCapturer : MonoBehaviour {
     public static ScreenCapturer instance = null;
     private Camera cam;
 
+    private float nextCapture = 0f;
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +25,11 @@ public class ScreenCapturer : MonoBehaviour {
 
     public void ScreenCap()
     {
-        StartCoroutine(ScreenCapture());
+        if(Time.time>nextCapture)
+        {
+            nextCapture = Time.time + 5f;
+            StartCoroutine(ScreenCapture());
+        }
     }
 
 

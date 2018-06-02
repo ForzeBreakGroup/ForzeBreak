@@ -9,6 +9,7 @@ public class ScreenShotKeeper : MonoBehaviour {
     public List<Sprite> screenShotList;
     public int limit = 10;
 
+
     void Awake ()
     {
         if (instance == null)
