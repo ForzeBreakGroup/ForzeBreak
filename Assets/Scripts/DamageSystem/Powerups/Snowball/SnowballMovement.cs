@@ -49,4 +49,12 @@ public class SnowballMovement : PowerUpMovement
     {
         return currentScale / maxScale;
     }
+
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        snowBallRolling.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        snowBallRolling.release();
+    }
 }
