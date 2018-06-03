@@ -5,19 +5,19 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayerScoreCard
+  m_Name: WinnerNamePanel
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Flip
+  - m_Name: Show
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: 1107822097455107232}
+    m_StateMachine: {fileID: 1107400986476999636}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -27,7 +27,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1101 &1101260542288423946
+--- !u!1101 &1101795500318746388
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -35,10 +35,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Flip
+    m_ConditionEvent: Show
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102083298282536018}
+  m_DstState: {fileID: 1102033863213379576}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -51,13 +51,13 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &1102083298282536018
+--- !u!1102 &1102033863213379576
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FlipCard
+  m_Name: WinnerNameIntro
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -70,19 +70,19 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c9ef88f00bfe1b947bad1bfd9eb0bfb1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 07db05bcf235c7a4eb5b251c56ee11c5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &1102726075035826556
+--- !u!1102 &1102764679009624208
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayeScoreCardDefault
+  m_Name: WinnerNameDefault
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -95,13 +95,13 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1319d269a778ace4aaf073da2ef2d163, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0355f5935e9b4f14c96c205716ea5bb9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1107 &1107822097455107232
+--- !u!1107 &1107400986476999636
 AnimatorStateMachine:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -110,14 +110,14 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 1102083298282536018}
-    m_Position: {x: 324, y: 72, z: 0}
+    m_State: {fileID: 1102764679009624208}
+    m_Position: {x: 216, y: 192, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 1102726075035826556}
-    m_Position: {x: 251, y: 341, z: 0}
+    m_State: {fileID: 1102033863213379576}
+    m_Position: {x: 336, y: 12, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
-  - {fileID: 1101260542288423946}
+  - {fileID: 1101795500318746388}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -125,4 +125,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102726075035826556}
+  m_DefaultState: {fileID: 1102764679009624208}

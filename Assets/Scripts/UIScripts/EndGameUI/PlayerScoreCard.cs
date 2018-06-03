@@ -18,6 +18,9 @@ public class PlayerScoreCard : MonoBehaviour
     private GameObject playerName;
     private GameObject playerScore;
 
+    private string playerNameTemp;
+    private string scoreTemp;
+
     private void Awake()
     {
         img = GetComponent<Image>();
@@ -43,5 +46,14 @@ public class PlayerScoreCard : MonoBehaviour
     {
         playerName.SetActive(!isBackside);
         playerScore.SetActive(!isBackside);
+
+        playerName.GetComponent<Text>().text = playerNameTemp;
+        playerScore.GetComponent<Text>().text = scoreTemp;
+    }
+
+    public void SetPlayerInfo(string playerName, int playerScore)
+    {
+        playerNameTemp = playerName;
+        scoreTemp = playerScore.ToString();
     }
 }
