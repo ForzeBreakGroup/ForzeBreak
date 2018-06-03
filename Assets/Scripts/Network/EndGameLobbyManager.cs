@@ -38,11 +38,6 @@ public class EndGameLobbyManager : Photon.MonoBehaviour
             rematchPlayers.Add(p, false);
         }
 
-        foreach (PhotonPlayer p in PhotonNetwork.playerList)
-        {
-            Debug.Log(p.CustomProperties["KillCount"]);
-        }
-
         // Write the analytic data to file
         AnalyticManager.Write();
         AnalyticManager.Clear();
