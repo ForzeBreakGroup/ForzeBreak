@@ -7,6 +7,9 @@ public class LobbyManager : Photon.MonoBehaviour
     [SerializeField]
     private int countdownSec = 3;
 
+    [SerializeField]
+    private string arenaName = "Online";
+
     public Dictionary<PhotonPlayer, bool> playerReadyStatus { get; private set; }
 
     public delegate void LobbyManagerPlayerJoinLobby(PhotonPlayer player);
@@ -120,7 +123,7 @@ public class LobbyManager : Photon.MonoBehaviour
     IEnumerator LoadSceneAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        PhotonNetwork.LoadLevel("Online");
+        PhotonNetwork.LoadLevel(arenaName);
     }
     #endregion
 }
