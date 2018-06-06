@@ -170,6 +170,7 @@ public class PowerUpComponent : Photon.MonoBehaviour
         PhotonView view = transform.root.gameObject.GetPhotonView();
         if (view.isMine)
         {
+            Debug.Log("Unloading PowerUp: " + gameObject.name);
             view.RPC("RemovePowerUpComponent", PhotonTargets.All, view.ownerId);
         }
 

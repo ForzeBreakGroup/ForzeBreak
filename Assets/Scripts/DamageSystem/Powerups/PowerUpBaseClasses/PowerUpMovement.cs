@@ -11,6 +11,7 @@ public class PowerUpMovement : PowerUpProjectileBase
 
     public void DestroyPowerUpProjectile()
     {
+        Debug.Log("Destroying Projectile: " + gameObject.name + " called by Player #" + NetworkManager.instance.GetLocalPlayer().GetPhotonView().ownerId);
         PhotonView.RPC("RpcDestroyPowerUpProjectile", PhotonTargets.All);
     }
 
@@ -19,6 +20,7 @@ public class PowerUpMovement : PowerUpProjectileBase
     {
         if (PhotonView.isMine)
         {
+            Debug.Log("RPC Received: " + gameObject.name);
             PhotonNetwork.Destroy(this.gameObject);
         }
     }
