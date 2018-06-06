@@ -69,6 +69,11 @@ public class PowerUpComponent : Photon.MonoBehaviour
     {
         enabled = GetComponent<PhotonView>().isMine;
         launchPoint = transform.Find("LaunchPoint");
+
+        if (enabled)
+        {
+            Debug.Log("Instantiated PowerUp Component: " + gameObject.name + " with PhotonView ID: " + GetComponent<PhotonView>().viewID);
+        }
     }
 
     public virtual void AdjustModel()
