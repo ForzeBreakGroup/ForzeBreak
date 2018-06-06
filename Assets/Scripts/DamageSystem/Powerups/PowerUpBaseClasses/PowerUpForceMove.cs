@@ -11,35 +11,38 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Transform))]
-public class PowerUpForceMove : PowerUpMovement {
-
-	protected Rigidbody rb;
-	public float initVelocity = 0.0f;
-	public float angle = 0.0f;
+public class PowerUpForceMove : PowerUpMovement
+{
+    protected Rigidbody rb;
+    public float initVelocity = 0.0f;
+    public float angle = 0.0f;
     public float ExistingTime = 3f;
 
-	public float spawnTime = 0f;
+    public float spawnTime = 0f;
 
     protected virtual void Awake()
-	{
-		rb = GetComponent<Rigidbody>();
-		float corAngle = Mathf.PI * angle / 180;
-		rb.velocity = initVelocity * transform.forward * Mathf.Cos (corAngle) + initVelocity * transform.up * Mathf.Sin (corAngle);
+    {
+        rb = GetComponent<Rigidbody>();
+        float corAngle = Mathf.PI * angle / 180;
+        rb.velocity = initVelocity * transform.forward * Mathf.Cos (corAngle) + initVelocity * transform.up * Mathf.Sin (corAngle);
         spawnTime = Time.time;
     }
 
-	protected virtual void FixedUpdate()
-	{
-		Move();
+    protected virtual void FixedUpdate()
+    {
+        Move();
 
         if (Time.time > spawnTime + ExistingTime)
         {
-            DestroyPowerUpProjectile();
+            if (photonView.isMine)
+            {
+                DestroyPowerUpProjectile();
+            }
         }
     }
 
-	protected virtual void Move()
-	{
+    protected virtual void Move()
+    {
 
-	}
+    }
 }

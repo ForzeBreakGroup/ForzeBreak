@@ -9,25 +9,17 @@ using UnityEngine;
  * Bullet moving class, bind to a single bullet.
  * 
  */
-public class BulletMovement : PowerUpMovement
+public class BulletMovement : PowerUpForceMove
 {
     /// <summary>
     /// Bullet moving speed
     /// </summary>
     public float Velocity = 100f;
-    /// <summary>
-    /// Bullet existing time duration
-    /// </summary>
-    public float ExistingTime = 3f;
 
-    private float spawnTime = 0f;
-
-    Rigidbody rb;
-    private void Awake()
+    protected override void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = Velocity * transform.forward;
         spawnTime = Time.time;
     }
-    
 }

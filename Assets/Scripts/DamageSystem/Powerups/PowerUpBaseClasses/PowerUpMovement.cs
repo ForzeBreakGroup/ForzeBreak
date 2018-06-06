@@ -16,13 +16,13 @@ public class PowerUpMovement : PowerUpProjectileBase
 
     public void DestroyPowerUpProjectile()
     {
-        PhotonView.RPC("RpcDestroyPowerUpProjectile", PhotonTargets.All);
+         PhotonView.RPC("RpcDestroyPowerUpProjectile", PhotonTargets.All);
     }
 
     [PunRPC]
     public virtual void RpcDestroyPowerUpProjectile()
     {
-        if (PhotonView.isMine)
+        if (photonView.isMine)
         {
             Debug.Log("RPC Received: " + gameObject.name);
             PhotonNetwork.Destroy(this.gameObject);
