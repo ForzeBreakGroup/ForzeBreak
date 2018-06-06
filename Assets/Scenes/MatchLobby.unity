@@ -17658,7 +17658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownSec: 3
-  arenaName: Online new Arena
+  arenaName: Online
 --- !u!4 &1995552130
 Transform:
   m_ObjectHideFlags: 0

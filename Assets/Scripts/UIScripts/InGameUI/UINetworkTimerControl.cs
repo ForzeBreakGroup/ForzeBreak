@@ -10,12 +10,15 @@ public class UINetworkTimerControl : UIControl
     [SerializeField] private float time = 10.0f;
     private float currentTime = 0;
     private bool startCounting = false;
+    private Animator anim;
 
     private void Awake()
     {
         timerText = GetComponent<Text>();
         timerText.enabled = false;
         currentTime = time;
+
+        anim = GetComponent<Animator>();
     }
 
     private void DisplayTime()
@@ -23,7 +26,24 @@ public class UINetworkTimerControl : UIControl
         int min = (int)(currentTime / 60);
         int sec = (int)(currentTime % 60);
 
-        timerText.text = string.Format("{0} : {1}", min.ToString("D2"), sec.ToString("D2"));
+        if (min > 0)
+        {
+            timerText.text = string.Format("{0} : {1}", min.ToString("D2"), sec.ToString("D2"));
+        }
+        else
+        {
+            timerText.text = string.Format("{0}", sec.ToString("D2"));
+        }
+
+        if (min == 1 && sec == 0)
+        {
+            anim.SetTrigger("Warning");
+        }
+
+        if (currentTime < 10)
+        {
+            anim.SetTrigger("CountDown");
+        }
     }
 
     public override void EnableUIControl()
