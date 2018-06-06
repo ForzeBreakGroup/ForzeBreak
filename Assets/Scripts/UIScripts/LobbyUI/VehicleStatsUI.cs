@@ -26,6 +26,8 @@ public class VehicleStatsUI : MonoBehaviour
     [SerializeField]
     private Sprite inactiveBarImg;
 
+    private VehicleSelectionControl.VehicleStats vs;
+
     private void Awake()
     {
         images = GetComponentsInChildren<Image>();
@@ -34,8 +36,7 @@ public class VehicleStatsUI : MonoBehaviour
 
     private void OnEnable()
     {
-        VehicleSelectionControl.VehicleStats vs = VehicleSelectionControl.instance.GetSelectVehicleStats();
-        Debug.Log(vs.VehicleSpeed);
+        vs = VehicleSelectionControl.instance.GetSelectVehicleStats();
         switch (type)
         {
             case VehicleStatsType.Speed:
@@ -53,6 +54,32 @@ public class VehicleStatsUI : MonoBehaviour
             case VehicleStatsType.Description:
                 UpdateStats(vs.VehicleDescription);
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        if (vs != VehicleSelectionControl.instance.GetSelectVehicleStats())
+        {
+            vs = VehicleSelectionControl.instance.GetSelectVehicleStats();
+            switch (type)
+            {
+                case VehicleStatsType.Speed:
+                    UpdateStats(vs.VehicleSpeed);
+                    break;
+                case VehicleStatsType.Weight:
+                    UpdateStats(vs.VehicleWeight);
+                    break;
+                case VehicleStatsType.Control:
+                    UpdateStats(vs.VehicleControl);
+                    break;
+                case VehicleStatsType.Energy:
+                    UpdateStats(vs.VehicleEnergy);
+                    break;
+                case VehicleStatsType.Description:
+                    UpdateStats(vs.VehicleDescription);
+                    break;
+            }
         }
     }
 

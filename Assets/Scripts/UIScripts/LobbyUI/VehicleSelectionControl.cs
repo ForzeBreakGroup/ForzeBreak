@@ -27,6 +27,25 @@ public class VehicleSelectionControl : MonoBehaviour
 
         [SerializeField]
         public string VehicleDescription;
+
+        public static bool operator ==(VehicleStats vs1, VehicleStats vs2)
+        {
+            if (vs1.VehicleSpeed == vs2.VehicleSpeed &&
+                vs1.VehicleEnergy == vs2.VehicleEnergy &&
+                vs1.VehicleControl == vs2.VehicleControl &&
+                vs1.VehicleWeight == vs2.VehicleWeight &&
+                vs1.VehicleDescription == vs2.VehicleDescription)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool operator !=(VehicleStats vs1, VehicleStats vs2)
+        {
+            return !(vs1 == vs2);
+        }
     }
 
 
@@ -111,5 +130,4 @@ public class VehicleSelectionControl : MonoBehaviour
     {
         return VehicleList[currentIndex].VehicleStats;
     }
-
 }
