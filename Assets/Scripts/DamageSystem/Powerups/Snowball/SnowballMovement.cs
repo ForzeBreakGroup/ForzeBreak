@@ -38,9 +38,10 @@ public class SnowballMovement : PowerUpMovement
 
         if (currentScale > maxScale)
         {
-            snowBallRolling.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            snowBallRolling.release();
-            DestroyPowerUpProjectile();
+            if (photonView.isMine)
+            {
+                DestroyPowerUpProjectile();
+            }
         }
         rb.AddForce(transform.forward * velocity * Time.deltaTime);
     }

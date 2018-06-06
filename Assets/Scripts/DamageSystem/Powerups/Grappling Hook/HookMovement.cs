@@ -88,7 +88,10 @@ public class HookMovement : PowerUpMovement
 
         if (Time.time > spawnTime + ExistingTime)
         {
-            DestroyPowerUpProjectile();
+            if (photonView.isMine)
+            {
+                DestroyPowerUpProjectile();
+            }
         }
     }
 

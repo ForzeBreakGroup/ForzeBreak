@@ -19,6 +19,10 @@ public class EMPMovement : PowerUpMovement
     IEnumerator DestroyEMPAfterDelay()
     {
         yield return new WaitForSeconds(existenceDuration);
-        DestroyPowerUpProjectile();
+
+        if (photonView.isMine)
+        {
+            DestroyPowerUpProjectile();
+        }
     }
 }

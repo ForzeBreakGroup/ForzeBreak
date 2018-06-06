@@ -35,7 +35,11 @@ public class BlackHoleMovement : PowerUpMovement
     IEnumerator DestroyBlackHole()
     {
         yield return new WaitForSeconds(5);
-        DestroyPowerUpProjectile();
+
+        if (photonView.isMine)
+        {
+            DestroyPowerUpProjectile();
+        }
     }
 
     protected override void OnDestroy()
