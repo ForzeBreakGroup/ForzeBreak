@@ -11,7 +11,7 @@ public class PowerUpMovement : PowerUpProjectileBase
 
     protected virtual void Start()
     {
-        Debug.Log("Instatiated PowerUp Projectile: " + gameObject.name + " with PhotonView ID: " + GetComponent<PhotonView>().viewID);
+        // Debug.Log("Instatiated PowerUp Projectile: " + gameObject.name + " with PhotonView ID: " + GetComponent<PhotonView>().viewID);
     }
 
     public void DestroyPowerUpProjectile()
