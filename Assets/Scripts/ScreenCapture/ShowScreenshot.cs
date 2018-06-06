@@ -15,6 +15,10 @@ public class ShowScreenshot : MonoBehaviour {
     private void Awake()
     {
         image = GetComponent<Image>();
+        if (ScreenShotKeeper.instance.screenShotList.Count > 0)
+        {
+            GetComponent<Animator>().SetTrigger("Fade");
+        }
     }
 
     void Update () {
