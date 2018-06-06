@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: de13bd781b8f0e04e9ff4d34e126c42b
+  - enabled: 1
+    path: Assets/Scenes/Online new Arena.unity
+    guid: 3ade0a5326d1b5844af6193e532fb5fb
   - enabled: 0
     path: Assets/Scenes/Test_Miguel.unity
     guid: 8e0dfee18a948a342961b1b0121feb20
