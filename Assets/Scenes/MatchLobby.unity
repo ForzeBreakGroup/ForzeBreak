@@ -543,7 +543,6 @@ GameObject:
   - component: {fileID: 179929917}
   - component: {fileID: 179929916}
   - component: {fileID: 179929915}
-  - component: {fileID: 179929918}
   m_Layer: 0
   m_Name: Quit
   m_TagString: Untagged
@@ -660,35 +659,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179929913}
---- !u!114 &179929918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114148620359053470, guid: 9f63a938f041fe14f843a8fcf79544b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 179929913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 542b3a70cb268be48941e793519abb31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  evt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 496865791}
-        m_MethodName: OnClickQuitLobby
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  inputName: Cancel
 --- !u!1 &181049703
 GameObject:
   m_ObjectHideFlags: 0
