@@ -74,9 +74,9 @@ public class FlipControl : MonoBehaviour {
 
                 VehicleSound vs = GetComponent<VehicleSound>();
                 if (vs != null)
-                    FMODUnity.RuntimeManager.PlayOneShot(vs.flipSoundref, transform.position);
+                    vs.PlayFlipSound();
 
-                if(selfAdjust)
+                if (selfAdjust)
                     StartCoroutine(SelfRotationControl());
                 carRigidbody.AddForce(transform.up * (upForce_wheelsGrounded + 100f * carRigidbody.velocity.magnitude), ForceMode.Impulse);
                 

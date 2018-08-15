@@ -79,7 +79,7 @@ public class BoostControl : MonoBehaviour {
             {
                 nextplayTime = Time.time + soundCD;
                 canPlaySound = false;
-                FMODUnity.RuntimeManager.PlayOneShotAttached(GetComponent<VehicleSound>().boostSoundref, gameObject);
+                GetComponent<VehicleSound>().PlayBoostSound();
             }
 
         }

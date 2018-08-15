@@ -35,11 +35,13 @@ public class PowerupSound : MonoBehaviour {
     [SerializeField]
     public SingleSound[] soundList;
 
+    private FMOD.Studio.EventInstance followSound;
 
     protected virtual void Awake()
     {
         if (launchSoundref != "")
         {
+            
             if (launchSoundAttached)
                 FMODUnity.RuntimeManager.PlayOneShotAttached(launchSoundref, gameObject);
             else
@@ -48,10 +50,10 @@ public class PowerupSound : MonoBehaviour {
 
         if (followSoundref != "")
         {
-            if (followSoundAttached)
-                FMODUnity.RuntimeManager.PlayOneShotAttached(followSoundref, gameObject);
-            else
-                FMODUnity.RuntimeManager.PlayOneShot(followSoundref, transform.position);
+            followSound = FMODUnity.RuntimeManager.CreateInstance(followSoundref);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(followSound, transform, GetComponent<Rigidbody>());
+            followSound.start();
+           
         }
     }
 
@@ -68,6 +70,12 @@ public class PowerupSound : MonoBehaviour {
                     FMODUnity.RuntimeManager.PlayOneShot(soundList[index].Soundref, gameObject.transform.position);
             }
         }
+    }
+
+    public void OnDestroy()
+    {
+        followSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        followSound.release();
     }
 
 

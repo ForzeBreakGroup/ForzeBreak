@@ -22,6 +22,8 @@ public class BlackHoleMovement : PowerUpMovement
     {
         PowerupSound ps = GetComponent<PowerupSound>();
         attractingSound = FMODUnity.RuntimeManager.CreateInstance(ps.soundList[0].Soundref);
+
+
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(attractingSound, transform, rb);
         attractingSound.start();
         yield return new WaitForSeconds(5);

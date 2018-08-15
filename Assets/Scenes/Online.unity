@@ -817,6 +817,11 @@ Prefab:
       propertyPath: m_Text
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114943538869458746, guid: 78383f720fff6134082f15a85845daf7,
+        type: 2}
+      propertyPath: time
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78383f720fff6134082f15a85845daf7, type: 2}
   m_IsPrefabParent: 0
